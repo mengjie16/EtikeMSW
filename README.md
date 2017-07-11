@@ -11,4 +11,4 @@ push to master.
 
 You can also download a github desktop exe 
 then add the repo 
-you can see the changes on the browser.
+click the 'sync'  then you can see the changes update on the browser.
