@@ -1,0 +1,125 @@
+body {
+}
+.contents_w {width:1100px; margin:0 auto;}
+
+.mType .con_slider_list { position: relative; width: 1100px; height: 284px; margin-bottom:17px;line-height: 16px; }
+.mType .con_slider_list ul { position: absolute; top: 0; left: 0; overflow: hidden; margin-left: -1px; }	
+.mType .con_slider_list ul li { float: left; width: 220px; height: 262px; text-align: center; position: relative;}
+.mType .con_slider_list ul li div { border-left: 1px solid #e8e8e8; overflow: hidden; }
+.productA.size183 li .product_wrap img {
+	width: 183px;
+    height: 183px;
+	display: block;
+	margin: 0 auto
+}
+.mType .con_slider_list ul li div dl { padding-bottom: 28px; }
+.mType ul li .icoCoupon { position: absolute; left: 18px; top: 0px; width:40px; height:40px;}
+
+
+
+/* product common */
+.productA.size330 li{width:330px; margin-bottom:27px;}
+
+
+
+
+.best100Title {height:237px; border-top:1px solid #e7e7e7; border-bottom:1px solid #000;  background:url(/public/images/img/best100Title1.jpg) 0 bottom no-repeat;}
+.best100Title ul {width:503px;padding-left:597px;}
+.best100Title ul:after{content:'';display:block;clear:both;}
+.best100Title li {width:153px; height:237px; float:left;margin-right:8px;}
+.best100Title a{display:block;}
+
+.best100tabs:after{content:'';display:block;clear:both;}
+.best100tabs li {width: 90px; height:39px;font-size:14px;line-height: 39px;color: #444;text-align: center;border:0;border-bottom:1px solid #dbdbdb; cursor:pointer; border-left:0px; border-top:0;border-right:1px solid #dbdbdb; float:left; position:relative; z-index:1; background:#ebebeb;}
+.best100tabs li.smallLi {width:90px;}
+.best100tabs li.firstLi {border-left:1px solid #dbdbdb;}
+.best100tabs li.selected {background-color: #fff;}
+.best100tabs li .selectedArrow {display:none; width: 91px; height:7px; position:absolute; left:0px; bottom:-7px;}
+
+.best100tabs li .selectedArrow {display:none; width:84px; height:7px; position:absolute; left:0px; bottom:-7px; background:url(/public/images/img/selectedArrow.png) center 0 no-repeat;}
+.best100tabs li.smallLi .selectedArrow {width:91px;}
+.best100tabs li.selected .selectedArrow  {display:block;}
+
+.best100tabs li.lastLi{width:97px;}
+.best100tabs li.lastLi .selectedArrow{width:98px;}
+
+
+
+
+.secondDepth {clear:both; width:1064px; padding:23px 0 13px 34px; border:1px solid #dbdbdb; border-top:0px;}
+.secondDepth ul {display:none;}
+.secondDepth ul.selected {display:block;}
+.secondDepth li {width:174px; height:23px; display:inline-block; *display:inline; *zoom:1;text-indent:6px; position:relative;}
+.secondDepth li span { color:#444;}
+.secondDepth li span.selected {font-weight:bold; text-decoration:underline;color:#444;}
+.secondDepth li .hover {display:none;position:absolute; padding:5px 8px 0;  padding-top:4px; background-color:#ffba00;  z-index:1; text-indent:0px; top:-3px; left:0px;}
+.secondDepth li .hover a {color:#fff; font-weight:bold; }
+
+.searchItems {}
+.searchTerms {width:1098px; height:48px; padding:23px 0; border:1px solid #dbdbdb; border-top:0px; background-color:#f4f3f1}
+.searchTerms ul {width:730px; margin:0 auto;}
+.searchTerms li {width:146px; height:31px; float:left; position:relative; text-indent:22px; padding-top:2px;}
+.searchTerms li .rankNum {width:15px; height:15px; position:absolute; top:0px; left:0px;}
+.searchTerms li a {color:#444;}
+.searchTerms li a:hover {font-weight:bold; text-decoration:underline;}.searchItems .bestRankTitle {width:898px;height:42px; padding-left:202px; margin-top:40px; border-bottom:1px solid #dbdbdb; margin-bottom:36px; position:relative;}
+
+.searchItems .bestRankTitle .bestSearchWord {display:inline-block; *display:inline; *zoom:1;height:22px; padding:6px 13px 0;color:#2d2d2d; padding-left:13px; background-color:#ffce2c; margin-top:2px; font-family:'Hiragino Sans GB','microsoft yahei',arial,sans-serif; font-weight:bold; font-size:16px;}
+.searchItems .bestRankTitle .targetAnchor {position:absolute; top:0px;}
+.searchItems .bestRankTitle .goTop {position:absolute; bottom:-6px; right:17px;}
+.searchItems #best2 .bestRankTitle  {background-position:0 -42px;}
+.searchItems #best3 .bestRankTitle  {background-position:0 -84px;}
+.searchItems #best4 .bestRankTitle  {background-position:0 -126px;}
+.searchItems #best5 .bestRankTitle  {background-position:0 -168px;}
+.searchItems #best6 .bestRankTitle  {background-position:0 -210px;}
+.searchItems #best7 .bestRankTitle  {background-position:0 -252px;}
+.searchItems #best8 .bestRankTitle  {background-position:0 -294px;}
+.searchItems #best9 .bestRankTitle  {background-position:0 -336px;}
+.searchItems #best10 .bestRankTitle  {background-position:0 -378px;}
+.searchItems .con_slider_list ul li div {border:0px;}
+
+.noSearch {display:block}
+
+
+.sectionWrap .sectiontype .top5 {height:884px; padding-top:50px; clear:both;}
+.sectionWrap .sectiontype .top5.only2 {height:504px; background-position:0 -380px;}
+.sectionWrap .sectiontype .top5 .con_slider_list {height:320px; margin-bottom:0px;}
+.sectionWrap .sectiontype .top5 .con_slider_list ul {padding-left:46px;}
+.sectionWrap .sectiontype .top5 .con_slider_list ul li {width:336px;height:320px; }
+.sectionWrap .sectiontype .top5 .con_slider_list ul li div {border:0px; overflow:visible}
+.sectionWrap .sectiontype .top5 .con_slider_list ul li .prod_check_ty {margin-top:190px;}
+.sectionWrap .sectiontype .top5 ul li .icoCoupon {background:none; width:49px; height:49px; left:19px;}
+.sectionWrap .sectiontype .top5 ul li .product_info {width:250px; margin:0 auto;}
+.sectionWrap .sectiontype .top5 ul li .product_wrap img {border:5px solid #fff;display: block;margin: 0 auto}
+.sectionWrap .sectiontype .top5 ul li .prdImg {width:230px; height:230px; display:block;border:5px solid #fff; margin:0 auto;}
+.sectionWrap .sectiontype .top5 ul li dl {letter-spacing:0px;}
+
+.sectionWrap .sectiontype .top5 .top2 {height:430px; margin-bottom:48px; overflow:visible}
+.sectionWrap .sectiontype .top5 .top2 ul {padding-left:67px; overflow:visible}
+.sectionWrap .sectiontype .top5 .top2 ul li {width:484px;height:430px; }
+.sectionWrap .sectiontype .top5 .top2 ul li .product_info {width:350px;}
+.sectionWrap .sectiontype .top5 .top2 ul li .prod_check_ty {margin-top:290px;}
+.sectionWrap .sectiontype .top5 .top2 ul li .prdImg {width:330px; height:330px; display:block;border:10px solid #fff; margin:0 auto;}
+.sectionWrap .sectiontype .top5 .top2 ul li .product_wrap img {width:330px; height:330px; border:10px solid #fff;display: block;margin: 0 auto}
+.sectionWrap .sectiontype .top5 .top2 ul li .icoCoupon {background:none; width:116px; height:117px; top:-4px; left:26px;}
+
+
+.searchTerms {width:1098px; height:48px; padding:23px 0; border:1px solid #dbdbdb; border-top:0px; background-color:#f4f3f1; margin:0 auto}
+.searchTerms ul {width:730px; margin:0 auto;}
+.searchTerms li {width:146px; height:31px; float:left; position:relative; text-indent:22px; padding-top:2px;}
+.searchTerms li .rankNum {width:15px; height:15px; position:absolute; top:0px; left:0px;}
+.searchTerms li a {color:#444;}
+.searchTerms li a:hover {font-weight:bold; text-decoration:underline;}
+
+.content_top_left{float:left; padding:14px 0 0;}
+.content_top_location{position:relative; z-index:2; width:1100px; margin:0 auto;}
+.content_top_location h3{float:left; margin-right:15px;}
+.content_top_location .left_con{float:left; margin-right:5px;}
+.content_top_location .left_con{*zoom:1;}
+.content_top_location .left_con p.location_area {float:left; margin-right:8px; font-size:11px; color:#c0c0c0;}
+.content_top_location .left_con p.home{width:22px; margin-right:8px;}
+.content_top_location .left_con p.location_area img{margin-right:7px; vertical-align:baseline}
+.content_top_location .left_con select {width:164px; height:21px; float:left; margin-right:9px; font-family:'Hiragino Sans GB','microsoft yahei',arial,sans-serif; font-size:12px;}
+.content_top_location .left_con select#com1 {margin-right:2px;}
+
+.content_top_location a.history_back{display:inline-block; width:72px; height:22px;line-height: 22px;text-align: center;background-color: #ebebeb;color: #444;border:1px solid #ccc;margin-top: -2px;}
+.content_top_location a.history_back{*display:inline; *zoom:1;}

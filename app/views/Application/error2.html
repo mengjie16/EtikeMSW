@@ -1,0 +1,44 @@
+#{extends 'main.html' /}
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/error.css'}" media="all" />
+#{/set}
+#{set title:'亲，访问受限了' /}
+<div id="content">
+<div id="main">
+  <div id="banner">
+    <a id="J_Banner" href="javascript:;">
+      <img src="/public/images/T1zL8ZFqFgXXaESgf7-520-500.png"/>
+    </a>
+  </div>
+  <div id="err" data-spm="1997481305">
+    <div class="tips">
+      <p>抱歉！系统繁忙，</p>
+      <p>暂时无法处理您的请求……</p>
+    </div>
+    <div class="reason">
+      <p>可能因为：</p>
+      <ul class="reason-list">
+        #{if errorMessages}
+          #{list items:errorMessages, as : 'errorMessage'}
+            <li>
+              ${errorMessage.text}
+              <span> <i class="gt">&gt;</i>
+                ${errorMessage.description}
+              </span>
+            </li>
+          #{/list}
+        #{/if}
+      </ul>
+    </div>
+    <div class="links">
+      <p>
+        或者逛逛：
+        <a href="/">吐司首页</a>
+      </p>
+    </div>
+  </div>
+</div>
+</div>
+#{set 'moreScripts'}
+<script type="text/javascript" src="/public/javascripts/unslider.js"></script>
+#{/set}

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="models.mappers.OrderMapper">
+	<resultMap id="BaseResultMap" type="models.Order">
+		<result column="buyer_info" property="buyerInfo" typeHandler="com.aton.db.handler.BuyerInfoHandler"/>
+		<result column="product_info" property="productInfo" typeHandler="com.aton.db.handler.ProductInfoHandler"/>
+	</resultMap>
+	<insert id="inserts" parameterType="java.util.List">
+		insert ignore into trade_order
+		(id,trade_id,out_order_no,caption,retailer_id,num,cargo_fee,shipping_fee,total_fee,express,exp_no,create_time,pay_time,consign_time,note,buyer_info,product_info,status)
+		 values
+		<foreach collection="orders" item="tradeorder"  separator=",">
+			(
+				#{tradeorder.id},
+				#{tradeorder.tradeId},
+				#{tradeorder.outOrderNo},
+				#{tradeorder.caption},
+				#{tradeorder.retailerId},
+				#{tradeorder.num},
+				#{tradeorder.cargoFee},
+				#{tradeorder.shippingFee},
+				#{tradeorder.totalFee},
+				#{tradeorder.express},
+				#{tradeorder.expNo},
+				#{tradeorder.createTime},
+				#{tradeorder.payTime},
+				#{tradeorder.consignTime},
+				#{tradeorder.note},
+				#{tradeorder.buyerInfo,typeHandler=com.aton.db.handler.BuyerInfoHandler},
+				#{tradeorder.productInfo,typeHandler=com.aton.db.handler.ProductInfoHandler},
+				#{tradeorder.status}
+				)
+		</foreach>
+	</insert>
+	<insert id="insert" parameterType="models.Order">
+		insert into trade_order
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,trade_id,out_order_no,caption,retailer_id,num,
+			cargo_fee,shipping_fee,total_fee,express,exp_no,create_time,pay_time,consign_time,note,
+			buyer_info,product_info,status
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+				#{id},
+				#{tradeId},
+				#{outOrderNo},
+				#{caption},
+				#{retailerId},
+				#{num},
+				#{cargoFee},
+				#{shippingFee},
+				#{totalFee},
+				#{express},
+				#{expNo},
+				#{createTime},
+				#{payTime},
+				#{consignTime},
+				#{note},
+				#{buyerInfo,typeHandler=com.aton.db.handler.BuyerInfoHandler},
+				#{productInfo,typeHandler=com.aton.db.handler.ProductInfoHandler},
+				#{status}
+		</trim>
+	</insert>
+	<update id="updateById" parameterType="models.Order">
+		update trade_order
+		<set>
+			<if test="note !=null and note != ''">
+				note = #{note},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	<update id="updateInfo" parameterType="models.Order">
+		update trade_order
+		<set>
+			<if test="caption !=null and caption != ''">
+				caption = #{caption},
+			</if>
+			<if test="outOrderNo !=null and outOrderNo != ''">
+				out_order_no = #{outOrderNo},
+			</if>
+			<if test="note !=null and note != ''">
+				note = #{note},
+			</if>
+			<if test="buyerInfo !=null">
+				buyer_info = #{buyerInfo,typeHandler=com.aton.db.handler.BuyerInfoHandler},
+			</if>
+			<if test="productInfo !=null">
+				product_info = #{productInfo,typeHandler=com.aton.db.handler.ProductInfoHandler},
+			</if>
+			<if test="num  > 0">
+				num = #{num},
+			</if>
+			<if test="cargoFee  > 0">
+				cargo_fee = #{cargoFee},
+			</if>
+			shipping_fee = #{shippingFee},
+			<if test="totalFee  > 0">
+				total_fee = #{totalFee},
+			</if>
+			<if test="createTime !=null">
+				create_time = #{createTime}
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	<update id="updateStatusById" parameterType="models.Order">
+		update trade_order
+		<set>
+			<if test="status !=null">
+				status = #{status},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	<select id="selectList" resultMap="BaseResultMap">
+		select * from trade_order a
+		order by a.create_time desc
+	</select>
+	<select id="selectByTradeId" resultMap="BaseResultMap">
+		select * from trade_order where trade_id=#{id}
+	</select>
+	<select id="selectById" resultMap="BaseResultMap">
+		select * from trade_order where id = #{id} limit 1
+	</select>
+</mapper>

@@ -1,0 +1,179 @@
+#{extends './manage-frame.html' /}
+#{set title:'运费模板编辑' /}
+#{set 'moreManaStyles'}
+<link href="@{'/public/stylesheets/freight.css'}" rel="stylesheet" type="text/css" />
+<style type="text/css">
+	.tbl_type01 td:first-child .tdcell {
+		text-align: center;
+	}
+	.freightTemp {
+		border:none;
+	}
+	.extendcontent {
+		display: block;
+	}
+	.tbHoverable tbody tr:hover td {
+    background-color: #fff;
+	}
+</style>
+#{/set}
+<div class="cont_mypage" style="margin-top:30px" id="container">
+	<div class="container_contents container_myMain_contents">
+		<div style="margin-top:0px;">
+			<div class="column_left">
+				<h3>运费模板编辑</h3>
+			</div>
+		</div>
+		#{authenticityToken/}
+		#{if freightTemp}
+				<textarea id="freightTempData" style="display:none">
+					${freightTemp.toString()}
+				</textarea>
+		#{/if}
+		<textarea class="muban" id="staticFreightTemp" style="display:none">
+	{{#temp}}
+	<div class="freightTemp">
+		<h4 class="pl10">
+			模板名称：
+			<input type="text" class="inputText titleName" value="{{tempName}}" maxlength="20" />
+			<input class="inputText" name="tempId" value="{{_id}}" type="hidden" />
+			<input type="hidden" value="static" name="tempType">
+			<span class="freightType ml10">模板类型：静态</span>
+		</h4>
+		<div class="extendcontent">
+			<table class="tbl_type01 tbHoverable">
+				<thead>
+					<tr>
+						<th>
+							<div class="thcell">地区</div>
+						</th>
+						<th>
+							<div class="thcell">价格(元)</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#freights}}
+					<tr>
+						<td>
+							<div class="tdcell">
+								<div class="province">{{provincesName}}</div>
+								<input type="hidden" name="provinceId" value="{{provincesStr}}"></div>
+						</td>
+						<td>
+							<div class="tdcell">
+								<input type="text" class="inputText short priceitem" name="price" value="{{priceStr}}" />
+								<i class="iconfont icondelbtn">&#xe606;</i>
+							</div>
+						</td>
+					</tr>
+					{{/freights}}
+				</tbody>
+			</table>
+			<a href="javascript:void(0)" class="btnStd btnSmall fr submitbtn">保存</a>
+		</div>
+	</div>
+	{{/temp}}
+</textarea>
+<textarea class="muban" id="dynamicFreightTemp" style="display:none">
+	{{#temp}}
+	<div class="freightTemp">
+		<h4 class="pl10">
+			模板名称：
+			<input type="text" class="inputText titleName" value="{{tempName}}"  maxlength="20"/>
+			<input class="inputText"  name="tempId"  value="{{_id}}" type="hidden" />
+			<input type="hidden" value="dynamic" name="tempType">
+			<span class="freightType ml10">模板类型：动态</span>
+		</h4>
+		<div class="extendcontent">
+			<table class="tbl_type01 move tbHoverable">
+				<thead>
+					<tr>
+						<th class="width240">
+							<div class="thcell">地区</div>
+						</th>
+						<th>
+							<div class="thcell">首重(kg)</div>
+						</th>
+						<th>
+							<div class="thcell">首重价格(元)</div>
+						</th>
+						<th>
+							<div class="thcell">续重(kg)</div>
+						</th>
+						<th>
+							<div class="thcell">续重价格(元)</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#freights}}
+					<tr>
+						<td class="width240">
+							<div class="tdcell">
+								<div class="province">{{provincesName}}</div>
+								<input type="hidden" name="provinceId" value="{{provincesStr}}"></div>
+						</td>
+						<td>
+							<div class="tdcell">
+								<input type="text" class="inputText short firstWeight" name="weight" value="{{firstWeight}}" />
+							</div>
+						</td>
+						<td>
+							<div class="tdcell">
+								<input type="text" class="inputText short firstPrice" name="price" value="{{fwPriceStr}}" />
+							</div>
+						</td>
+						<td>
+							<div class="tdcell">
+								<input type="text" class="inputText short nextWeight" name="weight" value="{{addedWeight}}" />
+							</div>
+						</td>
+						<td>
+							<div class="tdcell">
+								<input type="text" class="inputText short nextPrice" name="price" value="{{awPriceStr}}" />
+								<i class="iconfont icondelbtn">&#xe606;</i>
+							</div>
+						</td>
+					</tr>
+					{{/freights}}
+				</tbody>
+			</table>
+			<a href="javascript:void(0)" class="btnStd btnSmall fr submitbtn">保存</a>
+		</div>
+	</div>
+	{{/temp}}
+</textarea>
+		<div class="tbl_wrap_type02" id="freightTempList">
+		</div>
+	</div>
+</div>
+<div class="popWrapper" id="addProvence">
+	<div class="popWndFrame" style="min-width:770px">
+		<div class="modalWnd" tr-url="" id="addProvenceWndWrapper">
+			<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口">
+				<i class="iconfont mr10">&#xe60c;</i>
+			</a>
+			<div class="modalWndInner">
+				<input type="hidden" name="province">
+				<div class="chooseList" id="chooseList">
+					<h3>已选择省份</h3>
+					<ul></ul>
+				</div>
+				<div class="leaveList" id="leaveList">
+					<h3>未选择省份</h3>
+					<ul></ul>
+				</div>
+			</div>
+			<div class="wndBotButtonSection">
+				<a id="btnProvence" href="javascript:void(0)" class="btnStd btnLarge btnYellow-shadow trSubmit">确认</a>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- //content-area -->
+#{set 'moreManaScripts'}
+<script src="@{'/public/javascripts/libs/mustache.min.js'}" type="text/javascript"></script>
+<script type="text/javascript" src="/public/javascripts/bizComponents/manage/freightEdit.js"></script>
+<script type="text/javascript">APP.QnDomain = '${upload_domain}';App.module = 'freightManage';</script>
+#{/set}

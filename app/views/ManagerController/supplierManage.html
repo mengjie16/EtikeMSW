@@ -1,0 +1,267 @@
+#{extends './manage-frame.html' /}
+#{set title:'供应商管理' /}
+<div class="cont_mypage container_body" style="margin-top:30px" id="container">
+	<div class="container_contents container_myMain_contents">
+		<div style="margin-top:0px;">
+			<div class="column_left">
+				<h3>供应商管理</h3>
+			</div>
+		</div>
+		#{authenticityToken/}
+		<div class="tbl_wrap_type02 pt20">
+			<form name="Mypage_SubMit" method="post" id="frmEditReg">
+				<input type="hidden" value="" name="Gubun"/>
+				<div class="search_area">
+					<div class="search_box">
+						<div class="area_l">
+							<span class="txt_type01">名称</span>
+							<input type="text" class="text" id="user_name" name="titleName" maxlength="20"/>
+							<a href="javascript:;" class="btnStd btnMedium" id="searchBtn">查询</a>
+						</div>
+						<div class="area_r">
+							<a href="javascript:void(0)" class="floatRight mr6 btnStd btnMedium" id="registNew">添加供应商</a>	
+						</div>
+					</div>
+				</div>
+			</form>
+			<div class="clearFix"></div>
+			<table summary="" class="tbl_type01 tbHoverable">
+				<thead>
+					<tr>
+						<th class="thcellId">
+							<div class="thcell">ID</div>
+						</th>
+						<th>
+							<div class="thcell">名称</div>
+						</th>
+						<th>
+							<div class="thcell">省名称</div>
+						</th>
+						<th>
+							<div class="thcell">供应商类型</div>
+						</th>
+						<th>
+							<div class="thcell">操作</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody id="regContainer"></tbody>
+			</table>
+			<div class="pagin-btm clearFix">
+				<div class="pagination"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<textarea class="muban" id="regUserTemp" style="display:none">
+	{{#results}}
+	<tr mid="{{id}}"  data-type="{{role}}">
+		<td class="thcellId">
+			<div class="tdcell">{{id}}</div>
+		</td>
+		<td>
+			<div class="tdcell">
+				<a href="javascript:void(0)" class="resend">{{name}}</a>
+			</div>
+		</td>
+		<td>
+			<div class="tdcell">{{province}}</div>
+		</td>
+		<td>
+			<div class="tdcell">{{supType}}</div>
+		</td>
+		<td>
+			<div class="tdcell">
+				<a href="javascript:;" class="btnStd btnSmall editbtn" data-id="{{id}}">编辑</a>
+				<a href="javascript:;" class="btnStd btnSmall delbtn" data-id="{{id}}">删除</a>
+			</div>
+		</td>
+	</tr>
+	{{/results}}
+</textarea>
+*{ 编辑供应商信息 }*
+<div class="popWrapper" id="editRegist">
+	<div class="popWndFrame">
+		<div class="modalWnd" tr-url="/sys/supplier/save" id="editSupWnd">
+			#{authenticityToken/}
+			<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口">
+				<i class="iconfont mr10">&#xe60c;</i>
+			</a>
+			<div class="modalWndInner">
+				<div class="supplierMessage">
+					<form id="frmEdit_sup">
+						<input type="hidden" id="hidRetFormId" class="trControl" tr-param="supplier.id" value=""/>
+						<div class="column_left">
+							<h3>编辑供应商</h3>
+						</div>
+						<div class="form_line">
+							<label class="lbl">供应商名称</label>
+							<div class="controls">
+								<input id="editName" name="edit.name" type="text" class="inputText trControl" placeholder="公司名称" maxlength="15" value="" tr-param="supplier.name" />
+							</div>
+							<div for="editName" class="validateLine clearfix"></div>
+						</div>
+						<div class="form_line">
+							<label class="lbl">主营产品</label>
+							<div class="controls">
+								<textarea id="editProduct" class="inputMultiText trControl long" tabindex="3" name="edit.product" tabindex="3" maxlength="100" tr-param="supplier.product" placeholder="主营产品" style="height:90px;"></textarea>
+							</div>
+							<div for="editProduct" class="validateLine clearfix"></div>
+						</div>
+						<div class="form_line">
+							<label class="lbl">地址</label>
+							<div class="controls">
+								<input id="editCountry_id" type="hidden" name="edit.countryId" class="trControl" tr-param="supplier.countryId"/>
+								<select id="editCountry" class="country trControl" tabindex="8" name="edit.country" tr-param="supplier.country">
+									<option rid="" selected="true">-- 国家 --</option>
+									#{list items: countries, as:'ct'}
+									<option rid="${ct.id}">${ct.name}</option>
+									#{/list}
+								</select>
+							</div>
+							<div for="editCountry_id" class="validateLine clearfix" name="editCountry"></div>
+						</div>
+						<div class="form_line pro_city_region">
+							<label class="lbl">省/市/区</label>
+							<div class="controls">
+								<input id="editProvince_id" type="hidden" name="edit.provinceId" class="trControl" tr-param="supplier.provinceId"/>
+								<select id="editProvince" class="province trControl" name="edit.province" tabindex="9" tr-param="supplier.province">
+									<option rid="">-- 省份 --</option>
+								</select>
+								<select id="editCity" class="city ml10 trControl" name="edit.city" tabindex="10" tr-param="supplier.city">
+									<option>-- 城市 --</option>
+								</select>
+								<select id="editRegion" class="region ml10 trControl" name="edit.region" tabindex="10" tr-param="supplier.region">
+									<option>-- 区域 --</option>
+								</select>
+							</div>
+							<div for="editProvince_id" class="validateLine clearfix" name="selCountry"></div>
+						</div>
+						<div class="form_line">
+							<label class="lbl">&nbsp;</label>
+							<div class="controls">
+								<textarea id="editAddress" class="inputMultiText trControl" name="edit.address" style="height:90px;width:340px;" maxlength="60" tr-param="supplier.address" placeholder="详细地址"></textarea>
+							</div>
+							<div for="editAddress" class="validateLine clearfix"></div>
+						</div>
+						<div class="form_line">
+							<label class="lbl">供应商类型</label>
+							<div class="controls">
+								<select name="edit.type" id="editType" class="trControl" tr-param="supplier.type">
+									<option value="FACTORY">工厂</option>
+									<option value="BRAND">品牌方</option>
+									<option value="RESELLER">经销商</option>
+								</select>
+							</div>
+							<div for="editType" class="validateLine clearfix"></div>
+						</div>
+						<div class="form_line">
+							<label class="lbl">供应商二级域名</label>
+							<div class="controls">
+								<input id="editDomain" name="edit.domain" type="text" class="inputText trControl" placeholder="供应商二级域名" tabindex="14" maxlength="20" tr-param="supplier.domain"/>
+							</div>
+							<div for="editDomain" class="validateLine clearfix"></div>
+						</div>
+						<div class="form_line">
+							<label class="lbl">备注</label>
+							<div class="controls">
+								<textarea id="editNote" class="inputMultiText trControl" name="edit.note" style="height:90px;width:340px;" maxlength="100" placeholder="备注" tr-param="supplier.note"></textarea>
+							</div>
+							<div for="editNote" class="validateLine clearfix"></div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="wndBotButtonSection">
+				<a id="btnRegfirm_ret" href="javascript:;" class="btnStd btnLarge btnYellow-shadow trSubmit">保存</a>
+			</div>
+		</div>
+	</div>
+</div>
+*{ 添加供应商信息 }*
+<div class="popWrapper" id="registeUser">
+	<div class="popWndFrame">
+		<div class="modalWnd" tr-url="/sys/supplier/save" id="addSupWnd">
+			<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口">
+				<i class="iconfont mr10">&#xe60c;</i>
+			</a>
+			<div class="modalWndInner">
+				<form id="frmRegistSupplier">
+					#{authenticityToken/}
+					<div class="column_left">
+						<h3>添加供应商</h3>
+					</div>
+					<div class="form_line">
+						<label class="lbl">供应商名称</label>
+						<div class="controls">
+							<input id="txtName" name="add.name" type="text" class="inputText trControl" placeholder="公司名称" maxlength="15" value="" tr-param="supplier.name"/>
+						</div>
+						<div for="txtName" class="validateLine clearfix"></div>
+					</div>
+					<div class="form_line">
+						<label class="lbl">主营产品</label>
+						<div class="controls">
+							<textarea id="txtProduct" class="inputMultiText trControl long" tabindex="3" name="add.product" tabindex="3" maxlength="100" tr-param="supplier.product" placeholder="主营产品" style="height:90px;"></textarea>
+						</div>
+						<div for="txtProduct" class="validateLine clearfix"></div>
+					</div>
+					<div class="form_line">
+						<label class="lbl">地址</label>
+						<div class="controls">
+							<input id="selCountry_id" type="hidden" name="add.countryId" class="trControl" tr-param="supplier.countryId"/>
+							<select id="selCountry" class="country trControl" tr-param="supplier.country" tabindex="8" name="add.country">
+								<option rid="" selected="true">-- 国家 --</option>
+								#{list items: countries, as:'ct'}
+								<option rid="${ct.id}">${ct.name}</option>
+								#{/list}
+							</select>
+						</div>
+						<div for="selCountry_id" class="validateLine clearfix" name="selCountry"></div>
+					</div>
+					<div class="form_line pro_city_region">
+						<label class="lbl">省/市/区</label>
+						<div class="controls">
+							<input id="selProvince_id" type="hidden" name="add.provinceId" class="trControl" tr-param="supplier.provinceId" />
+							<select id="selProvince" class="province trControl" name="add.province" tr-param="supplier.province" tabindex="9">
+								<option rid="">-- 省份 --</option>
+							</select>
+							<select id="selCity" class="city ml10 trControl" name="add.city" tr-param="supplier.city" tabindex="10">
+								<option>-- 城市 --</option>
+							</select>
+							<select id="selRegion" class="region ml10 trControl" name="add.region" tr-param="supplier.region" tabindex="10">
+								<option>-- 区域 --</option>
+							</select>
+						</div>
+						<div for="selProvince_id" class="validateLine clearfix" name="selCountry"></div>
+					</div>
+					<div class="form_line">
+						<label class="lbl">&nbsp;</label>
+						<div class="controls">
+							<textarea id="txtAddress" class="inputMultiText trControl" name="add.address" style="height:90px;width:340px;" maxlength="60" placeholder="详细地址" tr-param="supplier.address"></textarea>
+						</div>
+						<div for="txtAddress" class="validateLine clearfix"></div>
+					</div>
+					<div class="form_line">
+						<label class="lbl">供应商类型</label>
+						<div class="controls">
+							<select name="edit.type" id="editType" class="trControl" tr-param="supplier.type">
+								<option value="FACTORY">工厂</option>
+								<option value="BRAND">品牌方</option>
+								<option value="RESELLER">经销商</option>
+							</select>
+						</div>
+						<div for="txtType" class="validateLine clearfix"></div>
+					</div>
+				</form>
+			</div>
+			<div class="wndBotButtonSection">
+				<a id="btnSupAdd" href="javascript:;" class="btnStd btnLarge btnYellow-shadow trSubmit">保存</a>
+			</div>
+		</div>
+	</div>
+</div>
+#{set 'moreManaScripts'}
+<script type="text/javascript" src="/public/javascripts/bizComponents/manage/supplierManage.js"></script>
+<script type="text/javascript">APP.QnDomain = '${upload_domain}';App.module = 'supplierManage';</script>
+#{/set}

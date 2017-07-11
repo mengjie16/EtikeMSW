@@ -1,0 +1,47 @@
+/*body {text-align:center; background:url('/Images/main_v2/bodybg.jpg') repeat-x left top;}*/
+table {border-collapse:collapse; padding:0px; margin:0px;}
+img { border:0px; _vertical-align:top;}
+* a { color:#6f6f6f; text-decoration:none;}
+
+.prdt_name { display:block; color:#7b6b54; font-weight:bold; letter-spacing:-1px; padding-bottom:2px;}
+.prdt_txt { display:block; color:#6f6f6f; letter-spacing:-1px;}
+.prdt_orginal {text-decoration:line-through; color:#8b8b8b;}
+.prdt_price { color:#467079; font-weight:bold;}
+.prdt_discount { color:#ba3535;}
+.prdt_save {background:url('/Images/main_v2/icon_save.gif') no-repeat 0 0px; color:#d88181; font-size:10px; font-family:'Hiragino Sans GB','microsoft yahei',arial,sans-serif; padding-left:18px; line-height:12px; letter-spacing:-1px;}
+.prdt_coupon {background:url('/Images/main_v2/icon_coupon.gif') no-repeat 0 0px; color:#9ca867; font-size:10px; font-family:'Hiragino Sans GB','microsoft yahei',arial,sans-serif; padding-left:27px; font-weight:bold; line-height:12px; letter-spacing:-1px;}
+.prdt_reply {background:url('/Images/main_v2/icon_reply.gif') no-repeat 0 0px; color:#888888; font-size:11px; padding-left:14px; line-height:12px; letter-spacing:-1px;}
+
+#topprdt {background:url('/Images/main_v2/topprdt_bg.gif') no-repeat 0 299px; height:607px;}
+.wrapper { position:relative; width:900px; margin:0 auto; text-align:left;}
+
+/* 장바구니 - step */
+.step_box{position:relative;}
+.step_box ol{position:relative;*zoom:1;margin:0px; }
+.step_box ol:after{display:block;clear:both;content:''}
+.step_box ol li{float:left;}
+.step_box ol .cart_step span{overflow:hidden;display:block;width:1px;height:1px;margin:-1px;font-size:0;line-height:0}
+.step_box ol .cart_step{position:relative;height:94px;background-image:url(/public/images/img/img_step.gif);background-repeat:no-repeat;}
+.step_box ol .cart_step01{width:385px;background-position:0 0}
+.step_box ol .cart_step02{width:221px;background-position:-385px 0}	
+.step_box ol .cart_step03{width:394px;background-position:-606px 0}
+
+.step_box ol .active .cart_step01{background-position:0 -94px}
+.step_box ol .active .cart_step02{background-position:-385px -94px}	
+.step_box ol .active .cart_step03{background-position:-606px -94px}
+
+/* 장바구니 - 바로보리 */
+.banner_barobori{position:relative}
+/* 장바구니 - 설명 */
+.cart_desc{position:relative;height:24px;padding:15px 0 14px 44px;border:3px solid #ececec;background:url(/public/images/img/bg_cart201302.gif) 0 0 repeat-x;*zoom:1}
+.cart_desc:after{display:block;clear:both;content:''}
+.cart_desc .ico_cartDesc{display:inline-block;float:left;margin-right:7px}
+.cart_desc dl{float:left}
+.cart_desc .tit_cartDesc{float:left;margin-top:4px;margin-right:8px}
+.cart_desc dd{float:left;margin-top:7px;font-size:14px;color:#4d4c46;}
+.cart_desc dd strong{color:#ff3030;font-weight: bold;font-size:14px}
+/* 장바구니 - 설명 유의사항 */
+.cart_desc02{position:relative}
+table th, table td {
+    vertical-align: middle;
+}

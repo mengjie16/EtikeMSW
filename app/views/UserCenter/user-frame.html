@@ -1,0 +1,44 @@
+#{extends 'main.html' /}
+
+#{set 'moreStyles'}
+<link href="@{'/public/stylesheets/layout_v3.css'}" rel="stylesheet" type="text/css" />
+<link href="@{'/public/stylesheets/mypage.css'}" rel="stylesheet" type="text/css" />
+<link href="@{'/public/stylesheets/mypageleft_v3.css'}" rel="stylesheet" type="text/css" />
+#{get 'moreSubStyles' /}
+#{/set}
+<div class="contentWrap">
+	<div class="contentCenter">
+		<!-- navigation -->
+		<div id="navigation">
+			<div id="location">
+				<a href="/user/home" class="home">个人中心</a>
+				<a class="text" id="mblock"></a>
+				<a class="text" id="mdetail"></a>
+			</div>
+		</div>
+		#{if user?.role == 'RETAILER'}
+			#{include '/RetailerController/navigator.html' /}
+		#{/if}
+		#{if user?.role == 'SUPPLIER'}
+			#{include '/SupplierController/navigator.html' /}
+		#{/if}
+		<!-- content-area -->
+		<div class="content-area">
+			#{if user?.role == 'RETAILER'}
+				#{include '/RetailerController/summary.html' /}
+			#{/if}
+			#{if user?.role == 'SUPPLIER'}
+				#{include '/SupplierController/summary.html' /}
+			#{/if}
+			#{doLayout /}
+			<div class="clboth"></div>
+
+		</div>
+		<!-- //contentCenter -->
+	</div>
+
+</div>
+#{set 'moreScripts'}
+<script type="text/javascript" src="/public/javascripts/frame.js"></script>
+#{get 'moreSubScripts' /}
+#{/set}

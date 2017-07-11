@@ -1,0 +1,1778 @@
+#{extends 'main.html' /}
+#{set title:'供应商首页' /}
+#{set 'moreStyles'}
+<link href="@{'/public/stylesheets/babyShop.css'}" rel="stylesheet" type="text/css">
+<link href="@{'/public/stylesheets/widget_style.css'}" rel="stylesheet" type="text/css">
+<link href="@{'/public/stylesheets/commonAdd.css'}" rel="stylesheet" type="text/css">
+<link href="@{'/public/stylesheets/r.css'}" rel="stylesheet" type="text/css">
+#{/set}
+<div id="myBabyShop">
+    <div id="babyshop_top">
+        <div class="content_top_location clearfix CategoryLocation">
+            <div class="content_top_left">
+                <h3>
+                    <a href="ps.html">
+                        <img src="/public/images/img/h3_logout.gif" alt="My Baby"></a>
+                </h3>
+                <div class="left_con">
+                    <p class="location_area">
+                        <img src="/public/images/img/location_home.gif" alt="home">&gt;</p>
+                    <div id="selectbox" class="selectbox">
+                        <select onchange="CategoryLocation_Change(this,'da|od|dp|bi|so|ps|bh|be|kk|bo|');">
+                            <option value="">- 카테고리 -</option>
+                            <option value="bk">백화점쇼핑관</option>
+                            <option value="pr">글로벌쇼핑관 Boris</option>
+                            <option value="p">베이비 (0~2세)</option>
+                            <option value="r">키즈 1관 (3~8세)</option>
+                            <option value="bt">키즈 2관 (3~8세)</option>
+                            <option value="bj">주니어 (9~17세)</option>
+                            <option value="bg">신발/잡화</option>
+                            <option value="pp">육아용품</option>
+                            <option value="d">도서/교구/완구</option>
+                            <option value="bc">리빙데코</option>
+                            <option value="bf">여성패션</option>
+                            <option></option>
+                            <option value="">- 전문관 -</option>
+                            <option value="od">스포츠/아웃도어</option>
+                            <option value="kk">AK플라자</option>
+                            <option value="bh">행복한백화점</option>
+                            <option value="dp">대구백화점</option>
+                            <option value="ps" selected="selected">My Baby Shop</option>
+                            <option value="bo">2001 아울렛</option>
+                            <option value="pb">보리펫스토어</option>
+                            <option value="da">다이소몰</option>
+                            <option value="so">모던하우스</option>
+                            <option value="bm">미니맘셀렉샵</option>
+
+                        </select>
+                    </div>
+                </div>
+                <a href="#" class="history_back">上一页</a>
+            </div>
+            <p class="content_top_right">
+                <a href="http://www.foodis.com" target="_blank">
+                    <img src="/public/images/img/Tricycle20150119181881586.jpg" alt=""></a>
+            </p>
+        </div>
+    </div>
+
+    <div class="baby_content1">
+        <div class="left_area">
+
+            <div>
+                <div class="baby_info">
+                    <a href="javascript:;">
+                        <div class="baby_info_tit baby_no">请登录</div>
+                    </a>
+                </div>
+                <div class="baby_photo">
+                    <img src="/public/images/img/baby_img_mask.png" alt="" class="baby_img_mask"></div>
+
+                <a href="#" class="left_area_ban">
+                    <img src="/public/images/img/left_area_ban.jpg" alt=""></a>
+            </div>
+
+        </div>
+        <div class="banner_area">
+            <div class="slideScrollControlWrap bannerAreaTop" id="bannerAreaTop">
+                <a href="javascript:;" class="baby_btn_prev prev">
+                    <img src="/public/images/img/baby_btn_prev.png" alt=""></a>
+                <div class="slideScrollContentsWrap swiper-container" id="slideScrollContentsWrap">
+                    <ul class="slideScrollContents swiper-wrapper" style="width: 90454px; height: 398px; transform: translate3d(-637px, 0px, 0px); transition-duration: 0s;">
+                        <li class="slideScrollContent swiper-slide swiper-slide-duplicate" style="height: 398px; width: 637px;">
+                            <a href="#" target="_blank">
+                                <img class="lazy" src="/public/images/img/Tricycle20150116582468974.jpg">
+                            </a>
+                        </li>
+                        <li class="slideScrollContent swiper-slide swiper-slide-visible swiper-slide-active" style="height: 398px; width: 637px;">
+                            <a href="#" target="_blank">
+                                <img class="lazy" src="/public/images/img/Tricycle20150115744413477.jpg">
+                            </a>
+                        </li>
+                        <li class="slideScrollContent swiper-slide" style="height: 398px; width: 637px;">
+                            <a href="#" target="_blank">
+                                <img class="lazy" src="/public/images/img/Tricycle20150115316566301.jpg">
+                            </a>
+                        </li>
+
+                        <li class="slideScrollContent swiper-slide swiper-slide-duplicate" style="height: 398px; width: 637px;">
+                            <a href="#" target="_blank">
+                                <img class="lazy" src="/public/images/img/Tricycle20150115744413477.jpg">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="javascript:;" class="baby_btn_next next">
+                    <img src="/public/images/img/baby_btn_next.png" alt=""></a>
+            </div>
+        </div>
+        <div class="right_area">
+            <a href="#">
+                <img src="/public/images/img/right_area_ban.jpg" alt=""></a>
+            <img src="/public/images/img/right_ban_png.png" alt="" class="right_ban_png"></div>
+    </div> 
+        
+    <iframe name="frm" style="display:none;"></iframe>
+	<div class="baby_content2">
+		<div class="baby_info_check">我们的孩子需要什么呢?  <a href="#">孩子信息确认</a></div>
+		<div class="content_tit">
+			<span style="display:inline-block;background-color:#fff;color:#444;font-size:16px;margin-top:-2px;font-weight:bold">宝宝信息对应列表</span>
+			<a href="#" class="btn_info_edit" style="background-color:#fff;color:#444;font-size:14px;display:inline-block;margin-top:-5px;font-weight:bold">
+                宝宝信息详情 +         
+            </a>
+		</div>
+		<div class="content_baby_item">
+			<ul class="tab_baby_item">
+				    <li class="tab1" rel="tab_baby_prd1">
+					    孕妇<div><span></span></div>
+				    </li>
+				    <li class="tab2" rel="tab_baby_prd2">
+					    0~2个月<div><span></span></div>
+				    </li>
+				    <li class="tab3 on" rel="tab_baby_prd3">
+					    2~4个月<div><span></span></div>
+				    </li>
+				    <li class="tab4" rel="tab_baby_prd4">
+					    4~6个月<div><span></span></div>
+				    </li>
+				    <li class="tab5" rel="tab_baby_prd5">
+					    6~8个月<div><span></span></div>
+				    </li>
+				    <li class="tab6" rel="tab_baby_prd6">
+					    8~10个月<div><span></span></div>
+				    </li>
+				    <li class="tab7" rel="tab_baby_prd7">
+					    10~12个月<div><span></span></div>
+				    </li>
+				    <li class="tab8" rel="tab_baby_prd8">
+					    12~24个月<div><span></span></div>
+				    </li>
+				    <li class="tab9" rel="tab_baby_prd9">
+					    24~48个月<div><span></span></div>
+				    </li>
+
+			</ul>
+            <div class="tab_baby_con">
+                <div id="tab_baby_prd1" class="tab_baby_prd" style="display: none;">
+                    <ul>
+                        <li>
+                            <div class="baby_img_area">
+                                <a href="#">
+                                    <img src="/public/images/img/P018266981.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                </p>
+                            </div>
+                            <div class="item_prd_option">
+                                <p class="item_name">
+                                    <a href="#">我们的身体需要</a>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="baby_img_area">
+                                <a href="#">
+                                    <img src="/public/images/img/P018266981.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                </p>
+                            </div>
+                            <div class="item_prd_option">
+                                <p class="item_name">
+                                    <a href="#">我们的身体需要</a>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="baby_img_area">
+                                <a href="#">
+                                    <img src="/public/images/img/P018266981.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                </p>
+                            </div>
+                            <div class="item_prd_option">
+                                <p class="item_name">
+                                    <a href="#">我们的身体需要</a>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="baby_img_area">
+                                <a href="#">
+                                    <img src="/public/images/img/P018266981.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                </p>
+                            </div>
+                            <div class="item_prd_option">
+                                <p class="item_name">
+                                    <a href="#">我们的身体需要</a>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="baby_img_area">
+                                <a href="#">
+                                    <img src="/public/images/img/P018266981.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                </p>
+                            </div>
+                            <div class="item_prd_option">
+                                <p class="item_name">
+                                    <a href="#">我们的身体需要</a>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="baby_img_area">
+                                <a href="#">
+                                    <img src="/public/images/img/P018266981.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                </p>
+                            </div>
+                            <div class="item_prd_option">
+                                <p class="item_name">
+                                    <a href="#">我们的身体需要</a>
+                                </p>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <div id="tab_baby_prd2" class="tab_baby_prd" style="display: none;">
+                    <ul>
+                        <li>
+                            <div class="baby_img_area">
+                                <a href="#">
+                                    <img src="/public/images/img/P018266981.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                </p>
+                            </div>
+                            <div class="item_prd_option">
+                                <p class="item_name">
+                                    <a href="#">我们的身体需要</a>
+                                </p>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <div id="tab_baby_prd3" class="tab_baby_prd" style="display: block;">
+                    <ul>
+                        <li>
+                            <div class="baby_img_area">
+                                <a href="#">
+                                    <img src="/public/images/img/P018266981.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                </p>
+                            </div>
+                            <div class="item_prd_option">
+                                <p class="item_name">
+                                    <a href="#">我们的身体需要</a>
+                                </p>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <div id="tab_baby_prd4" class="tab_baby_prd" style="display: none;">
+                    <ul>
+                        <li>
+                            <div class="baby_img_area">
+                                <a href="#">
+                                    <img src="/public/images/img/P018266981.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                </p>
+                            </div>
+                            <div class="item_prd_option">
+                                <p class="item_name">
+                                    <a href="#">我们的身体需要</a>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div id="tab_baby_prd5" class="tab_baby_prd" style="display: none;">
+                    <ul>
+                        <li>
+                            <div class="baby_img_area">
+                                <a href="#">
+                                    <img src="/public/images/img/P018266981.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                </p>
+                            </div>
+                            <div class="item_prd_option">
+                                <p class="item_name">
+                                    <a href="#">我们的身体需要</a>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div id="tab_baby_prd6" class="tab_baby_prd" style="display: none;">
+                    <ul>
+                        <li>
+                            <div class="baby_img_area">
+                                <a href="#">
+                                    <img src="/public/images/img/P018266981.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                </p>
+                            </div>
+                            <div class="item_prd_option">
+                                <p class="item_name">
+                                    <a href="#">我们的身体需要</a>
+                                </p>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <div id="tab_baby_prd7" class="tab_baby_prd" style="display: none;">
+                    <ul>
+                        <li>
+                            <div class="baby_img_area">
+                                <a href="#">
+                                    <img src="/public/images/img/P018266981.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                </p>
+                            </div>
+                            <div class="item_prd_option">
+                                <p class="item_name">
+                                    <a href="#">我们的身体需要</a>
+                                </p>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <div id="tab_baby_prd8" class="tab_baby_prd" style="display: none;">
+                    <ul>
+                        <li>
+                            <div class="baby_img_area">
+                                <a href="#">
+                                    <img src="/public/images/img/P018266981.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                </p>
+                            </div>
+                            <div class="item_prd_option">
+                                <p class="item_name">
+                                    <a href="#">我们的身体需要</a>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div id="tab_baby_prd9" class="tab_baby_prd" style="display: none;">
+                    <ul>
+                        <li>
+                            <div class="baby_img_area">
+                                <a href="#">
+                                    <img src="/public/images/img/P018266981.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                </p>
+                            </div>
+                            <div class="item_prd_option">
+                                <p class="item_name">
+                                    <a href="#">我们的身体需要</a>
+                                </p>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        
+        <div class="event_banner_area">
+            <a href="#">
+                <img src="/public/images/img/Tricycle201603301496204473.jpg" alt=""></a>
+            <a href="#">
+                <img src="/public/images/img/Tricycle201603301251932938.jpg" alt=""></a>
+            <a href="#">
+                <img src="/public/images/img/Tricycle201603301346235175.jpg" alt=""></a>
+            </div>
+        </div>         
+        <div class="baby_content3" id="FavItem">
+
+            <div class="content_tit">
+            <span style="display:inline-block;background-color:#fff;color:#444;font-size:16px;margin-top:-2px;font-weight:bold">幼儿用品</span>            
+            <a href="#" class="btn_tit_more" style="display:inline-block;background-color:#fff;color:#444;font-size:14px;margin-top:-5px;font-weight:bold">
+                更多 +</a>
+            </div>
+
+            <div class="necessity_item">
+            <ul class="tab_necessity_item">
+                <li class="tab1" rel="tab_necessity_prd1">
+                    <a href="#">
+                        <span>尿布</span>
+                    </a>
+                </li>
+                <li class="tab2" rel="tab_necessity_prd2">
+                    <a href="#">
+                        <span>분유</span>
+                    </a>
+                </li>
+                <li class="tab3 on" rel="tab_necessity_prd3">
+                    <a href="#">
+                        <span>물티슈</span>
+                    </a>
+                </li>
+                <li class="tab4" rel="tab_necessity_prd4">
+                    <a href="#">
+                        <span>스킨케어</span>
+                    </a>
+                </li>
+                <li class="tab5" rel="tab_necessity_prd5">
+                    <a href="#">
+                        <span>목욕용품</span>
+                    </a>
+                </li>
+                <li class="tab6" rel="tab_necessity_prd6">
+                    <a href="#">
+                        <span>유아세제</span>
+                    </a>
+                </li>
+                <li class="tab7" rel="tab_necessity_prd7">
+                    <a href="#">
+                        <span>이유식/과자/음료</span>
+                    </a>
+                </li>
+
+            </ul>
+            <div class="tab_necessity_con">
+                <div id="tab_necessity_prd1" class="tab_necessity_prd" style="display: none;">
+                    <ul>
+                        <li>
+                            <div>
+                                <a href="#">
+                                    <img src="/public/images/img/P010603235.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                    <a href="#" class="product_btn3"></a>
+                                </p>
+                            </div>
+                            <div class="item_txt_option">
+                                <p class="item_brand">
+                                    <a href="#">棉花</a>
+                                </p>
+                                <p class="item_name">
+                                    <a href="#">[一]★人气超特价机会★2016 New天然棉男女工用新生儿至特大型x 4包</a>
+                                </p>
+                                <p class="item_price">
+                                    <a href="#">
+                                        <span>
+                                            39,500 <em>元</em>
+                                        </span>
+                                    </a>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <a href="#">
+                                    <img src="/public/images/img/P010603235.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                    <a href="#" class="product_btn3"></a>
+                                </p>
+                            </div>
+                            <div class="item_txt_option">
+                                <p class="item_brand">
+                                    <a href="#">棉花</a>
+                                </p>
+                                <p class="item_name">
+                                    <a href="#">[一]★人气超特价机会★2016 New天然棉男女工用新生儿至特大型x 4包</a>
+                                </p>
+                                <p class="item_price">
+                                    <a href="#">
+                                        <span>
+                                            39,500 <em>元</em>
+                                        </span>
+                                    </a>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <a href="#">
+                                    <img src="/public/images/img/P010603235.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                    <a href="#" class="product_btn3"></a>
+                                </p>
+                            </div>
+                            <div class="item_txt_option">
+                                <p class="item_brand">
+                                    <a href="#">棉花</a>
+                                </p>
+                                <p class="item_name">
+                                    <a href="#">[一]★人气超特价机会★2016 New天然棉男女工用新生儿至特大型x 4包</a>
+                                </p>
+                                <p class="item_price">
+                                    <a href="#">
+                                        <span>
+                                            39,500 <em>元</em>
+                                        </span>
+                                    </a>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <a href="#">
+                                    <img src="/public/images/img/P010603235.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                    <a href="#" class="product_btn3"></a>
+                                </p>
+                            </div>
+                            <div class="item_txt_option">
+                                <p class="item_brand">
+                                    <a href="#">棉花</a>
+                                </p>
+                                <p class="item_name">
+                                    <a href="#">[一]★人气超特价机会★2016 New天然棉男女工用新生儿至特大型x 4包</a>
+                                </p>
+                                <p class="item_price">
+                                    <a href="#">
+                                        <span>
+                                            39,500 <em>元</em>
+                                        </span>
+                                    </a>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <a href="#">
+                                    <img src="/public/images/img/P010603235.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                    <a href="#" class="product_btn3"></a>
+                                </p>
+                            </div>
+                            <div class="item_txt_option">
+                                <p class="item_brand">
+                                    <a href="#">棉花</a>
+                                </p>
+                                <p class="item_name">
+                                    <a href="#">[一]★人气超特价机会★2016 New天然棉男女工用新生儿至特大型x 4包</a>
+                                </p>
+                                <p class="item_price">
+                                    <a href="#">
+                                        <span>
+                                            39,500 <em>元</em>
+                                        </span>
+                                    </a>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <a href="#">
+                                    <img src="/public/images/img/P010603235.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                    <a href="#" class="product_btn3"></a>
+                                </p>
+                            </div>
+                            <div class="item_txt_option">
+                                <p class="item_brand">
+                                    <a href="#">棉花</a>
+                                </p>
+                                <p class="item_name">
+                                    <a href="#">[一]★人气超特价机会★2016 New天然棉男女工用新生儿至特大型x 4包</a>
+                                </p>
+                                <p class="item_price">
+                                    <a href="#">
+                                        <span>
+                                            39,500 <em>元</em>
+                                        </span>
+                                    </a>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div id="tab_necessity_prd2" class="tab_necessity_prd" style="display: none;">
+                    <ul>
+                        <li>
+                            <div>
+                                <a href="#">
+                                    <img src="/public/images/img/P010603235.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                    <a href="#" class="product_btn3"></a>
+                                </p>
+                            </div>
+                            <div class="item_txt_option">
+                                <p class="item_brand">
+                                    <a href="#">棉花</a>
+                                </p>
+                                <p class="item_name">
+                                    <a href="#">[一]★人气超特价机会★2016 New天然棉男女工用新生儿至特大型x 4包</a>
+                                </p>
+                                <p class="item_price">
+                                    <a href="#">
+                                        <span>
+                                            39,500 <em>元</em>
+                                        </span>
+                                    </a>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div id="tab_necessity_prd3" class="tab_necessity_prd" style="display: block;">
+                    <ul>
+                        <li>
+                            <div>
+                                <a href="#">
+                                    <img src="/public/images/img/P010603235.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                    <a href="#" class="product_btn3"></a>
+                                </p>
+                            </div>
+                            <div class="item_txt_option">
+                                <p class="item_brand">
+                                    <a href="#">棉花</a>
+                                </p>
+                                <p class="item_name">
+                                    <a href="#">[一]★人气超特价机会★2016 New天然棉男女工用新生儿至特大型x 4包</a>
+                                </p>
+                                <p class="item_price">
+                                    <a href="#">
+                                        <span>
+                                            39,500 <em>元</em>
+                                        </span>
+                                    </a>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div id="tab_necessity_prd4" class="tab_necessity_prd" style="display: none;">
+                    <ul>
+                        <li>
+                            <div>
+                                <a href="#">
+                                    <img src="/public/images/img/P010603235.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                    <a href="#" class="product_btn3"></a>
+                                </p>
+                            </div>
+                            <div class="item_txt_option">
+                                <p class="item_brand">
+                                    <a href="#">棉花</a>
+                                </p>
+                                <p class="item_name">
+                                    <a href="#">[一]★人气超特价机会★2016 New天然棉男女工用新生儿至特大型x 4包</a>
+                                </p>
+                                <p class="item_price">
+                                    <a href="#">
+                                        <span>
+                                            39,500 <em>元</em>
+                                        </span>
+                                    </a>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div id="tab_necessity_prd5" class="tab_necessity_prd" style="display: none;">
+                    <ul>
+                        <li>
+                            <div>
+                                <a href="#">
+                                    <img src="/public/images/img/P010603235.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                    <a href="#" class="product_btn3"></a>
+                                </p>
+                            </div>
+                            <div class="item_txt_option">
+                                <p class="item_brand">
+                                    <a href="#">棉花</a>
+                                </p>
+                                <p class="item_name">
+                                    <a href="#">[一]★人气超特价机会★2016 New天然棉男女工用新生儿至特大型x 4包</a>
+                                </p>
+                                <p class="item_price">
+                                    <a href="#">
+                                        <span>
+                                            39,500 <em>元</em>
+                                        </span>
+                                    </a>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div id="tab_necessity_prd6" class="tab_necessity_prd" style="display: none;">
+                    <ul>
+                        <li>
+                            <div>
+                                <a href="#">
+                                    <img src="/public/images/img/P010603235.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                    <a href="#" class="product_btn3"></a>
+                                </p>
+                            </div>
+                            <div class="item_txt_option">
+                                <p class="item_brand">
+                                    <a href="#">棉花</a>
+                                </p>
+                                <p class="item_name">
+                                    <a href="#">[一]★人气超特价机会★2016 New天然棉男女工用新生儿至特大型x 4包</a>
+                                </p>
+                                <p class="item_price">
+                                    <a href="#">
+                                        <span>
+                                            39,500 <em>元</em>
+                                        </span>
+                                    </a>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div id="tab_necessity_prd7" class="tab_necessity_prd" style="display: none;">
+                    <ul>
+                        <li>
+                            <div>
+                                <a href="#">
+                                    <img src="/public/images/img/P010603235.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                    <a href="#" class="product_btn3"></a>
+                                </p>
+                            </div>
+                            <div class="item_txt_option">
+                                <p class="item_brand">
+                                    <a href="#">棉花</a>
+                                </p>
+                                <p class="item_name">
+                                    <a href="#">[一]★人气超特价机会★2016 New天然棉男女工用新生儿至特大型x 4包</a>
+                                </p>
+                                <p class="item_price">
+                                    <a href="#">
+                                        <span>
+                                            39,500 <em>元</em>
+                                        </span>
+                                    </a>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            </div>
+            <!-- SMS -->          
+            <div class="banner_area_notice">
+            <a href="#">
+                <img src="/public/images/img/banner_necessity.jpg" alt=""></a>
+            </div>
+
+            </div>
+            <!-- Baby Gift Shop -->         
+            <div class="baby_content4">
+            <ul class="tab_gift_shop">
+            <li class="tab1" rel="gift_shop_prd1">
+                <a href="#">[出生百日]百日到四个月。</a>
+            </li>
+            <li class="tab2 on" rel="gift_shop_prd2">
+                <a href="/PlanShop?ThemeSeq=57087#507946">[出生百日]很多人送礼物使用</a>
+            </li>
+            <li class="tab3" rel="gift_shop_prd3">
+                <a href="/PlanShop?ThemeSeq=57087#507951">[出生百日]作为终身纪念</a>
+            </li>
+            <li class="tab4" rel="gift_shop_prd4">
+                <a href="/PlanShop?ThemeSeq=57087#507952">[第一个生日礼物]完美的外出服</a>
+            </li>
+            <li class="tab5" rel="gift_shop_prd5">
+                <a href="/PlanShop?ThemeSeq=57087#507958">[婚礼]特别的一天</a>
+            </li>
+
+            </ul>
+
+            <div class="con_gift_shop">
+            <div id="gift_shop_prd1" class="gift_shop_prd" style="display: none;">
+                <ul>
+                    <li class="">
+                        <div class="baby_img_area">
+                            <a href="#">
+                                <img src="/public/images/img/P026750994.jpg" alt="" class="item_photo">          
+                                <img src="/public/images/img/gift_mask.png" alt="" class="gift_mask"></a>
+                            <p class="btn_layer">
+                                <a href="javascript:;" class="product_btn1"></a>
+                                <a href="#" target="_blank" class="product_btn2"></a>
+                                <a href="#" class="product_btn3"></a>
+                            </p>
+                        </div>
+                        <div class="item_prd_option">
+                            <p class="item_name">
+                                <a href="#">月亮乓狐狸12双面婴儿和幼儿连体裤</a>
+                            </p>
+                            <p class="item_price">
+                                <a href="#">22,900元</a>
+                            </p>
+                        </div>
+                    </li>
+                    <li class="li_two">
+                        <div class="baby_img_area">
+                            <a href="#">
+                                <img src="/public/images/img/P026750994.jpg" alt="" class="item_photo">          
+                                <img src="/public/images/img/gift_mask.png" alt="" class="gift_mask"></a>
+                            <p class="btn_layer">
+                                <a href="javascript:;" class="product_btn1"></a>
+                                <a href="#" target="_blank" class="product_btn2"></a>
+                                <a href="#" class="product_btn3"></a>
+                            </p>
+                        </div>
+                        <div class="item_prd_option">
+                            <p class="item_name">
+                                <a href="#">月亮乓狐狸12双面婴儿和幼儿连体裤</a>
+                            </p>
+                            <p class="item_price">
+                                <a href="#">22,900元</a>
+                            </p>
+                        </div>
+                    </li>
+                    <li class="">
+                        <div class="baby_img_area">
+                            <a href="#">
+                                <img src="/public/images/img/P026750994.jpg" alt="" class="item_photo">          
+                                <img src="/public/images/img/gift_mask.png" alt="" class="gift_mask"></a>
+                            <p class="btn_layer">
+                                <a href="javascript:;" class="product_btn1"></a>
+                                <a href="#" target="_blank" class="product_btn2"></a>
+                                <a href="#" class="product_btn3"></a>
+                            </p>
+                        </div>
+                        <div class="item_prd_option">
+                            <p class="item_name">
+                                <a href="#">月亮乓狐狸12双面婴儿和幼儿连体裤</a>
+                            </p>
+                            <p class="item_price">
+                                <a href="#">22,900元</a>
+                            </p>
+                        </div>
+                    </li>
+                    <li class="">
+                        <div class="baby_img_area">
+                            <a href="#">
+                                <img src="/public/images/img/P026750994.jpg" alt="" class="item_photo">          
+                                <img src="/public/images/img/gift_mask.png" alt="" class="gift_mask"></a>
+                            <p class="btn_layer">
+                                <a href="javascript:;" class="product_btn1"></a>
+                                <a href="#" target="_blank" class="product_btn2"></a>
+                                <a href="#" class="product_btn3"></a>
+                            </p>
+                        </div>
+                        <div class="item_prd_option">
+                            <p class="item_name">
+                                <a href="#">月亮乓狐狸12双面婴儿和幼儿连体裤</a>
+                            </p>
+                            <p class="item_price">
+                                <a href="#">22,900元</a>
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div id="gift_shop_prd2" class="gift_shop_prd" style="display: block;">
+                <ul>
+                    <li class="">
+                        <div class="baby_img_area">
+                            <a href="#">
+                                <img src="/public/images/img/P026750994.jpg" alt="" class="item_photo">          
+                                <img src="/public/images/img/gift_mask.png" alt="" class="gift_mask"></a>
+                            <p class="btn_layer">
+                                <a href="javascript:;" class="product_btn1"></a>
+                                <a href="#" target="_blank" class="product_btn2"></a>
+                                <a href="#" class="product_btn3"></a>
+                            </p>
+                        </div>
+                        <div class="item_prd_option">
+                            <p class="item_name">
+                                <a href="#">月亮乓狐狸12双面婴儿和幼儿连体裤</a>
+                            </p>
+                            <p class="item_price">
+                                <a href="#">22,900元</a>
+                            </p>
+                        </div>
+                    </li>
+                    <li class="li_two">
+                        <div class="baby_img_area">
+                            <a href="#">
+                                <img src="/public/images/img/P026750994.jpg" alt="" class="item_photo">          
+                                <img src="/public/images/img/gift_mask.png" alt="" class="gift_mask"></a>
+                            <p class="btn_layer">
+                                <a href="javascript:;" class="product_btn1"></a>
+                                <a href="#" target="_blank" class="product_btn2"></a>
+                                <a href="#" class="product_btn3"></a>
+                            </p>
+                        </div>
+                        <div class="item_prd_option">
+                            <p class="item_name">
+                                <a href="#">月亮乓狐狸12双面婴儿和幼儿连体裤</a>
+                            </p>
+                            <p class="item_price">
+                                <a href="#">22,900元</a>
+                            </p>
+                        </div>
+                    </li>
+                    <li class="">
+                        <div class="baby_img_area">
+                            <a href="#">
+                                <img src="/public/images/img/P026750994.jpg" alt="" class="item_photo">          
+                                <img src="/public/images/img/gift_mask.png" alt="" class="gift_mask"></a>
+                            <p class="btn_layer">
+                                <a href="javascript:;" class="product_btn1"></a>
+                                <a href="#" target="_blank" class="product_btn2"></a>
+                                <a href="#" class="product_btn3"></a>
+                            </p>
+                        </div>
+                        <div class="item_prd_option">
+                            <p class="item_name">
+                                <a href="#">月亮乓狐狸12双面婴儿和幼儿连体裤</a>
+                            </p>
+                            <p class="item_price">
+                                <a href="#">22,900元</a>
+                            </p>
+                        </div>
+                    </li>
+                    <li class="">
+                        <div class="baby_img_area">
+                            <a href="#">
+                                <img src="/public/images/img/P026750994.jpg" alt="" class="item_photo">          
+                                <img src="/public/images/img/gift_mask.png" alt="" class="gift_mask"></a>
+                            <p class="btn_layer">
+                                <a href="javascript:;" class="product_btn1"></a>
+                                <a href="#" target="_blank" class="product_btn2"></a>
+                                <a href="#" class="product_btn3"></a>
+                            </p>
+                        </div>
+                        <div class="item_prd_option">
+                            <p class="item_name">
+                                <a href="#">月亮乓狐狸12双面婴儿和幼儿连体裤</a>
+                            </p>
+                            <p class="item_price">
+                                <a href="#">22,900元</a>
+                            </p>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+            <div id="gift_shop_prd3" class="gift_shop_prd" style="display: none;">
+                <ul>
+                    <li class="">
+                        <div class="baby_img_area">
+                            <a href="#">
+                                <img src="/public/images/img/P026750994.jpg" alt="" class="item_photo">          
+                                <img src="/public/images/img/gift_mask.png" alt="" class="gift_mask"></a>
+                            <p class="btn_layer">
+                                <a href="javascript:;" class="product_btn1"></a>
+                                <a href="#" target="_blank" class="product_btn2"></a>
+                                <a href="#" class="product_btn3"></a>
+                            </p>
+                        </div>
+                        <div class="item_prd_option">
+                            <p class="item_name">
+                                <a href="#">月亮乓狐狸12双面婴儿和幼儿连体裤</a>
+                            </p>
+                            <p class="item_price">
+                                <a href="#">22,900元</a>
+                            </p>
+                        </div>
+                    </li>
+                    <li class="li_two">
+                        <div class="baby_img_area">
+                            <a href="#">
+                                <img src="/public/images/img/P026750994.jpg" alt="" class="item_photo">          
+                                <img src="/public/images/img/gift_mask.png" alt="" class="gift_mask"></a>
+                            <p class="btn_layer">
+                                <a href="javascript:;" class="product_btn1"></a>
+                                <a href="#" target="_blank" class="product_btn2"></a>
+                                <a href="#" class="product_btn3"></a>
+                            </p>
+                        </div>
+                        <div class="item_prd_option">
+                            <p class="item_name">
+                                <a href="#">月亮乓狐狸12双面婴儿和幼儿连体裤</a>
+                            </p>
+                            <p class="item_price">
+                                <a href="#">22,900元</a>
+                            </p>
+                        </div>
+                    </li>
+                    <li class="">
+                        <div class="baby_img_area">
+                            <a href="#">
+                                <img src="/public/images/img/P026750994.jpg" alt="" class="item_photo">          
+                                <img src="/public/images/img/gift_mask.png" alt="" class="gift_mask"></a>
+                            <p class="btn_layer">
+                                <a href="javascript:;" class="product_btn1"></a>
+                                <a href="#" target="_blank" class="product_btn2"></a>
+                                <a href="#" class="product_btn3"></a>
+                            </p>
+                        </div>
+                        <div class="item_prd_option">
+                            <p class="item_name">
+                                <a href="#">月亮乓狐狸12双面婴儿和幼儿连体裤</a>
+                            </p>
+                            <p class="item_price">
+                                <a href="#">22,900元</a>
+                            </p>
+                        </div>
+                    </li>
+                    <li class="">
+                        <div class="baby_img_area">
+                            <a href="#">
+                                <img src="/public/images/img/P026750994.jpg" alt="" class="item_photo">          
+                                <img src="/public/images/img/gift_mask.png" alt="" class="gift_mask"></a>
+                            <p class="btn_layer">
+                                <a href="javascript:;" class="product_btn1"></a>
+                                <a href="#" target="_blank" class="product_btn2"></a>
+                                <a href="#" class="product_btn3"></a>
+                            </p>
+                        </div>
+                        <div class="item_prd_option">
+                            <p class="item_name">
+                                <a href="#">月亮乓狐狸12双面婴儿和幼儿连体裤</a>
+                            </p>
+                            <p class="item_price">
+                                <a href="#">22,900元</a>
+                            </p>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+            <div id="gift_shop_prd4" class="gift_shop_prd" style="display: none;">
+                <ul>
+                    <li class="">
+                        <div class="baby_img_area">
+                            <a href="#">
+                                <img src="/public/images/img/P026750994.jpg" alt="" class="item_photo">          
+                                <img src="/public/images/img/gift_mask.png" alt="" class="gift_mask"></a>
+                            <p class="btn_layer">
+                                <a href="javascript:;" class="product_btn1"></a>
+                                <a href="#" target="_blank" class="product_btn2"></a>
+                                <a href="#" class="product_btn3"></a>
+                            </p>
+                        </div>
+                        <div class="item_prd_option">
+                            <p class="item_name">
+                                <a href="#">月亮乓狐狸12双面婴儿和幼儿连体裤</a>
+                            </p>
+                            <p class="item_price">
+                                <a href="#">22,900元</a>
+                            </p>
+                        </div>
+                    </li>
+                    <li class="li_two">
+                        <div class="baby_img_area">
+                            <a href="#">
+                                <img src="/public/images/img/P026750994.jpg" alt="" class="item_photo">          
+                                <img src="/public/images/img/gift_mask.png" alt="" class="gift_mask"></a>
+                            <p class="btn_layer">
+                                <a href="javascript:;" class="product_btn1"></a>
+                                <a href="#" target="_blank" class="product_btn2"></a>
+                                <a href="#" class="product_btn3"></a>
+                            </p>
+                        </div>
+                        <div class="item_prd_option">
+                            <p class="item_name">
+                                <a href="#">月亮乓狐狸12双面婴儿和幼儿连体裤</a>
+                            </p>
+                            <p class="item_price">
+                                <a href="#">22,900元</a>
+                            </p>
+                        </div>
+                    </li>
+                    <li class="">
+                        <div class="baby_img_area">
+                            <a href="#">
+                                <img src="/public/images/img/P026750994.jpg" alt="" class="item_photo">          
+                                <img src="/public/images/img/gift_mask.png" alt="" class="gift_mask"></a>
+                            <p class="btn_layer">
+                                <a href="javascript:;" class="product_btn1"></a>
+                                <a href="#" target="_blank" class="product_btn2"></a>
+                                <a href="#" class="product_btn3"></a>
+                            </p>
+                        </div>
+                        <div class="item_prd_option">
+                            <p class="item_name">
+                                <a href="#">月亮乓狐狸12双面婴儿和幼儿连体裤</a>
+                            </p>
+                            <p class="item_price">
+                                <a href="#">22,900元</a>
+                            </p>
+                        </div>
+                    </li>
+                    <li class="">
+                        <div class="baby_img_area">
+                            <a href="#">
+                                <img src="/public/images/img/P026750994.jpg" alt="" class="item_photo">          
+                                <img src="/public/images/img/gift_mask.png" alt="" class="gift_mask"></a>
+                            <p class="btn_layer">
+                                <a href="javascript:;" class="product_btn1"></a>
+                                <a href="#" target="_blank" class="product_btn2"></a>
+                                <a href="#" class="product_btn3"></a>
+                            </p>
+                        </div>
+                        <div class="item_prd_option">
+                            <p class="item_name">
+                                <a href="#">月亮乓狐狸12双面婴儿和幼儿连体裤</a>
+                            </p>
+                            <p class="item_price">
+                                <a href="#">22,900元</a>
+                            </p>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+            <div id="gift_shop_prd5" class="gift_shop_prd" style="display: none;">
+                <ul>
+                    <li class="">
+                        <div class="baby_img_area">
+                            <a href="#">
+                                <img src="/public/images/img/P026750994.jpg" alt="" class="item_photo">          
+                                <img src="/public/images/img/gift_mask.png" alt="" class="gift_mask"></a>
+                            <p class="btn_layer">
+                                <a href="javascript:;" class="product_btn1"></a>
+                                <a href="#" target="_blank" class="product_btn2"></a>
+                                <a href="#" class="product_btn3"></a>
+                            </p>
+                        </div>
+                        <div class="item_prd_option">
+                            <p class="item_name">
+                                <a href="#">月亮乓狐狸12双面婴儿和幼儿连体裤</a>
+                            </p>
+                            <p class="item_price">
+                                <a href="#">22,900元</a>
+                            </p>
+                        </div>
+                    </li>
+                    <li class="li_two">
+                        <div class="baby_img_area">
+                            <a href="#">
+                                <img src="/public/images/img/P026750994.jpg" alt="" class="item_photo">          
+                                <img src="/public/images/img/gift_mask.png" alt="" class="gift_mask"></a>
+                            <p class="btn_layer">
+                                <a href="javascript:;" class="product_btn1"></a>
+                                <a href="#" target="_blank" class="product_btn2"></a>
+                                <a href="#" class="product_btn3"></a>
+                            </p>
+                        </div>
+                        <div class="item_prd_option">
+                            <p class="item_name">
+                                <a href="#">月亮乓狐狸12双面婴儿和幼儿连体裤</a>
+                            </p>
+                            <p class="item_price">
+                                <a href="#">22,900元</a>
+                            </p>
+                        </div>
+                    </li>
+                    <li class="">
+                        <div class="baby_img_area">
+                            <a href="#">
+                                <img src="/public/images/img/P026750994.jpg" alt="" class="item_photo">          
+                                <img src="/public/images/img/gift_mask.png" alt="" class="gift_mask"></a>
+                            <p class="btn_layer">
+                                <a href="javascript:;" class="product_btn1"></a>
+                                <a href="#" target="_blank" class="product_btn2"></a>
+                                <a href="#" class="product_btn3"></a>
+                            </p>
+                        </div>
+                        <div class="item_prd_option">
+                            <p class="item_name">
+                                <a href="#">月亮乓狐狸12双面婴儿和幼儿连体裤</a>
+                            </p>
+                            <p class="item_price">
+                                <a href="#">22,900元</a>
+                            </p>
+                        </div>
+                    </li>
+                    <li class="">
+                        <div class="baby_img_area">
+                            <a href="#">
+                                <img src="/public/images/img/P026750994.jpg" alt="" class="item_photo">          
+                                <img src="/public/images/img/gift_mask.png" alt="" class="gift_mask"></a>
+                            <p class="btn_layer">
+                                <a href="javascript:;" class="product_btn1"></a>
+                                <a href="#" target="_blank" class="product_btn2"></a>
+                                <a href="#" class="product_btn3"></a>
+                            </p>
+                        </div>
+                        <div class="item_prd_option">
+                            <p class="item_name">
+                                <a href="#">月亮乓狐狸12双面婴儿和幼儿连体裤</a>
+                            </p>
+                            <p class="item_price">
+                                <a href="#">22,900元</a>
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="baby_content5" id="NecItem">
+        <div class="content_tit">
+            <span style="display:inline-block;background-color:#fff;color:#444;font-size:16px;margin-top:-2px;font-weight:bold">孕妇用品</span>          
+            <a href="#" class="btn_tit_more" style="display:inline-block;background-color:#fff;color:#444;font-size:14px;margin-top:-5px;font-weight:bold">
+                更多 +
+            </a>
+        </div>        
+        <div class="content_mom_item">
+            <ul class="tab_mom_item">
+                <li class="tab1" rel="con_mom_prd1">
+                    <a href="#">孕妇装</a>
+                </li>
+                <li class="tab2 on" rel="con_mom_prd2">
+                    <a href="#">皮肤护理</a>
+                </li>
+                <li class="tab3" rel="con_mom_prd3">
+                    <a href="#">孕妇衣服</a>
+                </li>
+                <li class="tab4" rel="con_mom_prd4">
+                    <a href="#">母乳喂养用品</a>
+                </li>
+                <li class="tab5" rel="con_mom_prd5">
+                    <a href="#">尿布</a>
+                </li>
+
+            </ul>
+
+            <div class="con_mom_item">
+                <div id="con_mom_prd1" class="con_mom_prd" style="display: none;">
+                    <ul>
+                        <li>
+                            <div class="baby_img_area">
+                                <a href="#">
+                                    <img src="/public/images/img/P012592809.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                    <a href="#" class="product_btn3"></a>
+                                </p>
+                            </div>
+                            <div class="item_prd_option">
+                                <p class="item_brand">
+                                    <a href="#">马斯婴儿</a>
+                                </p>
+                                <p class="item_name">
+                                    <a href="#">[马斯婴儿] 元至治吊带 背心式女内衣 (喂奶背心) ●免费配送●</a>
+                                </p>
+                                <p class="item_price">
+                                    <a href="#">
+                                        <span>29,000</span>
+                                        元
+                                    </a>
+                                </p>
+                                <p class="coupon_area">
+                                    <img src="/public/images/img/list_icon.gif" alt="리스트">           
+                                    <span class="coupon_txt2">63</span>
+                                    <span class="coupon_txt3">条</span>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="baby_img_area">
+                                <a href="#">
+                                    <img src="/public/images/img/P012592809.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                    <a href="#" class="product_btn3"></a>
+                                </p>
+                            </div>
+                            <div class="item_prd_option">
+                                <p class="item_brand">
+                                    <a href="#">马斯婴儿</a>
+                                </p>
+                                <p class="item_name">
+                                    <a href="#">[马斯婴儿] 元至治吊带 背心式女内衣 (喂奶背心) ●免费配送●</a>
+                                </p>
+                                <p class="item_price">
+                                    <a href="#">
+                                        <span>29,000</span>
+                                        元
+                                    </a>
+                                </p>
+                                <p class="coupon_area">
+                                    <img src="/public/images/img/list_icon.gif" alt="리스트">           
+                                    <span class="coupon_txt2">63</span>
+                                    <span class="coupon_txt3">条</span>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="baby_img_area">
+                                <a href="#">
+                                    <img src="/public/images/img/P012592809.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                    <a href="#" class="product_btn3"></a>
+                                </p>
+                            </div>
+                            <div class="item_prd_option">
+                                <p class="item_brand">
+                                    <a href="#">马斯婴儿</a>
+                                </p>
+                                <p class="item_name">
+                                    <a href="#">[马斯婴儿] 元至治吊带 背心式女内衣 (喂奶背心) ●免费配送●</a>
+                                </p>
+                                <p class="item_price">
+                                    <a href="#">
+                                        <span>29,000</span>
+                                        元
+                                    </a>
+                                </p>
+                                <p class="coupon_area">
+                                    <img src="/public/images/img/list_icon.gif" alt="리스트">           
+                                    <span class="coupon_txt2">63</span>
+                                    <span class="coupon_txt3">条</span>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="baby_img_area">
+                                <a href="#">
+                                    <img src="/public/images/img/P012592809.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                    <a href="#" class="product_btn3"></a>
+                                </p>
+                            </div>
+                            <div class="item_prd_option">
+                                <p class="item_brand">
+                                    <a href="#">马斯婴儿</a>
+                                </p>
+                                <p class="item_name">
+                                    <a href="#">[马斯婴儿] 元至治吊带 背心式女内衣 (喂奶背心) ●免费配送●</a>
+                                </p>
+                                <p class="item_price">
+                                    <a href="#">
+                                        <span>29,000</span>
+                                        元
+                                    </a>
+                                </p>
+                                <p class="coupon_area">
+                                    <img src="/public/images/img/list_icon.gif" alt="리스트">           
+                                    <span class="coupon_txt2">63</span>
+                                    <span class="coupon_txt3">条</span>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div id="con_mom_prd2" class="con_mom_prd" style="display: block;">
+                    <ul>
+                        <li>
+                            <div class="baby_img_area">
+                                <a href="#">
+                                    <img src="/public/images/img/P012592809.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                    <a href="#" class="product_btn3"></a>
+                                </p>
+                            </div>
+                            <div class="item_prd_option">
+                                <p class="item_brand">
+                                    <a href="#">马斯婴儿</a>
+                                </p>
+                                <p class="item_name">
+                                    <a href="#">[马斯婴儿] 元至治吊带 背心式女内衣 (喂奶背心) ●免费配送●</a>
+                                </p>
+                                <p class="item_price">
+                                    <a href="#">
+                                        <span>29,000</span>
+                                        元
+                                    </a>
+                                </p>
+                                <p class="coupon_area">
+                                    <img src="/public/images/img/list_icon.gif" alt="리스트">           
+                                    <span class="coupon_txt2">63</span>
+                                    <span class="coupon_txt3">条</span>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div id="con_mom_prd3" class="con_mom_prd" style="display: none;">
+                    <ul>
+                        <li>
+                            <div class="baby_img_area">
+                                <a href="#">
+                                    <img src="/public/images/img/P012592809.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                    <a href="#" class="product_btn3"></a>
+                                </p>
+                            </div>
+                            <div class="item_prd_option">
+                                <p class="item_brand">
+                                    <a href="#">马斯婴儿</a>
+                                </p>
+                                <p class="item_name">
+                                    <a href="#">[马斯婴儿] 元至治吊带 背心式女内衣 (喂奶背心) ●免费配送●</a>
+                                </p>
+                                <p class="item_price">
+                                    <a href="#">
+                                        <span>29,000</span>
+                                        元
+                                    </a>
+                                </p>
+                                <p class="coupon_area">
+                                    <img src="/public/images/img/list_icon.gif" alt="리스트">           
+                                    <span class="coupon_txt2">63</span>
+                                    <span class="coupon_txt3">条</span>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div id="con_mom_prd4" class="con_mom_prd" style="display: none;">
+                    <ul>
+                        <li>
+                            <div class="baby_img_area">
+                                <a href="#">
+                                    <img src="/public/images/img/P012592809.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                    <a href="#" class="product_btn3"></a>
+                                </p>
+                            </div>
+                            <div class="item_prd_option">
+                                <p class="item_brand">
+                                    <a href="#">马斯婴儿</a>
+                                </p>
+                                <p class="item_name">
+                                    <a href="#">[马斯婴儿] 元至治吊带 背心式女内衣 (喂奶背心) ●免费配送●</a>
+                                </p>
+                                <p class="item_price">
+                                    <a href="#">
+                                        <span>29,000</span>
+                                        元
+                                    </a>
+                                </p>
+                                <p class="coupon_area">
+                                    <img src="/public/images/img/list_icon.gif" alt="리스트">           
+                                    <span class="coupon_txt2">63</span>
+                                    <span class="coupon_txt3">条</span>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div id="con_mom_prd5" class="con_mom_prd" style="display: none;">
+                    <ul>
+                        <li>
+                            <div class="baby_img_area">
+                                <a href="#">
+                                    <img src="/public/images/img/P012592809.jpg" alt="" class="item_photo"></a>
+                                <p class="btn_layer">
+                                    <a href="javascript:;" class="product_btn1"></a>
+                                    <a href="#" target="_blank" class="product_btn2"></a>
+                                    <a href="#" class="product_btn3"></a>
+                                </p>
+                            </div>
+                            <div class="item_prd_option">
+                                <p class="item_brand">
+                                    <a href="#">马斯婴儿</a>
+                                </p>
+                                <p class="item_name">
+                                    <a href="#">[马斯婴儿] 元至治吊带 背心式女内衣 (喂奶背心) ●免费配送●</a>
+                                </p>
+                                <p class="item_price">
+                                    <a href="#">
+                                        <span>29,000</span>
+                                        元
+                                    </a>
+                                </p>
+                                <p class="coupon_area">
+                                    <img src="/public/images/img/list_icon.gif" alt="리스트">           
+                                    <span class="coupon_txt2">63</span>
+                                    <span class="coupon_txt3">条</span>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="baby_content6">
+        <div class="b_banner_top">
+            <a href="#">
+                <img src="/public/images/img/b_banner1.jpg" alt=""></a>
+            <a href="#">
+                <img src="/public/images/img/b_banner2.jpg" alt=""></a>
+            <a href="#">
+                <img src="/public/images/img/b_banner3.jpg" alt=""></a>
+            </div>
+            <div class="b_banner_bottom">
+            <div class="banL">
+                <a href="#" target="_blank">
+                    <img src="/public/images/img/b_banner4.jpg" alt=""></a>
+            </div>
+            <div class="banR">
+                <a href="#" target="_blank">
+                    <img src="/public/images/img/b_banner5.jpg" alt=""></a>
+                <a href="#" target="_blank">
+                    <img src="/public/images/img/b_banner6.jpg" alt=""></a>
+            </div>
+        </div>
+    </div>
+
+</div>
+#{set 'moreScripts'}
+<script src="@{'/public/javascripts/idangerous.swiper-3.0.min.js'}" type="text/javascript"></script>
+<script type="text/javascript">
+    var mySwiper = new Swiper('.swiper-container', {
+        loop: true,
+        onSlideChangeStart: function (swiper) {
+            var obj = swiper.activeSlide();
+            $(obj).find('img').attr('src', $(obj).find('img').attr('data-src'));
+        }
+    });
+
+    var objCategory = $('.baby_info_layer li').eq(0).attr("category");
+    var objBanner = $('.baby_info_layer li').eq(0).attr("banner");
+    var count = Math.floor(Math.random() * 4 + 1);
+    $(document).ready(function () {
+
+        if ("" != "" && $(".baby_info_layer li").attr("filename") != "undefined" && $(".baby_info_layer li").attr("filename") != "") {
+            $(".baby_photo_img").attr("src", imageURL + $(".baby_info_layer li").attr("filename"));
+        }
+        else {
+            $(".baby_photo_img").remove();
+        }
+        if (objCategory == undefined) {
+            objCategory = "1";
+        }
+
+        $('.baby_name').text($(".baby_name_ly span").eq(0).text());
+        $('.baby_name_div').text($(".baby_info_tit span").eq(0).text());
+        $("ul.tab_baby_item li").removeClass("on");
+        $("ul.tab_baby_item li.tab" + objCategory).addClass("on");
+        $(".tab_baby_prd").hide();
+
+        var activeTab = $(".tab_baby_item li.tab" + objCategory).attr("rel");
+        $("#" + activeTab).show();
+
+        if ("" == "N") {
+            objBanner = "01";
+            $(".children_move_pop").show();
+        }
+    });
+
+    $(".photo_link").mouseover(function () {
+        $('.photo_edit').show();
+    });
+    $(".photo_edit").mouseout(function () {
+        $('.photo_edit').hide();
+    });
+
+    $(".baby_info_tit").click(function () {
+        $('.baby_info_layer').toggle();
+    });
+
+    $(".baby_pop_close").click(function () {
+        $('.children_photo_pop').hide();
+        $('.children_move_pop').hide();
+    });
+
+    $(".photo_edit").click(function () {
+        $("#seqno").attr("value", $(".baby_info_tit").attr("SeqNo"));
+        $('.photo img').attr("src", $(".baby_photo_img").attr("src"));
+  
+        $(".children_photo_pop").show();
+    });
+
+    $('.baby_info_layer li').click(function () {
+        if ($(this).attr("value") >= 3) {
+            $(".children_move_pop").show();
+            return false;
+        }
+
+        objCategory = $(this).attr("category")
+        objBanner = $(this).attr("banner")
+
+        moveBabyWeekBanner(objBanner);
+
+        $("#seqno").attr("value", $(this).attr("SeqNo"));
+        $(".baby_info_tit").attr("SeqNo", $(this).attr("SeqNo"));
+        if ($(this).attr("filename") == "" || typeof $(this).attr("filename") == "undefined") {
+            $(".baby_photo_img").remove();
+        }
+        else {
+            $("<img src='" + $(this).attr("filename") + "' class='baby_photo_img' alt='baby photo'/>").appendTo($(".baby_photo"));
+            $(".baby_photo_img").attr("src", imageURL + $(this).attr("filename"));
+            $('.photo img').attr("src", imageURL + $(this).attr("filename"));
+        }
+        $(".baby_info_tit span").html($(this).text());
+        $('.baby_info_layer').toggle();
+        $('.baby_name').text($(".baby_info_tit span").text().split(' ', 1));
+        $('.baby_name_div').text($(".baby_info_tit span").text());
+
+        $("ul.tab_baby_item li").removeClass("on");
+        $("ul.tab_baby_item li.tab" + objCategory).addClass("on");
+        $(".tab_baby_prd").hide()
+        var activeTab = $(".tab_baby_item li.tab" + objCategory).attr("rel");
+        $("#" + activeTab).show()
+    });
+
+    $(function () {
+        //$(".tab_baby_prd").hide();
+        $("ul.tab_baby_item li").mouseover(function () {
+            $("ul.tab_baby_item li").removeClass("on");
+            $(this).addClass("on");
+            $(".tab_baby_prd").hide()
+            var activeTab = $(this).attr("rel");
+            $("#" + activeTab).show()
+        });
+    });
+
+    $(function () {
+        $("ul.tab_gift_shop li.tab" + count).addClass("on");
+        $(".gift_shop_prd").hide();
+        $("#gift_shop_prd" + count).show();
+        $("ul.tab_gift_shop li").mouseover(function () {
+            $("ul.tab_gift_shop li").removeClass("on");
+            $(this).addClass("on");
+            $(".gift_shop_prd").hide()
+            var activeTab = $(this).attr("rel");
+            $("#" + activeTab).show()
+        });
+    });
+
+    $(function () {
+        $("ul.tab_mom_item li.tab" + count).addClass("on");
+        $(".con_mom_prd").hide();
+        $("#con_mom_prd" + count).show();
+        $("ul.tab_mom_item li").mouseover(function () {
+            $("ul.tab_mom_item li").removeClass("on");
+            $(this).addClass("on");
+            $(".con_mom_prd").hide()
+            var activeTab = $(this).attr("rel");
+            $("#" + activeTab).show()
+        });
+    });
+    
+    $(".tab_baby_prd li, .tab_necessity_prd li, .gift_shop_prd li, .con_mom_prd li").mouseover(function () {
+        $(this).children().children('.btn_layer').show();
+    });
+    $(".tab_baby_prd li, .tab_necessity_prd li, .gift_shop_prd li, .con_mom_prd li").mouseout(function () {
+        $(this).children().children('.btn_layer').hide();
+    });
+
+    $('.baby_content1 .banner_area .baby_btn_prev').on('click', function (e) {
+        e.preventDefault();
+        mySwiper.swipePrev();
+    });
+
+    $('.baby_content1 .banner_area .baby_btn_next').on('click', function (e) {
+        e.preventDefault();
+        mySwiper.swipeNext();
+    });
+
+    function moveBabyWeekBanner(weekno) {
+        $(mySwiper.slides).each(function (i) {
+            if ($(this).attr('weekno') == weekno) {
+                //var obj = mySwiper.getSlide(i - 1);
+                $(this).find('img').attr('src', $(this).find('img').attr('data-src'));
+                //$('.lazy').attr('src', $('.lazy').attr('data-src'));
+                mySwiper.swipeTo(i - 1, 0, false);
+                return false;
+            }
+            else {
+                //var obj = mySwiper.getSlide(i - 1);
+                $(this).find('img').attr('src', $(this).find('img').attr('data-src'));
+                mySwiper.swipeTo(0, 0, false);
+            }
+        });
+    }
+
+
+
+</script>
+
+<script type="text/javascript">
+
+    $(function () {
+        $(".tab_necessity_prd").hide();
+        $(".tab_necessity_item li.tab1").addClass("on");
+        $(".tab_necessity_prd:first").show();
+        $("ul.tab_necessity_item li").mouseover(function () {
+            $("ul.tab_necessity_item li").removeClass("on");
+            $(this).addClass("on");
+            $(".tab_necessity_prd").hide()
+            var activeTab = $(this).attr("rel");
+            $("#" + activeTab).show()
+        });
+        $('#gnb1').hover(function() {
+                        $('.depth2_new').show();
+                    }, function() {
+                        $('.depth2_new').hide();
+                    });
+    });
+</script>
+#{/set}

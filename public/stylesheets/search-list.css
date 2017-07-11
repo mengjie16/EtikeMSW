@@ -1,0 +1,85 @@
+
+#MainItem2012 {margin:0 auto; }
+#MainItem2012 .item_navi {height:40px;}
+#MainItem2012 .item_none {
+	text-align:center;padding:50px 0
+}
+#MainItem2012 .item_none span {font-size: 16px;color: #fea200}
+#MainItem2012 .item_navi .location {float:left; font-size:16px; font-weight:bold; color:#333; padding:15px 0 10px 0;}
+#MainItem2012 .item_navi .location h1 {display:inline; font-size:16px; font-weight:bold; color:#333; padding-right:5px;}
+#MainItem2012 .item_navi .location img {cursor:pointer;padding:0 5px;}
+#MainItem2012 .item_navi .location span { font-size:16px; font-weight:bold; color:#fea200;}
+#MainItem2012 .item_navi .location_txt {float:right; color:#333; padding:22px 3px 0 0;}
+#MainItem2012 .item_navi .location_txt span {font-weight:bold;cursor:pointer;}
+#MainItem2012 .item_navi .location_img {float:right; color:#333; padding-top:15px;}
+#MainItem2012 .item_navi .location_img img {padding-left:3px;}
+
+/*categorybox 20120308*/
+#MainItem2012 .categorybox {clear:both; padding-top:0px; margin-bottom:19px;}
+#MainItem2012 .categorybox:after {content:""; clear:both; display:block;}
+/*item_thum*/
+#MainItem2012 .item_thum {clear:both; padding-top:11px; }
+#MainItem2012 .item_thum.bg { background:url(/public/images/img/bestsection_bg.jpg) no-repeat left 39px; }
+#MainItem2012 .item_thum:after {content:""; clear:both; display:block;}
+#MainItem2012 .item_thum h3 {padding-bottom:28px;}
+#MainItem2012 .item_thum ul {width:100%;}
+#MainItem2012 .item_thum li {float:left; padding:15px 46px; width:183px; background:#fff; height:260px;}
+
+#MainItem2012 .item_thum li dt {  font-size:12px; color:#888; padding-bottom:0px;margin-bottom:1px; }
+#MainItem2012 .item_thum li dt a { text-decoration:none;color:#888; font-weight:bold; font-size:12px;}
+#MainItem2012 .item_thum li dd {color:#888;  font-size:12px;}
+#MainItem2012 .item_thum li .txt {font-size:12px; padding-top:3px; line-height:14px; display:inline-block;overflow:hidden;height: 15px; margin-bottom:8px; }
+#MainItem2012 .item_thum li .price  {height:12px; padding-bottom:6px; line-height:normal;}
+#MainItem2012 .item_thum li .price .newPrice { font-size: 14px; color: #FF9605; line-height: 18px; font-weight: bold; text-decoration: none; }
+#MainItem2012 .item_thum li .price .newPrice:before {
+	content: '￥';
+	font-size: 12px;
+}
+#MainItem2012 .item_thum li .ico { color:#8b846b; font-size:11px; padding-bottom:7px;}
+#MainItem2012 .item_thum li .ico img {position:relative; top:3px; padding-right:2px;}
+#MainItem2012 .item_thum li .ico .ico_more {top:4px;}
+
+
+#MainItem2012 .item_thum li p {padding-bottom:14px; position:relative; }
+#MainItem2012 .item_thum li p .best {position:absolute; top:0; left:0;}
+
+/*20120308*/
+#MainItem2012 .tabcate {border-bottom:2px solid #b5b5b5; height:100%;}
+#MainItem2012 .tabcate li ul {float:left; width:890px; max-height:263px; line-height: 30px;}
+#MainItem2012 .tabcate .GroupBrd {max-height:800px;position:relative;}
+#MainItem2012 .tabcate:after {content:""; clear:both; display:block;}
+#MainItem2012 .tabcate li {float:left; color:#999; border-bottom:1px solid #f3f3f3;}
+#MainItem2012 .tabcate li h2 {line-height: 30px; clear:both; float:left; width:175px; color:#666; padding-left:35px;  font-weight:bold;  background-position:25px 68%;}
+#MainItem2012 .tabcate li h2 .yellowDot {width:4px; height:4px; position:absolute; bottom:5px; left:23px; background-color:#ffb400;}
+#MainItem2012 .tabcate li h2 span {font-weight:bold; color:#ff9806;}
+#MainItem2012 .tabcate li #CategoryList {padding-bottom:0px; }
+
+#MainItem2012 .tabcate li ul li {width:167px; border:none; overflow:hidden; white-space:nowrap;}
+#MainItem2012 .tabcate li ul li input {position:relative; margin:0px; padding:0px; margin-right:3px;}
+#MainItem2012 .tabcate li ul .select {text-decoration:underline; font-weight:bold; color:#666;}
+
+.priceTxt{
+	line-height: 18px;
+	width: 70px;
+	height: 18px;
+	padding: 3px;
+	border-radius: 2px;
+}
+
+#MainItem2012 .item_thum li .productImg {position:relative; margin-bottom:12px; border:0px; height:183px; overflow:visible;}
+#MainItem2012 .item_thum li .productImg a {position:relative; display:block; overflow:hidden; zoom:1; width:183px; height:183px;text-align: center;vertical-align: middle;}
+#MainItem2012 .item_thum li .productImg a img {position:relative; top:0px; left:0px; /*width:183px; height:183px;*/ }
+#MainItem2012 .item_thum li .productImg .newBtnFunc {position:absolute; width:49px; height:35px; background-color:white; bottom:-1px; left:50%; margin-left:-25px; display:none; z-index:10;}
+
+#MainItem2012 .item_thum li .current {border:2px solid #aea998;  overflow:hidden; height:179px;}
+#MainItem2012 .item_thum li .current a {width:181px; height:181px;}
+#MainItem2012 .item_thum li .current a img { top:-2px; left:-2px;}
+#MainItem2012 .item_thum li .current .newBtnFunc {display:block;}
+#MainItem2012 .item_thum li dl dt a img {position:relative; top:3px;}
+#MainItem2012 .item_thum .newBtns li {float:left; width:23px; height:20px; padding:1px 0px 0px 1px; cursor:pointer;}
+#MainItem2012 .item_thum .newBtns .iconquick {}
+#MainItem2012 .item_thum .newBtns .iconnewWindow {}
+#MainItem2012 .item_thum .newTxt {width:49px; height:13px; background-position:top left; clear:both;}
+#MainItem2012 .item_thum li dt a.lnkBrand:hover{
+	text-decoration: underline;
+}

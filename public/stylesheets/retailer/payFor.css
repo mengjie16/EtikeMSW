@@ -1,0 +1,54 @@
+.validateLine {
+	display: table-cell;
+	padding-left: 10px
+}
+.validateLine .error {
+	line-height: 24px;
+}
+.stepTwo {
+	display: none;
+}
+.choosebtn {
+	display: inline-block;
+	margin-left: 30px;
+	border: 1px solid #afafaf;
+    background-color: #f3f3f3;
+	width: 140px;
+	height: 140px;
+	line-height: 34px;
+	text-align: center;
+	color: #777;
+	cursor: pointer;
+	border-radius: 2px;
+}
+.choosebtn .icon{
+	height: 110px;
+}
+.choosebtn .icon .iconfont{
+	line-height: 110px;
+	font-size: 40px;
+}
+.choosebtn .text{
+	height: 30px;
+	line-height: 20px;
+}
+.scanPay{
+	border: 1px solid #8e8e8e;
+    background-color: #fcfbfb;
+    color: #676d70;
+}
+.choosebtn:hover{
+	background-color: #676d70;
+	
+}
+.choosebtn:hover *{
+	color:#fff;
+}
+.aton-qrcode{
+	margin: 30px;
+	display: none;
+}
+.aton-qrcode img{
+	width: 200px;
+	height: 200px;
+}

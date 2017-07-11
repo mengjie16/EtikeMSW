@@ -1,0 +1,451 @@
+#{extends './manage-frame.html' /}
+#{set title:'编辑订单' /}
+#{set 'moreManaStyles'}
+<link href="@{'/public/stylesheets/manage.css'}" rel="stylesheet" type="text/css" />
+<link href="@{'/public/stylesheets/mypage.css'}" rel="stylesheet" type="text/css" />
+<link href="@{'/public/stylesheets/retailer.css'}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/common/datePicker.css'}" />
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/common/express.css'}" />
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/common/jquery.pagination.css'}"  />
+<style type="text/css">
+	#frmAddOrder .validateLine {
+		padding-left: 5px;
+    line-height: 24px;
+	}
+	.totalPay {
+		margin-bottom: 25px;
+	}
+	.totalPay .inputText {
+		height: 24px;
+		line-height: 24px;
+	}
+	.totalPay span {
+		line-height: 24px;
+		margin-left:10px;
+		margin-right:10px;
+	}
+	.changeItem {
+		position: relative;
+	}
+	.prompt {
+		position: absolute;
+		top:-20px;
+		left:0;
+		z-index: 1000;
+		background-color: #888;
+		border-radius: 4px;
+		color:#fff;
+		padding:1px 3px;
+	}
+	select {
+    border: 1px solid #999;
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #999;
+    width: 100px;
+	}
+	.tbl td .op_express_delivery_dropdown_container div {
+		min-width: 10px
+	}
+</style>
+#{/set}
+<div class="cont_mypage" style="margin-top:30px" id="container">
+	<div class="container_contents container_myMain_contents">
+		<div style="margin-top:0px;">
+			<div class="column_left">
+				<h3>
+					编辑订单
+					<span class="orderNo">${tradeId}</span>
+					<a class="btnStd btnMedium fr" id="exportExcelbtn"> <i class="iconfont mr4">&#xe603;</i>
+						导出订单
+					</a>
+					<a class="btnStd btnMedium fr" id="Createbtn" style="margin-right:10px;"> <i class="iconfont mr4">&#xe60b;</i>
+						添加订单
+					</a>
+				</h3>
+				<input type="hidden" name="trade" value="${tradeId}"/>
+			</div>
+		</div>
+		<div class="tbl_wrap_type02">
+			#{authenticityToken/}
+			<div class="form_line">
+				<div class="searchDiv">
+					<span>输入搜索关键词</span>
+					<input type="text" class="inputText" name="" id="orderSearch"/>
+					<a class="btnStd btnSmall" id="orderSearchBtn">搜索</a>
+				</div>
+				<div class="totalPay">
+					<p class="feetitle">
+						<span class="totalPrices">订单总额</span><span class="sign"></span><span class="discountPrice">折扣</span><span class="sign"></span><span class="toPay">应付款</span>
+					</p>
+					<p class="feetitle">
+						<span class="totalPrices" id="totalPrice"><em class="price">${totalFee?totalFee/100:0}</em></span><span class="sign">-</span><span class="discountPrice" style="position: relative;"><input type="text" id="discountPrice" class="inputText" value="0" /></span><span class="sign">=</span><span class="toPay" id="toPay"><em class="price">${payment?payment/100:0}</em></span>
+						<a class="btnStd btnSmall" id="savebtn" style="float:none">保存</a>
+					</p>
+				</div>
+				<div class="orderStatus">
+					<span class="square mr4"></span>
+					<span class="mr20">普通状态</span>
+					<span class="square mr4 orange"></span>
+					<span>已发物流</span>
+				</div>
+				<div class="orderList">
+					<table class="tbl">
+						<thead>
+							<tr>
+								<th>
+									<div>订单号</div>
+								</th>
+								<th>
+									<div>外部订单号</div>
+								</th>
+								<th>
+									<div>订单总金额(元)</div>
+								</th>
+								<th>
+									<div>物流费(元)</div>
+								</th>
+								<th>
+									<div>快递公司</div>
+								</th>
+								<th>
+									<div>快递单号</div>
+								</th>
+								<th>
+									<div>订单状态</div>
+								</th>
+								<th>
+									<div>商品ID</div>
+								</th>
+								<th>
+									<div>商品规格</div>
+								</th>
+								<th>
+									<div>数量</div>
+								</th>
+								<th>
+									<div>客户姓名</div>
+								</th>
+								<th>
+									<div>电话号码</div>
+								</th>
+								<th>
+									<div>客户地址-省</div>
+								</th>
+								<th>
+									<div>客户地址-市</div>
+								</th>
+								<th>
+									<div>客户地址-区</div>
+								</th>
+								<th>
+									<div>客户地址详细</div>
+								</th>
+								<th>
+									<div>备注</div>
+								</th>
+								<th>
+									<div>下单时间</div>
+								</th>
+								<th>
+									<div>操作</div>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							#{if orders}
+							#{list items:orders, as : 'orderVo'}
+							<tr class="${orderVo.expNo!=null&&orderVo.expNo!=''?'consigned':''}" data-order-no="${orderVo_index-1}">
+								<td><div name="id">${orderVo.id}</div></td>
+								<td><div class="changeItem changenum" name="outOrderNo">${orderVo.outOrderNo}</div></td>
+								<td>
+									<div class="changeItem changeTotalfee" name="totalFee">${orderVo.totalFee/100}</div>
+								</td>
+								<td>
+									<div class="changeItem changefee" name="shippingFee">${orderVo.shippingFee/100}</div>
+								</td>
+								<td>
+									<div class="changeItem changeExpress" name="express">${orderVo.express}</div>
+								</td>
+								<td>
+									<div class="changeItem changeexpNo" name="expNo">${orderVo.expNo}</div>
+								</td>
+								<td>
+									<div class="${orderVo.statusColor}">${orderVo.statusText}</div>
+								</td>
+								<td>
+									<div class="changeItem changeId" name="itemId">${orderVo?.productInfo?.itemId}</div>
+								</td>
+								<td>
+									<div class="changeItem changeSku" name="sku">${orderVo?.productInfo?.sku}</div>
+								</td>
+								<td>
+									<div class="changeItem changenum" name="num">${orderVo.num}</div>
+								</td>
+								<td>
+									<div class="changeItem changetxt" name="name">${orderVo?.buyerInfo?.name}</div>
+								</td>
+								<td>
+									<div class="changeItem changephone" name="contact">${orderVo?.buyerInfo?.contact}</div>
+								</td>
+								<td>
+									<input type="hidden" name="province_id" value="${orderVo?.buyerInfo?.provinceId}"/>
+									<div class="changeItem changePro" name="province">${orderVo?.buyerInfo?.province}</div>
+								</td>
+								<td>
+									<input type="hidden" name="city_id" value=""/>
+									<div class="changeItem changecity" name="city">${orderVo?.buyerInfo?.city}</div>
+								</td>
+								<td>
+									<div class="changeItem changeregion" name="region">${orderVo?.buyerInfo?.region}</div>
+								</td>
+								<td>
+									<div class="addresswidth changeItem changelenght" name="address">${orderVo?.buyerInfo?.address}</div>
+								</td>
+								<td>
+									<div class="changeItem changelenght" name="note">${orderVo.note}</div>
+								</td>
+								<td>
+									<div class="changeItem changetime" name="createTimeStr">${orderVo.createTimeStr}</div>
+								</td>
+								<td>
+									<div>
+										<a class="btnStd btnSmall delbtn">
+											<i class="iconfont mr5">&#xe606;</i>
+											删除
+										</a>
+									</div>
+								</td>
+							</tr>
+							#{/list}
+								#{/if}
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="button_section" style="text-align: center">
+				<a class="btnStd btnYellow-shadow btnLarge" id="btnSubmit" href="javascript:;">保存</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="popWrapper" id="exportExcel">
+	<div class="popWndFrame">
+		<div class="modalWnd" tr-url="" id="exportExcelWndWrapper">
+			<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口">
+				<i class="iconfont mr10">&#xe60c;</i>
+			</a>
+			<div class="modalWndInner">
+				<form id="frmExportExcel">
+					#{authenticityToken/}
+					<div class="column_left">
+						<h3>导出excel</h3>
+					</div>
+					<div class="form_line">
+						<label class="lbl">选择导出项</label>
+						<div class="controls">
+							<ul class="excelItem">
+								<li class="mt4">
+									<input type="checkbox" id="orderNos" value="id" name="excel_item" />
+									<label for="orderNos">订单ID</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="outOrderNos" value="outOrderNo" name="excel_item" />
+									<label for="outOrderNos">外部订单号</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="totalAmounts" value="totalAmount" name="excel_item" />
+									<label for="totalAmounts">总金额</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="goodsFees" value="goodsFee" name="excel_item" />
+									<label for="goodsFees">商品总金额</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="shippingFees" value="shippingFee" name="excel_item" />
+									<label for="shippingFees">邮费</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="discounts" value="discount" name="excel_item" />
+									<label for="discounts">折扣</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="itemIds" value="itemId" name="excel_item" />
+									<label for="itemIds">商品ID</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="nums" value="num" name="excel_item" />
+									<label for="nums">商品数量</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="expresss" value="express" name="excel_item" />
+									<label for="expresss">快递公司</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="expNos" value="expNo" name="excel_item" />
+									<label for="expNos">快递单号</label>
+								</li>
+
+								<li class="mt4">
+									<input type="checkbox" id="notes" value="note" name="excel_item" />
+									<label for="notes">订单备注</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="skus" value="sku" name="excel_item" />
+									<label for="skus">商品规格</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="names" value="name" name="excel_item" />
+									<label for="names">客户名称</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="contacts" value="contact" name="excel_item" />
+									<label for="contacts">客户联系方式</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="provinces" value="province" name="excel_item" />
+									<label for="provinces">客户地址-省</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="citys" value="city" name="excel_item" />
+									<label for="citys">客户地址-市</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="regions" value="region" name="excel_item" />
+									<label for="regions">客户地址-区</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="addresss" value="address" name="excel_item" />
+									<label for="addresss">客户-详细地址</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="createTimes" value="createTime" name="excel_item" />
+									<label for="createTimes">创建时间</label>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="wndBotButtonSection">
+				<a id="btnExport" href="javascript:void(0)" class="btnStd btnLarge btnYellow-shadow trSubmit">开始导出</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="popWrapper" id="addOrder">
+	<div class="popWndFrame" style="max-width:700px">
+		<div class="modalWnd" tr-url="" id="addOrderWndWrapper">
+			<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口">
+				<i class="iconfont mr10">&#xe60c;</i>
+			</a>
+			<div class="modalWndInner">
+				<form id="frmAddOrder">
+					#{authenticityToken/}
+					<div class="column_left">
+						<h3>添加订单</h3>
+					</div>
+					<div class="form_line">
+						<label class="lbl">外部订单号</label>
+						<div class="controls">
+							<input class="inputText" id="txtOutOrderNo" type="text" value="" name="outOrderNo"/>
+						</div>
+						<div for="txtOutOrderNo" class="validateLine clearfix"></div>
+					</div>
+					<div class="form_line">
+						<label class="lbl">商品ID</label>
+						<div class="controls">
+							<input class="inputText" id="txtItemId" type="text" value="" name="itemId"/>
+						</div>
+						<div for="txtItemId" class="validateLine clearfix"></div>
+					</div>
+					<div class="form_line">
+						<label class="lbl">商品规格</label>
+						<div class="controls">
+							<select id="selSku" name="sku" value="">
+							</select>
+						</div>
+						<div for="txtSku" class="validateLine clearfix"></div>
+					</div>
+					<div class="form_line">
+						<label class="lbl">商品数量</label>
+						<div class="controls">
+							<input class="inputText" id="txtNum" type="text" value="" name="num"/>
+						</div>
+						<div for="txtNum" class="validateLine clearfix"></div>
+					</div>
+					<div class="form_line">
+						<label class="lbl">客户姓名</label>
+						<div class="controls">
+							<input class="inputText" id="txtName" type="text" value="" name="name"/>
+						</div>
+						<div for="txtName" class="validateLine clearfix"></div>
+					</div>
+					<div class="form_line">
+						<label class="lbl">客户电话</label>
+						<div class="controls">
+							<input class="inputText" id="txtContact" type="text" value="" name="contact"/>
+						</div>
+						<div for="txtContact" class="validateLine clearfix"></div>
+					</div>
+					<div class="form_line">
+						<label class="lbl">省/市/区</label>
+						<div class="controls">
+							<input id="province_id" type="hidden" name="provinceId" />
+							<select id="province" class="province" name="province" value="">
+								<option>-- 省份 --</option>
+							</select>
+							<select id="city" class="city ml10" name="city">
+								<option>-- 城市 --</option>
+							</select>
+							<select id="region" class="region ml10" name="region">
+								<option>-- 区域 --</option>
+							</select>
+						</div>
+						<div for="province_id" class="validateLine clearfix" name="selProvince"></div>
+					</div>
+					<div class="form_line">
+						<label class="lbl">详细地址</label>
+						<div class="controls">
+							<textarea id="txtAddress" class="inputMultiText" name="address" style="height:60px;width:340px" maxlength="60" placeholder="详细地址"></textarea>
+						</div>
+						<div for="txtAddress" class="validateLine clearfix"></div>
+					</div>
+					<div class="form_line">
+						<label class="lbl">下单时间</label>
+						<div class="controls">
+							<input class="inputText" id="txtCreateTime" type="text" value="" name="createTime" placeholder="如2016-01-01 10:00:00" />
+						</div>
+						<div for="txtCreateTime" class="validateLine clearfix"></div>
+					</div>
+					<div class="form_line">
+						<label class="lbl">订单备注</label>
+						<div class="controls">
+							<input class="inputText" id="txtNote" type="text" value="" name="note"/>
+						</div>
+						<div for="txtNote" class="validateLine clearfix"></div>
+					</div>
+				</form>
+			</div>
+			<div class="wndBotButtonSection">
+				<a id="btnOrder" href="javascript:void(0)" class="btnStd btnLarge btnYellow-shadow trSubmit">添加</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="popWrapper" style="display: none;" id="tr_loading_mask">
+	<img class="tr_juhua" src="@{'/public/images/pre_loading.gif'}" />
+</div>
+<div class="popupError">
+	<h3>警告</h3>
+	<div class="errorText"></div>
+	<div class="wndBotButtonSection"><div class="btnStd btnLarge btnYellow-shadow">确 定</div></div>
+</div>
+#{set 'moreManaScripts'}
+<script src="@{'/public/javascripts/libs/mustache.min.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/date.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/jquery.datePicker.js'}" type="text/javascript"></script>
+<script type="text/javascript" src="/public/javascripts/bizComponents/manage/tradeOrders.js"></script>
+<script type="text/javascript">APP.QnDomain = '${upload_domain}';App.module = 'orderList';</script>
+#{/set}

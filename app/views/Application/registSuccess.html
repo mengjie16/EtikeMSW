@@ -1,0 +1,32 @@
+#{extends 'simple-frame.html' /}
+#{set title:'注册' /}
+#{set 'moreStyles'}
+<link href="@{'/public/stylesheets/regist.css'}" rel="stylesheet" type="text/css" />
+#{/set}
+<div class="contentBody">
+	<div class="title" style="height:35px;">
+		<div class="keyImg">
+			<img src="/public/images/img/keyImg.png" alt="" />
+		</div>
+	</div>
+	<div class="registDown">
+		<div class="leftside"><i class="iconfont ml10">&#xe62c;</i></div>
+		<div class="rightside">
+			<p class="welldown">注册成功！</p>
+			<p><span class="line_time"></span>秒后跳转至登录页面</p>
+		</div>	
+		
+	</div>
+	<div style="margin-left:25px; height:238px; padding-bottom:40px;"></div>
+</div>
+#{set 'moreScripts'}
+<script type="text/javascript">
+	var seconds = 5;
+	var clock = setInterval(function(){
+		$('.line_time').text(seconds--);
+		if(seconds == 0){
+			location.href = '/login';
+		}
+	},1000);
+</script>
+#{/set}

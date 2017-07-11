@@ -1,0 +1,128 @@
+#{extends 'UserCenter/user-frame.html' /}
+#{set title:'财务流水' /}
+#{set 'moreSubStyles'}
+<link href="@{'/public/stylesheets/retailer.css'}" rel="stylesheet" type="text/css" />
+<link href="@{'/public/stylesheets/mypage.css'}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/common/datePicker.css'}" />
+#{/set}
+<div class="cont_mypage container_body" style="margin-top:30px" id="container">
+	<div class="container_contents container_myMain_contents">
+		<div style="margin-top:0px;">
+			<div class="column_left">
+				<h3>财务流水</h3>
+			</div>
+		</div>
+		<div class="tbl_wrap_type02 pt20">
+			<div class="search_area">
+				<div class="search_box">
+					<div class="area_l">
+						<span class="txt_type01">流水号</span>
+						<input type="text" class="text" id="serialNo" name="serialNo"/ style="width:160px;"></div>
+					<div class="area_l">
+						<span class="txt_type01">创建时间</span>
+						<input type="text" class="text inputDate" style="width:80px;" value="" id="startTime"/>
+						-
+						<input type="text" class="text inputDate" style="width:80px;" value="" id="endTime"/></div>
+						<span class="errorDate"></span>
+					<div class="area_r">
+						<div class="fl">
+							<a href="javascript:;" class="searchbtns" id="searchBtn">查询</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<table class="tbl_type01 tbHoverable" id="listContainer">
+				<thead>
+					<tr>
+						<th>
+							<div class="thcell">流水号</div>
+						</th>
+						<th>
+							<div class="thcell">金额</div>
+						</th>
+						<th>
+							<div class="thcell">类型</div>
+						</th>
+						<th>
+							<div class="thcell">状态</div>
+						</th>
+						<th>
+							<div class="thcell">创建时间</div>
+						</th>
+						<th>
+							<div class="thcell">支付时间</div>
+						</th>
+						<th>
+							<div class="thcell">操作</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<div class="tdcell">123456</div>
+						</td>
+						<td>
+							<div class="tdcell"><span class="price">1110</span></div>
+						</td>
+						<td>
+							<div class="tdcell">直接付款</div>
+						</td>
+						<td>
+							<div class="tdcell">已完成</div>
+						</td>
+						<td>
+							<div class="tdcell">2015-01-01 12:00:00</div>
+						</td>
+						<td>
+							<div class="tdcell">2015-01-01 12:00:00</div>
+						</td>
+						<td>
+								<a href="javascript:;" class="orderbtn">去付款</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="pagin-btm clearFix" style="text-align:center">
+				<div class="pagination" style="display:inline-block"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<textarea class="muban" id="financeTemp" style="display:none">
+	{{#results}}
+	<tr>
+		<td>
+			<div class="tdcell"></div>
+		</td>
+		<td>
+			<div class="tdcell"><span class="price"></span></div>
+		</td>
+		<td>
+			<div class="tdcell"></div>
+		</td>
+		<td>
+			<div class="tdcell"></div>
+		</td>
+		<td>
+			<div class="tdcell"></div>
+		</td>
+		<td>
+			<div class="tdcell"></div>
+		</td>
+		<td>
+			<div class="tdcell">
+				<a href="javascript:;" class="evaluate">去付款</a>
+			</div>
+		</td>
+	</tr>
+	{{/results}}
+</textarea>
+#{set 'moreSubScripts'}
+<script src="@{'/public/javascripts/date.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/jquery.datePicker.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/libs/mustache.min.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/libs/jquery.pagination.js'}" type="text/javascript"></script>
+<script type="text/javascript" src="/public/javascripts/bizComponents/retailer/finance.js"></script>
+<script type="text/javascript">App.module = 'finance';</script>
+#{/set}

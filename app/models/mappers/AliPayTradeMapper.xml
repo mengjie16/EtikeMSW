@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="models.mappers.AliPayTradeMapper">
+	<resultMap id="BaseResultMap" type="models.AliPayTrade">
+	</resultMap>
+	<insert id="insert" parameterType="models.AliPayTrade">
+		insert into alipay_trade
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,user_id,subject,trade_status,total_fee,gmt_create
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+				#{id},
+				#{userId},
+				#{subject},
+				#{tradeStatus},
+				#{totalFee},
+				#{gmtCreate}
+		</trim>
+	</insert>
+	<update id="updateById" parameterType="models.AliPayTrade">
+		update alipay_trade
+		<set>
+			<if test="tradeStatus !=null and tradeStatus!='' ">
+				trade_status = '${tradeStatus}',
+			</if>
+			<if test="tradeNo !=null and tradeNo != ''">
+				trade_no = #{tradeNo},
+			</if>
+			<if test="sellerEmail !=null and sellerEmail != ''">
+				seller_email = #{sellerEmail},
+			</if>
+			<if test="buyerEmail !=null and buyerEmail != ''">
+				buyer_email = #{buyerEmail},
+			</if>
+			<if test="buyerId !=null and buyerId != ''">
+				buyer_id = #{buyerId},
+			</if>
+			<if test="sellerId !=null and sellerId != ''">
+				seller_id = #{sellerId},
+			</if>
+			<if test="gmtPayment !=null and gmtPayment != ''">
+				gmt_payment = #{gmtPayment},
+			</if>
+			<if test="gmtClose !=null and gmtClose != ''">
+				gmt_close = #{gmtClose},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	<select id="selectList" resultMap="BaseResultMap">
+		select * from alipay_trade a
+		order by a.gmt_create desc
+	</select>
+</mapper>

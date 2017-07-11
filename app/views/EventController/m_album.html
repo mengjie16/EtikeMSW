@@ -1,0 +1,149 @@
+#{extends 'mobile-frame.html' /}
+#{set title:(albumName?albumName:"专辑")/}
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/mobile/brand.css'}" />
+#{/set}
+<div id="J-page-collect-header">
+	<div class="page-collect-wrapper clearfix">
+		<!-- 专辑名称 -->
+		<div class="title">
+			<span class="ui-ellipsis" id="album_title">${albumName?albumName:"-----------"}</span>
+		</div>
+		<div class="f-right">
+			<a href="" class="share icon-share f-right J-btn-share"></a>
+			<a href="" id="J-collect-btn"  class="collect icon-addcollect f-right" ></a>
+		</div>
+	</div>
+</div>
+<div id="J-brand-filter" style="margin-bottom:15px;">
+	<div class="wrap-filter">
+		<div class="filter-collect-placeholder" id="J-filter-collect-placeholder"></div>
+		<div class="wrap-filter-bar" id="J-wrap-filter-bar">
+			<ul class="filter-bar clearfix" id="J-filter-bar">
+				<li class="filter-stock J-filter-item">
+					<span class="orange">默认</span>
+				</li>
+				<li class="filter-price J-filter-item" data-pricecount="0">
+					<a class="iconfont_box"> <i class="iconfont up">&#xe626;</i> <i class="iconfont down">&#xe627;</i>
+					</a>
+					<span style="float:left;padding-top:.05rem">价格</span>
+				</li>
+				<li class="filter-discount J-filter-item" data-discount="0">
+					<a class="iconfont_box">
+						<i class="iconfont up">&#xe626;</i>
+						<i class="iconfont down">&#xe627;</i>
+					</a>
+					<span style="float:left;padding-top:.05rem">折扣</span>
+				</li>
+			<!-- <li class="filter J-filter-item">
+				<i class="iconfont">&#xe624;</i>
+				<span>筛选</span>
+			</li> -->
+			
+		</ul>
+		<!-- <div class="filter-box clearfix" id="J-filter-box">
+		<div class="first-level J-first-level-box f-left">
+			<ul>
+				<li class="J-first-level selected">
+					<a href="#">全部 (20)</a>
+					<i class="iconfont current-item">&#xe62d;</i>
+				</li>
+				<li class="J-first-level ">
+					<a href="#">婴儿推车 (17)</a>
+					<i class="iconfont current-item">&#xe62d;</i>
+				</li>
+				<li class="J-first-level ">
+					<a href="#">汽车安全座椅 (3)</a>
+					<i class="iconfont current-item">&#xe62d;</i>
+				</li>
+			</ul>
+		</div>
+
+		<div class="second-level J-second-level-box f-left">
+			<div class="wrapper">
+				<ul class="" id="second-level-0">
+					<li class="J-second-level selected">
+						<a href="#">全部</a>
+						<i class="iconfont current-item">&#xe62d;</i>
+					</li>
+					<li class="J-second-level ">
+						<a href="#">均码</a>
+						<i class="iconfont current-item">&#xe62d;</i>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="filter-btn-box">
+			<a href="#" class="filter-btn">确 定</a>
+		</div>
+	</div>
+	-->
+</div>
+</div>
+</div>
+<div id="J-product-list">
+<!-- 普通&预热商品列表-->
+<div id="J-list-view" class="u-product-list">
+<div id="album_item_list" class="J-list-page list-view-page"></div>
+</div>
+<div class="u-empty-tip J-empty-tip hide">
+<i class="icon-search"></i>
+<div>抱歉，该尺码已售完</div>
+</div>
+</div>
+<textarea class="muban" id="albumItemsTemp" style="display:none">
+{{#albumItems}}
+<dl class="u-product">
+<a href="/h5/item/{{itemId}}?albumId=${albumID}" class="ablock">
+	<dt class="u-product-pic">
+		<img src="{{picUrl}}" /></dt>
+	<dd class="product-name">{{title}}</dd>
+	<dd class="product-price-wrap">
+		<span class="grally-price vip-red">&yen;{{price}}</span>
+		<!-- <span class="mark-price">&yen;{{price}}</span>
+	-->
+</dd>
+</a>
+</dl>
+{{/albumItems}}
+</textarea>
+<!-- 	<div id="J-cart-cmp">
+<div id="J-cart-flow-icon" class="u-shopbag">
+<a href="">
+<i class="iconfont i-flow-carticon">&#xe621;</i>
+<span class="u-flow-cartnum J-cart-num">0</span>
+</a>
+</div>
+</div>
+-->
+<div id="J-resident-function-entry">
+<div class="u-resident-function-entry J-resident-function-entry">
+<div class="u-bg"></div>
+<div class="u-spot J-u-spot">
+<i class="iconfont">&#xe637;</i>
+</div>
+<div class="u-resident-menus J-resident-menus">
+<div class="u-body-menus-wrap">
+<ul class="unselect">
+	#{if albums}
+							#{list items:albums, as : 'album'}
+	<li>
+		<div class="activitySession">
+			<a href="/h5/event/album?id=${album.id}">${album.name}</a>
+		</div>
+	</li>
+	#{/list}
+						#{/if}
+</ul>
+</div>
+<i class="iconfont  J-close-btn">&#xe631;</i>
+</div>
+</div>
+</div>
+#{set 'moreScripts'}
+<script src="@{'/public/javascripts/libs/mustache.min.js'}" type="text/javascript"></script>
+<script type="text/javascript"  src="@{'/public/javascripts/bizComponents/m_album.js'}"></script>
+<script type="text/javascript">
+	CDTH5.albumID = '${albumID}'
+</script>
+#{/set}

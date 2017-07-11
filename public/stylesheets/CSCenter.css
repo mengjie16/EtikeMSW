@@ -1,0 +1,142 @@
+#boriboriCSCenter img {border:0; vertical-align:top; margin:0; padding:0; text-align:left;}
+#boriboriCSCenterLeftArea { width:170px; float:left; margin-right:30px;}
+#boriboriCSCenterLeftMenu { width:168px; padding-bottom: 20px; border:1px solid #c7c7c7; margin-bottom:10px;}
+#boriboriCSCenterQTitle { border-bottom:1px solid #c7c7c7;}
+#boriboriCSShoppingQTitle {border-bottom:1px solid #c7c7c7;}
+#boriboriCSMenus { width:137px; height:387px; padding:20px 18px 0 13px;}
+.boriboriCSMenusTitle {width:133px; height:18px; padding-left:4px; border-bottom:1px solid #ececec; margin-bottom:7px;}
+.boriboriCSMenusContent {width:133px; margin-bottom:15px; padding-left:4px;}
+.boriboriCSMenusContent a {line-height:18px;color:#777;}
+.boriboriCSMenusContent a:hover {
+	color:#333;
+}
+#boriboriCSCenterContentArea {width:700px; float:left;}
+/**/
+#boriboriCSCenterShoppingQTitle { height:23px; border-bottom:1px solid #d8d8d8; padding-left:13px;}
+#boriboriCSCenterShoppingQDiscription {height:37px; padding-top:19px; text-align:center;}
+#boriboriCSCenterShoppingQMoreBtn {height:19px; text-align:right;}
+#boriboriShoppingQTable {margin-bottom:30px;}
+#boriboriShoppingQTable td { text-align:center;vertical-align:top; }
+.boriboriCSCenterHeaderTd { 
+	height:17px; 
+	padding-top:8px;
+	color:white; 
+	font-weight:bold; 
+	background-color:#c9c9c9;
+}
+.boriboriCSCenterTd { height:20px; border-bottom:1px solid #ebe8e6; padding-top:10px;}
+.boriboriCSCenterTd a:link {color:#666;}
+.boriboriCSCenterTd a:visited {color:#666;}
+.boriboriCSCenterTd a:hover {color:#666;}
+.boriboriCSCenterTd a:focus {color:#666;}
+.boriboriCSCenterTd a:active {color:#666;}
+.boriboriShoppingQCate {font-weight:bold; }
+.boriboriCSCenterQuestionDiv { overflow:hidden; text-overflow:hidden; white-space:nowrap;}
+#boriboriShoppingQTable .boriboriShoppingQQuestion { text-align:left; padding-left:25px; }
+#boriboriShoppingQTable .boriboriCSCenterQuestionDiv {width:335px;}
+
+
+#boriboriCSCenterCustomerProject { width:696px; height:167px; border:1px solid #ffe05a; margin-bottom:30px;}
+#boriboriCSCenterCustomerProjectContent { width:320px; height:150px; padding:17px 24px 0px 18px; float:left;}
+#boriboriCSCenterCustomerProjectContentTitle {width:320px; height:20px; border-bottom:1px solid #e0e0e0; margin-bottom:16px;}
+#boriboriCSCenterCustomerProjectContentBody div {height:22px; float:left; color:#666}
+.boriboriCSCenterCustomerProjectContentBodyTitle {width:260px; _width:257px; overflow:hidden; text-overflow:hidden; white-space:nowrap;}
+.boriboriCSCenterCustomerProjectContentBodyDate {width:51px; padding-left:9px;}
+
+#boriboriCSCenterNotice {width:425px; height:141px; float:left; margin-right:16px;}
+#boriboriCSCenterNoticeTitle { width:416px; height:22px; padding-left:9px;}
+#boriboriCSCenterNoticeTable td {text-align:center; vertical-align:top;}
+#boriboriCSCenterNoticeTable .boriboriCSCenterNoticeQuestion { text-align:left; padding-left:26px; }
+#boriboriCSCenterNoticeTable .boriboriCSCenterQuestionDiv {width:290px;}
+
+#boriboriCSCenterFAQTitle { height:21px; border-bottom:1px solid #d8d8d8; padding-left:10px;}
+#boriboriCSCenterFAQDiscription { height:24px; padding-left:11px; padding-top:18px}
+#boriboriCSCenterFAQSearch {height:51px; padding-left:11px;}
+#boriboriCSCenterFAQSearch div { float:left; margin-right:8px;}
+#boriboriCSCenterFAQSearchtxt input {width:432px; _width:426px; height:15px; margin:0px; padding:0px;}
+*:first-child+html #boriboriCSCenterFAQSearchtxt input {width:430px;}
+*:first-child+html #boriboriCSCenterFAQSearchtxt {margin-right:5px;}
+#boriboriCSCenterFAQSearchTable {margin-bottom:30px;}
+#boriboriCSCenterFAQSearchTable td{width:139px; height:30px;}
+#boriboriCSCenterFAQSearchTable td img {vertical-align:top; cursor:pointer;}
+.boriboriCSCenterFAQFirstLineTd {border-right:1px solid #5c5c5c; border-bottom:1px solid #5c5c5c; }
+.boriboriCSCenterFAQSecondLineTd {border-right:1px solid #5c5c5c;}
+
+#boriboriCSCenterFAQQuestionTable td { text-align:center; vertical-align:top;}
+#boriboriCSCenterFAQQuestionTable .boriboriCSCenterQuestionDiv {width:470px;}
+#boriboriCSCenterFAQQuestionTable .boriboriCSCenterFAQQuestionTd { text-align:left; padding-left:16px; }
+
+#navigation {width:900px; margin:0 auto;}
+
+/* [2011.12.21 : 박현종] : CSS 추가 */
+.Customer_A {text-align:left;padding-top:14px;padding-right:12px;padding-bottom:14px;padding-left:31px;background-image:none;background-attachment:scroll;background-repeat:repeat;background-position-x:0%;background-position-y:0%;background-color:rgb(242,246,247);} 
+.rightArea {
+	float: left;
+	width: 900px;
+}
+.fastRead {
+	line-height: 1.5em;
+	margin-bottom: 10px;
+	border-bottom: 3px solid #A8C9D0;
+}
+.fastRead span {
+	display: block;
+	margin-bottom: 10px;
+}
+.rightArea .Title {
+	line-height: 1.5em;
+	margin-bottom: 10px;
+	font-size: 14px;
+	color: #666;
+	border-bottom: 1px dashed #ccc;
+	padding-bottom: 7px;
+}
+.rightArea .Cont {
+	padding: 15px;
+	margin: 10px 0 50px;
+}
+.rightArea .prev_link {
+	display: block;
+	width: 100%;
+	border-top: 2px solid #A8C9D0;
+	border-bottom: 1px solid #A8C9D0;
+	padding: 7px 0;
+}
+.rightArea .next_link {
+	display: block;
+	width: 100%;
+	border-bottom: 2px solid #A8C9D0;
+	padding: 7px 0;
+}
+.rightArea .prev_link span,.rightArea .next_link span {
+	margin-right: 20px;
+}
+.rightArea .prev_link a,.rightArea .next_link a{
+	color: #666;
+}
+.rightArea .prev_link a:hover,.rightArea .next_link a:hover{
+	color: #aaa;
+}
+#boriboriCSMenus a {
+	display: block;
+	line-height: 1.7em;
+	color: #444;
+}
+#boriboriCSMenus a:hover {
+	color: #888;
+}
+#boriboriCSMenus a.active {
+	background-color: #FECF10;
+}
+.Cont p {
+	margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 14px;
+  font-family: 'Hiragino Sans GB','microsoft yahei',arial,sans-serif;
+  line-height: 21px;
+  white-space: normal;
+  background-color: rgb(255, 255, 255)
+}
+.Cont p span {
+	font-size: 14px;
+}

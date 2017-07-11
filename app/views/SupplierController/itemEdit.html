@@ -1,0 +1,475 @@
+#{extends 'UserCenter/user-frame.html' /}
+#{set title:(item!=null?'商品编辑':'商品发布') /}
+#{set 'moreSubStyles'}
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/itemEdit.css'}"  />
+#{/set}
+<div class="cont_mypage" style="margin-top:30px" id="container">
+	<div class="container_contents container_myMain_contents">
+		#{if false}
+		<div class="bannerimg">
+			<a href="#" target="_blank">
+				<img src="/public/images/img/121023_powermypagebanner_700.jpg"/></a>
+		</div>
+		#{/if}
+		<div style="margin-top:0px;">
+			<div class="column_left" >
+				<h3>${item?'编辑商品':'发布商品'}</h3>
+			</div>
+		</div>
+		<div class="tbl_wrap_type02 pt20" style="padding-left: 30px;">
+			<div class="error_panel" style="padding-left: 198px;color: #f00;line-height: 33px">
+				${flash?.error}
+			</div>
+			<form action="/supplier/item/save" id="formComm" method="post">
+				#{authenticityToken/}
+				<input class="inputText" type="hidden" value="${item?.id}" name="item.id"/>
+				<div class="form_line">
+					<label class="lbl">标题</label>
+					<div class="controls">
+						<input class="inputText long" id="txtTitle" type="text" value="${item?.title}" name="item.title" tabindex="1"/>
+					</div>
+					<div for="txtTitle" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">类目</label>
+					<div class="controls" id="T_cateControls">
+						<input id="cateTxt" type="hidden" name="item.cateId" value="${item?.cate?.id}" /> 
+						<span class="mt3 chooseCate" ${item?.cate?.id?"style='display:none'":""}>未选择</span>
+						<div id="showCate" ${item?.cate?.id?"":"style='display:none'"}>
+							<span class="mt3">${item?.cate?.name}</span>
+							<i class="iconfont ml10" id="delCate">&#xe606;</i>
+						</div>
+					</div>
+					<div for="cateTxt" class="validateLine clearfix" name="valcate"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl" style="padding-top:5px;">规格</label>
+					<div class="controls" id="imgcontainer">
+						#{if item&&item.skus}
+							#{list items:item.skus,as : 'sku'}
+								<div class="gg_container">
+								<div class="controls" style="padding-top:5px;">
+									<input class="inputText" id="txtColor_${sku_index-1}" type="text" value="${sku.color}" placeholder="颜色" name="sku.color" />
+								</div>
+								<div for="txtColor_0" class="validateLine clearfix" name="valColor"></div>
+								<div class="controls uploadImg">
+									<div class="mask" id="T_adBanner_${sku_index-1}" img-container="img_${sku_index-1}" style="${item?'display: none':''}">
+										<i class="iconfont mr10">&#xe632;</i>
+										<input class="inputText" type="hidden" value="${sku.img}" name="sku.img"/>
+									</div>
+									<div class="itemImg" id="img_${sku_index-1}">
+										<img src="${sku.img}"/> 
+									</div>
+								</div>
+								<div for="hidPicUrl" class="validateLine clearfix" name="valImg"></div>
+								<div class="controls" style="padding-top:5px;">
+									<input class="inputText" id="txtQuantity_${sku_index-1}" type="text" value="${sku.quantity}" placeholder="库存" name="sku.quantity" />
+								</div>
+								<div for="txtQuantity_${sku_index-1}" class="validateLine clearfix"  name="valQuantity"></div>
+								#{if item.skus.size()>=2}
+									<i class='iconfont ml10 ggdelbtn'>&#xe606;</i>
+									<i class="iconfont pl10 moveUp">&#xe600;</i>
+									<i class="iconfont pl10 moveDown">&#xe60d;</i>
+								#{/if}
+							</div>
+							#{/list}
+						#{/if}
+						#{else}
+						<div class="gg_container">
+							<div class="controls" style="padding-top:5px;">
+								<input class="inputText" id="txtColor_0" type="text" value="" placeholder="颜色" name="sku.color" />
+							</div>
+							<div for="txtColor_0" class="validateLine clearfix" name="valColor"></div>
+							<div class="controls uploadImg">
+								<div class="mask" id="T_adBanner_0" img-container="img_0">
+									<i class="iconfont mr10">&#xe632;</i>
+									<input class="inputText" type="hidden" id="hidPicUrl_0" value="" name="sku.img"/>
+								</div>
+								<div class="itemImg" id="img_0">
+									<img src=""/> 
+								</div>
+							</div>
+							<div for="hidPicUrl_0" class="validateLine clearfix" name="valImg"></div>
+							<div class="controls" style="padding-top:5px;">
+								<input class="inputText" id="txtQuantity_0" type="text" value="" placeholder="库存" name="sku.quantity" />
+							</div>
+							<div for="txtQuantity_0" class="validateLine clearfix" name="valQuantity"></div>
+						</div>
+						#{/else}
+						<div class="addMarkAdd" id="addSpec">
+							<i class="iconfont">&#xe60b;</i>
+							<span class="mt3 addbtns">增加规格</span>
+						</div>
+					</div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">净重量</label>
+					<div class="controls">
+						<input class="inputText" id="txtNetWeight" type="text" value="${item?.netWeight?item.netWeight:0}" name="item.netWeight" />
+						<span class="mt3">kg</span>
+					</div>
+					<div for="txtNetWeight" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">毛重量</label>
+					<div class="controls">
+						<input class="inputText" id="txtGrossWeight" type="text" value="${item?.grossWeight?item.grossWeight:0}" name="item.grossWeight" />
+						<span class="mt3">kg</span>
+					</div>
+					<div for="txtGrossWeight" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">品质系数</label>
+					<div class="controls">
+						<input class="inputText" id="txtQuality" type="text" value="${item?.quality?item.quality:0}" name="item.quality"/>
+						<span class="mt3">(1000-10000)</span>
+					</div>
+					<div for="txtQuality" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">商品单位</label>
+					<div class="controls">
+						<input class="inputText" id="txtUnit" type="text" value="${item?.unit}" name="item.unit" />
+					</div>
+					<div for="txtUnit" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">初始销量</label>
+					<div class="controls">
+						<input class="inputText" id="txtNum" type="text" value="${item?.initialQuantity?item.initialQuantity:0}" name="item.initialQuantity" />
+					</div>
+					<div for="txtNum" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">产地</label>
+					<div class="controls" id="regionControls">
+						<input type="hidden" />
+						<div class="search-sel"> <b></b>
+							<input type="text" class="inputText" value="${item?.origin?item.origin:'中国'}" name="item.origin" id="placePro"/>
+							<div class="selectboxs" id="placeList">
+								<ul></ul>
+							</div>
+						</div>
+					</div>
+					<div for="placePro" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">货号</label>
+					<div class="controls">
+						<input class="inputText" id="txtOutNo" type="text" value="${item?.outNo}" name="item.outNo" />
+					</div>
+					<div for="txtOutNo" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">发货方式</label>
+					<div class="controls">
+						<select class="mb10 select" name="item.deliverType" id="selDeliverType">
+							#{if item&&item.deliverType.toString()=='DOMESTIC_SPOT'||!item}
+								<option value="DOMESTIC_SPOT" selected="true">国内现货</option>
+								<option value="BONDED_WAREHOUSE_GOODS">保税仓商品</option>
+								<option value="OVERSEA_DIRECT_DELIVERY">海外直邮</option>
+							#{/if}
+							#{elseif item&&item.deliverType.toString()=='BONDED_WAREHOUSE_GOODS'}
+								<option value="DOMESTIC_SPOT">国内现货</option>
+								<option value="BONDED_WAREHOUSE_GOODS" selected="true">保税仓商品</option>
+								<option value="OVERSEA_DIRECT_DELIVERY">海外直邮</option>
+							#{/elseif}
+							#{else item&&item.deliverType.toString()=='OVERSEA_DIRECT_DELIVERY'}
+								<option value="DOMESTIC_SPOT">国内现货</option>
+								<option value="BONDED_WAREHOUSE_GOODS">保税仓商品</option>
+								<option value="OVERSEA_DIRECT_DELIVERY" selected="true">海外直邮</option>
+							#{/else}
+						</select>
+					</div>
+					<div for="selDeliverType" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">建议零售价</label>
+					<div class="controls">
+						<input class="inputText" id="txtRetailPrice" type="text" value="${item?.retailPrice?item.retailPrice/100:0}" name="item.d_retailPrice" />
+						<span class="mt3">元</span>
+					</div>
+					<div for="txtRetailPrice" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl" style="line-height: 28px;">代发价格 <input type="checkbox" name="item.distPriceUse" ${item?.distPriceUse==true||!item?"checked":""} style="margin-left:10px" /></label>
+					<div class="controls">
+						<div class="checkboxPrice ${item?.distPriceUse==false?'hidden':''}">						
+						<input class="inputText" id="txtDistPrice" type="text" value="${item?.distPrice?item?.distPrice/100:0}" name="item.d_distPrice" />
+						<span class="mt3">元</span>
+					</div>
+					</div>
+					<div for="txtDistPrice" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">批发价格<input type="checkbox" name="item.priceRangeUse"  ${item?.priceRangeUse==true||!item?"checked":""}  style="margin-left:10px"/></label>
+					<div class="controls" id="priceItems" >
+						<div class="checkboxPrice ${item?.priceRangeUse==false?'hidden':''}">
+						<!-- 价格条件描述项 -->
+						#{if item&&item.priceRanges}
+							#{list items:item.priceRanges,as : 'priceRange'}
+								<div class="mb10 priceItem">
+									<span class="mt3">大于</span>
+									<input name="condition_item" id="txtPi_${priceRange_index-1}" class="inputText short conditionTxt" type="text" value="${priceRange.range}"/>
+									<span class="mt3">件</span>
+									<div for="txtPi_${priceRange_index-1}" class="validateLine clearfix" name="valPrice"></div>
+									<input name="price_item" id="txtNum_${priceRange_index-1}" class="inputText short priceTxt ml30" type="text" value="${priceRange.price/100}"/>
+									<span class="mt3">元</span>
+									<div for="txtNum_${priceRange_index-1}" class="validateLine clearfix" name="valNum"></div>
+								#{if item.priceRanges.size()>=2}
+									<i class='iconfont ml10 pdelbtn'>&#xe606;</i>
+								#{/if}
+								</div>
+							#{/list}
+						#{/if}
+						#{else}
+						<div class="mb10 priceItem">
+							<span class="mt3">大于</span>
+							<input name="condition_item" id="txtPi_0" class="inputText short conditionTxt" type="text" value=""/>
+							<span class="mt3">件</span>
+							<div for="txtPi_0" class="validateLine clearfix" name="valPrice"></div>
+							<input name="price_item" id="txtNum_0" class="inputText short priceTxt ml30" type="text" value=""/>
+							<span class="mt3">元</span>
+							<div for="txtNum_0" class="validateLine clearfix" name="valNum"></div>
+						</div>
+						#{/else}
+						<div class="addMark" id="addPriceItem"> 
+							<i class="iconfont">&#xe60b;</i>
+							<span class="mt3 addbtns">增加价格区间</span>
+						</div>
+					</div>
+				</div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">品牌</label>
+					<div class="controls">
+						<input class="inputText" type="hidden" value="${item?.brand?.id}" name="item.brandId" id="brandTxt"/>
+						<span class="mt3 chooseBrand" ${item?.brand?.name?"style='display:none'":""}>未选择</span>
+						<div ${item?.brand?.name?"":"style='display:none'"} id="showBrand">
+							<span class="mt3">${item?.brand?.name}</span>
+							<i class="iconfont ml10" id="delBrand">&#xe606;</i>
+						</div>
+					</div>
+					<div for="brandTxt" class="validateLine clearfix" name="valbrand"></div>
+				</div>
+				<div class="form_line clearfix">
+					<label class="lbl" style="float: left">商品详情</label>
+					<div class="controls" id="editorControl" style="float: left">
+						<div class="detailTab">
+							<ul>
+								<li class="PCtab active">PC端</li>
+								<li class="h5tab">移动端</li>
+							</ul>
+						</div>
+						<div class="PCdetail" id="PCcontainer">
+							<textarea id="itemDetail" name="item.detail" style="display: none"></textarea>
+							<script type="text/plain" id="contentEditor">
+								${item?item.detail?.raw():""}
+							</script>
+						</div>
+						<div class="h5detail" id="h5container">
+							<textarea id="h5itemDetail" name="item.mobileDetail" style="display: none"></textarea>
+							<script type="text/plain" id="h5contentEditor">
+								${item?item.mobileDetail?.raw():""}
+							</script>
+						</div>
+					</div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">商品属性</label>
+					<div class="controls" id="attributes">
+						<!-- 价格条件描述项 -->
+						#{if item&&item.properties}
+							#{list items:item.properties,as : 'propertie'}
+							 <div class="mb10 attribute">
+								<input name="name_attribute" id="txtName_${propertie_index-1}" class="inputText nameTxt" type="text" value="${propertie.key}" placeholder="属性名" />
+								<div for="txtName_${propertie_index-1}" class="validateLine clearfix" name="valName"></div>
+								<span class="mt3" style="display:inline-block;margin-right:10px;">:</span>
+								<input name="value_attribute" id="txtValue_${propertie_index-1}" class="inputText valueTxt" type="text" value="${propertie.value}" placeholder="属性值"/>
+								<div for="txtValue_${propertie_index-1}" class="validateLine clearfix" name="valValue"></div>
+								#{if item.properties.size()>=2}
+									<i class='iconfont ml10 adelbtn'>&#xe606;</i>
+								#{/if}
+						    </div>
+							#{/list}
+						#{/if}
+						#{else}
+						<div class="mb10 attribute">
+							<input name="name_attribute" id="txtName_0" class="inputText nameTxt" type="text" value="" placeholder="属性名" />
+							<div for="txtName_0" class="validateLine clearfix" name="valName"></div>
+							<span class="mt3" style="display:inline-block;margin-right:10px;">:</span>
+							<input name="value_attribute" id="txtValue_0" class="inputText valueTxt" type="text" value="" placeholder="属性值"/>
+							<div for="txtValue_0" class="validateLine clearfix" name="valValue"></div>
+						</div>
+						#{/else}
+						<div class="addMark" id="addAttribute"> 
+							<i class="iconfont">&#xe60b;</i>
+							<span class="mt3 addbtns">增加属性</span>
+						</div>
+					</div>
+				</div>
+				<div class="form_line">
+					<label class="lbl pt10">发货地址</label>
+					<div class="controls" >
+						<div id="addressList"> 
+							#{if item&&item.sendGoodLocations}
+							#{list items:item.sendGoodLocations,as:'location'}
+								<div class="addressContainer">
+								<input class="hLocation" type="hidden" data-province="${location.province}" data-pid="${location.provinceId}" data-city="${location.city}" data-region="${location.region}" data-address="${location.address}" />
+									<p><span>${location.province}</span><span>${location.city}</span><span>${location.region}</span></p>
+									<p>${location.address}</p>
+									<i class="iconfont mr10 addressDelbtn">&#xe631;</i>
+								</div>
+							#{/list}
+						#{/if}		
+						</div>
+						<div class="addMarkAdd" id="addAddress"> <i class="iconfont">&#xe60b;</i>
+							<span class="mt3 addbtns">增加发货地址</span>
+						</div>				
+					</div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">运费模板</label>
+					<div class="controls">
+						<select class="mb10 select" id="txtFreight" name="item.freightTemp">
+						<option value="" ${item?.freightTemp==''||item==null?"selected='true'":""}>未选择</option>	
+							#{if supFreightTemps&&supFreightTemps.size()>0}
+								#{list items:supFreightTemps, as : 'supFreightTemp'}
+									<option value="${supFreightTemp._id}" ${item?.freightTemp==supFreightTemp._id&&item?.freightTemp?'selected=true':''}>${supFreightTemp.tempName}</option>
+								#{/list}
+							#{/if}
+						</select>
+					</div>
+					<div for="txtFreight" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">当前状态</label>
+					<div class="controls">
+						<select class="mb10 select" id="selStatus" name="item.status">
+						#{if item&&item.status.toString()=='ONLINE'}
+							<option value="ONLINE" selected="true">在架</option>
+							<option value="HIDE">下架</option>
+						#{/if}
+						#{else}
+							#{if !item}
+								<option value="ONLINE"  selected="true">在架</option>
+								<option value="HIDE" >下架</option>
+							#{/if}
+							#{else}
+								<option value="ONLINE">在架</option>
+								<option value="HIDE"  selected="true">下架</option>
+							#{/else}
+						#{/else}
+						</select>
+					</div>
+					<div for="selStatus" class="validateLine clearfix"></div>
+				</div>
+				<div class="button_section" id="btnSubmit" style="padding-left:95px;">
+					<a class="btnStd btnLarge btnYellow-shadow" href="javascript:;">发布</a>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- //	cont_mypage -->
+</div>
+<div class="popWrapper" id="addBrand">
+	<div class="popWndFrame">
+		<div class="modalWnd" tr-url="" id="addWndWrapper">
+			<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口"><i class="iconfont mr10">&#xe60c;</i></a>
+			<div class="modalWndInner">
+				<div id="T_cateControls_b">
+					<input type="hidden" name="" />			
+					<div class="search-sel" id="searchBrand"> <i class="iconfont mr10" id="searchBrandBtn">&#xe608;</i>
+						<input type="text" class="inputText" placeholder="搜索" id="brandInput"/>
+					</div>
+				</div>
+				<div class="brandList" id="brandList">
+					<ul></ul>
+				</div>
+			</div>
+			<div class="wndBotButtonSection">
+				<a id="btnConfirm" href="javascript:;" class="btnStd btnLarge btnYellow-shadow trSubmit">确认</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="popWrapper" id="addCate">
+	<div class="popWndFrame" style="min-width:770px">
+		<div class="modalWnd" tr-url="" id="addCateWndWrapper">
+			<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口"><i class="iconfont mr10">&#xe60c;</i></a>
+			<div class="modalWndInner">
+				<div id="T_cateControls_c">
+					<input type="hidden" name="" />			
+					<div class="search-sel" id="searchCate" style="margin-left:15px;"> <i class="iconfont mr10" id="searchCateBtn">&#xe608;</i>
+						<input type="text" class="inputText" placeholder="搜索" id="cateInput"/>
+					</div>
+				</div>
+				<div class="cateList" id="cateList">
+					<ul></ul>
+				</div>
+			</div>
+			<div class="wndBotButtonSection">
+				<a id="btnCatefirm" href="javascript:;" class="btnStd btnLarge btnYellow-shadow trSubmit">确认</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="popWrapper" id="addAddressBlock">
+	<div class="popWndFrame">
+		<div class="modalWnd" tr-url="" id="addAddressWrapper">
+			<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口"><i class="iconfont mr10">&#xe60c;</i></a>
+			<div class="modalWndInner">
+				<form id="frmAddAddress">
+					#{authenticityToken/}
+					<div class="form_line">
+						<label class="lbl">选择地址</label>
+						<div class="controls">
+							<select class="select" name="" id="addressSelects" style="width:260px;">
+								<option value="others">其他</option>
+							</select>			
+						</div>
+					</div>
+					<div class="address" style="margin:30px 0 0 30px;">
+						<div class="mb10">
+							<input type="hidden" class="itemIndex" name="item_index" value="0" />					
+							<select id="selProvince" class="province select" name="item_province" tabindex="9">
+								<option>-- 省份 --</option>
+							</select>
+							<select id="selCity" name="item_city" class="city ml10 select" tabindex="10">
+								<option>-- 城市 --</option>
+							</select>
+							<select id="selRegion"  name="item_region" class="region ml10 select" tabindex="10">
+								<option>-- 区域 --</option>
+							</select>
+						</div>
+						<div class="mb10" style="display:table-cell">
+							<!-- <input id="txtAddress" name="item_address" class="regionAddress inputText long" type="text" value="" placeholder="请不要重复填写省市区" /> -->
+							<textarea class="textnote regionAddress" id="txtAddress" type="text" name="item_address" placeholder="请不要重复填写省市区" maxlength="60" style="width:460px"></textarea>					
+						</div>
+						<div class="saveMoudel">
+							<input type="checkbox" name="item_location_save" id="saveadd"/><label for="saveadd" style="display:inline-block;margin-left:6px;cursor:pointer">保存到发货地址模板</label>
+						</div>
+					</div>
+					<div for="txtAddress" class="validateLine clearfix"></div>
+				</form>
+			</div>
+			<div class="wndBotButtonSection">
+				<a id="btnAddfirm" href="javascript:;" class="btnStd btnLarge btnYellow-shadow trSubmit">确认</a>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- //content-area -->
+#{set 'moreSubScripts'}
+<script src="@{'/public/javascripts/libs/mustache.min.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/ueditor/ueditor.config.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/ueditor/editor_api.js'}" type="text/javascript"></script>
+<script type="text/javascript" charset="utf-8" src="@{'/public/javascripts/ueditor/lang/zh-cn/zh-cn.js'}"></script>
+<script src="@{'/public/javascripts/libs/jquery.validate.min.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/validate.plus.js'}" type="text/javascript"></script>
+<script type="text/javascript" src="/public/javascripts/plupload/plupload.full.min.js"></script>
+<script type="text/javascript" src="/public/javascripts/libs/qiniu.min.js"></script>
+<script type="text/javascript" src="/public/javascripts/bizComponents/supplier/itemEdit.js"></script>
+<script type="text/javascript">APP.QnDomain = '${upload_domain}';App.module = 'itemEdit';
+</script>
+#{/set}

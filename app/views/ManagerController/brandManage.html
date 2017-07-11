@@ -1,0 +1,139 @@
+#{extends './manage-frame.html' /}
+#{set title:'品牌管理' /}
+<div class="cont_mypage container_body" style="margin-top:30px" id="container">
+	<div class="container_contents container_myMain_contents">
+		<div style="margin-top:0px;">
+			<div class="column_left">
+				<h3>品牌管理<a href="javascript:void(0)" class="createbtn " id="brandCreateBtn" style="float:right">创建</a></h3>
+			</div>
+		</div>
+		<input type="hidden" id="hidBrandId" value=""/> 
+		<div class="tbl_wrap_type02 pt20" id="brandContainer">			
+			<div class="search_area">
+				<div class="search_box">
+					<div class="area_l">
+						<span class="txt_type01">搜索</span>
+						<input type="text" class="text" style="width:160px;" value="" id="brandName" placeholder="品牌名称">
+					</div>
+					<div class="area_r">
+						<div class="fl">
+							<a href="javascript:;" class="btnStd btnMedium mr6" id="brandSearchBtn">查询</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<table summary="" class="tbl_type01 tbHoverable">
+				<thead>
+					<tr>
+						<th class="thcellId">
+							<div class="thcell">ID</div>
+						</th>
+						<th>
+							<div class="thcell">品牌名称</div>
+						</th>
+						<th>
+							<div class="thcell">次名称</div>
+						</th>
+						<th>
+							<div class="thcell">操作</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+			<div class="pagin-btm clearFix">
+				<div class="pagination"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<textarea class="muban" id="brandTemp" style="display:none">
+	{{#results}}
+	<tr mid="{{id}}">
+		<td class="thcellId">
+			<div class="tdcell">{{id}}</div>
+		</td>
+		<td>
+			<div class="tdcell">{{name}}</div>
+		</td>
+		<td>
+			<div class="tdcell">{{secondaryName}}</div>
+		</td>
+		<td>
+			<div class="tdcell">
+				<a href="javascript:;" class="btnStd btnSmall editbtn">编辑</a>
+				<a href="javascript:;" class="btnStd btnSmall delbtn">删除</a>
+			</div>
+		</td>
+	</tr>
+	{{/results}}
+</textarea>
+<div class="popWrapper" id="editBrand">
+	<div class="popWndFrame">
+		<div class="modalWnd" tr-url="" id="addBrandWrapper">
+			<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口"><i class="iconfont mr10">&#xe60c;</i></a>
+			<div class="modalWndInner">
+				<form id="frmEditBrand">
+					#{authenticityToken/}
+					<div class="column_left">
+						<h3>编辑品牌</h3>
+					</div>
+					<div class="form_line">
+						<label class="lbl">名称</label>
+						<div class="controls">
+							<input class="inputText" id="txtBrandId" type="hidden" value="0" name="brand.id" />
+							<input class="inputText" id="txtTitle" type="text" value="" name="brand.name" tabindex="1"/>			
+						</div>
+						<div for="txtTitle" class="validateLine clearfix"></div>
+					</div>
+					<div class="form_line">
+						<label class="lbl">次名称</label>
+						<div class="controls">
+							<input class="inputText" id="txtSecondTitle" type="text" value="" name="brand.secondaryName" tabindex="2"/>					
+						</div>
+						<div for="txtSecondTitle" class="validateLine clearfix"></div>
+					</div>
+					<div class="form_line">
+						<label class="lbl">图片</label>
+						<div class="controls uploadImg" id="T_adBanner">
+							<input class="inputText" id="hidPicUrl" type="hidden" value="" name="brand.picUrl"/>					
+							<img src="" alt="" style="width:100px;height:26px;overflow:hidden"/> <i class="iconfont mr10" id="addPrice">&#xe60a;</i>
+							<p id="picClickDesc">点击上传图片</p>
+
+						</div>
+						<p style="display:table-cell;padding-left:10px;padding-top:8px;">图片规格 100x26</p>
+						<div for="hidPicUrl" class="validateLine clearfix"></div>
+					</div>
+					<div class="form_line">
+						<label class="lbl">所属公司</label>
+						<div class="controls">
+							<input class="inputText" id="txtCompany" type="text" value="" name="brand.company" tabindex="3"/>					
+						</div>
+						<div for="txtCompany" class="validateLine clearfix"></div>
+					</div>
+					<div class="form_line">
+						<label class="lbl">对接持有人</label>
+						<div class="controls">
+							<input class="inputText" id="txtHolder" type="text" value="" name="brand.holder" tabindex="4"/>					
+						</div>
+						<div for="txtHolder" class="validateLine clearfix"></div>
+					</div>
+					<div class="form_line">
+						<label class="lbl">描述</label>
+						<div class="controls">
+							<textarea class="textareaText" name="brand.descption" id="texdiscribe" cols="32" rows="5" maxlength="200" minlength="5"></textarea>					
+						</div>
+						<div for="texdiscribe" class="validateLine clearfix"></div>
+					</div>
+				</form>
+			</div>
+			<div class="wndBotButtonSection">
+				<a id="btnBrandfirm" href="javascript:;" class="btnStd btnLarge btnYellow-shadow trSubmit">保存</a>
+			</div>
+		</div>
+	</div>
+</div>
+#{set 'moreManaScripts'}
+<script type="text/javascript" src="/public/javascripts/bizComponents/manage/brandManage.js"></script>
+<script type="text/javascript">APP.QnDomain = '${upload_domain}';App.module = 'brandManage';</script>
+#{/set}

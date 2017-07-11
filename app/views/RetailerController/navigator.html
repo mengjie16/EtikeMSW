@@ -1,0 +1,83 @@
+		*{ 这是零售商的user登录进来后看到的菜单 }*
+		<!-- hd_mysnbMenu -->		
+		<div class="hd_mysnbMenu" style="margin-top:200px;">
+			<div class="mysnbMenu" style="border:0px;">
+				<div class="container_body">
+					<div class="container_left">
+						<div class="mypage_menu">
+							#{if false}
+							<h2>
+								<span>我的</span>
+							</h2>
+							<ul>
+								<li>
+									<a href="/user/storeList" class="navLink" module="storeList">我的收藏</a>
+								</li>
+								<li>
+									<a href="/user/markList" class="navLink" module="markList">我的足迹</a>
+								</li>
+								<li>
+									<a href="/user/authorize" class="navLink" module="authorize">店铺授权</a>
+								</li>
+							</ul>
+							#{/if}
+							<h2>
+								<span>订单功能</span>
+							</h2>
+							<ul>
+								<li>
+									<a href="/retailer/order/stepOne" class="navLink" module="orderStepOne">提交订单</a>
+								</li>
+								<li>
+									<a href="/retailer/order/list" class="navLink" module="orderList">我的订单</a>
+								</li>
+							</ul>
+							<h2>
+								<span>财务</span>
+							</h2>
+							<ul>
+								#{if false}
+								<li>
+									<a href="/retailer/finance" class="navLink" module="finance">财务流水</a>
+								</li>
+								#{/if}
+								<li>
+									<a href="/retailer/pay" class="navLink" module="payFor">我要付款</a>
+								</li>
+							</ul>
+							<h2>
+								<span>账户/安全</span>
+							</h2>
+							<ul>
+								<li>
+									<a href="/retailer/edit" class="navLink" module="retailerEdit">修改信息</a>
+								</li>
+								<li>
+									<a href="/user/edit/pass" class="navLink" module="editPass">修改密码</a>
+								</li>
+							</ul>
+						</div>
+						<div class="cs_center">
+							<h2 class="cs_tit">服务中心</h2>
+							<ul class="cs_lst">
+								<li>
+									<a href="/help" class="faq">
+										<span>FAQ</span>
+									</a>
+								</li>
+								<li>
+									<a href="#" class="qna">
+										<span>我要提问</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						*{
+						<div class="cs_center_tel">
+							<img src="/public/images/img/cs_center_tel.png" alt=""/>		
+						</div>
+						}*
+					</div>
+				</div>
+			</div>
+		</div>

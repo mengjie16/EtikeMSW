@@ -1,0 +1,62 @@
+#content {
+  width: 990px;
+  margin: 0 auto;
+}
+#main {
+  overflow: hidden;
+  padding-top: 25px;
+}
+#banner {
+  float: left;
+  width: 520px;
+  margin-right: 40px;
+  height: 500px;
+  overflow: hidden;
+}
+#banner img {
+	width: 100%;
+	height: 100%;
+}
+#err {
+  float: left;
+  padding-top: 125px;
+}
+#err .tips {
+  font-size: 30px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 35px;
+}
+#err .tips p {
+	font-size: 30px;
+  font-weight: 700;
+  color: #333;
+}
+#err .reason {
+  line-height: 1.6em;
+  margin-bottom: 25px;
+}
+#err .reason p {
+  color: #ccc;
+  margin-bottom: 5px;
+}
+#err .reason li {
+  color: #333;
+}
+#err .reason li span {
+  color: #ccc;
+  padding-left: 5px;
+}
+#err .links {
+  color: #ccc;
+  line-height: 2em;
+}
+#err .links a {
+  color: #0B72A4;
+}
+.gt, .lt {
+  font-family: tahoma;
+  font-size: 10px;
+  font-style: normal;
+  color: #ccc;
+}

@@ -1,0 +1,70 @@
+<div class="contentWrap" style="z-index:122;margin-bottom:10px">
+	<div class="" style="width:1010px;">
+		<div class="container_myMain_header" style="margin-left:-80px;z-index:122">
+			<div class="mypage_myLevel snsMember" style="display:block">
+				<form id="frmMiddlePoster">
+					#{authenticityToken/}
+					<div class="my_photo" id="img_content">
+						<input type="hidden" name="user_avatar"/>
+						<img src="${user?.avatar?user.avatar:'/public/images/avatar_empty.png'}" alt="${user?.name}"/>
+						<div class="mask" id="uploadHead"> <i class="iconfont">&#xe632;</i>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="thisMonthLevel_info">
+				<p class="disc2">
+					注册会员即赠送<strong class="ml4 mr4">运费50元折扣券</strong>和<strong class="ml4 mr4">VIP积分1000</strong>
+				</p>
+			</div>
+			<div class="my_mainBox">
+				<div class="level_benefit">
+					<span class="welcome">欢迎您：</span>
+					<div class="sns_user_name">${user?.name}</div>
+				</div>
+				<div class="shopping_benefit">
+					<div class="benefit_header">
+						<h1>
+							<span class="blind" style="font-size:15px;color:#444;">基础数据</span>
+						</h1>
+					</div>
+					<div class="benefit_body">
+						<dl class="benefit_lst first-child">
+							<dt class="">
+								<span class="blind">历史订单</span>
+							</dt>
+							<dd>
+								<span class="txt_sys">
+									<a href="#">0</a>
+								</span>
+								个
+							</dd>
+						</dl>
+						<dl class="benefit_lst">
+							<dt class="">
+								<span class="blind">今日订单</span>
+							</dt>
+							<dd>
+								<span class="txt_sys">
+									<a href="#">0</a>
+								</span>
+								条
+							</dd>
+						</dl>
+						<dl class="benefit_lst">
+							<dt class="">
+								<span class="blind">今日下单金额</span>
+							</dt>
+							<dd>
+								<span class="txt_sys">
+									<a href="#">0</a>
+								</span>
+								元
+							</dd>
+						</dl>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,202 @@
+#{extends './manage-frame.html' /}
+#{set title:'零售商管理' /}
+#{set 'moreManaStyles'}
+<style>
+	.modalWndInner label {
+		display: inline-block;
+	}
+	.channel {
+		line-height: 22px;
+	}
+</style>
+#{/set}
+<div class="cont_mypage container_body" style="margin-top:30px" id="container">
+	<div class="container_contents container_myMain_contents">
+		<div style="margin-top:0px;">
+			<div class="column_left">
+				<h3>零售商管理</h3>
+			</div>
+		</div>
+		#{authenticityToken/}
+		<div class="tbl_wrap_type02 pt20">
+			<form name="Mypage_SubMit" method="post" id="frmEditReg">
+				<input type="hidden" value="" name="Gubun"/>
+				<div class="search_area">
+					<div class="search_box">
+						<div class="area_l">
+							<span class="txt_type01">名称</span>
+							<input type="text" class="text" id="user_name" name="titleName" maxlength="20"/>
+							<a href="javascript:;" class="btnStd btnMedium" id="searchBtn">查询</a>
+						</div>
+						<div class="area_r">
+							<a href="javascript:void(0)" class="floatRight mr6 btnStd btnMedium" id="registNew">添加零售商</a>
+						</div>
+					</div>
+				</div>
+			</form>
+			<div class="clearFix"></div>
+			<table summary="" class="tbl_type01 tbHoverable">
+				<thead>
+					<tr>
+						<th class="thcellId">
+							<div class="thcell">ID</div>
+						</th>
+						<th>
+							<div class="thcell">名称</div>
+						</th>
+						<th>
+							<div class="thcell changeTh">网店Url</div>
+						</th>
+						<th>
+							<div class="thcell">操作</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody id="regContainer"></tbody>
+			</table>
+			<div class="pagin-btm clearFix">
+				<div class="pagination"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<textarea class="muban" id="regUserTemp" style="display:none">
+	{{#results}}
+	<tr mid="{{id}}">
+		<td class="thcellId">
+			<div class="tdcell">{{id}}</div>
+		</td>
+		<td>
+			<div class="tdcell">{{name}}</div>
+		</td>
+		<td>
+			<div class="tdcell">{{shopUrl}}</div>
+		</td>
+		<td>
+			<div class="tdcell">
+				<a href="javascript:;" class="btnStd btnSmall editbtn" data-id="{{id}}">编辑</a>
+				<a href="javascript:;" class="btnStd btnSmall delbtn" data-id="{{id}}">删除</a>
+			</div>
+		</td>
+	</tr>
+	{{/results}}
+</textarea>
+*{ 添加零售商信息 }*
+<div class="popWrapper" id="registeUser">
+	<div class="popWndFrame">
+		<div class="modalWnd" tr-url="/sys/retailer/save" id="retAddWnd">
+			<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口">
+				<i class="iconfont mr10">&#xe60c;</i>
+			</a>
+			<div class="modalWndInner">
+				<form id="frmRegistRetailer">
+					<div class="column_left">
+						<h3>添加零售商</h3>
+					</div>
+					#{authenticityToken/}
+					<div class="form_line">
+						<label class="lbl">名称</label>
+						<div class="controls">
+							<input id="txtName" name="add.name" type="text" class="inputText trControl" placeholder="名称" tabindex="1" maxlength="20" tr-param="retailer.name"/>
+						</div>
+						<div for="txtName" class="validateLine clearfix"></div>
+					</div>
+					<div class="form_line">
+						<label class="lbl">网店Url</label>
+						<div class="controls">
+							<input id="txtShopUrl" name="add.shopUrl" type="text" class="inputText trControl" placeholder="http://www.taobao.com" tabindex="2" maxlength="250" tr-param="retailer.shopUrl"/>
+						</div>
+						<div for="txtShopUrl" class="validateLine clearfix"></div>
+					</div>
+					<div class="form_line">
+						<label class="lbl">选择渠道</label>
+						<div class="controls">
+							<div class="canal" id="channelList">
+								<input type="hidden" name="add.channel" value="" class="trControl" tr-param="retailer.channel"/>
+								#{if rcs}
+									#{list items:rcs,as :'retailerChannel'}
+									<div class="channel">
+										<input value="${retailerChannel.id}" name="add.channels" type="checkbox" class="mr4"/>
+										<label for="pop">${retailerChannel.channel}</label>
+									</div>
+									#{/list}
+									<div class="validateLine clearfix checkboxval"></div>
+								#{/if}
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="wndBotButtonSection">
+				<a id="btnRetAdd" href="javascript:;" class="btnStd btnLarge btnYellow-shadow trSubmit">保存</a>
+			</div>
+		</div>
+	</div>
+</div>
+*{ 编辑零售商信息 }*
+<div class="popWrapper" id="editRegist">
+	<div class="popWndFrame">
+		<div class="modalWnd" tr-url="/sys/retailer/save" id="editRetWnd">
+			#{authenticityToken/}
+			<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口">
+				<i class="iconfont mr10">&#xe60c;</i>
+			</a>
+			<div class="modalWndInner">
+				<div class="retailerMessage">
+					<form id="frmEdit_ret">
+						<input type="hidden" id="hidRetFormId" class="trControl" tr-param="retailer.id" value=""/>
+						<div class="column_left">
+							<h3>编辑零售商注册用户</h3>
+						</div>
+						<div class="form_line">
+							<label class="lbl">名称</label>
+							<div class="controls">
+								<input id="editName" name="edit.name" type="text" class="inputText trControl" placeholder="名称" tabindex="1" maxlength="20" tr-param="retailer.name"/>
+							</div>
+							<div for="editName" class="validateLine clearfix"></div>
+						</div>
+						<div class="form_line">
+							<label class="lbl">网店Url</label>
+							<div class="controls">
+								<input id="editShopUrl" name="edit.shopUrl" type="text" class="inputText trControl" placeholder="http://www.taobao.com" tabindex="2" maxlength="250" tr-param="retailer.shopUrl"/>
+							</div>
+							<div for="editShopUrl" class="validateLine clearfix"></div>
+						</div>
+						<div class="form_line">
+							<label class="lbl">选择渠道</label>
+							<div class="controls">
+								<div class="canal" id="editChannelList">
+									<input type="hidden" name="edit.channel" value="" class="trControl" tr-param="retailer.channel"/>
+									#{if rcs}
+									#{list items:rcs,as :'retailerChannel'}
+									<div class="channels">
+										<input value="${retailerChannel.id}" name="edit.channels" type="checkbox" class="mr4"/>
+										<label for="pop">${retailerChannel.channel}</label>
+									</div>
+									#{/list}
+									<div class="validateLine clearfix checkboxval"></div>
+								#{/if}
+								</div>
+							</div>
+						</div>
+						<div class="form_line">
+							<label class="lbl">备注</label>
+							<div class="controls">
+								<textarea id="editNote" class="inputMultiText trControl" name="edit.note" style="height:90px;width:340px;" maxlength="100" placeholder="备注" tr-param="retailer.note"></textarea>
+							</div>
+							<div for="editNote" class="validateLine clearfix"></div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="wndBotButtonSection">
+				<a id="btnRegfirm_ret" href="javascript:;" class="btnStd btnLarge btnYellow-shadow trSubmit">保存</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+#{set 'moreManaScripts'}
+<script type="text/javascript" src="/public/javascripts/bizComponents/manage/retailerManage.js"></script>
+<script type="text/javascript">APP.QnDomain = '${upload_domain}';App.module = 'retailerManage';</script>
+#{/set}

@@ -1,0 +1,371 @@
+.contentWrap {
+    width: 880px;
+    padding-top: 33px;
+    padding-bottom: 110px;
+    padding-top: 92px;
+    background-color: #fff;
+    margin: 0 auto;
+    clear: both;
+    position: relative;
+}
+.contentWrap .leftArea {
+    width: 472px;
+    height: 260px;
+    padding: 27px 30px 19px 29px;
+    float: left;
+    margin-right: 16px;
+    border: 2px solid #eaeaea;
+}
+.contentWrap .leftArea .loginTabs {
+    height: 18px;
+    width: 160px;
+    padding-top: 9px;
+    border: 1px solid #dcdcdc;
+    border-bottom: 0px;
+    float: left;
+    margin-right: 2px;
+    letter-spacing: -1px;
+    text-align: center;
+    color: #7d7d7d;
+}
+.contentWrap .leftArea .loginContents {
+    height: 164px;
+}
+.contentWrap .leftArea .loginContents .loginInfo {
+    float: left;
+    margin-right: 9px;
+}
+.contentWrap .leftArea .loginContents .loginInfo li {
+    width: 260px;
+    height: 24px;
+    padding-left: 58px;
+    margin-bottom: 8px;
+}
+.contentWrap .leftArea .loginContents .loginInfo li div {
+    height: 24px;
+    float: left;
+}
+.contentWrap .leftArea .loginContents .loginInfo li div input {
+    border-width: 2px;
+    height: 20px;
+    margin-left: 12px;
+}
+.contentWrap .leftArea .loginContents .loginBtn {
+    width: 135px;
+    float: left;
+    margin-bottom: 21px;
+}
+.loginBottom input {
+    position: relative;
+    top: 2px;
+}
+.contentWrap .leftArea .loginContents .btns {
+    margin-top: 10px;
+    text-align: right;
+}
+.contentWrap .rightArea {
+    width: 329px;
+    height: 347px;
+    float: left;
+}
+.contentWrap .rightArea .ad {
+    border: 1px solid #e2e2e2;
+}
+.contentWrap .leftArea .loginTxtInfo {
+    border-top: 2px solid #5c5c5c;
+    border-bottom: 2px solid #5c5c5c;
+    padding-top: 39px;
+    padding-bottom: 39px;
+}
+.contentWrap .leftArea .loginTxtInfo div {
+    text-align: center;
+    letter-spacing: -1px;
+}
+.contentWrap .leftArea .loginTxtInfo div.bigFont {
+    font-size: 17px;
+    font-weight: bold;
+    color: #4e4e4e;
+    margin-bottom: 20px;
+}
+.contentWrap .leftArea .loginTxtInfo div.bigFont span {
+    color: #d72020;
+    text-decoration: underline;
+    font-size: 17px;
+}
+.loginWrap {
+    width: 740px;
+    height: 470px;
+}
+.body {
+    margin-top: 50px;
+    border-top: 0px;
+    position: relative;
+    border: 0;
+}
+.body .contentWrap {
+    margin-left: 40px;
+    overflow: hidden;
+    width: 720px;
+    height: auto;
+    padding: 0;
+    border: 0;
+    margin: 0 auto;
+}
+.body .contentWrap .leftArea {
+    border: 0;
+    padding: 0;
+    width: 400px;
+    float: left;
+    margin-right: 29px;
+    border-right: 1px solid #eaeaea;
+}
+.body .contentWrap .leftArea .loginContents {
+    clear: both;
+    padding-top: 30px;
+    position: relative;
+
+    border-top: 0;
+}
+.loginContents .form_area {
+    width: 372px;
+    overflow: hidden;
+}
+.body .contentWrap .leftArea .selected {
+    
+}
+.body .contentWrap .leftArea .loginContents .loginInfo {
+    float: left;
+    width: 270px;
+    margin-right: 0;
+}
+.body .contentWrap .leftArea .loginContents .loginInfo li {
+    width: 242px;
+    height: 33px;
+    line-height: 33px;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+.body .contentWrap .leftArea .loginContents .loginInfo li:first-child {
+    margin-bottom: 13px;
+}
+.body .contentWrap .leftArea .loginContents .loginInfo li div {
+    float: left;
+    color: #747474;
+    height: auto;
+}
+.body .contentWrap .leftArea .loginContents .loginInfo li div input {
+    border: 1px solid #bebebe;
+    width: 167px;
+    height: 15px;
+    line-height: 15px;
+    padding: 9px 4px;
+    margin-left: 0;
+    text-indent: 6px;
+    height: 32px;
+}
+.body .contentWrap .leftArea .loginContents .loginBtn {
+    float: left;
+    width: 102px;
+    margin-bottom: 0;
+}
+.body .contentWrap .leftArea .loginContents .loginBtn .normalLogin{
+    display:inline-block;
+    width:101px;
+    height:82px;
+    line-height:82px;
+    text-align:center;
+    color:#fff;
+    background-color:#52d0c4;
+    font-size:14px;
+    text-decoration:none;
+}
+.body .contentWrap .leftArea .loginContents .loginBtn .rightLogin {
+    display:inline-block;
+    width:101px;
+    height:65px;
+    line-height:65px;
+    text-align:center;
+    color:#fff;
+    background-color:#52d0c4;
+    font-size:14px;
+    text-decoration:none;
+}
+.changeUser {
+    display: inline-block;
+    margin-top: 3px;
+}
+.loginBottom {
+    width: 370px;
+    height: 25px;
+    padding: 10px 0 10px;
+    text-align: right;
+    clear: both;
+    border-top: 0;
+    border-bottom: 0;
+}
+.loginBottom .txt_r {
+    font-size: 12px;
+    text-align: right;
+}
+.body .contentWrap .leftArea .loginContents .login_bottom_l {
+    float: left;
+    padding-left: 60px;
+}
+.body .contentWrap .leftArea .loginContents .login_bottom_l label {
+    font-size: 12px;
+    color: #989898;
+}
+.body .contentWrap .leftArea .loginContents .login_bottom_r {
+    float: right;
+}
+.body .contentWrap .leftArea .loginContents .login_bottom_r a {
+    font-size: 12px;
+    color: #989898;
+}
+.body .contentWrap .leftArea .loginContents .loginBottom input {
+    position: relative;
+    top: 0;
+}
+.body .contentWrap .leftArea .loginContents .btns {
+    margin-top: 10px;
+    text-align: right;
+}
+.body .contentWrap .rightArea {
+    width: 270px;
+    height: 200px;
+    margin-top: 37px;
+    float: left;
+}
+.rightArea .sns_tit1 {
+    font-size: 14px;
+    color: #000;
+    font-weight: bold;
+    padding: 10px 0 28px;
+}
+.rightArea .sns_tit2 {
+    font-size: 12px;
+    color: #989898;
+    text-indent: -9px;
+    margin: 17px 0 9px;
+    padding: 12px 0 0;
+    border-top: 1px solid #eaeaea;
+}
+.body .contentWrap .rightArea button {
+    width: 260px;
+    height: 48px;
+    margin: 0;
+    display: block;
+    border: 0px
+}
+.body .contentWrap .leftArea .loginTxtInfo {
+    border-top: 2px solid #5c5c5c;
+    border-bottom: 2px solid #5c5c5c;
+    padding-top: 39px;
+    padding-bottom: 39px;
+}
+.body .contentWrap .leftArea .loginTxtInfo div {
+    text-align: center;
+    letter-spacing: -1px;
+}
+.body .contentWrap .leftArea .loginTxtInfo div.bigFont {
+    font-size: 17px;
+    font-weight: bold;
+    color: #4e4e4e;
+    margin-bottom: 20px;
+}
+.body .contentWrap .leftArea .loginTxtInfo div.bigFont span {
+    color: #d72020;
+    text-decoration: underline;
+    font-size: 17px;
+}
+.join_area {
+    overflow: hidden;
+    width: 720px;
+    margin: 40px auto 0;
+}
+.join_area_l {
+    float: left;
+    padding-top: 23px;
+}
+.join_area_l .txt1 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #747474;
+    margin-bottom: 8px;
+}
+.join_area_l .txt2 {
+    font-size: 12px;
+    color: #989898;
+}
+.join_area_r {
+    float: right;
+    padding-top: 14px;
+}
+.bottom_banner {
+    margin: 0 auto;
+    margin-top: 25px;
+    width: 664px;
+    height: 80px;
+    padding-bottom: 20px;
+}
+
+
+.third-party-login {
+    display: table
+}
+
+.third-party-login a {
+    display: table-cell;
+    width: 45px;
+    background-size: 100% 100%
+}
+
+.third-party-login .icon {
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin: 0 auto
+}
+.third-party-login .weixin {
+    background-image: url(/public/images/sprite.passport.png?v1545d0de4f4);
+    background-position: -96px -81px
+}
+
+.third-party-login .qq {
+    background-image: url(/public/images/sprite.passport.png?v1545d0de4f4);
+    background-position: -128px -81px
+}
+
+.third-party-login .weibo {
+    background-image: url(/public/images/sprite.passport.png?v1545d0de4f4);
+    background-position: 0 -81px
+}
+
+.login-page .third-party-login .alipay {
+    background-image: url(/public/images/sprite.passport.png?v1545d0de4f4);
+    background-position: 0 -113px
+}
+.userInfo img {
+    float: left;
+}
+.controls {
+    padding: 5px 0;
+    color: #ffa200;
+}
+.clboth {
+    clear: both;
+}
+#errText,.error_panel {
+    width: 80%;
+    height: 20px; 
+    overflow: hidden;
+    padding-left: 60px;
+    color: #f00;
+}
+#errText div {
+    float: left;
+    margin-right: 15px;
+}
+.body .contentWrap .leftArea .loginContents .loginInfo li div .txtOn{
+    border-color: #FFC907;
+}

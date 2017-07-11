@@ -1,0 +1,20 @@
+@charset "utf-8";
+
+.content_top_left{float:left; padding:14px 0 0;}
+.content_top_location{position:relative; z-index:2;}
+.content_top_location h3{float:left; width:65px; margin-right:25px;}
+.content_top_location .left_con{float:left; width:194px; margin-right:5px;}
+.content_top_location .left_con{*zoom:1;}
+.content_top_location .left_con p.location_area{float:left; width:22px; margin-right:8px;  font-size:11px; color:#c0c0c0;}
+.content_top_location .left_con p.location_area img{margin-right:7px; vertical-align:baseline}
+.content_top_location .left_con div.selectbox{display:inline-block; position:relative; left:0; top:0; width:164px; height:22px;}
+.content_top_location .left_con div.selectbox{*display:inline; *zoom:1;}
+.content_top_location .left_con div.selectbox ul{position:absolute; left:0; top:0; z-index:30; width:162px; background:#fff; border:1px solid #dee0e1;}
+.content_top_location .left_con div.selectbox li{display:none; overflow:hidden;background:#fff;}
+.content_top_location .left_con div.selectbox li.on{display:block;}
+.content_top_location .left_con div.selectbox li:hover{background:#eee;}
+.content_top_location .left_con div.selectbox li a{float:left; display:block; width:162px; height:16px; padding:4px 0 0 6px; color:#919191;}
+.content_top_location .left_con div.selectbox li span{display:block; position:absolute; right:0; top:0; width:20px; height:20px;}
+.content_top_location a.history_back{display:inline-block; width:72px; height:22px;text-align: center;line-height: 22px;background-color: #ebebeb;border:1px solid #ccc;margin-top: -2px;}
+.content_top_location a.history_back{*display:inline; *zoom:1;}
+.content_top_right{float:right;}

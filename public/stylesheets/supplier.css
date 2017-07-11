@@ -1,0 +1,42 @@
+.certificationTypeBox {
+	position: relative;
+}
+.certificationTypeBox .sendSmsPop{
+	position: absolute;
+	display: none;
+	border: solid 1px #ddd;
+	background-color: #fff;
+	padding: 20px;
+	width: 380px;
+  height: 230px;
+  top: 40px;
+  left: 194px;
+  z-index: 10;
+}
+.sendSmsPop .popCloser{
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	display: block;
+	width: 28px;
+	height: 28px;
+	z-index: 11;
+}
+.certificationTypeBox .okBtn {
+	text-align: center;
+}
+.certificationTypeBox .okBtn a{
+	display: block;
+	width: 168px;
+	height: 38px;
+	margin: 0 auto;
+}
+.certificationTypeBox .okBtn p {
+	line-height: 38px;
+	background-color: #D450A6;
+	color: #fff;
+	text-align: center;
+}
+.certificationTypeBox_pop .error span {
+	line-height: 33px;
+}

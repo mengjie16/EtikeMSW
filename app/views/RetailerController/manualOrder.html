@@ -1,0 +1,173 @@
+#{extends 'UserCenter/user-frame.html' /}
+#{set title:'提交订单' /}
+#{set 'moreSubStyles'}
+<link href="@{'/public/stylesheets/retailer.css'}" rel="stylesheet" type="text/css" />
+<link href="@{'/public/stylesheets/album.css'}" rel="stylesheet" type="text/css" />
+<style type="text/css">
+	.form_line .lbl {
+		width: 80px;
+		text-align: left;
+	}
+	.form_line .controls .inputText.long {
+		width: 320px;
+	}
+	.orderItem {
+		width: 600px;
+	}
+	.validateLine {
+		display: table-cell;
+		line-height: 26px;
+		padding-left:5px;
+	}
+	.albumImg {
+		display: inline-block;
+		margin-right: 15px;
+		padding: 2px;
+		box-sizing: border-box;
+	}
+	.productId,.sku {
+		font-size: 14px;
+    color: #ffa200;
+    margin-left: 10px;
+	}
+	.delbtnicon {
+		cursor: pointer;
+	}
+	.form_line .controls select {
+    border: 1px solid #999;
+    height: 26px;
+    line-height: 26px;
+    font-size: 12px;
+    padding: 3px 0;
+    color: #999;
+    width: 101px;
+	}
+	.qntys input {
+		height: 35px;
+	}
+</style>
+#{/set}
+<div class="cont_mypage" style="margin-top:30px" id="container">
+	<div class="container_contents container_myMain_contents">
+		<div style="margin-top:0px;">
+			<div class="column_left">
+				<h3>提交订单 - (2/2)</h3>
+			</div>
+		</div>
+		<div class="tbl_wrap_type02 pt20">
+			<h3 class="prevStep">上一步：您已选择“<span class="green">通过手工输入</span>”的形式</h3>
+				#{authenticityToken/}
+			<h3>第二步：填写订单相关信息</h3>
+			<form id="addOrder">
+				<div class="form_line">
+					<label class="lbl">订单号</label>
+					<div class="controls">
+						<input class="inputText long" id="outOrderNo" type="text" name="outOrderNo" maxlength="20" />
+					</div>
+					<div for="outOrderNo" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">商品ID</label>
+					<div class="controls">
+						<input class="inputText long" id="itemId" type="text" name="itemId" maxlength="10"/>
+						<div for="itemId" class="validateLine clearfix" style="display: inline-block;padding-left:0"></div>
+						<div class="itemMassage">
+							<div class="imgcont" id="imgcont">
+								<img src="">
+							</div>
+							<div class="itemtext">
+								<p class="itemTitle" id="itemTitle">商品名称</p>
+								<p class="price">0</p>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				<div class="form_line">
+					<label class="lbl">商品规格</label>
+					<input type="hidden" name="sku" id="txtSku" />
+					<div class="controls" id="selSku">
+						<div class="albumImg">
+							<img src=""/>	
+							<div class="tip"> <b></b>
+								<em>商品规格</em>
+							</div>
+						</div>
+					</div>
+					<div for="txtSku" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">商品数量</label>
+					<div class="controls">
+						<input class="inputText" id="txtNum" type="text" value="" name="num" maxlength="10" />
+					</div>
+					<div for="txtNum" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">客户姓名</label>
+					<div class="controls">
+						<input class="inputText long" id="txtName" type="text" value="" name="name" maxlength="20" />
+					</div>
+					<div for="txtName" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">客户电话</label>
+					<div class="controls">
+						<input class="inputText long" id="txtContact" type="text" value="" name="contact" maxlength="18" />
+					</div>
+					<div for="txtContact" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">省/市/区</label>
+					<div class="controls">
+						<input id="province_id" type="hidden" name="provinceId" />
+						<select id="province" class="province" name="province" value="">
+							<option>-- 省份 --</option>
+						</select>
+						<select id="city" class="city ml10" name="city">
+							<option>-- 城市 --</option>
+						</select>
+						<select id="region" class="region ml10" name="region">
+							<option>-- 区域 --</option>
+						</select>
+					</div>
+					<div for="province_id" class="validateLine clearfix" name="selProvince"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">详细地址</label>
+					<div class="controls">
+						<textarea id="txtAddress" class="inputMultiText" name="address" style="height:90px;width:322px" maxlength="60" placeholder="详细地址"></textarea>
+					</div>
+					<div for="txtAddress" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">订单备注</label>
+					<div class="controls">
+						<input class="inputText long" id="txtNote" type="text" value="" name="note" maxlength="40" />
+					</div>
+					<div for="txtNote" class="validateLine clearfix"></div>
+				</div>
+			</form>
+			<div class="button_section" style="padding-left:95px;">
+				<a id="btnOrder" href="javascript:void(0)" class="btnStd btnMedium" style="width:80px">添加</a>
+			</div>
+			<h3 style="margin-top:30px;">已添加的订单</h3>
+			<div id="orderList"></div>
+			<form id="submitList">
+				#{authenticityToken/}
+			</form>
+			<div class="button_section" style="text-align:left;margin-left: 210px">
+				<a class="btnStd btnLarge btnYellow-shadow" href="javascript:;" id="btnSubmit">订单添加完毕</a>
+			</div>
+		</div>
+	</div>
+</div>
+#{set 'moreSubScripts'}
+<script src="@{'/public/javascripts/libs/mustache.min.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/libs/jquery.validate.min.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/validate.plus.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/ajaxfileupload.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/libs/raphael.2.2.1.min.js'}" type="text/javascript"></script>
+<script type="text/javascript" src="/public/javascripts/bizComponents/retailer/manualOrder.js"></script>
+<script type="text/javascript">App.module = 'orderStepOne';</script>
+#{/set}

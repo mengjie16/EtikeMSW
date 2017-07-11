@@ -1,0 +1,87 @@
+<div class="contentWrap" style="z-index:122;margin-bottom:10px">
+	<div class="" style="width:1010px">
+		<div class="container_myMain_header" style="margin-left:-80px;z-index:122">
+			<div class="mypage_myLevel snsMember" style="display:block" id="img_container">
+				<form id="frmMiddlePoster">
+					#{authenticityToken/}
+					<div class="my_photo" id="img_content">
+						<input type="hidden" name="user_avatar"/>
+						<img src="${user?.avatar?user.avatar:'/public/images/avatar_empty.png'}" alt="${user?.name}" title="${user?.name}" />
+						<div class="mask" id="uploadHead"> <i class="iconfont">&#xe632;</i>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="thisMonthLevel_info">
+				<p class="disc2">
+					欢迎您<strong class="ml4 mr4">尊贵的合作伙伴</strong>
+				</p>
+			</div>
+			<div class="my_mainBox">
+				<div class="level_benefit">
+					<span class="welcome">欢迎您：</span>
+					<div class="sns_user_name">${user?.name}</div>
+					#{if supplier}
+					<div class="user_company"> <i class="iconfont" style="margin-right:8px">&#xe639;</i>
+						${supplier.name}
+					</div>
+					#{/if}
+				</div>
+				<div class="shopping_benefit">
+					<div class="benefit_header">
+						<h1>
+							<span class="blind" style="font-size:15px;color:#444;">基础数据</span>
+						</h1>
+					</div>
+					<div class="benefit_body">
+						<dl class="benefit_lst first-child">
+							<dt class="">
+								<span class="blind">在架商品</span>
+							</dt>
+							<dd>
+								<span class="txt_sys">
+									<a href="#">${supplier?.dataPreview?supplier.dataPreview.onlineItem:0}</a>
+								</span>
+								<span>个</span>
+
+							</dd>
+						</dl>
+						<dl class="benefit_lst">
+							<dt class="">
+								<span class="blind">今日商品浏览</span>
+							</dt>
+							<dd>
+								<span class="txt_sys">
+									<a href="#">${supplier?.dataPreview?supplier?.dataPreview.hideItem:0}</a>
+								</span>
+								条
+							</dd>
+						</dl>
+						<dl class="benefit_lst">
+							<dt class="">
+								<span class="blind">今日订单</span>
+							</dt>
+							<dd>
+								<span class="txt_sys">
+									<a href="#">${supplier?.dataPreview?supplier.dataPreview.order:0}</a>
+								</span>
+								条
+							</dd>
+						</dl>
+						<dl class="benefit_lst">
+							<dt class="">
+								<span class="blind">今日成交金额</span>
+							</dt>
+							<dd>
+								<span class="txt_sys">
+									<a href="#">${supplier?.dataPreview?supplier.dataPreview.amount:0.0}</a>
+								</span>
+								元
+							</dd>
+						</dl>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

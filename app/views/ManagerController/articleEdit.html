@@ -1,0 +1,98 @@
+#{extends './manage-frame.html' /}
+#{set 'moreManaStyles'}
+<link href="@{'/public/stylesheets/common/datePicker.css'}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/itemEdit.css'}"  />
+#{/set}
+#{set title:'文章编辑' /}
+<div class="cont_mypage container_body" style="margin-top:30px" id="container">
+	<div class="container_contents container_myMain_contents">
+		<div style="margin-top:0px;">
+			<div class="column_left">
+				<h3>文章编辑发布</h3>
+			</div>
+		</div>
+		<div class="tbl_wrap_type02 pt20" style="padding-left: 30px;">
+			<div class="error_panel" style="padding-left: 198px;color: #f00;line-height: 33px">
+	${flash?.error}
+</div>
+			<form action="/sys/article/save" id="formartical" method="post">
+				#{authenticityToken/}
+				<div class="form_line">
+					<label class="lbl">标题</label>
+					<div class="controls">
+						<input class="inputText long" id="txtTitle" type="text" value="${article?.title}" name="article.title" tabindex="1"/>
+					</div>
+					<div for="txtTitle" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<input type="hidden" name="article.id" value="${article?.id}" />
+					<input type="hidden" name="article.typeId" id="articleTid"  value="${article?.typeId}" />
+					<input type="hidden" name="article.typeName" id="articleTname" value="${article?.typeName}"/>
+					<label class="lbl">类型</label>
+					<div class="controls" id="T_cateControls">
+						#{if atypes}
+							#{list atypes,as : 'type'}
+								<input type="radio" name="articleType" data-text="${type.name}" value="${type._id}"  ${type_isFirst&&!article||article&&article.typeId==type._id ?'checked':'' } /> ${type.name}
+							#{/list}
+						#{/if}
+					</div>
+				</div>
+				<div class="form_line clearfix">
+					<label class="lbl" style="float: left">文章内容</label>
+					<div class="controls" id="editorControl" style="float: left">
+						<textarea id="articleContent" name="article.content" style="display: none"></textarea>
+						<script type="text/plain" id="contentEditor">${article?.content?.raw()}</script>
+					</div>
+					<div for="articleContent" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">发布时间</label>
+					<div class="controls">
+						<input class="inputText inputDate" id="txtTime" type="text" value="${article?.createTime?.format('yyyy-MM-dd')}" name="article.createTime" tabindex="2"/>
+					</div>
+					<div for="txtTime" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">对外可见</label>
+					<div class="controls">
+						#{if article}
+						<input type="radio" name="article.isPublic" value="yes" ${article.isPublic==true?'checked':''} /> 是
+						<input type="radio" name="article.isPublic" ${article.isPublic==false?'checked':''} value="no" /> 否
+						#{/if}
+						#{else}
+						<input type="radio" name="article.isPublic" value="yes" checked /> 是
+						<input type="radio" name="article.isPublic" value="no" /> 否
+						#{/else}
+					</div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">显示在文章列表中</label>
+					<div class="controls">
+						#{if article}
+						<input type="radio" name="article.isInList" value="yes" ${article?.isInList==true?'checked':''} /> 是
+						<input type="radio" name="article.isInList" value="no"  ${article?.isInList==false?'checked':''}　/> 否
+						#{/if}
+						#{else}
+								<input type="radio" name="article.isInList" value="yes" checked /> 是
+						<input type="radio" name="article.isInList" value="no" /> 否
+						#{/else}
+					</div>
+				</div>
+				<div class="button_section" id="btnSubmit" style="padding-left:125px;">
+					<a class="btnStd btnLarge btnYellow-shadow" href="javascript:;">提交</a>
+				</div>
+			</form>
+		</div>
+		<div class="popWrapper" style="display: none;" id="tr_loading_mask">
+				<img class="tr_juhua" src="@{'/public/images/pre_loading.gif'}" />
+			</div>
+	</div>
+</div>
+#{set 'moreManaScripts'}
+<script src="@{'/public/javascripts/date.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/jquery.datePicker.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/ueditor/ueditor.config.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/ueditor/editor_api.js'}" type="text/javascript"></script>
+<script type="text/javascript" src="/public/javascripts/bizComponents/manage/articleEdit.js"></script>
+<script type="text/javascript">APP.QnDomain = '${upload_domain}';App.module = 'articleManage';</script>
+#{/set}

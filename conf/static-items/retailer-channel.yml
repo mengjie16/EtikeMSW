@@ -1,0 +1,21 @@
+#
+#  零售商渠道描述配置文件
+#
+# 
+- !!models.RetailerChannel 
+  id: 1
+  channel: 常规网络POP，淘宝，天猫，京东，蜜芽，贝贝等
+
+- !!models.RetailerChannel 
+  id: 2
+  channel: 特卖活动，唯品会等
+- !!models.RetailerChannel 
+  id: 3
+  channel: 微博，微信（微信群、大V）
+
+- !!models.RetailerChannel 
+  id: 4
+  channel: 政府、医院等采购渠道
+- !!models.RetailerChannel 
+  id: 5
+  channel: 商超，线下连锁门店

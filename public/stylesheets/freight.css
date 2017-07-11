@@ -1,0 +1,168 @@
+.tbl_type01 thead th:last-child .thcell {
+	text-align: center;
+}
+.tbl_type01 td:last-child .tdcell {
+	text-align: center;
+}
+.province {
+	display: inline-block;
+}
+.tbHoverable {
+	border: 1px solid #ccc;
+}
+.tbHoverable thead tr {
+	background-color: #ebebeb;
+}
+.tbl_type01 td, .tbl_type01 thead th {
+	border: 1px solid #ccc;
+}
+.tbl_type01 td .tdcell {
+	position: relative;
+}
+.tbl_type01 thead th {
+	padding: 0;
+}
+.tbl_type01 td:first-child .tdcell {
+	padding: 15px 50px;
+}
+.tbl_type01.move td .tdcell {
+	padding: 15px 6px;
+}
+.freightTemp {
+	position: relative;
+	text-align: center;
+	border:1px solid #ccc;
+	margin:10px 0;
+}
+
+/*.basebtn {
+	display: inline-block;
+	float: right;
+	padding: 0 15px;
+	height: 19px;
+	line-height: 19px;
+	text-align: center;
+	border: 1px solid #ccc;
+	background-color: #FFCE00;
+	cursor: pointer;
+	margin-top: 5px;
+}
+.submitbtn,.delbtn {
+	margin-left: 10px;
+}
+.delbtn {
+	background-color: #e4393c;
+	color: #fff;
+}
+.delbtn:hover {
+	color:#fff;
+}*/
+.province:hover {
+	color: #ffa200;
+	cursor: pointer;
+}
+.inputText {
+	height: 24px;
+	line-height: 24px;
+	text-align: center;
+}
+.modalWndInner label {
+	display: inline-block;
+	line-height: 26px;
+	margin-right:20px;
+}
+.modalWndInner label input {
+	margin-right: 3px;
+}
+.popWrapper .inputText {
+	text-align: left;
+}
+#chooseList, #leaveList {
+	margin-bottom: 30px;
+}
+#leaveList ul li, #chooseList ul li {
+	display: inline-block;
+	padding: 6px 15px;
+	border: 1px solid #ccc;
+	margin-top: 10px;
+	margin-right: 15px;
+	cursor: pointer;
+	position: relative;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.tip {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	line-height: 26px;
+	background-color: #888;
+	color: #fff;
+	z-index: 1111;
+	display: none;
+	opacity:0.9;
+}
+#leaveList ul li:active {
+	background-color: #ffce00;
+	color: #fff;
+}
+.container_contents h4 {
+	line-height: 26px;
+	font-size: 14px;
+	height: 26px;
+	margin-top:10px;
+	padding-left: 10px;
+}
+.tempName {
+	font-size: 14px;
+}
+.titleName {
+	text-align: left;
+	text-indent: 4px;
+	margin-left: 4px;
+}
+.popWrapper h3 {
+	color: #ffa200;
+}
+.icondelbtn {
+	display: inline-block;
+	float: right;
+	margin-top: 5px;
+	cursor: pointer;
+}
+.additem {
+	cursor: pointer;
+}
+.extendcontent {
+	display: none;
+	padding-bottom: 30px;
+	margin-bottom: 30px;
+}
+.extendbtn {
+	float: right;
+}
+.freightType {
+	font-size: 14px;
+	color: #666;
+}
+.width60 {
+	width: 60px;
+}
+.width240 {
+	width: 240px;
+}
+.tbl_type01 td div.prompt {
+	position: absolute;
+	top:-5px;
+	left:0;
+	color: #f00;
+	width: 100%;
+	text-align: center;
+}

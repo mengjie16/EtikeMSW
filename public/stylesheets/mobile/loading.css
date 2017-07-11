@@ -1,0 +1,34 @@
+@-webkit-keyframes loading-3 {
+	50%{
+		transform:scale(0.1);
+		opacity: 0;
+	}
+	100%{
+		transform:scale(1);
+		opacity: 1;
+	}
+}
+.loading-3 {
+	text-align: center;
+	margin: .5rem 0;
+}
+.loading-3 i {
+	display: inline-block;
+	width: 4px;
+	height: 4px;
+	border-radius: 100%;
+	background-color: #333;
+	margin: 0 2px;
+}
+.loading-3 i:nth-child(1) {
+	-webkit-animation: loading-3 2s ease 0s infinite;
+}
+.loading-3 i:nth-child(2) {
+	-webkit-animation: loading-3 2s ease 0.3s infinite;
+}
+.loading-3 i:nth-child(3) {
+	-webkit-animation: loading-3 2s ease 0.6s infinite;
+}
+.footer {
+	display: none;
+}

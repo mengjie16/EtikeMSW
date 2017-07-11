@@ -1,0 +1,142 @@
+#{extends './tool-frame.html' /}
+#{set title:'运费计算' /}
+#{set 'moreToolStyles'}
+<link href="@{'/public/stylesheets/freight.css'}" rel="stylesheet" type="text/css" />
+<link href="@{'/public/stylesheets/tool.css'}" rel="stylesheet" type="text/css" />
+#{/set}
+<div class="rightArea">
+<a href="javascript:void(0)" class="btnStd btnMedium" id="exportExcelbtn" style="float: right;margin-bottom: 3px"><i class="iconfont mr4">&#xe603;</i>导出</a>
+#{if freightTemp && freightTemp.freights}
+#{if freightTemp.tempType=="dynamic"}
+	<h4 class="pl10 mb10" style="line-height:24px;color:#444">
+			输入重量：
+			<input type="text" class="inputText weight" value="" maxlength="10" /> kg
+			<a href="javascript:void(0)" class="btnStd btnMedium countBtn ml10">计算</a>
+			<a href="javascript:void(0)" class="btnStd btnMedium backBtn ml10"><i class="iconfont mr4">&#xe605;</i>返回</a>
+
+		</h4>
+	<table class="tbl_type01 move tbHoverable">
+		<thead>
+			<tr>
+				<th class="width240">
+					<div class="thcell">地区</div>
+				</th>
+				<th class="showcontent">
+					<div class="thcell">首重(kg)</div>
+				</th>
+				<th class="showcontent">
+					<div class="thcell">首重价格(元)</div>
+				</th>
+				<th class="showcontent">
+					<div class="thcell">续重(kg)</div>
+				</th>
+				<th class="showcontent">
+					<div class="thcell">续重价格(元)</div>
+				</th>
+				<th class="result">
+					<div class="thcell">价格(元)</div>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+		%{
+			def formatUtils = new java.text.DecimalFormat("0");
+		}%
+			#{list items:freightTemp.freights, as : 'freight'}
+			<tr>
+				<td class="width240">
+					<div class="tdcell">
+						<div class="province">
+							#{list items:freight.provinces, as : 'provinceId'}
+								
+								#{if provinceId_index==1}
+									${regionMap?.get(provinceId)?regionMap.get(provinceId):""}
+								#{/if}
+								#{else}
+									${regionMap?.get(provinceId)?","+regionMap.get(provinceId):""}
+								#{/else}
+							#{/list}
+						</div>
+					</div>
+				</td>
+				<td class="showcontent">
+					<div class="tdcell firstWeight" data-num="${freight.firstWeight}">
+						${formatUtils.format(freight.firstWeight)}
+					</div>
+				</td>
+				<td class="showcontent">
+					<div class="tdcell firstPrice" data-num="${freight.fwPrice}">
+						${freight.fwPrice/100}
+					</div>
+				</td>
+				<td class="showcontent">
+					<div class="tdcell nextWeight" data-num="${freight.addedWeight}">
+						${formatUtils.format(freight.addedWeight)}
+					</div>
+				</td>
+				<td class="showcontent">
+					<div class="tdcell nextPrice" data-num="${freight.awPrice}">
+						${freight.awPrice/100}
+					</div>
+				</td>
+				<td class="result">
+					<div class="tdcell totalPrice">
+						0
+					</div>
+				</td>
+			</tr>
+			#{/list}
+		</tbody>
+	</table>
+
+#{/if}
+#{else}
+	<h3 class="mb10" style="line-height:14px;color:#444;font-size:14px;">
+		运费价格表
+	</h3>
+	<table class="tbl_type01 move tbHoverable">
+		<thead>
+			<tr>
+				<th class="width240">
+					<div class="thcell">地区</div>
+				</th>
+				<th class="showcontent">
+					<div class="thcell">价格(元)</div>
+				</th>
+				
+			</tr>
+		</thead>
+		<tbody>
+			#{list items:freightTemp.freights, as : 'freight'}
+			<tr>
+				<td class="width240">
+					<div class="tdcell">
+						<div class="province">
+							#{list items:freight.provinces, as : 'provinceId'}
+								
+								#{if provinceId_index==1}
+									${regionMap?.get(provinceId)?regionMap.get(provinceId):""}
+								#{/if}
+								#{else}
+									${regionMap?.get(provinceId)?","+regionMap.get(provinceId):""}
+								#{/else}
+							#{/list}
+						</div>
+					</div>
+				</td>
+				<td class="showcontent">
+					<div class="tdcell firstWeight" data-num="${freight.firstWeight}">
+						${freight.price/100}
+					</div>
+				</td>
+			</tr>
+			#{/list}
+		</tbody>
+	</table>
+#{/else}
+#{/if}
+</div>
+#{set 'moreToolScripts'}
+<script type="text/javascript" src="/public/javascripts/bizComponents/tool.js"></script>
+<script type="text/javascript">App.module = 'freightCount';</script>
+#{/set}

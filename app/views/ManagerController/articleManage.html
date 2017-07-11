@@ -1,0 +1,67 @@
+#{extends './manage-frame.html' /}
+#{set title:'文章管理' /}
+<div class="cont_mypage container_body" style="margin-top:30px" id="container">
+	<div class="container_contents container_myMain_contents">
+		<div style="margin-top:0px;">
+			<div class="column_left">
+				<h3>文章管理
+					<a href="javascript:0" class="btnStd btnMedium mr6" id="cateArticleBtn" style="float:right">添加文章</a>
+				</h3>
+			</div>
+		</div>
+		#{authenticityToken/}
+		<input type="hidden" id="hidBrandId" value=""/> 
+		<div class="tbl_wrap_type02 pt20" id="articleContainer">
+			<table summary="" class="tbl_type01 tbHoverable">
+				<thead>
+					<tr>
+						<th class="thcellId">
+							<div class="thcell">ID</div>
+						</th>
+						<th>
+							<div class="thcell">类型</div>
+						</th>
+						<th>
+							<div class="thcell">标题</div>
+						</th>
+						<th>
+							<div class="thcell">操作</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+			<div class="pagin-btm clearFix">
+				<div class="pagination"></div>
+			</div>
+			<div class="popWrapper" style="display: none;" id="tr_loading_mask">
+				<img class="tr_juhua" src="@{'/public/images/pre_loading.gif'}" />
+			</div>
+		</div>
+	</div>
+</div>
+<textarea class="muban" id="articleTemp" style="display:none">
+	{{#results}}
+	<tr mid="{{id}}">
+		<td class="thcellId">
+			<div class="tdcell" style="text-align: center">{{id}}</div>
+		</td>
+		<td>
+			<div class="tdcell">{{typeName}}</div>
+		</td>
+		<td>
+			<div class="tdcell"><a href="/help/{{id}}" target="_blank">{{title}}</a></div>
+		</td>
+		<td>
+			<div class="tdcell">
+				<a href="/sys/article/edit?id={{id}}" class="btnStd btnSmall editbtn">编辑</a>
+				<a href="#" class="btnStd btnSmall delbtn">删除</a>
+			</div>
+		</td>
+	</tr>
+	{{/results}}
+</textarea>
+#{set 'moreManaScripts'}
+<script type="text/javascript" src="/public/javascripts/bizComponents/manage/articleManage.js"></script>
+<script type="text/javascript">APP.QnDomain = '${upload_domain}';App.module = 'articleManage';</script>
+#{/set}

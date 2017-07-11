@@ -1,0 +1,39 @@
+#{extends 'main.html' /}
+#{set 'moreStyles'}
+<link href="@{'/public/stylesheets/CSCenter.css'}" rel="stylesheet" type="text/css" />
+<link href="@{'/public/stylesheets/Commons.css'}" rel="stylesheet" type="text/css" />
+<link href="@{'/public/stylesheets/layout_v3.css'}" rel="stylesheet" type="text/css" />
+<link href="@{'/public/stylesheets/mypage.css'}" rel="stylesheet" type="text/css" />
+<link href="@{'/public/stylesheets/mypageleft_v3.css'}" rel="stylesheet" type="text/css" />
+#{get 'moreToolStyles' /}
+#{/set}
+<div class="container">
+	<div style="margin:0 auto;width:1100px;overflow:hidden">
+		<div id="navigation">
+			<div id="location">
+				<span class="home">工具</span>
+				<span id="detail" style="line-height:20px;"></span>
+			</div>
+		</div>
+		<div id="boriboriCSCenterLeftArea" style="margin-bottom:20px;">
+			<div id="boriboriCSCenterLeftMenu">
+				<div id="boriboriCSMenus" style="text-align:left;">
+					<div class="boriboriCSMenusTitle" style="color:#444;font-size:14px;font-weight:bold">工具</div>
+					<div class="boriboriCSMenusContent">
+						<a href="/help/5" class="navLink" module="freightCount">运费计算</a>
+					</div>
+				</div>
+			</div>
+			<a>
+				<img src="/public/images/img/cs_center_tel.png" title="联系电话" alt="联系电话" />
+			</a>
+		</div>
+		#{doLayout /}
+
+	</div>
+</div>
+#{set 'moreScripts'}
+<script type="text/javascript" src="/public/javascripts/frame.js"></script>
+
+#{get 'moreToolScripts' /}
+#{/set}

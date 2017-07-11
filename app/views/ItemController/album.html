@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<title>${albumName?albumName:"专辑"}</title>
+	<meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/common/reset.css'}" />
+  <link rel="shortcut icon" href="/public/images/favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/album.css'}" />
+	<script type="text/javascript" src="@{'/public/javascripts/jquery.1.8.3.min.js'}"></script>
+</head>
+<body class="zh_CN">
+<div class="h-view-wrap">
+	<div class="h-view handsontable htRowHeaders htColumnHeaders" id="ht_1a84e31effd7a403" style="height: 340px;">
+		<div class="ht_master handsontable" style="position: relative;">
+			<div class="wtHolder" style="position: relative; width: 1366px; height: 340px;">
+				<div class="wtHider" style="width: 1850px; height: 4223px;">
+					<div class="wtSpreader" style="position: relative; top: 0px; left: 0px;">
+						<table class="htCore">
+							<colgroup>
+								<col class="rowHeader">
+								<col style="width: 100px;">
+								<col style="width: 100px;">
+								<col style="width: 100px;">
+								<col style="width: 100px;">
+								<col style="width: 100px;">
+								<col style="width: 100px;">
+								<col style="width: 100px;">
+								<col style="width: 100px;">
+								<col style="width: 100px;">
+								<col style="width: 100px;">
+								<col style="width: 100px;">
+								<col style="width: 100px;">
+								<col style="width: 100px;">
+								<col style="width: 100px;">
+								<col style="width: 100px;">
+								<col style="width: 100px;">
+								<col style="width: 100px;">
+								<col style="width: 100px;">
+							</colgroup>
+							<thead>
+								<tr>
+									<th class="">
+										<div class="relative">
+											<span class="colHeader cornerHeader"></span>
+										</div>
+									</th>
+									<th class="">
+										<div class="relative">
+											<span class="colHeader">品牌</span>
+										</div>
+									</th>
+									<th class="">
+										<div class="relative">
+											<span class="colHeader">图片</span>
+										</div>
+									</th>
+									<th class="">
+										<div class="relative">
+											<span class="colHeader">产品名称</span>
+										</div>
+									</th>
+									<th class="">
+										<div class="relative">
+											<span class="colHeader">规格</span>
+										</div>
+									</th>
+									<th class="">
+										<div class="relative">
+											<span class="colHeader">零售价</span>
+										</div>
+									</th>
+									<th class="">
+										<div class="relative">
+											<span class="colHeader">供货价</span>
+										</div>
+									</th>
+									<th class="">
+										<div class="relative">
+											<span class="colHeader">利润率</span>
+										</div>
+									</th>
+									<th class="">
+										<div class="relative">
+											<span class="colHeader">H</span>
+										</div>
+									</th>
+									<th class="">
+										<div class="relative">
+											<span class="colHeader">I</span>
+										</div>
+									</th>
+									<th class="">
+										<div class="relative">
+											<span class="colHeader">J</span>
+										</div>
+									</th>
+									<th class="">
+										<div class="relative">
+											<span class="colHeader">K</span>
+										</div>
+									</th>
+									<th class="">
+										<div class="relative">
+											<span class="colHeader">L</span>
+										</div>
+									</th>
+									<th class="">
+										<div class="relative">
+											<span class="colHeader">M</span>
+										</div>
+									</th>
+									<th class="">
+										<div class="relative">
+											<span class="colHeader">N</span>
+										</div>
+									</th>
+									<th class="">
+										<div class="relative">
+											<span class="colHeader">O</span>
+										</div>
+									</th>
+									<th class="">
+										<div class="relative">
+											<span class="colHeader">P</span>
+										</div>
+									</th>
+									<th class="">
+										<div class="relative">
+											<span class="colHeader">Q</span>
+										</div>
+									</th>
+									<th class="">
+										<div class="relative">
+											<span class="colHeader">R</span>
+										</div>
+									</th>
+								</tr>
+							</thead>
+							<tbody id="album_item_list">
+								#{if albumItems}
+								#{list items:albumItems, as : "albumItem"}
+									<tr>
+										<th class="">
+											<div class="relative">
+												<span class="rowHeader">${albumItem_index}</span>
+											</div>
+										</th>
+										<td class="s-cell" style="">${albumItem?.brand?.name}</td>
+										<td class="s-cell" style=""><a target="_blank" href="/item/${albumItem.itemId}"><img src="${albumItem.picUrl+'?imageView2/1/w/50/h/50/q/100'}"></a></td>
+										<td class="s-cell" style="">${albumItem.title}</td>
+										<td class="s-cell" title="${albumItem.sku}" style="max-width:380px;overflow:hidden;text-overflow: ellipsis;">${albumItem.sku}</td>
+										<td class="s-cell" style="">${albumItem.retailPrice/100}</td>
+										<td class="s-cell" style="">${albumItem.supplyPrice/100}</td>
+										<td class="s-cell" style="">${new java.text.DecimalFormat("0").format(albumItem?.profit*100)}%</td>
+										<td class="s-cell" style=""></td>
+										<td class="s-cell" style=""></td>
+										<td class="s-cell" style=""></td>
+										<td class="s-cell" style=""></td>
+										<td class="s-cell" style=""></td>
+										<td class="s-cell" style=""></td>
+										<td class="s-cell" style=""></td>
+										<td class="s-cell" style=""></td>
+										<td class="s-cell" style=""></td>
+										<td class="s-cell" style=""></td>
+										<td class="s-cell" style=""></td>
+									</tr>
+								#{/list}
+								#{/if}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- <textarea class="muban" id="albumItemsTemp" style="display:none">
+	{{#albumItems}}
+	<tr>
+		<th class="">
+			<div class="relative">
+				<span class="rowHeader">1</span>
+			</div>
+		</th>
+		<td class="s-cell" style=""></td>
+		<td class="s-cell" style=""><img src="{{picUrl}}"></td>
+		<td class="s-cell" style="">{{title}}</td>
+		<td class="s-cell" style=""></td>
+		<td class="s-cell" style=""></td>
+		<td class="s-cell" style="">{{price}}</td>
+		<td class="s-cell" style="">{{profitStr}}</td>
+		<td class="s-cell" style=""></td>
+		<td class="s-cell" style=""></td>
+		<td class="s-cell" style=""></td>
+		<td class="s-cell" style=""></td>
+		<td class="s-cell" style=""></td>
+		<td class="s-cell" style=""></td>
+		<td class="s-cell" style=""></td>
+		<td class="s-cell" style=""></td>
+		<td class="s-cell" style=""></td>
+		<td class="s-cell" style=""></td>
+		<td class="s-cell" style=""></td>
+	</tr>
+	{{/albumItems}}
+</textarea> -->
+</body>
+<script type="text/javascript"  src="@{'/public/javascripts/bizComponents/album.js'}"></script>
+</html>

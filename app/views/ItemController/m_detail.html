@@ -1,0 +1,195 @@
+#{extends 'mobile-frame.html' /}
+#{set title:'商品详情'/}
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/mobile/m_item_detail.css'}" />
+<link rel="stylesheet" href="@{'/public/stylesheets/swiper.min.css'}">
+#{/set}
+<a name="top"></a>
+<div class="banner">
+	<div class="banner_slider swiper-container">
+		<div class="swiper-wrapper">
+			#{if item}
+			#{list items:item.skus,as:'sku'}
+			<div class="item swiper-slide">
+				<img src="${sku.img}" />
+			</div>
+			#{/list}
+			#{/if}
+		</div>
+		<div class="swiper-pagination"></div>
+	</div>
+</div>
+<div class="bigbanner">
+	<div class="banners"></div>
+</div>
+<div class="titleBlock unselect">
+	<p class="titleDetail">${item?.title}</p>
+</div>
+<div class="priceBlock unselect">
+	<div id="priceTypeSwitcher">
+		#{if item?.priceRangeUse}
+		<div class="priceTypeItem title_o active">
+			<span>批发价格</span>
+		</div>
+		#{/if}
+		#{if item?.distPriceUse}
+		<div class="priceTypeItem title_t ${!item?.priceRangeUse?'active':''}">
+			<span>一件代发价格</span>
+		</div>
+		#{/if}
+	</div>
+	<input type="hidden" value="more" id="hidType"/>
+
+	<!-- 批发价格区间显示 -->
+	#{if item?.priceRangeUse}
+	<div class="price_container_o">
+		#{list items:item.priceRanges,as:'priceRange'}
+		<div class="price_item" data-range="${priceRange.range}" data-price="${priceRange.price}">
+			<div class="num">
+				${priceRange.range}
+				#{if item.priceRanges[priceRange_index] }
+					- ${item.priceRanges[priceRange_index].range}
+				#{/if}
+				${item?.unit?item.unit:'件'}
+				#{else}
+					- 以上
+				#{/else}
+						
+			</div>
+			<div class="price">
+				<span>${priceRange.price/100}</span>
+			</div>
+		</div>
+		#{/list}
+	</div>
+	#{/if}
+	#{if item?.distPriceUse}
+	<div class="price_container_t" style="${item?.priceRangeUse&&item?.distPriceUse?'display:none':''}">
+
+		<p class="price_t">
+			#{if albumItem}
+				${albumItem.price/100}
+			#{/if}
+			#{else}
+				${item?.distPrice/100}
+			#{/else}
+		</p>
+
+	</div>
+	#{/if}
+</div>
+<div class="typeBlock unselect">
+	<h2>规格</h2>
+	<p class="chooseColor">
+		已选择：
+		<span id="colorsel" style="color: #F4C301;">${item?.skus?.size()>0?item.skus.get(0).color:''}</span>
+	</p>
+	<ul>
+		#{if item}
+		#{list items:item.skus,as:'sku'}
+		<li>
+			<div ${sku_isFirst?"class='active'":""}>
+				<img src="${sku.img}" data-color="${sku.color}" />
+			</div>
+		</li>
+		#{/list}
+		#{/if}
+	</ul>
+	<h2>数量</h2>
+	<div class="fr numberContrl">
+		<div class="numbtn" style="">
+			<div class="down" id="minus">-</div>
+			<div id="qnty">
+				<input type="text" value="0" maxlength="4"/></div>
+			<div class="up" id="plus">+</div>
+		</div>
+		<span class="totalPrice">
+			<em class="priceContainer">0</em>
+		</span>
+
+	</div>
+	<p class="range_error"></p>
+</div>
+<div class="proposal unselect">
+	<p class="proposalPrice">
+		<h2>
+			建议零售价
+			<span style="color:#e4393c;margin-left:.4rem"><em class="rp">${item?.retailPrice/100}</em></span>
+		</h2>
+	</p>
+</div>
+<div class="valueBlock unselect">
+	<h2>商品信息</h2>
+	<table>
+		<tbody>
+			<tr class="product-attr-item">
+				<td>品牌名称：</td>
+				<td>${brand?.name}</td>
+			</tr>
+			<tr class="product-attr-item">
+				<td>商品名称：</td>
+				<td>${item?.title}</td>
+			</tr>
+			<tr class="product-attr-item">
+				<td>产地：</td>
+				<td>${item?.origin}</td>
+			</tr>
+			#{if item}
+				#{list items:item.properties,as:'propertie'}
+			<tr class="product-attr-item">
+				<td>${propertie.key}：</td>
+				<td>${propertie.value}</td>
+			</tr>
+			#{/list}
+			#{/if}
+		</tbody>
+	</table>
+</div>
+<div class="brandBlock unselect">
+	<h2>品牌介绍</h2>
+	<div class="brandDetail">${item?.brand?.descption}</div>
+</div>
+<div class="proBlock">
+	<h2>商品详情</h2>
+	<div class="proDetail">${item?.mobileDetail?.raw()}</div>
+</div>
+#{if false}
+<div class="fixed-bottom">
+	<div class="shoppingcar ui-border-t empty animate unselect" id="J-shoppingcar">
+		<div class="cart-box">
+			<a href="javascript:void(0)">
+				<div class="count-of-car">
+					<span class="count J-count">0</span> <i class="iconfont">&#xe621;</i>
+				</div>
+			</a>
+		</div>
+		<div class="submit-box J-submit-box">
+			<a class="btn btn-large btn-purple J-submit-box-btn ">加入购物车</a>
+		</div>
+		<div class="animate-body"></div>
+	</div>
+</div>
+#{/if}
+<a href="#top" class="u-backtop"> <i class="iconfont">&#xe611;</i>
+</a>
+<div class="mask"></div>
+#{set 'moreScripts'}
+<script type="text/javascript" src="@{'/public/javascripts/swiper.min.js'}"></script>
+<script src="@{'/public/javascripts/bizComponents/m_detail.js'}" type="text/javascript"></script>
+#{if wxJssdkConfig}
+<script src="@{'/public/javascripts/wechat/jweixin-1.0.0.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/wechat/wxConfigBase.js'}" type="text/javascript"></script>
+<script type="text/javascript">
+	CDTWXConfig.debug = ${wxJssdkConfig.debug},
+	CDTWXConfig.url = '${wxJssdkConfig.url}',
+	CDTWXConfig.appId = '${wxJssdkConfig.appId}',
+	CDTWXConfig.timestamp = '${wxJssdkConfig.timestamp}',
+	CDTWXConfig.nonceStr = '${wxJssdkConfig.noncestr}',
+	CDTWXConfig.signature = '${wxJssdkConfig.signature}';
+	#{list items:wxJssdkConfig.jsApiList,as :'api'}
+	CDTWXConfig.jsApiList.push('${api}');
+	#{/list}
+</script>
+<script src="@{'/public/javascripts/wechat/wxConfig.js'}" type="text/javascript"></script>
+#{/if}
+#{/set}

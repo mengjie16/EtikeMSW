@@ -1,0 +1,256 @@
+a {
+	text-decoration: none;
+}
+.topWrap{
+	width: 880px;
+}
+.contentBody {
+	width: 880px;
+	margin: 0 auto;
+	background-image: url(/public/images/img/confirmBG.jpg);
+	background-repeat: no-repeat;
+	background-position: 671px top;
+}
+.contentBody .title {
+	width: 855px;
+	border-bottom: 1px solid #eee;
+	padding-left: 25px;
+	padding-top: 38px;
+	position: relative;
+}
+.contentBody .title .keyImg {
+	width: 98px;
+	height: 92px;
+	position: absolute;
+	top: 54px;
+	right: 26px;
+}
+.contentBody .info1 {
+	height: 855px;
+	height: 58px;
+	padding-left: 25px;
+	font-size: 11px;
+	clear: both;
+	line-height: 25px;
+	padding-top: 21px;
+}
+.contentBody .info1 span {
+	font-weight: bold;
+	color: #4e4e4e;
+}
+.contentBody .contentBox {
+	border: 1px solid #e7e7e7;
+	padding: 27px 22px 0;
+	padding-bottom: 36px;
+	margin-bottom: 49px;
+	position: relative;
+}
+.contentBody .contentBox .contentTitle {
+	height: 25px;
+}
+.contentBody .contentBox .info {
+	height: 33px;
+	text-indent: 21px;
+}
+.contentBody .contentBox .userTypes {
+	height: 54px;
+	margin: 0 21px 37px;
+}
+.contentBody .contentBox .userTypes li {
+	width: 388px;
+	height: 54px;
+	margin-right: 7px;
+	float: left;
+}
+.contentBody .contentBox .userTypes li p {
+	width: 100%;
+	height: 100%;
+	line-height: 54px;
+	text-align: center;
+	background-color: #ebebeb;
+	border: 1px solid #ccc;
+}
+.contentBody .contentBox .userTypes li p.active {
+	background-color: #F9C700;
+	border: 1px solid #F9C700;
+	box-shadow: 0px 0px 1px 0px #fff inset;
+	color: #fff;
+}
+.contentBody .contentBox .certificationTypeSubInfos .certificationTypeSubInfo {
+	padding-left: 35px;
+}
+.contentBody .contentBox .certificationTypeSubInfos .certificationTypeSubInfo li {
+	height: 17px;
+	text-indent: -6px;
+	list-style-type: square;
+}
+.contentBody .contentBox .certificationTypeBox {
+	position: relative;
+	border: 2px solid #e7e7e7;
+	padding: 33px 39px;
+	margin: 10px 22px;
+}
+.certificationTypeBox_pop {
+	position: absolute;
+	top: 100px;
+	left:0;
+	margin: 10px 22px;
+}
+.maskbg{
+	width: 810px;
+	height: 500px;
+	background-color: #fff;
+	opacity: .5;
+	display: none;
+	position: absolute;
+	top:0;
+	left: 0;
+	z-index: 5;
+}
+.certificationTypeBox_pop .sendSmsPop{
+	position: absolute;
+	display: none;
+	border: solid 1px #ddd;
+	background-color: #fff;
+	padding: 20px;
+	width: 380px;
+  height: 230px;
+  top: 40px;
+  left: 194px;
+  z-index: 10;
+}
+.sendSmsPop .popCloser{
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	display: block;
+	width: 28px;
+	height: 28px;
+	z-index: 11;
+}
+.certificationTypeBox_pop .okBtn,.certificationTypeBox .okBtn {
+	text-align: center;
+}
+.certificationTypeBox_pop .okBtn a,.certificationTypeBox .okBtn a{
+	display: block;
+	width: 168px;
+	height: 38px;
+	margin: 0 auto;
+}
+.certificationTypeBox_pop .okBtn p,.certificationTypeBox .okBtn p {
+	line-height: 38px;
+	background-color: #D450A6;
+	color: #fff;
+	text-align: center;
+}
+.certificationTypeBox_pop .error span {
+	line-height: 33px;
+}
+.certificationTypeBox .confirmSendSmsBtn a{
+	width: 120px;
+}
+.certificationTypeBox .formLine {
+	margin: 15px 0;
+}
+.certificationTypeBox .formLine label {
+	display: inline-block;
+	width: 190px;
+	text-align: right;
+	line-height: 33px;
+	margin-right: 8px;
+}
+.canal {
+	display: inline-block;
+	width: 400px;
+}
+.certificationTypeBox .formLine .canal label {
+	text-align: left;
+	display: inline;
+}
+.certificationTypeBox .formLine .canal>div {
+	line-height: 31px;
+}
+.certificationTypeBox .formLine select
+{
+	min-width: 100px;
+	position: relative;
+	top:6px;
+  border: 1px solid #999;
+  font-size: 11px;
+  color: #999;
+  height: 22px;
+}
+.stepHeaderTip{
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 10px;
+	margin-bottom: 40px;
+}
+.btnSendPhoneCaptcha{
+	display:inline-block;
+	width:100px;
+	height:34px;
+	line-height:34px;
+	text-align:center;
+	color:#fff;background-color:#bdbdbd;text-decoration:none;
+	font-size: 12px;
+}
+.btnSendPhoneCaptcha:hover {
+	color:#fff;
+}
+.btnSendPhoneCaptcha.active{
+	color:#fff;
+	background-color:#D450A6;
+}
+#frmEditSup .inputMultiText {
+	line-height: 20px
+}
+.validateLine {
+	display: inline-block;
+	line-height: 30px;
+	margin-left: 10px;
+}
+#captchaForm .validateLine {
+	display: block;
+	text-align: center;
+	height: 33px;
+}
+.registDown {
+	overflow:hidden;
+	padding: 130px 0 10px;
+}
+.registDown .leftside,.registDown .rightside {
+	width: 40%;
+	float: left;
+}
+.registDown .leftside i {
+	float: right;
+	font-size: 50px;
+	color: #4BB952;
+	display: inline-block;
+	margin-top: 5px;
+}
+.registDown .rightside p{
+	margin-left: 10px;
+}
+.welldown {
+	font-size: 18px;
+	color: #555;
+	margin-bottom: 10px;
+}
+.line_time {
+	color: #ffa200;
+	text-decoration: underline;
+	margin-right:3px;
+}
+.country {
+	width: 140px;
+}
+.province,.city,.region {
+	width: 120px;
+}
+.certificationTypeBox .error span {
+	line-height: 33px;
+}
+.error span,#frmEditPass .error span {
+	line-height: 24px;
+}

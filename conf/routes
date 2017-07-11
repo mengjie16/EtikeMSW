@@ -1,0 +1,305 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# 应用管理相关接口
+GET     /                                       Application.indexList2
+GET     /index                                  Application.indexList2
+GET     /regist                                 Application.regist
+POST    /retRegist                              Application.doRegist
+GET     /regist/success                         Application.registSuccess
+
+GET     /pwd/retrieve/check                     Application.retrievePass(step:'1')
+GET     /pwd/retrieve/action                    Application.retrievePass(step:'2')
+POST    /pwd/submit_retrieve                    Application.doRetrievePass
+GET     /pwd/retrieve/finished                  Application.retrievePass(step:'3')
+
+
+POST    /regist/sendSms                         Application.sendRegistSms
+POST    /uservalid/sendSms                      Application.sendUserValidSms
+POST    /smscode/check                          Application.checkSms
+GET     /captcha                                Application.captcha
+POST    /phone/check                            Application.checkPhone
+
+GET     /error                                  Application.error2
+
+
+# h5应用接口
+GET     /h5/wx/oauth                            Application.WxAuth
+GET     /h5/wx/role/check                       Application.hasAuthRole
+
+# 支付中心
+POST    /alipay/notify                          PayCenter.payNotify
+GET     /alipay/return                          PayCenter.payReturn
+POST    /alipay/notify/error                    PayCenter.errorNotify
+ 
+
+#---------------------------------------------------------------------------------------------------------------
+
+# 管理员相关页面
+GET     /sys/enter                              ManagerController.login
+POST    /sys/doLogin                            ManagerController.doLogin
+GET     /sys/brand                              ManagerController.brandManage
+GET     /sys/cate                               ManagerController.cateManage
+GET     /sys/user/manage                        ManagerController.userManage
+GET     /sys/supplier/manage                    ManagerController.supplierManage
+GET     /sys/retailer/manage                    ManagerController.retailerManage
+GET     /sys/article                            ManagerController.articleManage
+GET     /sys/home/manage                        ManagerController.homeManage
+GET     /sys/activity/manage                    ManagerController.activityManage
+GET     /sys/article/edit                       ManagerController.articleEdit
+GET     /sys/article/wechat                     ManagerController.chatManage
+GET     /sys/search/show                        ManagerController.searchShowCase
+GET     /sys/freight/manage                     ManagerController.freightManage
+GET     /sys/order/list                         ManagerController.orderList
+GET     /sys/trade/order                        ManagerController.tradeOrders
+GET     /sys/order/excel                        ManagerController.exportOrderExcel
+
+# 管理员商品管理
+GET     /sys/item/edit                          ManagerController.itemManaEdit
+GET     /sys/item/list                          ManagerController.itemList
+GET     /sys/item/query                         ManagerController.querySupplierItemByVo
+POST    /sys/item/dellist                       ManagerController.removeItems
+#    商品上下架
+POST    /sys/item/shelve                        ManagerController.shelveItem
+POST    /sys/item/unshelve                      ManagerController.unshelveItem
+
+POST    /sys/item/save                          ManagerController.saveItem
+GET     /sys/item/sendLocationlist              ManagerController.findSendLocationTempList
+POST    /sys/item/sendlocationConfirm           ManagerController.confirmSendLocationTemp
+GET     /sys/item/starquery                     ManagerController.queryStarItemSetting
+POST    /sys/item/starsave                      ManagerController.saveStarItemSetting
+
+# 专辑管理
+GET     /sys/album/manage                       ManagerController.albumManage
+GET     /sys/album/query/list                   ManagerController.queryAlbumList
+GET     /sys/album/query                        ManagerController.queryAlbumById
+GET     /sys/album/item/query                   ManagerController.queryAlbumItemsByAlbumId
+POST    /sys/album/delete                       ManagerController.deleteAlbumById
+POST    /sys/album/item/delete                  ManagerController.deleteAlbumItemByAlbumId
+POST    /sys/album/create                       ManagerController.createAlbum
+POST    /sys/album/modify                       ManagerController.updateAlbum
+POST    /sys/album/item/add                     ManagerController.addAlbumItem
+
+# 品牌管理
+GET     /sys/brand/delone                       ManagerController.delBrandWithId
+POST    /sys/brand/save                         ManagerController.brandSave
+POST    /sys/cate/modify                        ManagerController.changeCateInfo
+POST    /sys/cate/delone                        ManagerController.cateDelete
+
+# 注册用户管理相关接口
+GET     /sys/user/query                         ManagerController.queryUserWithVo
+POST    /sys/user/resetpass                     ManagerController.resetUserPassword
+POST    /sys/user/save                          ManagerController.saveUserInfo
+POST    /sys/user/delone                        ManagerController.removeUser
+POST    /sys/user/authone                       ManagerController.userAuthOne
+GET     /sys/user/smsCode/query                 ManagerController.queryUserSmsValidCode
+
+# 供应商管理相关接口
+GET     /sys/supplier/query                     ManagerController.querySupplierWithVo
+POST    /sys/supplier/save                      ManagerController.saveSupplierInfo
+POST    /sys/supplier/remove                    ManagerController.removeSupplier
+
+# 零售商管理相关接口
+GET     /sys/retailer/query                     ManagerController.queryRetailerWithVo
+POST    /sys/retailer/save                      ManagerController.saveRetailerInfo
+POST    /sys/retailer/remove                    ManagerController.removeRetailer
+
+POST   	/sys/user/mock                          ManagerController.mockUser
+
+# 文章管理
+POST    /sys/article/delone                     ManagerController.removeArticle
+POST    /sys/article/save                       ManagerController.saveArticle
+
+# 主页设置
+POST    /sys/homePageSetting/modify             ManagerController.confirmHomePageSetting
+GET     /sys/homePageSetting/query              ManagerController.queryHomePageSettingById
+GET     /sys/homePageSetting/list               ManagerController.queryHomePageSettingList
+POST    /sys/homePageSetting/delete             ManagerController.deleteHomePageSetting
+POST    /sys/homePageSetting/create             ManagerController.createHomePageSetting
+POST    /sys/homePageSetting/deleteWId          ManagerController.deleteHomePageSettingById
+POST    /sys/homePageSetting/useWId             ManagerController.useHomePageSetting
+GET     /sys/homePageSetting/build              ManagerController.queryBuildHomePageSetting
+
+
+GET     /sys/item/{<[0-9]+>id}                  ManagerController.itemData
+GET     /sys/item/batch                         ManagerController.itemDataBatch
+
+# 活动配置相关
+GET     /sys/activity/edit                      ManagerController.activityEdit
+GET     /sys/activity/edit/{id}                 ManagerController.activityEdit
+GET     /sys/activity/query                     ManagerController.queryActivitySetting
+POST    /sys/activity/create                    ManagerController.createActivityPageSetting
+GET     /sys/activity/list                      ManagerController.queryActivityList
+POST    /sys/activity/mouble/modify             ManagerController.confirmActivitySetting
+POST    /sys/activity/use                       ManagerController.useActivityPageSetting
+POST    /sys/activity/delete                    ManagerController.deleteActivityPageSetting
+POST    /sys/activity/delmodle                  ManagerController.deleteActivityPageSettingMoudle
+
+# H5活动配置相关
+GET     /sys/h5/activity/list                   ManagerController.queryH5ActivityList
+POST    /sys/h5/activity/create                 ManagerController.createH5ActivityPageSetting
+GET     /sys/h5/activity/query                  ManagerController.queryH5ActivitySetting
+POST    /sys/h5/activity/delete                 ManagerController.deleteH5ActivityPageSetting
+GET     /sys/h5/activity/edit/{id}              ManagerController.h5activityEdit
+POST    /sys/h5/activity/use                    ManagerController.useH5ActivityPageSetting
+
+# 授权管理
+POST    /sys/moudble/auth/save                  ManagerController.saveAuthUserToMoudle
+GET     /sys/moudble/auth/query                 ManagerController.queryMoudleAuth
+
+# 交易管理
+GET	 	/sys/trade/query                        ManagerController.queryTradeByVo
+GET     /sys/trade/order                        ManagerController.tradeOrders
+POST    /sys/trade/order/save                   ManagerController.saveTradeOrders
+POST    /sys/trade/fee/save                     ManagerController.modifyTradePayment
+
+# 微信用户管理
+GET     /sys/wechat/user/query                  ManagerController.queryWechatUser
+POST    /sys/wechat/user/delete                 ManagerController.deleteWechatUser
+GET     /sys/wechat/user/queryOne               ManagerController.queryWechatUserById
+
+# 运费模板管理
+GET		/sys/freight/query                      ManagerController.queryFreightTemp
+POST    /sys/freighttemp/save                   ManagerController.saveFreightTemp
+POST    /sys/freighttemp/delete                 ManagerController.deleteFreightTemp
+GET     /sys/freight/edit/{<[0-9]+>id}          ManagerController.freightEdit
+
+#---------------------------------------------------------------------------------------------------------------
+#GET    /user                                   UserCenter.index
+GET     /user/home                              UserCenter.home
+GET     /login                                  UserCenter.login
+POST    /doLogin                                UserCenter.doLogin
+POST    /user/quick_login                       UserCenter.quickLogin
+GET     /user/login/out                         UserCenter.loginOut
+POST    /user/info/edit                         UserCenter.saveBaseInfo
+POST    /user/upload/avatar                     UserCenter.uploadAvatar
+GET     /user/cateList                          UserCenter.cateList
+GET     /user/edit/pass                         UserCenter.editPass
+POST    /user/pass/modify                       UserCenter.modifyPass
+
+# 供应商
+GET     /supplier/edit                          SupplierController.edit
+POST    /supplier/modify                        SupplierController.infoEdit
+GET     /supplier/item/edit                     SupplierController.itemEdit    
+POST    /supplier/item/save                     SupplierController.itemSave    
+GET     /supplier/item/list                     SupplierController.itemList    
+GET     /supplier/item/query                    SupplierController.querySupplierItemByVo
+GET     /supplier/freight                       SupplierController.freight
+POST    /supplier/item/hidelist                 SupplierController.itemBatchHide
+POST    /supplier/item/dellist                  SupplierController.itemBatchDelete    
+POST    /supplier/item/online                   SupplierController.itemBatchOnline    
+POST    /supplier/sendlocation/confirm          SupplierController.confirmSendLocationTemp
+GET     /supplier/sendLocation/list             SupplierController.findSendLocationTempList
+POST    /supplier/freighttemp/save              SupplierController.saveFreightTemp
+POST    /supplier/freighttemp/delete            SupplierController.deleteFreightTemp
+GET     /supplier/freighttemp/query             SupplierController.querySupplierFreightTemp
+
+
+# 零售商
+GET     /retailer/edit                          RetailerController.edit
+GET     /retailer/finance                       RetailerController.finance
+GET     /retailer/pay                           RetailerController.payFor
+GET     /retailer/order/list                    RetailerController.orderList
+GET     /retailer/trade/order                   RetailerController.tradeOrders
+GET     /retailer/order/stepOne                 RetailerController.orderStepOne
+GET     /retailer/order/stepTwo                 RetailerController.orderStepTwo
+GET     /retailer/order/stepThree               RetailerController.orderStepThree
+GET     /retailer/order/stepFour                RetailerController.orderStepFour
+GET     /retailer/order/manual                  RetailerController.manualOrder
+POST    /retailer/fee/pay                       RetailerController.payFee
+GET		/retailer/cart/query                    RetailerController.cart
+POST	/retailer/cart/remove                   RetailerController.cartRemove
+GET		/retailer/order/edit                    RetailerController.orderStepOne
+POST	/retailer/order/upload                  RetailerController.parseOrderFromExcel
+POST	/retailer/ordervo/parse                 RetailerController.parseOrderVo
+POST	/retailer/ordervo/generate              RetailerController.generateOrderVo
+POST	/retailer/order/generate                RetailerController.generateOrder
+GET	 	/retailer/trade/query                   RetailerController.queryTradeByVo
+POST	/retailer/trade/cancel                  RetailerController.cancelTrade
+GET	 	/retailer/order/excel                   RetailerController.exportOrderExcel
+POST	/retailer/order/usergenerate            RetailerController.userGenerateOrder
+
+# 用户公共路由
+GET     /user/storeList                         UserCenter.storeList
+GET     /user/markList                          UserCenter.markList
+GET     /user/authorize                         UserCenter.authorize
+
+GET     /user/order/list                        UserCenter.orderList
+GET     /user/cart                              UserCenter.cart
+GET     /user/cart/stepTwo                      UserCenter.stepTwo
+
+#---------------------------------------------------------------------------------------------------------------
+
+# 商品列表相关
+GET     /search                                 ListController.search
+GET     /list/best                              ListController.best
+
+# 供应商店铺
+GET     /shop/home                              ShopController.home
+
+# 宝贝/类目相关接口
+GET     /item/{<[0-9]+>id}                      ItemController.detail
+GET     /h5/item/{<[0-9]+>id}                   ItemController.m_detail
+GET     /cate/search                            ItemController.itemCateFindByKeyWord
+GET     /item/query                             ItemController.queryItemByVo
+GET     /h5/album/{<[0-9]+>id}                  ItemController.m_album
+GET     /h5/album/item/query                    ItemController.queryAlbumItemsByAlbumId
+GET     /album/{<[0-9]+>id}                     ItemController.album
+
+#---------------------------------------------------------------------------------------------------------------
+
+# month
+GET     /event/month                            EventController.month
+GET     /event/activity                         EventController.activity
+GET     /h5/event/activity/detail               EventController.queryH5ActivitySettingDetail
+GET     /event/report                           EventController.report
+
+
+#---------------------------------------------------------------------------------------------------------------
+
+# 会员指导
+GET     /member/guide                           MemberController.guide
+
+
+GET     /help/{<[0-9]+>id}                      HelpController.index
+GET     /help                                   HelpController.index
+
+
+# 工具
+GET     /tools/freight/calc/{<[0-9a-zA-Z]+>tempId}   ToolController.freightCount
+GET     /tools/consign                          ToolController.consignTrade
+
+
+# 微信可信域名认证文件
+GET     /MP_verify_6kQmaG4PbKiN0Yae.txt         staticFile:/public/MP_verify_6kQmaG4PbKiN0Yae.txt
+
+#---------------------------------------------------------------------------------------------------------------
+
+#    id生成接口
+GET     /dpl/generateOid                        DataPlant.generateOid
+
+#     用户相关的公用接口
+*       /dpl/upload/token                       DataPlant.fetchUploadToken
+GET     /dpl/region                             DataPlant.region
+GET     /dpl/province                           DataPlant.province
+GET     /dpl/origin/search                      DataPlant.queryOriginByKeyword
+GET     /dpl/brand/search                       DataPlant.brandByKeyWord
+GET     /dpl/brand/list                         DataPlant.queryBrandByVo
+GET     /dpl/brand/all                          DataPlant.queryBrandList
+GET     /dpl/cate/list                          DataPlant.queryItemCateByVo
+GET     /dpl/cate/all                           DataPlant.queryAllItemCate
+GET     /dpl/cate/level/list                    DataPlant.queryAllItemCateByLevel
+GET     /dpl/article/query                      DataPlant.articleQuery
+GET     /dpl/item/query                         DataPlant.queryItemById
+POST    /dpl/shippfee/calc                      DataPlant.calcFreightTempFee
+
+
+# Ignore favicon requests
+GET     /favicon.ico                            404
+
+GET     /expressList                            staticFile:/public/html/express.html
+
+# Map static resources from the /app/public folder to the /public path
+GET     /public/                                staticDir:public
+

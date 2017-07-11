@@ -1,0 +1,197 @@
+#{extends 'main.html' /}
+#{set title: (vo?.kw?vo.kw+"_搜索":"全部商品") /}
+#{set setGlobal:false /}
+#{set 'moreStyles'}
+<link href="@{'/public/stylesheets/layout_v3.css'}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/common/list.pagination.css'}"  />
+<link href="@{'/public/stylesheets/search-list.css'}" rel="stylesheet" type="text/css">
+#{/set}
+<div class="contentWrap">
+	<div class="contentCenter itemContentCenter" style="margin-top:15px">
+
+		<div id="MainItem2012">
+			<div class="item_thum bg">
+				<h3>
+					<img src="/public/images/title_best.png" alt="" />
+				</h3>
+				<ul>
+					#{if starItem?.items}
+					#{list items:starItem.items, as : 'starItem'}
+					#{if starItem}
+					<li>
+						<div class="productImg">
+							<a href="/item/${starItem?.id}" target="_blank">
+								<img class="lazyImg" src="public/images/grey.gif"  data-original="${starItem?.picUrl+'?imageView2/2/h/183/q/100'}" border="0" alt="${starItem?.title}" title="${starItem?.title}" />
+							</a>
+							<div class="newBtnFunc">
+								<ul class="newBtns">
+									<li class="iconquick"></li>
+									<li class="iconnewWindow"></li>
+								</ul>
+								<div class="newTxt" style="background-position-y: 0px;"></div>
+							</div>
+						</div>
+						<dl>
+							<dt>
+								<a href="/search?brandId=${starItem?.brand?.id}" target="_top" class="lnkBrand">
+									${starItem?.brand?.name}${starItem?.brand?.secondaryName?'/'+starItem?.brand?.secondaryName:''}
+								</a>
+							</dt>
+							<dd class="txt">${starItem?.title}</dd>
+							<dd class="price">
+								<span class="newPrice">${starItem.retailPrice/100}</span>
+							</dd>
+						</dl>
+					</li>
+					#{/if}
+					#{/list}
+				#{/if}
+				</ul>
+			</div>
+			<a name="target_postion"></a>
+			<div class="item_navi">
+				<div class="location">
+					#{if search_result?.totalCount==0}
+					<span style="color:#666;">搜索结果：</span>
+					<span>您还可以看看别的宝贝</span>
+					#{/if}
+					#{else}
+					<span style="color:#666;">共找到</span>
+					<span>${search_result?.totalCount?:0}</span>
+					<span style="color:#666;">个结果</span>
+					#{/else}
+				</div>
+			</div>
+
+			<div class="categorybox" style="padding-top: 0px;">
+				<img src="/public/images/img/item_navi_bg_2.jpg" alt="" style="vertical-align:top;" />
+			</div>
+
+			<ul class="tabcate">
+				#{if search_result?.cates}
+				<li>
+					<h2>类别</h2>
+					<ul id="CategoryList">
+						#{list items:search_result.cates, as : 'cate'}
+						<li>
+							<input type="checkbox" name="CategoryCD" value="${cate.id}" ${search_result?.cates.size()==1&&vo?.cateId>0?'checked':''} />
+							${cate.name}
+							#{if search_result?.totalCount>0}
+							(${cate.count})
+							#{/if}
+						</li>
+						#{/list}
+					</ul>
+				</li>
+				#{/if}
+				#{if search_result?.is_brand==false && search_result?.brands}
+				<li style="background-color:#fafafa;">
+					<h2>品牌</h2>
+					<ul id="BrandList" class="BrandCloseing">
+						#{list items:search_result?.brands,as : 'brand'}
+						<li>
+							<input type="checkbox" name="BrdCD" value="${brand.id}" ${search_result?.brands.size()==1&&vo?.brandId>0?'checked':''} />
+							${brand.name}
+						</li>
+						#{/list}
+					</ul>
+				</li>
+				#{/if}
+				<li>
+					<h2>合作方式</h2>
+					<ul id="Cooperation">
+						#{if vo?.dp_use}
+						<li class="">
+							<input name="FreeDelivery" type="checkbox" id="FreeDelivery" checked="true" />
+							一件代发
+						</li>
+						#{/if}
+						#{elseif vo?.pr_use}
+						<li class="">
+							<input name="SalePst" type="checkbox" id="SalePst" checked="true"/>
+							批发
+						</li>
+						#{/elseif}
+						#{else}
+						<li class="">
+							<input name="FreeDelivery" type="checkbox" id="FreeDelivery"/>
+							一件代发
+						</li>
+						<li class="">
+							<input name="SalePst" type="checkbox" id="SalePst" />
+							批发
+						</li>
+						#{/else}
+					</ul>
+				</li>
+				<!-- <li class="last">
+				<h2>价格</h2>
+				<div style="line-height:26px;margin-top:2px;height:28px;overflow:hidden;" class="floatLeft">
+					<input type="text" value="" class="inputText priceTxt floatLeft" />
+					<span class="floatLeft ml10 mr10">-</span>
+					<input type="text" value="" class="inputText priceTxt floatLeft" />
+				</div>
+			</li>
+			-->
+		</ul>
+		<div class="item_thum" style="min-height:300px">
+			#{if search_result?.totalCount==0}
+			<div id="results_empty" class="item_none">
+				<span style="color:#666">没有找到与</span>
+				"<span>${search_result?.result_empty_desc}</span>"
+				<span style="color:#666">相关的宝贝</span>
+			</div>
+			#{/if}
+			<ul>
+				#{if search_result?.items}
+				#{list items:search_result.items,as : 'item'}
+				<li>
+					<div class="productImg">
+						<a href="/item/${item?.id}" target="_blank">
+							<img class="lazyImg"  src="public/images/grey.gif"  data-original="${item?.picUrl+'?imageView2/2/h/183/q/100'}" border="0" alt="${item.title}" title="${item.title}" />
+						</a>
+						<div class="newBtnFunc">
+							<ul class="newBtns">
+								<li class="iconquick"></li>
+								<li class="iconnewWindow"></li>
+							</ul>
+							<div class="newTxt" style="background-position-y: 0px;"></div>
+						</div>
+					</div>
+					<dl>
+						<dt>
+							<a href="/search?brandId=${item?.brand?.id}" target="_top" class="lnkBrand">
+								${item?.brand?.name}${item?.brand?.secondaryName?'/'+item?.brand?.secondaryName:''}
+							</a>
+						</dt>
+						<dd class="txt">${item?.title}</dd>
+						<dd class="price">
+							<span class="newPrice">${item.retailPrice/100}</span>
+						</dd>
+					</dl>
+				</li>
+				#{/list}
+				#{/if}
+			</ul>
+		</div>
+		<div class="pagin-btm clearFix">
+			<div class="pagination"></div>
+		</div>
+	</div>
+</div>
+</div>
+#{set 'moreScripts'}
+<script type="text/javascript"  src="@{'/public/javascripts/paginator.js'}"></script>
+<script type="text/javascript"  src="@{'/public/javascripts/bizComponents/searchList.js'}"></script>
+<script type="text/javascript"  src="@{'/public/javascripts/src/jquery.lazyload.min.js'}"></script>
+<script type="text/javascript">
+	CDT.currPageNo = ${vo?.pageNo};
+	CDT.pageSize = ${vo?.pageSize};
+	CDT.totalCount = ${search_result?.totalCount};
+	CDT.keyWord ='${vo?.kw}';
+	CDT.brandId = ${vo?.brandId};
+	CDT.cateId = ${vo?.cateId};
+	CDT.dp_use = ${vo?.dp_use};
+	CDT.pr_use = ${vo?.pr_use};
+</script>
+#{/set}

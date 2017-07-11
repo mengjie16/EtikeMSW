@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="models.mappers.BrandMapper">
+	<resultMap id="BaseResultMap" type="models.Brand"></resultMap>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select * from brand b
+		<include refid="where" />
+		order by b.id asc
+	</select>
+	<select id="selectByVo" resultMap="BaseResultMap">
+		select * from brand b
+		<include refid="where" />
+		order by b.id asc
+		limit #{startIndex},
+		#{pageSize}
+	</select>
+	<select id="countByVo" resultType="java.lang.Integer">
+		select count(1) from brand b
+		<include refid="where" />
+	</select>
+	<update id="updateById" parameterType="models.Brand">
+		update brand
+		<set>
+			<if test="name !=null and name !=''">
+				name = #{name},
+			</if>
+			<if test="secondaryName!= null and secondaryName!=''">
+				secondary_name = #{secondaryName},
+			</if>
+			<if test="picUrl!= null and picUrl!=''">
+				pic_url = #{picUrl},
+			</if>
+			<if test="company!= null and company !=''">
+				company = #{company},
+			</if>
+			<if test="holder != null and holder!=''">
+				holder = #{holder},
+			</if>
+			<if test="note != null and note!=''">
+				note = #{note},
+			</if>
+			<if test="descption != null and descption!=''">
+				descption = #{descption}
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	<sql id="where">
+		<where>
+			<if test="name!=null and name!=''">
+				and b.name like '%${name}%'
+			</if>
+			<if test="secondaryName!=null and secondaryName!=''">
+				and b.secondary_name like '%${secondaryName}%'
+			</if>
+			<if test="company!=null and company!=''">
+				and b.company like '%${company}%'
+			</if>
+			<if test="note!=null and note!=''">
+				and b.note like '%${note}%'
+			</if>
+		</where>
+	</sql>
+</mapper>

@@ -1,0 +1,131 @@
+#{extends './manage-frame.html' /}
+#{set title:'活动编辑' /}
+<div class="cont_mypage container_body" style="margin-top:30px" id="container">
+	<div class="container_contents container_myMain_contents">
+		<div style="margin-top:0px;">
+			<div class="column_left">
+				<h3 id="activityTitle">-----</h3>
+			</div>
+		</div>
+		<div class="tbl_wrap_type02 pt20" id="brandContainer">  
+			<div class="bigBanner" id="bigcontainer">
+				<form id="bannerImg">
+					#{authenticityToken/}
+					<input class="inputText" type="hidden" value="add" name="modifyType" />
+					<div class="uploadbimg" id="activityBanner" img-container="bigbanner">
+						<input class="inputText" id="activityBanner" type="hidden" value="" name="activity.bannerImg"/>				
+						 <i class="iconfont mr10">&#xe60b;</i>
+					</div>
+					<div class="bigImg" id="bigbanner"></div>
+				</form>
+			</div>
+			<div class="activityItems">
+			</div>
+			<div class="addactivity"><i class="iconfont mr10">&#xe60b;</i></div>
+			<div class="smallBanner" id="midcontainer">
+				<form id="frmMiddlePoster">
+				#{authenticityToken/}
+				<input class="inputText" type="hidden" value="add" name="modifyType" />
+					<div class="uploadsimg" id="T_smBanner" img-container="smallbanner" style="height:130px;">
+						<input class="inputText" id="shidPicUrl" type="hidden" value="" name="activity.middlePoster" />				
+						 <i class="iconfont mr10">&#xe60b;</i>
+					</div>
+					<div class="smallImg" style="height:130px;" id="smallbanner"></div>
+				</form>
+			</div>
+			<div id="thumImageObjectList" class="item ex_type01">
+			</div>
+			<div class="addList"><i class="iconfont mr10">&#xe60b;</i></div>
+		</div>
+		<div class="popWrapper" style="display: none;" id="tr_loading_mask">
+			<img class="tr_juhua" src="@{'/public/images/pre_loading.gif'}" />
+		</div>
+	</div>
+</div>
+<div class="muban" id="itemsTemp" style="display:none">
+	{{#activityItems}}
+	<div class="cont_dep activityItem">
+		<form class="frmItems">
+			#{authenticityToken/}
+			<input class="inputText" type="hidden" value="{{#modifyType}}{{modifyType}}{{/modifyType}}{{^modifyType}}update{{/modifyType}}" name="modifyType" />
+			<h2>
+				<input type="text" name="items.mainTitle" placeholder="标题1" class="inputText long" value="{{mainTitle}}"/></h2>
+
+			<div class="prdt_set">
+				<div class="prdt_photo">
+					<div class="maskbigImg upload" id="T_adBanner_0" img-container="T_img_0">
+						<input class="inputText" id="T_hidPicUrl_0" type="hidden" value="{{itemImg}}" name="items.itemImg"/> <i class="iconfont mr10">&#xe60b;</i>
+					</div>
+					<div class="loadbigImg" id="T_img_0"><img src="{{itemImg}}"/></div>
+				</div>
+				<div class="prdt_txt">
+					<div class="prdt_txtid">
+						<input type="text" name="items.itemId" placeholder="商品id" class="inputText" value="{{itemId}}"/>	
+						<a class="btn readBtn">读取</a>
+					</div>
+					<div class="prdt_txtid">
+						<input type="text" name="items.subTitle" placeholder="标题2" class="inputText long" value="{{subTitle}}"/>
+					</div>
+					<div class="prdt_txtid">
+						<input type="text" name="items.price" class="inputText short" placeholder="现价" value="{{price}}"/>	
+						<input type="text" name="items.distPrice" class="inputText short" placeholder="折扣价" value="{{distPrice}}"/>
+					</div>
+					<div class="prdt_txa">
+						<textarea placeholder="内容" name="items.content" value="{{content}}">{{content}}</textarea>
+						<div class="controlBtn">
+							<a class="btn btnItemForm">保存</a>
+							<a class="btn delbtn">删除</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	{{/activityItems}}
+</div>
+<textarea class="muban" id="bottomItemsTemp" style="display:none">
+	{{#bottomItems}}
+	<div class="prt_list"> <i class="iconfont mr10 delbtns">&#xe606;</i>
+		<div class="loadlistImg">
+			<img src="{{picUrl}}"/>
+		</div>
+		<a href="">
+			<span class="item_name ">[{{brand.name}}]{{title}}</span>
+		</a>
+		<div class="price">
+			<span>{{retailPrice}}</span>
+			元
+		</div>
+	</div>
+	{{/bottomItems}}
+</textarea>
+<div class="popWrapper" id="editbottomItems">
+	<div class="popWndFrame">
+		<div class="modalWnd" tr-url="" id="addbottomItemsWrapper">
+			<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口"><i class="iconfont mr10">&#xe60c;</i></a>
+			<div class="modalWndInner">
+				<form id="frmEditbottomItems" method="post">
+					#{authenticityToken/}
+				<input class="inputText" type="hidden" value="add" name="modifyType" />
+					<div class="column_left">
+						<h3>添加活动商品</h3>
+					</div>
+					<div class="form_line">
+						<label class="lbl">商品id</label>
+						<div class="controls">
+							<input type="text" class="inputText" id="txtItemId" name="bottomItems.id"/>	
+						</div>
+						<div for="txtItemId" class="validateLine clearfix"></div>
+					</div>
+				</form>
+			</div>
+			<div class="wndBotButtonSection">
+				<a id="btnbottomItemsfirm" href="javascript:;" class="botButton trSubmit">保存</a>
+			</div>
+		</div>
+	</div>
+</div>
+#{set 'moreManaScripts'}
+<script type="text/javascript" src="/public/javascripts/bizComponents/manage/activityEdit.js"></script>
+<script type="text/javascript">APP.QnDomain = '${upload_domain}';App.module = 'activityManage'; CDT.activityId='${aps_id}'</script>
+#{/set}

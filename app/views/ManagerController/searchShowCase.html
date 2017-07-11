@@ -1,0 +1,84 @@
+#{extends './manage-frame.html' /}
+#{set title:'搜索列表明星产品' /}
+#{set 'moreManaStyles'}
+<link href="@{'/public/stylesheets/searchShowCase.css'}" rel="stylesheet" type="text/css" />
+#{/set}
+<div class="cont_mypage container_body" style="margin-top:30px" id="container">
+	<div class="container_contents container_myMain_contents">
+		<div class="column_left">
+				<h3>搜索列表明星产品<div class="funbar_region">
+				<span class="btnStd btnMedium markedred" id="saveBtn">保存</span>
+			</div></h3>
+		</div>
+		#{authenticityToken/}
+		<div class="listWrap pt20" id="showContainer">
+			
+			<table summary="" class="tableStyle01 mt10 tbHoverable">
+				<thead>
+					<tr>
+						<th>
+							<div class="thcell">ID</div>
+						</th>
+						<th>
+							<div class="thcell">跳转</div>
+						</th>
+						<th>
+							<div class="thcell">移动</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					#{if starItems}
+						<input type="hidden" id="setting_id" value="${starItems._id}" />  
+						#{list items:starItems.itemIds, as : 'starItemId'}
+						<tr mid="">
+						<td>
+							<div class="tdcell">
+								<input type="text" class="inputText case_id_item" value="${starItemId}"></div>
+						</td>
+						<td>
+							<div class="tdcell">
+								<i class="iconfont jumping">&#xe615;</i>
+							</div>
+						</td>
+						<td>
+							<div class="tdcell"> 
+								<i class="iconfont mr10 moveUpAll">&#xe604;</i> 
+								<i class="iconfont mr10 moveUp">&#xe600;</i>
+								<i class="iconfont mr10 moveDown">&#xe60d;</i>
+								<i class="iconfont mr10 moveDownAll">&#xe601;</i>
+							</div>
+						</td>
+					</tr>
+					#{/list}
+					#{/if}
+					#{else}
+						<tr mid="">
+							<td>
+								<div class="tdcell">
+									<input type="text" class="inputText case_id_item" value=""></div>
+							</td>
+							<td>
+								<div class="tdcell">
+									<i class="iconfont jumping">&#xe615;</i>
+								</div>
+							</td>
+							<td>
+								<div class="tdcell"> 
+									<i class="iconfont mr10 moveUpAll">&#xe604;</i> 
+									<i class="iconfont mr10 moveUp">&#xe600;</i>
+									<i class="iconfont mr10 moveDown">&#xe60d;</i>
+									<i class="iconfont mr10 moveDownAll">&#xe601;</i>
+								</div>
+							</td>
+						</tr>
+					#{/else}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+#{set 'moreManaScripts'}
+<script type="text/javascript" src="/public/javascripts/bizComponents/manage/searchShowCase.js"></script>
+<script type="text/javascript">APP.QnDomain = '${upload_domain}';App.module = 'searchShowCase';</script>
+#{/set}

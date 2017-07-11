@@ -1,0 +1,514 @@
+.albumTitle {
+	display: inline-block;
+	margin: 0 auto;
+	width: 180px;
+	text-align: center;
+}
+.albumImg {
+	width: 50px;
+	height: 50px;
+	border:1px solid #ebebeb;
+	display: inline-block;
+	margin: 0 auto;
+	position: relative;
+}
+.albumImg.active {
+	border:2px solid #ffce00;
+}
+.maskImg {
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	top:10px;
+	left:50px;
+	z-index: 123456
+}
+.albumImg img {
+	width: 100%;
+	height: 100%;
+}
+div.tip {
+	position: absolute;
+	top:0;
+	left:54px;
+	z-index: 100;
+	display: inline-block;
+	padding: 3px 5px;
+	border-radius: 3px;
+	background-color: #666;
+	min-width: 48px;
+	color: #fff;
+	display: none;
+}
+.tip em {
+	color: #fff;
+}
+.tip b {
+	position: absolute;
+	top:30%;
+	left: -8px;
+	border:4px solid transparent;
+	border-right-color:#666; 
+}
+.currentnum {
+	color: #888;
+	font-size: 15px;
+}
+.currentnum em {
+	font-size: 14px;
+	margin-left: 5px;
+	color:#019A61;
+	line-height: 21px;
+}
+.userlist {
+	border:1px solid #ccc;
+	width: 700px;
+	height: 254px;
+	overflow-y: auto;
+}
+.userlist ul {
+	overflow:hidden;
+}
+.userlist li {
+	padding: 10px 25px;
+	width: 120px;
+	float: left
+}
+.userlist li .userid {
+	color: #444;
+	font-size: 14px;
+}
+.userlist li .userid i {
+	float: right;
+}
+.userlist li .userimg {
+	width: 100px;
+	height: 100px;
+	border:1px solid #ccc;
+	margin:5px auto;
+}
+.userlist li .userimg img {
+	width: 100%;
+	height: 100%;
+}
+.userlist li .username {
+	color: #444;
+	font-size: 14px;
+	height: 40px;
+	line-height: 20px;
+	word-break: break-all;
+	display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2
+}
+.preinstalList {
+	margin-top: 20px;
+	
+}
+.preinstalList ul {
+	height: 120px;
+	overflow-y: auto;
+}
+.preinstalList p {
+	color: #444;
+	font-size: 14px;
+}
+.preinstalList li {
+	display: inline-block;
+	padding: 4px 8px;
+	color: #666;
+	font-size: 13px;
+	border: 1px solid #d1d1d1;
+	margin-top: 10px;
+	margin-right: 15px;
+}
+
+.preinstalList li i{
+	font-size: 16px;
+  margin-left: 4px;
+}
+.handsontable {
+  font-size: 12px;
+}
+.handsontable {
+  position: relative;
+}
+.handsontable div {
+  box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+}
+.ht_master, .ht_clone_left {
+  height: 100%;
+}
+.ht_master .wtHider {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.handsontable .wtSpreader {
+  position: relative;
+  width: 0;
+  height: auto;
+}
+.handsontable table.htCore {
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 0;
+  border-width: 0;
+  table-layout: automatic;
+  width: 0;
+  outline-width: 0;
+  max-width: none;
+  max-height: none;
+  border-left: 1px solid #d1d1d1;
+}
+.handsontable table, .handsontable tbody, .handsontable thead, .handsontable td, .handsontable th, .handsontable input, .handsontable textarea, .handsontable div {
+	box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  text-align: center;
+}
+.handsontable div.c-dropdown2-btn {
+	text-align: left;
+}
+.handsontable col.rowHeader {
+  width: 70px;
+}
+.handsontable .rowHeader, .handsontable .colHeader {
+  color: #666;
+  font-size: 12px;
+}
+.handsontable .rowHeader input {
+	margin-top: 6px;
+	margin-right: 3px
+}
+.ht_master:not(.innerBorderTop) thead tr:last-child th, .ht_master:not(.innerBorderTop) ~ .handsontable thead tr:last-child th, .ht_master:not(.innerBorderTop) thead tr.lastChild th, .ht_master:not(.innerBorderTop) ~ .handsontable thead tr.lastChild th {
+  border-bottom-width: 0;
+}
+.handsontable thead th:first-child {
+  border-bottom: 1px solid #D1D1D1;
+  border-right: 1px solid #D1D1D1;
+}
+.handsontable tr:first-child th, .handsontable tr:first-child td {
+  border-top: 1px solid #CCC;
+}
+.handsontable thead th {
+  border-right: 1px solid #D6D6D6;
+  border-bottom: 1px solid #D1D1D1;
+}
+.handsontable thead th {
+  line-height: 21px;
+  height: 21px;
+}
+.handsontable thead th {
+  padding: 0;
+}
+.handsontable tr th, .handsontable tr td {
+  border-right: 1px solid #E0E0E0;
+  border-bottom: 1px solid #E0E0E0;
+}
+.handsontable tr td {
+	min-width: 100px;
+	min-height: 26px;
+}
+.handsontable tr .firstcol {
+	min-width: 60px;
+	background: #EBEBEB;
+	vertical-align: middle;
+}
+.handsontable th {
+  
+}
+.handsontable th {
+  vertical-align: middle;
+}
+.handsontable th, .handsontable td {
+  line-height: 26px;
+  height: 26px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.handsontable th {
+  background-color: #EEE;
+  color: #222;
+  text-align: center;
+  font-weight: normal;
+  white-space: nowrap;
+  font-size: 12px;
+}
+.handsontable thead th .relative {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.handsontable thead th .relative {
+  padding: 2px 4px;
+}
+.handsontable .relative {
+  position: relative;
+}
+.htCore .s-cell {
+  /*height: 100%;*/
+  line-height: 1.2;
+  white-space:nowrap;
+  vertical-align: middle;
+  position: relative;
+}
+.htCore .s-cell.highlight {
+	background-color: #F1F6FC;
+}
+.htCore tr:first-child .s-cell.highlight {
+	border-top: 1px solid #0579C0;
+}
+.htCore th.highlight {
+	border-right: 1px solid #0579C0;
+}
+.htCore .s-cell img {
+	width: 50px;
+	height: 50px;
+	margin:5px 0;
+}
+.handsontable th.currentCol, .handsontable th.currentRow {
+  background: #E0E0E0;
+}
+.handsontable .relative {
+  position: relative;
+  height: 25px;
+  line-height: 25px;
+}
+.container_head_contents {
+
+}
+/*.column_left {
+	margin-top: 20px;
+	padding-left: 20px;
+	border-bottom: 2px solid #fecf10;
+}*/
+/*.column_left h3 {
+  margin: 0 0 0 3px;
+  padding-bottom: 10px;
+  font-size: 15px;
+  color: #444;
+}*/
+.headContainer {
+	margin:20px 0;
+}
+.headContainer h3 {
+	margin: 0 0 0 3px;
+  padding-bottom: 10px;
+  font-size: 16px;
+  color: #444;
+  border-bottom:2px solid #fecf10;
+  font-weight: normal;
+  width: 1590px;
+}
+.pl20 {
+	padding-left: 20px;
+}
+.prompt {
+	overflow: hidden;
+	margin-top:10px;
+}
+.prompt_left,.prompt_right {
+	float: left;
+}
+.prompt_left {
+	margin-right: 20px;
+	color:#aaa;
+	font-size: 14px;
+	margin-left: 5px;
+	line-height: 24px;
+}
+.prompt_right p {
+	font-size: 14px;
+	color:#333;
+	line-height: 24px;
+}
+.merge {
+	margin-top: 10px;
+	border:1px solid #ccc;
+	padding: 10px;
+	width: 700px;
+	margin-left: 5px;
+	margin-left: 20px;
+}
+.merge input {
+	margin-right: 5px;
+	display: inline-block;
+	margin-top:2px;
+}
+.clearfix {
+	clear: both;
+}
+.control {
+	margin-top: 15px;
+	width: 720px;
+	position: relative;
+}
+/*.basebtn {
+  display: inline-block;
+  float: left;
+  padding: 0 25px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 3px;
+  text-align: center;
+  background-color: #f7f7f7;
+  border:1px solid #eaeaea;
+  cursor: pointer;
+  color:#777;
+}
+.basebtn:hover {
+	color:#aaa;
+}
+.basebtn i {
+	color:#777;
+}*/
+.ml4 {
+	margin-left: 4px;
+}
+.mr4 {
+	margin-right:4px;
+}
+.mr20 {
+  margin-right: 20px;
+}
+.screen,.screen:hover {
+	font-size: 14px;
+	color:#444;
+	float: right;
+	cursor: pointer;
+}
+.screen i {
+	color:#444;
+}
+.orderStatus {
+  height: 20px;
+  line-height: 14px;
+  margin-top:15px;
+}
+.orderStatus span {
+  font-size: 14px;
+  color: #444;
+}
+.square {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+.orange {
+  background-color: #F4F9F8;
+}
+.batchBlock {
+	position: absolute;
+	top:30px;
+	left: 20px;
+	z-index: 211;
+	width: 360px;
+	height: 160px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	display: none;
+	padding: 20px;
+}
+.batchBlock .closebtn {
+	position: absolute;
+	top:8px;
+	right:8px;
+	font-size: 20px;
+	cursor: pointer;
+	color: #444;
+}
+.batchBlock p {
+	line-height: 26px;
+	text-align: center;
+	font-size: 14px;
+	color:#444;
+	margin-top:10px;
+	position: relative;
+}
+.choosenum {
+	color:#ffa200;
+	font-size: 14px;
+	margin:0 5px;
+}
+.inputText {
+  font-size: 14px;
+  color: #7d7d7d;
+  border: 1px solid #bebebe;
+  width: 180px;
+  height: 24px;
+  line-height: 24px;
+  padding: 0 3px;
+}
+.ensure {
+	margin:20px auto;
+	text-align: center;
+}
+.colBlock {
+	position: absolute;
+	top:24px;
+	right: 0;
+	z-index: 210;
+	width: 300px;
+	height: 120px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	padding: 30px 20px 10px;
+	display: none;
+}
+.colBlock li {
+  display: inline-block;
+  width: 49%;
+  height: 26px
+}
+.colBlock input {
+	margin-top: 3px;
+}
+.colBlock label {
+  display: inline-block;
+  line-height: 18px;
+  color: #555;
+}
+.colBlock .closebtn {
+	position: absolute;
+	top:10px;
+	right:10px;
+	font-size: 20px;
+	color:#333;
+	cursor: pointer;
+}
+.botButton {
+	display: inline-block;
+  width: 160px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border: 1px solid #D9D9D9;
+  background-color: #FFCE00;
+  text-decoration: none;
+  color:#333;
+}
+.bgcolor_consign {
+	background-color: #F4F9F8;
+}
+#btnConsign {
+	position: fixed;
+	right:15px;
+	bottom: 15px;
+	width: 84px;
+	height: 80px;
+	font-size: 14px;
+	text-align: center;
+	line-height: 80px;
+	border-radius: 3px;
+	background-color: #FD9826;
+	border:1px solid #D47202;
+	color: #fff;
+}
+#btnConsign:hover {
+	background-color: #FDA43F;
+}

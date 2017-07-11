@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>艾泰客 - 专注德国</title>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta charset="utf-8" />
+  <meta name="keyword" content="好孩子推车,费雪,乐高,小泰克,TAKATA高田,Aprica阿普丽佳,Kiddy奇蒂,Cybex,迪士尼,一件代发" />
+  <meta name="description" content="吐司宝贝,关注这个时代最好的母婴产品，婴儿推车，安全座椅，童车，儿童三轮车，提篮，婴儿床，一件代发" />
+  <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/common/bootstrap.css'}" />
+  <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/common/widget.1.1.css'}" />
+  <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/style.css'}"  />
+  <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/flexslider.css'}"  />
+  <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/memenu.css'}"  />
+  #{get 'moreStyles' /}
+  <link rel="shortcut icon" href="/public/images/favicon.ico" />
+</head>
+<body>
+  <div class="header"> 
+      <div class="container">
+          <div class="head-top">
+              <div class="col-sm-2 logo">
+                  <a href="index.html">EITAK</a>
+              </div>
+              <div class="col-sm-5 h_menu4">
+                  <ul class="memenu skyblue">
+                      <li class="grid"><a href="/">首页</a></li>
+                      <li><a href="/search">全部商品</a>
+                          <div class="mepanel">
+                              <div class="row" style="margin: 0">
+                                  <div class="col1">
+                                      <div class="h_nav">
+                                          <h4>母婴用品</h4>
+                                          <ul>
+                                              
+                                              <li><a href="">奶粉</a></li>
+                                              <li><a href="/search?cateId=1">推车</a></li>
+                                              <li><a href="/search?cateId=2">安全座椅</a></li>
+                                              <li><a href="">纸尿裤湿巾</a></li>
+                                              <li><a href="/search?cateId=30">喂养用品/辅食</a></li>
+                                              <li><a href="">宝宝服饰</a></li>
+                                              <li><a href="/search?cateId=10">玩具</a></li>
+                                          </ul>
+                                      </div>
+                                  </div>
+                                  <div class="col1">
+                                      <div class="h_nav">
+                                          <h4>食品保健</h4>
+                                          <ul>
+                                              <li><a href="">营养健康</a></li>
+                                              <li><a href="">营养辅食</a></li>
+                                          </ul>
+                                      </div>
+                                  </div>
+                                  <div class="col1">
+                                      <div class="h_nav">
+                                          <h4>美妆个护</h4>
+                                          <ul>
+                                              <li><a href="">洗护用品</a></li>
+                                              <li><a href="">彩妆</a></li>
+                                          </ul>
+                                      </div>
+                                  </div>
+                                  <div class="col1">
+                                      <div class="h_nav">
+                                          <h4>生活用品</h4>
+                                          <ul>
+                                              <li><a href="">家居生活</a></li>
+                                              <li><a href="">办公用品</a></li>
+                                              <li><a href="">女装</a></li>
+                                              <li><a href="">食品饮料</a></li>
+                                          </ul>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </li>
+                  </ul>
+              </div>
+              <div class="col-sm-3">
+                <form action="/search" method="get">
+                  <div class="searchBlock">
+                    <input id="searchTxt" name="kw" value="${vo?.kw?.raw()}" type="text" style="ime-mode:active;"/>
+                    <i class="glyphicon glyphicon-search"> </i>
+                  </div>
+                </form>
+              </div>
+              <div class="col-sm-2 search">
+                  <a class="shoppingcart" href="/cart">
+                      <img src="/public/images/cart.png" alt="" />
+                  </a>
+                  #{if !user}
+                  <a href="/login" target="_blank" class="login">
+                    登录
+                  </a>
+                  #{/if}
+                  #{else}
+                  <a class="play-icon" href="/user/home" class="mr4"><i class="glyphicon glyphicon-user"></i>${user.name}</a>
+                  <a href="/user/login/out" class="leave">退出</a>
+                  #{/else}
+              </div>
+              <div class="clearfix"></div>
+          </div>
+      </div>
+  </div>
+  #{doLayout /}
+  <div class="clearFix"></div>
+  <div class="footer">
+      <div class="footer-bottom">
+          <div class="container">
+              <div class="col-sm-3 footer-bottom-cate">
+                  <h6>正品保证</h6>
+                  <ul>
+                      <li><a href="#">test</a></li>
+                  </ul>
+              </div>
+              <div class="col-sm-3 footer-bottom-cate">
+                  <h6>极速物流</h6>
+                  <ul>
+                      <li><a href="#">test</a></li>
+                      <li><a href="#">test</a></li>
+                  </ul>
+              </div>
+              <div class="col-sm-3 footer-bottom-cate">
+                  <h6>合作品牌</h6>
+                  <ul>
+                      <li><a href="#">Curabitur sapien</a></li>
+                      <li><a href="#">Dignissim purus</a></li>
+                  </ul>
+              </div>
+              <div class="col-sm-3 footer-bottom-cate cate-bottom">
+                  <h6>联系我们</h6>
+                  <ul>
+                      <li>Aliquam metus dui. </li>
+                      <li>orci, ornareidquet</li>
+                      <li class="phone">PH : 6985792466</li>
+                  </ul>
+              </div>
+              <div class="clearfix"> </div>
+              <p class="footer-class">Copyright &copy; 2015.Company name All rights reserved.<a target="_blank" href="http://www.aitaike.com/">艾泰客</a></p>
+          </div>
+      </div>
+  </div>
+  <script src="@{'/public/javascripts/jquery.1.8.3.min.js'}" type="text/javascript"></script>
+  <script src="@{'/public/javascripts/libs/global.1.2.min.js'}" type="text/javascript"></script>
+  <script src="@{'/public/javascripts/memenu.js'}" type="text/javascript"></script>
+  
+  #{get 'moreScripts' /}
+</body>
+</html>

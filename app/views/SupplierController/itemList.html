@@ -1,0 +1,168 @@
+#{extends 'UserCenter/user-frame.html' /}
+#{set title:'商品列表' /}
+#{set 'moreSubStyles'}
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/common/jquery.pagination.css'}"  />
+<style type="text/css">
+	.tbl_type01 td:first-child .tdcell {
+    text-align: left;
+}
+select {
+	height: 22px;
+	color: #666;
+}
+</style>
+#{/set}
+<div class="container_body">
+	<div class="container_contents " style="margin-top:5px">
+		<h3 style="font-size:15px;color:#444;">商品列表</h3>
+		<form name="Mypage_SubMit" method="post" id="Mypage_SubMit">
+			<input type="hidden" value="" name="Gubun"/>
+			<div class="search_area">
+				<div class="search_box">
+					<div class="area_l">
+						<span class="txt_type01">货号</span>
+						<input type="text" class="text" style="width:150px;" value="" id="goodNum" />
+					</div>
+					<div class="area_l">
+						<span class="txt_type01">标题</span>
+						<input type="text" class="text" style="width:150px;" value="" id="titleName" />
+					</div>
+					<div class="area_l">
+						<span class="txt_type01">ID</span>
+						<input type="text" class="text" style="width:150px;" value="" id="titleId" />
+					</div>
+					<div class="area_l">
+						<span class="txt_type01">品牌</span>
+						<select class="text" style="width:150px;" id="titleSel">
+							<option value="0">--请选择--</option>
+							#{if brands}
+								#{list items:brands,as : 'brand'}
+									<option value="${brand.id}">${brand.name}</option>
+								#{/list}
+							#{/if}
+						</select>
+					</div>
+					<div class="area_r">
+						<div class="fl">
+							<a href="javascript:;" class="btnStd btnMedium mr6" id="listSearchBtn">查询</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<!-- ListInfo -->
+		<div class="ListInfo">
+		#{authenticityToken/}
+			<div class="btn">
+				<a href="javascript:;" class="floatRight btnStd btnMedium mr6" id="hideBtn">下架</a>
+				<a href="javascript:;" class="floatRight btnStd btnMedium mr6" id="onlineBtn" style="display: none">上架</a>
+				<a href="javascript:;" class="floatRight btnStd btnMedium mr6" id="deleteBtn">删除</a>
+			</div>
+		</div>
+		<div class="tbl_wrap">
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<tbody>
+					<tr>
+						<td style="text-align:left;">
+							<table width="" cellpadding="0" cellspacing="0" border="0">
+								<tbody>
+									<tr>
+										<td>
+											<a href="javascript:;" id="online" class="tab active">正常展示</a>
+										</td>
+										<td width="94">
+											<a href="javascript:;" id="outline" class="tab">库存</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="tbl_wrap_type01" id="listContainer">
+				<table summary="" class="tbl_type01">
+					<thead>
+						<tr>
+							<th class="col" style="width:60px;">
+								<div class="thcell" style="text-align: left;padding:6px 0px 3px 6px"><input type="checkbox" id="choolseAll" /><span class="ml10">全选</span></div>
+							</th>
+							<th scope="col">
+								<div class="thcell">货号</div>
+							</th>
+							<th scope="col">
+								<div class="thcell">主图</div>
+							</th>
+							<th scope="col">
+								<div class="thcell">产品名称</div>
+							</th>
+							<th scope="col">
+								<div class="thcell">单价</div>
+							</th>
+							<th scope="col">
+								<div class="thcell">发布时间</div>
+							</th>
+
+							<th scope="col">
+								<div class="thcell">操作</div>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						
+					</tbody>
+				</table>
+				<div class="pagin-btm clearFix">
+					<div class="pagination"></div>
+				</div>
+				
+			</div>
+		</div>
+		<!-- //Paginate -->
+	</div>
+</div>
+<textarea class="muban" id="itemTemp" style="display:none">
+	{{#results}}
+	<tr mid="{{id}}">
+		<td>
+			<div class="tdcell">
+				<input type="checkbox" class="iCheck" />	
+			</div>
+		</td>
+		<td>
+			<div class="tdcell">{{outNo}}</div>
+		</td>
+		<td>
+			<div class="tdcell">
+				<a href="/item/{{id}}" target="_blank"><img src="{{picUrl}}?imageView2/2/w/60/q/100" class="tdMainPhoto" /></a>	
+			</div>
+		</td>
+		<td>
+			<div class="tdcell">{{title}}</div>
+		</td>
+		<td>
+			<div class="tdcell">{{formatPrice}}元</div>
+		</td>
+		<td>
+			<div class="tdcell">
+				{{formatTimer}}
+			</div>
+		</td>
+		<td>
+			<div class="tdcell">
+				<a href="/supplier/item/edit?id={{id}}" target="_blank" class="btnStd btnSmall evaluate">编辑</a>
+			</div>
+		</td>
+	</tr>
+	{{/results}}
+</textarea>
+#{set 'moreSubScripts'}
+<script src="@{'/public/javascripts/libs/mustache.min.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/libs/jquery.validate.min.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/validate.plus.js'}" type="text/javascript"></script>
+<script type="text/javascript" src="/public/javascripts/plupload/plupload.full.min.js"></script>
+<script type="text/javascript" src="/public/javascripts/libs/qiniu.min.js"></script>
+<script src="@{'/public/javascripts/libs/jquery.pagination.js'}" type="text/javascript"></script>
+<script type="text/javascript" src="/public/javascripts/bizComponents/supplier/itemList.js"></script>
+<script type="text/javascript">APP.QnDomain = '${upload_domain}';App.module = 'itemList';</script>
+#{/set}

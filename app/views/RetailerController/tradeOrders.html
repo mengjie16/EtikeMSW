@@ -1,0 +1,231 @@
+#{extends 'UserCenter/user-frame.html' /}
+#{set title:'查看订单' /}
+#{set 'moreSubStyles'}
+<link href="@{'/public/stylesheets/retailer.css'}" rel="stylesheet" type="text/css" />
+#{/set}
+<div class="cont_mypage" style="margin-top:30px" id="container">
+	<div class="container_contents container_myMain_contents">
+		<div style="margin-top:0px;">
+			<div class="column_left">
+			#{if tradeId}
+				<h3>查看订单  <span class="orderNo">${tradeId}</span>
+					<a class="basebtn" id="exportExcelbtn"><i class="iconfont mr4">&#xe603;</i>导出订单</a>
+				</h3>
+				<input type="hidden" name="trade" value="${tradeId}"/>
+			#{/if}
+			</div>
+		</div>
+
+		<div class="tbl_wrap_type02">
+				#{authenticityToken/}
+				<div class="form_line">
+					<div class="searchDiv">
+						<span>输入搜索关键词</span>
+						<input type="text" class="inputText" name="" id="orderSearch"/>
+						<a class="basebtn" id="orderSearchBtn">搜索</a>
+					</div>
+					<div class="orderStatus">
+						<span class="square mr4"></span><span class="mr20">普通状态</span>
+						<span class="square mr4 orange"></span><span>已发物流</span>
+					</div>
+					<div class="orderList">
+						<table class="tbl">
+							<thead>
+								<tr>
+									<th>
+										<div>订单号</div>
+									</th>
+									<th>
+										<div>外部订单号</div>
+									</th>
+									<th>
+										<div>订单总金额(元)</div>
+									</th>
+									<th>
+										<div>物流费(元)</div>
+									</th>
+									<th>
+										<div>快递公司</div>
+									</th>
+									<th>
+										<div>快递单号</div>
+									</th>
+									<th>
+										<div>订单状态</div>
+									</th>
+									<th>
+										<div>商品ID</div>
+									</th>
+									<th>
+										<div>商品规格</div>
+									</th>
+									<th>
+										<div>数量</div>
+									</th>
+									<th>
+										<div>客户姓名</div>
+									</th>
+									<th>
+										<div>电话号码</div>
+									</th>
+									<th>
+										<div>客户地址-省</div>
+									</th>
+									<th>
+										<div>客户地址-市</div>
+									</th>
+									<th>
+										<div>客户地址-区</div>
+									</th>
+									<th>
+										<div>客户地址详细</div>
+									</th>
+									<th>
+										<div>备注</div>
+									</th>
+									<th>
+										<div>下单时间</div>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								#{if orders}
+									#{list items:orders, as : 'orderVo'}
+										<tr class="${orderVo.expNo!=null&&orderVo.expNo!=''?'consigned':''}">
+										<td>${orderVo.id}</td>
+										<td>${orderVo.outOrderNo}</td>
+										<td><div>${orderVo.totalFee/100}</div></td>
+										<td><div>${orderVo.shippingFee/100}</div></td>
+										<td><div>${orderVo.express}</div></td>
+										<td><div>${orderVo.expNo}</div></td>
+										<td><div class="${orderVo.statusColor}">${orderVo.statusText}</div></td>
+										<td><div>${orderVo?.productInfo?.itemId}</div></td>
+										<td><div>${orderVo?.productInfo?.sku}</div></td>
+										<td><div>${orderVo.num}</div></td>
+										<td><div>${orderVo?.buyerInfo?.name}</div></td>
+										<td><div>${orderVo?.buyerInfo?.contact}</div></td>
+										<td><div>${orderVo?.buyerInfo?.province}</div></td>
+										<td><div>${orderVo?.buyerInfo?.city}</div></td>
+										<td><div>${orderVo?.buyerInfo?.region}</div></td>
+										<td><div class="addresswidth">${orderVo?.buyerInfo?.address}</div></td>
+										<td><div>${orderVo.note}</div></td>
+										<td><div>${orderVo.createTimeStr}</div></td>
+									</tr>
+									#{/list}
+								#{/if}
+							</tbody>
+						</table>
+					</div>
+				</div>
+		</div>
+	</div>
+</div>
+<div class="popWrapper" id="exportExcel">
+	<div class="popWndFrame">
+		<div class="modalWnd" tr-url="" id="exportExcelWndWrapper">
+			<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口">
+				<i class="iconfont mr10">&#xe60c;</i>
+			</a>
+			<div class="modalWndInner">
+				<form id="frmExportExcel">
+					#{authenticityToken/}
+					<div class="column_left">
+						<h3>导出excel</h3>
+					</div>
+					<div class="form_line">
+						<label class="lbl">选择导出项</label>
+						<div class="controls">
+							<ul class="excelItem">
+								<li class="mt4">
+									<input type="checkbox" id="orderNo" value="id" name="excel_item" />
+									<label for="orderNo">订单ID</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="outOrderNo" value="outOrderNo" name="excel_item" />
+									<label for="outOrderNo">外部订单号</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="totalFee" value="totalFee" name="excel_item" />
+									<label for="totalFee">总金额</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="cargoFee" value="cargoFee" name="excel_item" />
+									<label for="cargoFee">商品总金额</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="shippingFee" value="shippingFee" name="excel_item" />
+									<label for="shippingFee">邮费</label>
+								</li>
+								<!-- <li class="mt4">
+									<input type="checkbox" id="discountFee" value="discountFee" name="excel_item" />
+									<label for="discountFee">折扣</label>
+								</li> -->
+								<li class="mt4">
+									<input type="checkbox" id="itemId" value="itemId" name="excel_item" />
+									<label for="itemId">商品ID</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="num" value="num" name="excel_item" />
+									<label for="num">商品数量</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="express" value="express" name="excel_item" />
+									<label for="express">快递公司</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="expNo" value="expNo" name="excel_item" />
+									<label for="expNo">快递单号</label>
+								</li>
+								
+								<li class="mt4">
+									<input type="checkbox" id="note" value="note" name="excel_item" />
+									<label for="note">订单备注</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="sku" value="sku" name="excel_item" />
+									<label for="sku">商品规格</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="name" value="name" name="excel_item" />
+									<label for="name">客户名称</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="contact" value="contact" name="excel_item" />
+									<label for="contact">客户联系方式</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="province" value="province" name="excel_item" />
+									<label for="province">客户地址-省</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="city" value="city" name="excel_item" />
+									<label for="city">客户地址-市</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="region" value="region" name="excel_item" />
+									<label for="region">客户地址-区</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="address" value="address" name="excel_item" />
+									<label for="address">客户-详细地址</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="createTime" value="createTime" name="excel_item" />
+									<label for="createTime">创建时间</label>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="wndBotButtonSection">
+				<a id="btnExport" href="javascript:void(0)" class="botButton trSubmit">开始导出</a>
+			</div>
+		</div>
+	</div>
+</div>
+#{set 'moreSubScripts'}
+<script src="@{'/public/javascripts/libs/mustache.min.js'}" type="text/javascript"></script>
+<script type="text/javascript" src="/public/javascripts/bizComponents/retailer/checkOrder.js"></script>
+<script type="text/javascript">App.module = 'orderList';</script>
+#{/set}

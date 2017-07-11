@@ -1,0 +1,357 @@
+#{extends './user-frame.html' /}
+#{set title:'我的订单' /}
+#{set 'moreSubStyles'}
+
+#{/set}
+<div class="container_body">
+	<div class="container_contents " style="margin-top:5px">
+		<div class="banner_only_power">
+			<a href="#" target="_blank">
+				<img src="/public/images/img/121023_powermypagebanner_700.jpg" alt=""/></a>
+		</div>
+		<h3 style="font-size:15px;color:#444;">订单明细/配送现状</h3>
+		<div class="page_info">
+			<ul class="blind">
+				<li>订单号，点击详细的订单/送货结果的详细内容可以看到.</li>
+				<li>订单会最多3个月，可以查询.</li>
+			</ul>
+		</div>
+		<form name="Mypage_SubMit" method="post" id="Mypage_SubMit">
+			<input type="hidden" value="" name="Gubun"/>
+			<div class="search_area">
+				<div class="search_box">
+					<div class="area_l">
+						<a href="javascript:;" class="button">15日</a>
+						<a href="javascript:;" class="button active">1个月</a>
+						<a href="javascript:;" class="button">2个月</a>
+						<a href="javascript:;" class="button">3个月</a>
+					</div>
+					<div class="area_r">
+						<div style="width:63px" class="selectbox selectbox_applied fl">
+							<div class="selectbox_box" id="select01">
+								<span class="selectbox_label" id="StartY">2016</span>
+							</div>
+							<div style="display:none" class="selectbox_layer">
+								<ul class="selectbox_list scroll selectboxh54">
+									<li>2016</li>
+									<li>2015</li>
+									<li>2014</li>
+									<li>2013</li>
+									<li>2012</li>
+									<li>2011</li>
+									<li>2010</li>
+								</ul>
+							</div>
+						</div>
+						<div style="width:42px" class="selectbox selectbox_applied fl">
+							<div class="selectbox_box">
+								<span class="selectbox_label" id="StartM">03</span>
+							</div>
+							<div style="display:none" class="selectbox_layer">
+								<ul class="selectbox_list scroll">
+									<li>01</li>
+									<li>02</li>
+									<li>03</li>
+									<li>04</li>
+									<li>05</li>
+									<li>06</li>
+									<li>07</li>
+									<li>08</li>
+									<li>09</li>
+									<li>10</li>
+									<li>11</li>
+									<li>12</li>
+								</ul>
+							</div>
+						</div>
+						<div style="width:42px;margin-right:0" class="selectbox selectbox_applied fl">
+							<div class="selectbox_box">
+								<span class="selectbox_label" id="StartD">04</span>
+							</div>
+							<div style="display:none" class="selectbox_layer">
+								<ul class="selectbox_list scroll">
+									<li>01</li>
+									<li>02</li>
+									<li>03</li>
+									<li>04</li>
+									<li>05</li>
+									<li>06</li>
+									<li>07</li>
+									<li>08</li>
+									<li>09</li>
+									<li>10</li>
+									<li>11</li>
+									<li>12</li>
+									<li>13</li>
+									<li>14</li>
+									<li>15</li>
+									<li>16</li>
+									<li>17</li>
+									<li>18</li>
+									<li>19</li>
+									<li>20</li>
+									<li>21</li>
+									<li>22</li>
+									<li>23</li>
+									<li>24</li>
+									<li>25</li>
+									<li>26</li>
+									<li>27</li>
+									<li>28</li>
+									<li>29</li>
+									<li>30</li>
+									<li>31</li>
+								</ul>
+							</div>
+						</div>
+						<span class="bar">~</span>
+						<div style="width:63px" class="selectbox selectbox_applied fl">
+							<div class="selectbox_box">
+								<span class="selectbox_label" id="EndY">2016</span>
+							</div>
+							<div style="display:none" class="selectbox_layer">
+								<ul class="selectbox_list scroll selectboxh54">
+									<li>2016</li>
+									<li>2015</li>
+									<li>2014</li>
+									<li>2013</li>
+									<li>2012</li>
+									<li>2011</li>
+									<li>2010</li>
+								</ul>
+							</div>
+						</div>
+						<div style="width:42px" class="selectbox selectbox_applied fl">
+							<div class="selectbox_box">
+								<span class="selectbox_label" id="EndM">04</span>
+							</div>
+							<div style="display:none" class="selectbox_layer">
+								<ul class="selectbox_list scroll">
+									<li>01</li>
+									<li>02</li>
+									<li>03</li>
+									<li>04</li>
+									<li>05</li>
+									<li>06</li>
+									<li>07</li>
+									<li>08</li>
+									<li>09</li>
+									<li>10</li>
+									<li>11</li>
+									<li>12</li>
+								</ul>
+							</div>
+						</div>
+						<div style="width:42px;margin-right:0" class="selectbox selectbox_applied fl">
+							<div class="selectbox_box">
+								<span class="selectbox_label" id="EndD">04</span>
+							</div>
+							<div style="display:none" class="selectbox_layer">
+								<ul class="selectbox_list scroll">
+									<li>01</li>
+									<li>02</li>
+									<li>03</li>
+									<li>04</li>
+									<li>05</li>
+									<li>06</li>
+									<li>07</li>
+									<li>08</li>
+									<li>09</li>
+									<li>10</li>
+									<li>11</li>
+									<li>12</li>
+									<li>13</li>
+									<li>14</li>
+									<li>15</li>
+									<li>16</li>
+									<li>17</li>
+									<li>18</li>
+									<li>19</li>
+									<li>20</li>
+									<li>21</li>
+									<li>22</li>
+									<li>23</li>
+									<li>24</li>
+									<li>25</li>
+									<li>26</li>
+									<li>27</li>
+									<li>28</li>
+									<li>29</li>
+									<li>30</li>
+									<li>31</li>
+								</ul>
+							</div>
+						</div>
+						<div class="fl">
+							<a href="#" style="display:inline-block; width: 59px;height: 19px;line-height:19px;text-align:center;margin-left: 8px;border:1px solid #ccc;background-color:#FFCE00">查询</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<!-- ListInfo -->
+		<div class="ListInfo">
+			<span class="point_txt f_tahoma">2016/03/04 ~ 2016/04/04</span>
+			期间总
+			<span class="point_txt f_tahoma">0</span>
+			<span class="point_txt">条</span>
+			订货数量查询
+			<div class="btn">
+				<a href="#" style="display:inline-block; width: 129px;height: 19px;line-height:19px;text-align:center;margin-left: 8px;border:1px solid #ccc;background-color:#ebebeb">取消退货明细视图</a>
+			</div>
+		</div>
+		<div class="tbl_wrap">
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<tbody>
+					<tr>
+						<td style="text-align:left;">
+
+							<table width="" cellpadding="0" cellspacing="0" border="0">
+								<tbody>
+									<tr>
+										<td>
+											<a href="#" class="tab active">一一</a>
+										</td>
+										<td width="94">
+											<a href="#" class="tab">二二</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="tbl_wrap_type01">
+				<table summary="" class="tbl_type01">
+					<thead>
+						<tr>
+							<th scope="col" class="col_01">
+								<div class="thcell">订单号</div>
+							</th>
+							<th scope="col">
+								<div class="thcell">产品名称</div>
+							</th>
+							<th scope="col">
+								<div class="thcell">结算金额</div>
+							</th>
+							<th scope="col">
+								<div class="thcell">配送现状</div>
+							</th>
+							<th scope="col">
+								<div class="thcell">取消/退货</div>
+							</th>
+							<th scope="col">
+								<div class="thcell">购物积分</div>
+							</th>
+							<th scope="col">
+								<div class="thcell">产品评价</div>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<div class="tdcell">32432325235</div>
+							</td>
+							<td>
+								<div class="tdcell">迷你的心(mini.mom)</div>
+							</td>
+							<td>
+								<div class="tdcell">27,900元</div>
+							</td>
+							<td>
+								<div class="tdcell">已发货</div>
+							</td>
+							<td>
+								<div class="tdcell">
+									<a href="#">退货</a>
+								</div>
+							</td>
+							<td>
+								<div class="tdcell">3,100元</div>
+							</td>
+							<td>
+								<div class="tdcell">
+									<a href="#" class="evaluate">评价</a>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="paginate">
+			<table cellpadding="0" cellspacing="0" border="0" height="20">
+				<tbody>
+					<tr>
+						<td width="210"></td>
+						<td width="30" style="padding-right:8" valign="absmiddle">
+							<a href="#" class="first">
+								<img src="/public/images/img/paginate_prev2.gif" class="first" style="margin-top:3px;"/></a>
+							<img src="/public/images/img/paginate_prev.gif" style="margin-top:3px;filter:Alpha(Opacity=100)"/></td>
+						<td align="center" valign="absmiddle">
+							<table cellpadding="0" cellspacing="0" border="0" style="table-layout:fixed;">
+								<tbody>
+									<tr>
+										<td width="15" align="center">
+											<a class="a_linemap"> <b>1</b>
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+						<td width="30" style="padding-left:8" valign="absmiddle">
+							<img src="/public/images/img/paginate_next.gif" style="margin-top:3px;filter:Alpha(Opacity=100)"/>
+							<a href="#" class=" end">
+								<img src="/public/images/img/paginate_next2.gif" class="end" style="margin-top:3px;"/></a>
+						</td>
+						<td width="150" align="absmiddle" style="padding-right:8" valign="absmiddle">
+							&nbsp;&nbsp;&nbsp;[ <b>1</b>
+							/1]&nbsp;&nbsp;&nbsp;Total : 0
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<!-- //Paginate -->
+
+		<h3 class="help_txt" style="font-size:15px;color:#444;">引导和帮助</h3>
+		<div class="info_image_box" style="position:static;">
+			<img src="/public/images/img/OderListGuide_txt.gif" alt=""/></div>
+
+	</div>
+</div>
+#{set 'moreSubScripts'}
+<script type="text/javascript">
+jQuery(function(){
+	jQuery(document).click(function(e){
+		if(jQuery(e.target).attr("class") != "selectbox_box" && jQuery(e.target).attr("class") != "selectbox_label")
+		{
+			jQuery(".selectbox_layer").css("display", "none");
+		}
+	});
+
+	jQuery(".selectbox_box").click(function(){
+		var selectbox_layer = jQuery(this).parent().children(".selectbox_layer");
+		if(selectbox_layer.css("display") != "block")
+		{
+			jQuery(".selectbox_layer").css("display", "none");
+			selectbox_layer.css("display", "block");
+		}
+		else
+		{													
+			selectbox_layer.css("display", "none");
+		}												
+	});
+	jQuery(".selectbox_list li").click(function(){
+		$(this).parent().parent().parent().children(".selectbox_box").children().text($(this).text());
+	})
+});
+
+
+</script>
+#{/set}

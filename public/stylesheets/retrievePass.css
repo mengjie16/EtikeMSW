@@ -1,0 +1,80 @@
+.certificationTypeBox {
+	position: relative;
+	border: 2px solid #e7e7e7;
+	padding: 33px 39px;
+	margin: 10px 22px;
+}
+.btnSendPhoneCaptcha.active {
+	background-color: #D450A6;
+}
+.contentBody .info1 {
+	padding-left: 0px;
+}
+.contentBody .info1 span {
+	font-size: 16px;
+	font-family: 'Hiragino Sans GB','microsoft yahei',arial,sans-serif;
+}
+.contentTitle h3 {
+	font-size: 14px;
+	font-family: 'Hiragino Sans GB','microsoft yahei',arial,sans-serif;
+	color: #666;
+}
+.certificationTypeBox .okBtn a {
+	display: block;
+	width: 168px;
+	height: 38px;
+	margin: 0 auto;
+}
+.certificationTypeBox .okBtn p {
+	line-height: 38px;
+	background-color: #52d0c4;
+	color: #fff;
+	text-align: center;
+}
+.success {
+	text-align: center;
+}
+.success i {
+	font-size: 44px;
+	color: #FEBF00;
+	margin-right: 12px;
+	display: inline-block;
+}
+.success span {
+	color: #444;
+	font-size: 17px;
+	display: inline-block;
+	margin-top: 12px;
+	line-height: 30px;
+}
+.certificationTypeBox .sendSmsPop {
+	position: absolute;
+	display: none;
+	border: solid 1px #ddd;
+	background-color: #fff;
+	padding: 20px;
+	width: 320px;
+	height: 230px;
+	top: 40px;
+	left: 194px;
+	z-index: 10;
+}
+.info1 a {
+	display: inline-block;
+	width: 50px;
+	height: 22px;
+	line-height: 22px;
+	text-align: center;
+	background-color: #D450A6;
+	color:#fff;
+	cursor: pointer;
+	float: right;
+	margin-right:200px;
+	margin-top: 2px;
+}
+.contentBody .info1 .login {
+	display: inline-block;
+	float: right;
+	font-weight: normal;
+	color: #999;
+}

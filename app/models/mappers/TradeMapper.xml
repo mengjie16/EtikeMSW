@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="models.mappers.TradeMapper">
+	<resultMap id="BaseResultMap" type="models.Trade">
+	</resultMap>
+	<resultMap id="TradeOrdersMap" type="models.Trade">
+		<id property="id" column="id" />
+		<collection property="orders" javaType="java.util.List"
+			column="id" select="models.mappers.OrderMapper.selectByTradeId"
+			ofType="models.Order" />
+	</resultMap>
+	<insert id="insert" parameterType="models.Trade">
+		insert into trade
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,retailer_id,caption,total_fee,discount_fee,cargo_fee,payment,shipping_fee,expect_consign_time,consign_time,
+			status,create_time,note
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			#{retailerId},
+			#{caption},
+			#{totalFee},
+			#{discountFee},
+			#{cargoFee},
+			#{payment},
+			#{shippingFee},
+			#{expectConsignTime},
+			#{consignTime},
+			#{status},
+			now(),
+			#{note}
+		</trim>
+	</insert>
+	<update id="updateById" parameterType="models.Trade">
+		update trade
+		<set>
+			<if test="status !=null and status !='' ">
+				status = '${status}',
+			</if>
+			<if test="consignTime !=null and consignTime != ''">
+				consign_time = #{consignTime},
+			</if>
+			<if test="closeTime !=null and closeTime != ''">
+				close_time = #{closeTime},
+			</if>
+			<if test="note !=null and note != ''">
+				note = #{note},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	<update id="updateFee" parameterType="models.Trade">
+		update trade
+		<set>
+			total_fee = #{totalFee},
+			discount_fee = #{discountFee},
+			payment =
+			#{payment},
+			cargo_fee = #{cargoFee},
+			shipping_fee = #{shippingFee}
+		</set>
+		where id = #{id}
+	</update>
+	<select id="selectList" resultMap="BaseResultMap">
+		select * from trade t
+		order by
+		t.create_time desc
+	</select>
+	<select id="selectWithOrdersById" resultMap="TradeOrdersMap">
+		select * from trade
+		t
+		where id = ${tradeId}
+		order by t.create_time desc
+		limit 1
+	</select>
+	<select id="selectListWithOrderByVo" resultMap="TradeOrdersMap">
+		select * from trade t
+		<include refid="where" />
+		order by t.create_time desc
+		limit #{startIndex},
+		#{pageSize}
+	</select>
+	<sql id="where">
+		<where>
+			<if test="id > 0">
+				and t.id = #{id}
+			</if>
+			<if test="retailerId > 0">
+				and t.retailer_id = #{retailerId}
+			</if>
+			<if test="caption!=null and caption !=''">
+				and t.caption like '%${caption}%'
+			</if>
+			<if test="status!=null">
+				and t.status = #{status}
+			</if>
+			<if test="createTimeStart !=null">
+				<![CDATA[ and t.create_time>=#{createTimeStart} ]]>
+			</if>
+			<if test="createTimeEnd !=null">
+				<![CDATA[ and t.create_time<=#{createTimeEnd} ]]>
+			</if>
+		</where>
+	</sql>
+</mapper>

@@ -1,0 +1,453 @@
+#{extends 'main.html' /}
+#{set title: item.title /}
+#{set 'moreStyles'}
+<link href="@{'/public/stylesheets/shopping.css'}" rel="stylesheet" type="text/css" />
+<link href="@{'/public/stylesheets/widget_style.css'}" rel="stylesheet" type="text/css" />
+<link href="@{'/public/stylesheets/detail.css'}" rel="stylesheet" type="text/css" />
+#{/set}
+#{if item }
+<div class="content_top_location">
+	<div class="crumb">
+		<span href="#">全部商品</span>
+		#{if item?.cates}
+		#{list items:item.cates,as : 'cate'}
+		<span class="split">&gt;</span>
+		<a href="#">${cate.name}</a>
+		#{/list}
+		#{/if}
+	</div>
+</div>
+<div class="side-panel" style="bottom: 80px;">
+	<a href="" title="客服" id="kfzx" class="side-panel-item"> <i class="iconfont tip-hide">&#xe602;</i>
+		<span class="tip-txt hidden">客服</span>
+	</a>
+	<a href="#" title="回到顶部" id="elevator" class="side-panel-item"> <i class="iconfont tip-hide">&#xe611;</i>
+		<span class="tip-txt hidden">回到顶部</span>
+	</a>
+</div>
+<div class="bpdContWrap" style="width: 1100px; background-color: white; margin: 0px auto 50px;">
+	<div class="toplikeHateBox">
+		<div class="boriTitleBox">
+			<h2 class="titleBoxText">
+				<span style="color:#FE6102;font-size:18px">
+					${item?.brand?.getMainSubName()?'['+item?.brand?.getMainSubName()+']':''}
+				</span>
+				${item?.title}
+			</h2>
+		</div>
+	</div>
+	<div class="boriSangseBox">
+		<div class="boriSanseLeft">
+			<div class="largeViewLayer">
+				<div class="largeViewBody">
+					<div class="imgArea">
+						<img src="${item.picUrl}" alt=""/>
+					</div>
+					<ul>
+						<li>
+							<a href="javascript:">
+								<img src="${item.picUrl}?imageView2/2/w/50/q/100" alt=""/>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<a href="javascript:;" class="closeBtn">
+					<img src="/public/images/img/closeBtn.jpg" alt=""/>
+				</a>
+			</div>
+			<p class="boriContPhoto">
+				<img src="${item.picUrl}?imageView2/2/h/350/q/100" alt="" id="Img_PrdLarge"/>
+			</p>
+			<p class="boriMorebtn">
+				<a href="javascript:;">
+					<img src="/public/images/img/btn_imgmore.png" alt=""/>
+				</a>
+			</p>
+		</div>
+		<div class="productMid">
+			<div class="productId">
+				<p>商品ID</p>
+				<p class="mt4 mb10">
+					<span style="color:#555;font-size:18px;">${item?.id}</span>
+				</p>
+			</div>
+			<div class="bp-price">
+				#{if item?.priceRangeUse}
+				<div class="priceInfoBlock priceTable">
+					<p class="pl10">批发经销</p>
+					<div class="mt10">
+						#{if item?.priceRanges}
+						#{list items:item.priceRanges,as :'priceRange'}
+						<div class="unit">
+							<p class="content_font" style="margin-top:13px;margin-bottom: 15px;">
+								<span class="priceDigit">${priceRange.price/100}</span>
+							</p>
+							<p class="content_font pricerange f14" data-range="${priceRange.range}" data-price="${priceRange.price}" >
+								<span>
+									${priceRange.range}
+									#{if item.priceRanges[priceRange_index] }
+										- ${item.priceRanges[priceRange_index].range}
+									#{/if}
+									${item?.unit?item.unit:'件'}
+									#{else}
+										- 以上
+									#{/else}
+								</span>
+
+							</p>
+						</div>
+						#{/list}
+						#{/if}
+					</div>
+				</div>
+				#{/if}
+				#{if item?.distPriceUse}
+				<div class="priceInfoBlock replacePrice">
+					<p class="pl10">代销/一件代发</p>
+					<p class="mt20 ml10">
+						<span id="disPrice" class="priceDigit">${albumItem?.price?albumItem.price/100:item.distPrice/100}</span>
+					</p>
+				</div>
+				#{/if}
+				<div>
+					<p>建议零售价</p>
+					<p class="mt10">
+						<span class="priceDigit">${item?.retailPrice/100}</span>
+					</p>
+				</div>
+			</div>
+			#{if !user}
+			<div class="bp-direct">
+				<p class="login">
+					<a href="/login" class="mr10">登录</a>
+					后可以查看您是否享有优惠
+				</p>
+			</div>
+			#{/if}
+			<div class="solid mt20"></div>
+			<div class="bp-options" id="PrdSize">
+				#{if item.sendGoodLocations && item.sendGoodLocations.size()>0}
+				<div class="mt10">
+					<span>发货地址</span>
+				</div>
+				<div class="customSelector">
+						<select name="" id="">
+						#{list items:item.sendGoodLocations, as : 'location'}
+						<option value="">
+							${location?.country}
+							${location?.province}
+							${location?.city}
+							${location?.region}
+							${location?.address}
+						</option>
+						#{/list}
+						</select>
+				</div>
+				#{/if}
+				<div class="freight">
+					<div class="mt10 i-tem">
+						<span class="dt">配送</span>
+						<div class="freighttemp">
+							<span>至</span>
+							<div class="provinceBox">
+								<div class="choosePro">
+									<span>请选择省份</span> <b></b>
+								</div>
+								<div class="provinceList">
+									<p><span class="emptyPro">请选择省份</span><i class="iconfont iconclosebtn">&#xe60c;</i></p>
+									<ul id="provinceUl">
+										#{if provinces}
+										#{list items:provinces, as : 'province'}
+										<li value="provinceItem" data-price="${item?.itemFreightTemp?.get(province.id)!=null?item.itemFreightTemp.get(province.id)/100:-1}">${province.name}</li>
+										#{/list}
+										#{/if}
+									</ul>
+								</div>
+							</div>
+							<span>快递</span>
+							<span class="freightprice">按实际收费</span>
+							#{if item?.freightTemp}
+							<a href="/tools/freight/calc/${item?.freightTemp}" target="_blank" class="forHelp"><i class="iconfont iconclosebtn">&#xe60f;</i> 有疑问</a>
+							#{/if}
+						</div>
+					</div>
+
+				</div>
+
+				<div class="solid mt10 mb10"></div>
+				<div class="i-tem">
+					<span class="dt">规格</span>
+					<table style="width:100%;">
+						<tbody>
+							#{list items:item.skus,as:'sku'}
+							<tr class="sku_line">
+								<td class="cell chooseimg">
+									<img src="${sku.img}?imageView2/2/w/52/q/100" data-src="${sku.img}" alt="${sku.color}" title="${sku.color}" />
+								</td>
+								<td class="cell commInventorys tc">
+									库存
+									<span class="commInventory ml10">${sku.quantity}</span>
+								</td>
+								<td class="cell numberContrl">
+									<input type="text" class="inputText qnty" value="0"/>
+									<span style="display:inline-block">
+										<a class="up plus"> <b></b>
+										</a>
+										<a class="down minus">
+											<b></b>
+										</a>
+									</span>
+								</td>
+							</tr>
+							#{/list}
+						</tbody>
+					</table>
+				</div>
+				<div class="solid mt10 mb10"></div>
+				<div class="mt40 mb20" >
+					<input type="hidden" id="hTotalPrice" value="0"/>
+					<input type="hidden" id="hCP_SSalPri" value="29000"/>
+
+					<div class="total-value tr">
+						<span class="errortext" style="display:none"></span>
+						<span class="total-txt mr10">总额</span> <strong id="TotalPrice" class="priceDigit" style="font-size:22px;">0</strong>
+					</div>
+				</div>
+			</div>
+			#{if false}
+			<div class="bp-submit">
+				<a href="javascript:;" class="b-buyNow" id="DirectBuy">加入购物车</a>
+				<div class="alertCart">
+					<div class="alertTitle">
+						<h3>添加成功</h3>
+						<i class="iconfont closeBtn_a">&#xe60c;</i>
+					</div>
+					<div class="alertContent">
+						<div class="contxt">
+							<span class="iconfont">&#xe609;</span>
+							<span>货品已添加成功！</span>
+						</div>
+						<div class="opration">
+							<span>
+								<a trace="viewcart1" class="btn btn-orange view-cart" href="javascript:;" target="_blank">去结算</a>
+							</span>
+							<span>
+								<a class="long-buy" trace="goonpurchase1" href="javascript:;" target="_self">继续购物</a>
+							</span>
+						</div>
+					</div>
+				</div>
+				<a href="javascript:;" class="b-cartIn">
+					<i class="iconfont tip-hide">&#xe618;</i>
+					<span>收藏</span>
+				</a>
+			</div>
+			#{/if}
+		</div>
+		<div class="productRight">
+			<div class="boriDirectBox">
+				<a href="#" class="logo-define" target="_self">
+					<img src="${item?.brand?.picUrl}" alt="${item.brand?.name}" title="${item.brand?.name}" />
+				</a>
+				<div class="brandName">
+					<span class="firstName">${item.brand?.name}</span><span class="secondName">${item.brand?.secondaryName?'/'+item.brand?.secondaryName:''}</span>
+				</div>
+			</div>
+			<div class="boriponoReview">
+				<div class="review-true">
+					<h4 style="color:#333;font-weight:bold;font-size:14px;text-align:center">品牌描述</h4>
+					<p>${item.brand?.descption}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<a name="detail_tab1" id="detail_tab1_link">&nbsp;</a>
+	<div class="prod-TabBox">
+		<ul class="boriBottomTab">
+			<li class="current">
+				<a href="#detail_tab1">商品详情</a>
+			</li>
+			<li>
+				<a href="#detail_tab2">商品属性</a>
+			</li>
+			<li>
+				<a href="#detail_tab3">常见问题</a>
+			</li>
+			<li>
+				<a href="#detail_tab4">吐司优势</a>
+			</li>
+		</ul>
+	</div>
+
+	<div class="brpDetail-cw">
+		<div class="inCnt-productDetail">
+			<div style="text-align:center;margin-bottom:10px"></div>
+			<div class="prdInfoDiv" id="prdInfoDiv" >
+				<div class="inCnt-zone">
+					<center>${item.detail.raw()}</center>
+				</div>
+
+			</div>
+		</div>
+		<div class="boriSmallBannerBox">
+			<div class="smallSangpum">
+
+				<ul class="list-bes">
+					#{if corrItems}
+					#{list items:corrItems, as:'corritem'}
+					<li class="${corritem_isFirst?'first':''}">
+						<a href="/item/${corritem?.id}" class="thum-b" target="_blank">
+							<img src="${corritem.picUrl}?imageView2/2/w/160/q/100" alt=""/>
+						</a>
+						<p class="de-tail">
+							<a href="#" class="dt"> <strong>${corritem?.brand.name}</strong>
+							</a>
+							<span class="dd-d">${corritem.title}</span>
+							<span class="dd-p">
+
+								<strong class="ne">${corritem.retailPrice/100}</strong>
+								元
+							</span>
+						</p>
+					</li>
+					#{/list}
+				#{/if}
+				</ul>
+			</div>
+		</div>
+	</div>
+	<a name="detail_tab2" id="detail_tab2_link">&nbsp;</a>
+	<div class="prod-TabBox">
+		<ul class="boriBottomTab">
+			<li>
+				<a href="#detail_tab1">商品详情</a>
+			</li>
+			<li class="current">
+				<a href="#detail_tab2">商品属性</a>
+			</li>
+			<li>
+				<a href="#detail_tab3">常见问题</a>
+			</li>
+			<li>
+				<a href="#detail_tab4">吐司优势</a>
+			</li>
+		</ul>
+	</div>
+	<div class="brpWarrant-tb">
+		<table>
+			<caption>${item.title}</caption>
+			<tbody>
+				#{if item.properties}
+			#{list items:item.properties, as: 'propertie'}
+				<tr>
+					<th>${propertie_index}. ${propertie.key}</th>
+					<td>${propertie.value}</td>
+				</tr>
+				#{/list}
+			#{/if}
+			</tbody>
+		</table>
+	</div>
+	<a name="detail_tab3">&nbsp;</a>
+	<div class="prod-TabBox">
+		<ul class="boriBottomTab">
+			<li>
+				<a href="#detail_tab1">商品详情</a>
+			</li>
+			<li>
+				<a href="#detail_tab2">商品属性</a>
+			</li>
+			<li class="current">
+				<a href="#detail_tab3">常见问题</a>
+			</li>
+			<li>
+				<a href="#detail_tab4">吐司优势</a>
+			</li>
+		</ul>
+	</div>
+	<div class="brpProd-Qa">
+		<p class="qu">吐司宝贝的商品来源是？</p>
+		<p class="an">我们的产品全部来自于品牌方，国内总代，绝对不会出现水货，假货，请放心。</p>
+		<p class="qu">我如何分销？</p>
+		<p class="an">注册成为平台的“零售商/分销商”，并通过客服与我们取得联系，在审核过您的渠道资质后，您就可以在后台进行分销设置了。</p>
+		<p class="qu">我希望在我的天猫/京东店中进行分销，如何授权？</p>
+		<p class="an">联系我们，我们将在1~3个工作日内，让品牌方为您下发授权，但需要您提供真实的公司证件资料。</p>
+		<p class="qu">如何确认产品细节？</p>
+		<p class="an">我们已经在产品的购买页面，详尽的列出了产品介绍及注意事项，如果您对此还有疑问，欢迎您随时拨打我们的客服电话。</p>
+		<p class="qu">我想在实体店中进行售卖，是否可以一件代发？</p>
+		<p class="an">如果该产品具有“一件代发”的价格信息，就是可以的。商品可能支持“一件代发价”和“批发价”其中一个价格体系，或两者兼具。</p>
+		<p class="qu">大量采购是否可以优惠？</p>
+		<p class="an">请与我们联系，我们将酌情与您商量，欢迎微商团购，政府采购等渠道合作。</p>
+		<p class="qu">物流费用怎么看？多件商品怎么办？</p>
+		<p class="an">商品购买页的运费价格仅供参考，一般为一件代发的运费。如果多件则可能走物流形式，具体请与客服沟通。</p>
+	</div>
+
+	<a name="detail_tab4">&nbsp;</a>
+	<div class="prod-TabBox">
+		<ul class="boriBottomTab">
+			<li>
+				<a href="#detail_tab1">商品详情</a>
+			</li>
+			<li>
+				<a href="#detail_tab2">商品属性</a>
+			</li>
+			<li class="">
+				<a href="#detail_tab3">常见问题</a>
+			</li>
+			<li class="current">
+				<a href="#detail_tab4">吐司优势</a>
+			</li>
+		</ul>
+	</div>
+
+	<div class="brpCustomer-info">
+		<div class="pdtDevInfo">
+			<p class="img">
+				<img alt="" src="/public/images/item-advan.png"/>
+			</p>
+		</div>
+		#{if false}
+		<table class="bbslistReview">
+			<colgroup>
+			<col width="10%">
+			<col>
+			<col width="20%">
+			<col width="15%"></colgroup>
+		<thead>
+			<tr>
+				<th scope="col">区分</th>
+				<th scope="col">内容</th>
+				<th scope="col">包邮规则</th>
+				<th scope="col" class="last-child">相应品牌</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>吐司宝贝</td>
+				<td class="subject">本身物流中心配送</td>
+				<td>30,000元 以上</td>
+				<td>
+					<a href="#">品牌视图 ></a>
+				</td>
+			</tr>
+			<tr>
+				<td>企业配送</td>
+				<td class="subject">各合作厂家配送 (快递公司)</td>
+				<td>根据合作企业</td>
+				<td>
+					<a href="#">品牌视图 ></a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	#{/if}
+</div>
+</div>
+#{/if}
+#{set 'moreScripts'}
+<script src="@{'/public/javascripts/libs/mustache.min.js'}" type="text/javascript"></script>
+<script type="text/javascript" src="/public/javascripts/libs/qiniu.min.js"></script>
+<script src="@{'/public/javascripts/libs/jquery.pagination.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/detail.js'}" type="text/javascript"></script>
+#{/set}

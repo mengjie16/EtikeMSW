@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="defaultExecutorType" value="REUSE" />
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+	<typeAliases>
+		<package name="models" />
+	</typeAliases>
+
+	<environments default="default">
+		<environment id="default">
+			<transactionManager type="JDBC" />
+			<dataSource type="com.aton.db.DefaultDataSourceFactory" />
+		</environment>
+	</environments>
+	<mappers>
+		<mapper class="models.mappers.UserMapper" />
+		<mapper class="models.mappers.RegionMapper" />
+		<mapper class="models.mappers.ItemMapper" />
+		<mapper class="models.mappers.ItemCateMapper" />
+		<mapper class="models.mappers.RetailerMapper" />
+		<mapper class="models.mappers.SupplierMapper" />
+		<mapper class="models.mappers.ShopCateMapper" />
+		<mapper class="models.mappers.BrandMapper" />
+		<mapper class="models.mappers.ArticleMapper" />
+		<mapper class="models.mappers.SupplierSendLocationTempMapper" />
+		<mapper class="models.mappers.AlbumMapper" />
+		<mapper class="models.mappers.FootMarkMapper" />
+		<mapper class="models.mappers.WechatUserMapper" />
+		<mapper class="models.mappers.AliPayTradeMapper" />
+		<mapper class="models.mappers.TradeMapper" />
+		<mapper class="models.mappers.OrderMapper" />
+	</mappers>
+</configuration>

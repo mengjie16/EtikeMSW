@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="models.mappers.ItemMapper">
+	<resultMap id="BaseResultMap" type="models.Item">
+		<result column="price_ranges" property="priceRanges"  typeHandler="com.aton.db.handler.PriceRangeTypeHandler"/>
+		<result column="properties" property="properties" typeHandler="com.aton.db.handler.ItemPropertieVoHandler"/>
+		<result column="skus" property="skus" typeHandler="com.aton.db.handler.ItemSkuTypeHandler"/>
+		<result column="refer_urls" property="referUrls" typeHandler="com.aton.db.handler.KeyValueHandler"/>
+	</resultMap>
+	
+    <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    	select * from item where id=#{id}
+    </select>
+    <select id="selectBaseById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    	select id,supplier_id,title,pic_url,cate_id,brand_id,retail_price,supply_price,net_weight,gross_weight,skus,
+			quality,status,dist_price,price_ranges,dist_price_use,price_range_use,freight_temp,sold_quantity,update_time from item where id=#{id} limit 1
+    </select>
+	<insert id="insert" parameterType="models.Item">
+		<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into item
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			title,
+			product_id,
+			supplier_id,
+			cate_id,
+			brand_id,
+			pic_url,
+			num,
+			origin,
+			out_no,
+			deliver_type,
+			retail_price,
+			supply_price,
+			net_weight,
+			gross_weight,
+			quality,
+			unit,
+			dist_price,
+			sold_quantity,
+			initial_quantity,
+			detail,
+			mobile_detail,
+			status,
+			properties,
+			refer_urls,
+			price_ranges,
+			skus,
+			note,
+			dist_price_use,
+			price_range_use,
+			freight_temp,
+			create_time,
+			update_time
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{title},
+			#{productId},
+			#{supplierId},
+			#{cateId},
+			#{brandId},
+			#{picUrl},
+			#{num},
+			#{origin},
+			#{outNo},
+			#{deliverType},
+			#{retailPrice},
+			#{supplyPrice},
+			#{netWeight},
+			#{grossWeight},
+			#{quality},
+			#{unit},
+			#{distPrice},
+			#{soldQuantity},
+			#{initialQuantity},
+			#{detail},
+			#{mobileDetail},
+			#{status},
+			#{properties,typeHandler=com.aton.db.handler.ItemPropertieVoHandler},
+			#{referUrls,typeHandler=com.aton.db.handler.KeyValueHandler},
+			#{priceRanges,typeHandler=com.aton.db.handler.PriceRangeTypeHandler},
+			#{skus,typeHandler=com.aton.db.handler.ItemSkuTypeHandler},
+			#{note},
+			#{distPriceUse},
+			#{priceRangeUse},
+			#{freightTemp},
+			#{createTime},
+			#{updateTime}
+		</trim>
+	</insert>
+	<update id="updateById" parameterType="models.Item">
+		update item
+		<set>
+			<if test="title !=null">
+				title = #{title},
+			</if>
+			<if test="productId!= null">
+				product_id = #{productId},
+			</if>
+			<if test="supplierId>0">
+				supplier_id = #{supplierId},
+			</if>
+			<if test="cateId!= 0">
+				cate_id = #{cateId},
+			</if>
+			<if test="brandId > 0">
+				brand_id = #{brandId},
+			</if>
+			<if test="picUrl != null">
+				pic_url = #{picUrl},
+			</if>
+			<if test="num != 0">
+				num = #{num},
+			</if>
+			<if test="origin != null">
+				origin = #{origin},
+			</if>
+			<if test="outNo != null">
+				out_no = #{outNo},
+			</if>
+			<if test="deliverType != null">
+				deliver_type = #{deliverType},
+			</if>
+			<if test="retailPrice != 0">
+				retail_price = #{retailPrice},
+			</if>
+			<if test="supplyPrice != 0">
+				supply_price = #{supplyPrice},
+			</if>
+			<if test="netWeight != 0">
+				net_weight = #{netWeight},
+			</if>
+			<if test="grossWeight != 0">
+				gross_weight = #{grossWeight},
+			</if>
+			<if test="quality != 0">
+				quality = #{quality},
+			</if>
+			<if test="unit != null">
+				unit = #{unit},
+			</if>
+			<if test="distPrice != 0">
+				dist_price = #{distPrice},
+			</if>
+			<if test="initialQuantity != 0">
+				initial_quantity = #{initialQuantity},
+			</if>
+			<if test="soldQuantity != 0">
+				sold_quantity = #{soldQuantity},
+			</if>
+			<if test="detail != null">
+				detail = #{detail},
+			</if>
+			<if test="mobileDetail != null">
+				mobile_detail = #{mobileDetail},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime},
+			</if>
+			<if test="skus!=null">
+				skus = #{skus,typeHandler=com.aton.db.handler.ItemSkuTypeHandler},
+			</if>
+			<if test="note!=null and note!=''">
+				note = #{note},
+			</if>
+			<if test="properties!=null">
+				properties = #{properties,typeHandler=com.aton.db.handler.ItemPropertieVoHandler},
+			</if>
+			<if test="priceRanges !=null">
+				price_ranges = #{priceRanges,typeHandler=com.aton.db.handler.PriceRangeTypeHandler},
+			</if>
+			<if test="referUrls !=null">
+				refer_urls = #{referUrls,typeHandler=com.aton.db.handler.KeyValueHandler},
+			</if>
+			<if test="freightTemp > 0">
+				freight_temp = #{freightTemp},
+			</if>
+			
+			dist_price_use = #{distPriceUse},
+			price_range_use = #{priceRangeUse}
+		</set>
+		where id = #{id}
+	</update>
+	<update id="updateStatusByIds" parameterType="java.util.List">
+		update item
+		<set>
+			status = #{status}
+		</set>
+		where id in (
+		<foreach collection="ids" item="iid"  separator=",">
+			 #{iid}
+		</foreach>
+		)
+	</update>
+	<select id="selectListAll" resultMap="BaseResultMap">
+		select * from item i
+		order by i.create_time desc
+	</select>
+	<select id="selectList" resultMap="BaseResultMap">
+		select * from item i
+		<include refid="where" />
+		order by i.create_time desc
+	</select>
+	<select id="selectListOnline" resultMap="BaseResultMap">
+		select i.pic_url,i.id,i.title,i.cate_id, i.brand_id,i.retail_price,i.update_time from item i
+		where i.status = 'ONLINE'
+		order by i.create_time desc
+	</select>
+	<select id="selectListBySupplier" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select * from item i
+		where i.supplier_id = #{supplierId}
+		and i.status = 'ONLINE'
+		order by i.sold_quantity desc
+		limit 3
+	</select>
+	<select id="selectListByPage" resultMap="BaseResultMap">
+		select * from item i
+		<include refid="where" />
+		order by i.create_time desc
+		limit #{startIndex},
+		#{pageSize}
+	</select>
+	<select id="countTotalVo" resultType="java.lang.Integer">
+		select count(1) from item i
+		<include refid="where" />
+	</select>
+	<sql id="where">
+		<where>
+			<if test="id>0">
+				and i.id = #{id}
+			</if>
+			<if test="supplierId>0">
+				and i.supplier_id = #{supplierId}
+			</if>
+			<if test="title!=null and title!=''">
+				and i.title like '%${title}%'
+			</if>
+			<if test="cateId>0">
+				and i.cate_id = #{cateId}
+			</if>	
+			<if test="brandId>0">
+				and i.brand_id = #{brandId}
+			</if>			
+			<if test="origin !=null and origin!='' ">
+				and i.origin like '%${origin}%'
+			</if>
+			<if test=" outNo!=null and outNo!=''">
+				and i.out_no like '%${outNo}%'
+			</if>
+			<if test="status != null">
+				and i.status=#{status}
+			</if>
+			<if test="deliverType !=null">
+				and i.deliver_type=#{deliverType}
+			</if>
+			<if test="createTimeStart !=null">
+				<![CDATA[ and i.create_time>=#{createTimeStart} ]]>
+			</if>
+			<if test="createTimeEnd !=null">
+				<![CDATA[ and i.create_time<=#{createTimeEnd} ]]>
+			</if>
+			<if test="aboutSupplier !=null and aboutSupplier!=''">
+				and i.supplier_id in (select id from supplier s where s.name like '%${aboutSupplier}%' or s.company like '%${aboutSupplier}%')
+			</if>
+			<if test="aboutBrand !=null and aboutBrand !=''">
+				and i.brand_id in (select id from brand b where Lower(b.name ) like '%${aboutBrand}%' or Lower(b.secondary_name) like '%${aboutBrand}%')
+			</if>
+		</where>
+	</sql>
+	<select id="selectbIdsByKeyWordInIds" resultType="models.Brand">
+		select results.name,id from (select case   
+		<foreach collection="keyWords" item="keyWord" separator=" ">
+			when Lower(b.name ) like '%${keyWord}%' or Lower(b.secondary_name) like '%${keyWord}%'
+			then "${keyWord}"
+		</foreach>
+		else ''
+		end as name,id from brand b) as results where results.name!=''
+	</select>
+	<select id="selectIdsInAllIdsOrBids" resultMap="BaseResultMap">
+		select i.pic_url,i.id,i.title,i.cate_id, i.brand_id,i.retail_price,i.update_time from item i
+		<where>
+			<if test="keyWords!=null and keyWords.size()>0">			
+				<foreach collection="keyWords" item="keyWord"  open="" close="" separator="OR">
+					i.title like '%${keyWord}%'
+				</foreach>
+			</if>	
+			 <choose>
+               <when test="brandIds !=null  and brandIds.size()>0">
+				and i.brand_id in 
+					<foreach collection="brandIds" item="bid"  open="(" close=")" separator=",">
+					  #{bid}
+					</foreach>
+				</when>
+                <when test="itemIds !=null  and itemIds.size()>0">
+                 and  i.id in 
+					<foreach collection="itemIds" item="itemId"  open="(" close=")" separator=",">
+					  #{itemId}
+					</foreach>
+                </when>
+        	 </choose>
+		</where>
+	</select>
+	<select id="selectListFilterByVo"  resultType="java.lang.Long">
+		select i.id from item i
+		<where>	
+			<if test="cateId>0">
+				and i.cate_id = #{cateId}
+			</if>	
+			<if test="brandId>0">
+				and i.brand_id = #{brandId}
+			</if>
+			<if test="dp_use==true">
+				and i.dist_price_use = 1
+			</if>	
+			<if test="pr_use==true">
+				and i.price_range_use = 1
+			</if>
+			and i.status = 'ONLINE'		
+		</where>
+	</select>
+	<select id="selectListVoByIds" resultMap="BaseResultMap">
+		select i.pic_url,i.id,i.title,i.cate_id, i.brand_id,i.retail_price,i.update_time from item i
+		<where>			
+			i.id in 	
+			<foreach collection="itemIds" item="itemId"  open="(" close=")" separator=",">
+				#{itemId}
+			</foreach>	
+		</where>
+		order by i.create_time desc
+		limit #{startIndex},
+		#{pageSize}
+	</select>
+	<select id="selectFreightTempByVo" resultType="java.lang.Long">
+		select freight_temp from item i 
+		<where>	
+		i.freight_temp!=""
+		<if test="aboutBrand !=null and aboutBrand !=''">
+				and i.brand_id in (select id from brand b where Lower(b.name) like '%${aboutBrand}%' or Lower(b.secondary_name) like '%${aboutBrand}%')
+			</if>
+		<if test="aboutSupplier !=null and aboutSupplier!=''">
+				and i.supplier_id in (select id from supplier s where Lower(s.name) like '%${aboutSupplier}%' or Lower(s.company) like '%${aboutSupplier}%' or s.phone like '%${aboutSupplier}%')
+		</if>
+		</where>
+	</select>
+</mapper>

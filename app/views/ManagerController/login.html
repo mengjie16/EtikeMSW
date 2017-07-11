@@ -1,0 +1,56 @@
+#{extends 'simple-frame.html' /}
+#{set title:'管理员登录' /}
+
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/login.css'}" />
+<style type="text/css">
+    .bottom {
+        position: fixed;
+        bottom: 0;
+        left: 0
+    }
+</style>
+#{/set}
+<div class="body">
+    <div class="contentWrap">
+        <div class="leftArea">
+            <div class="loginTabs">管理员登录</div>
+            <div class="loginContents">
+                <div class="error_panel" style="text-align:right;color: #f00;">${flash?.error}</div>
+
+                <form id="frmLogin" method="post" action="/sys/doLogin">
+                    #{authenticityToken/}
+                    <input type="hidden" name="rUrl" value="${rUrl?.raw()}"/>
+                    <div class="mb10" id="errText">
+                        <div for="txtAccount" class="validateLine clearfix"></div>
+                        <div for="txtPassWord" class="validateLine clearfix"></div>
+                    </div>
+                    <div class="clearfix">
+                        <ul class="loginInfo">
+                            <li>
+                                <div style="width:60px;" class="f14">账号</div>
+                                <div>
+                                    <input id="txtAccount" name="account" type="text" class="inputText" placeholder="登录账号" />
+                                </div>
+                            </li>
+                            <li>
+                                <div style="width:60px;" class="f14">密码</div>
+                                <div>
+                                    <input id="txtPassWord" name="password" type="password" class="inputText" maxlength="20" placeholder="密码" />
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="loginBtn" id="btnLogin">
+                            <a href="javascript:;" class="normalLogin">登 录</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+#{set 'moreScripts'}
+<script type="text/javascript" src="/public/javascripts/libs/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/public/javascripts/validate.plus.js"></script>
+<script type="text/javascript" src="/public/javascripts/bizComponents/syslogin.js"></script>
+#{/set}

@@ -1,0 +1,95 @@
+#{extends './manage-frame.html' /}
+#{set title:'微信用户管理' /}
+<div class="cont_mypage container_body" style="margin-top:30px" id="container">
+	<div class="container_contents container_myMain_contents">
+		<div style="margin-top:0px;">
+			<div class="column_left">
+				<h3>微信用户管理</h3>
+			</div>
+		</div>
+		<input type="hidden" id="hidChatId" value=""/> 
+		#{authenticityToken/}
+		<div class="tbl_wrap_type02 pt20" id="wechatContainer">			
+			<div class="search_area">
+				<div class="search_box">
+					<div class="area_l">
+						<span class="txt_type01">昵称</span>
+						<input type="text" class="text" style="width:160px;" id="chatName"/>
+					</div>
+					<div class="area_r">
+						<div class="fl">
+							<a href="javascript:;" class="btnStd btnMedium mr6" id="chatSearchBtn">查询</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<table summary="" class="tbl_type01 tbHoverable">
+				<thead>
+					<tr>
+						<th class="thcellId">
+							<div class="thcell">ID</div>
+						</th>
+						<th>
+							<div class="thcell">头像</div>
+						</th>
+						<th>
+							<div class="thcell">昵称</div>
+						</th>
+						<th>
+							<div class="thcell">openid</div>
+						</th>
+						<th>
+							<div class="thcell">初次授权</div>
+						</th>
+						<th>
+							<div class="thcell">最近授权</div>
+						</th>
+						<th>
+							<div class="thcell">操作</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+			<div class="pagin-btm clearFix">
+				<div class="pagination"></div>
+			</div>
+			<div class="popWrapper" style="display: none;" id="tr_loading_mask">
+				<img class="tr_juhua" src="@{'/public/images/pre_loading.gif'}" />
+			</div>
+		</div>
+	</div>
+</div>
+<textarea class="muban" id="chatTemp" style="display:none">
+	{{#results}}
+	<tr mid="{{id}}">
+		<td class="thcellId">
+			<div class="tdcell">{{id}}</div>
+		</td>
+		<td>
+			<div class="tdcell"><div class="userimg"><img src="{{avatar}}"/></div></div>
+		</td>
+		<td>
+			<div class="tdcell">{{nick}}</div>
+		</td>
+		<td>
+			<div class="tdcell ellipsis">{{openId}}</div>
+		</td>
+		<td>
+			<div class="tdcell">{{formatauthTime}}</div>
+		</td>
+		<td>
+			<div class="tdcell">{{formatlastAuthTime}}</div>
+		</td>
+		<td>
+			<div class="tdcell">
+				<a href="javascript:;" class="btnStd btnSmall delbtn">删除</a>
+			</div>
+		</td>
+	</tr>
+	{{/results}}
+</textarea>
+#{set 'moreManaScripts'}
+<script type="text/javascript" src="/public/javascripts/bizComponents/manage/chatManage.js"></script>
+<script type="text/javascript">APP.QnDomain = '${upload_domain}';App.module = 'chatManage';</script>
+#{/set}

@@ -1,0 +1,75 @@
+#{extends 'UserCenter/user-frame.html' /}
+#{set title:'提交订单' /}
+#{set 'moreSubStyles'}
+<link href="@{'/public/stylesheets/retailer.css'}" rel="stylesheet" type="text/css" />
+#{/set}
+<div class="cont_mypage" style="margin-top:30px" id="container">
+	<div class="container_contents container_myMain_contents">
+		<div style="margin-top:0px;">
+			<div class="column_left">
+				<h3>提交订单 - (2/4)
+				</h3>
+			</div>
+		</div>
+		<div class="tbl_wrap_type02 pt20">
+			<h3 class="prevStep">上一步：您已选择“<span class="green">通过Excel上传订单</span>”的形式</h3>
+				#{authenticityToken/}
+				<input class="inputText" type="hidden" value="${item?.id}" name="item.id"/>
+				<h3>第二步：上传Excel文件</h3>
+				<div class="form_line uploadcontainer">
+					<form id="formUploadExcel" method="post" class="pt20" style="position:relative">
+						#{authenticityToken/}
+						<a href="javascript:;" class="file">选择文件
+							<input class="inputFile" id="uploadExcelFile" type="file" name="uploadExcelFile" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+						</a>
+					<span class="showFileName">未选择文件</span>
+					<a href="javascript:void(0)" class="btnStd btnMedium" id="analysisBtn" style="position:absolute;left:150px;top:22px;float:none;display:none">开始上传</a>
+					</form>
+				</div>
+				<div class="mt40"><p class="uploadStatus"></p></div>
+				<h3 class="data_title"><span class="excel_title">您的Excel表头</span><span class="order_title">吐司宝贝数据字段</span></h3>
+				<div class="form_line lineTo">
+					<div id="line_canvas" class="line_canvas"></div>
+					<div class="analysisTable show">
+						<div class="excel_data_div showleft">
+						</div>
+						<div class="order_data_div showright">
+							<div class="showitem" name="productName" data-must=false>商品名称</div>
+							<div class="showitem" name="outOrderNo" data-must=true>订单号</div>
+							<div class="showitem" name="contact" data-must=true>联系号码</div>
+							<div class="showitem" name="buyerName" data-must=true>顾客名字</div>
+							<div class="showitem" name="province" data-must=true>顾客所在省</div>
+							<div class="showitem" name="city" data-must=true>顾客所在市</div>
+							<div class="showitem" name="region" data-must=true>顾客所在区</div>
+							<div class="showitem" name="address" data-must=true>顾客详细地址（不包含省市区）</div>
+							<div class="showitem" name="address_detail_pcra" data-must=true>顾客详细地址（包含省市区）</div>
+							<div class="showitem" name="sku_str" data-must=true>规格（如小码，M号等）</div>
+							<div class="showitem" name="num" data-must=true>商品数量</div>
+							<div class="showitem" name="createTime" data-must=false>下单时间</div>
+							<div class="showitem" name="note" data-must=false>备注</div>
+						</div>
+					</div>
+
+				</div>
+				<div class="button_section" id="btnSubmit">
+					<a class="btnStd btnLarge btnYellow-shadow" href="javascript:;" style="margin-left:347px;">确认连线完毕，进入下一步</a>
+				</div>
+		</div>
+	</div>
+	<!-- //	cont_mypage -->
+</div>
+<div class="popupError">
+	<h3>警告</h3>
+	<div class="errorText"></div>
+	<div class="sureBtn">确 定</div>
+</div>
+<!-- //content-area -->
+#{set 'moreSubScripts'}
+<script src="@{'/public/javascripts/libs/mustache.min.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/libs/jquery.validate.min.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/validate.plus.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/ajaxfileupload.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/libs/raphael.2.2.1.min.js'}" type="text/javascript"></script>
+<script type="text/javascript" src="/public/javascripts/bizComponents/retailer/orderStepTwo.js"></script>
+<script type="text/javascript">App.module = 'orderStepOne';</script>
+#{/set}

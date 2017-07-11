@@ -1,0 +1,251 @@
+#{extends 'main.html' /}
+#{set title:'search' /}
+#{set 'moreStyles'}
+<link href="@{'/public/stylesheets/benefit.css'}" rel="stylesheet" type="text/css">
+<link href="@{'/public/stylesheets/widget_style.css'}" rel="stylesheet" type="text/css">
+#{/set}
+<div id="container">
+	<div id="content">
+
+		<div id="bt_content_top">
+			<div class="content_top_location clearfix CategoryLocation">
+				<div class="content_top_left">
+					<h3>
+						<a href="#">
+							<img src="/public/images/img/content_h3.gif" alt="ev"/></a>
+					</h3>
+					<div class="left_con">
+						<p class="location_area">
+							<img src="/public/images/img/location_home.gif" alt="home"/>&gt;</p>
+						<div id="selectbox" class="selectbox">
+							<select>
+								<option value="">- 쿠폰/포인트/혜택 -</option>
+								<option value="ThisMonthBenefit_V2" selected="selected">1. 이달의 혜택</option>
+								<option value="CardBenefit">2. 카드 혜택</option>
+								<option value="MobileBenefit_V2">3. 모바일 혜택</option>
+								<option value="NewMomBenefit">4. 신규맘 혜택</option>
+								<option value="GradeBenefit">5. 등급별 혜택</option>
+								<option value="BaroBoriBenefit">6. 바로보리 혜택</option>
+								<option value="DancuBenefit">7. 단추(포인트)혜택</option>
+
+							</select>
+						</div>
+					</div>
+					<a href="#" class="history_back" onclick="history.back(); return false;">上一页</a>
+				</div>
+				<p class="content_top_right"></p>
+			</div>
+		</div>
+
+		<div class="wrap" style="padding:0px;">
+
+			<p class="txtRight"></p>
+			<div class="tabBenefit">
+				<a href="#" id="tab01" rel="con01" class="on"></a>
+				<a href="#" id="tab02" rel="con02" class=""></a>
+				<a href="#" id="tab03" rel="con03" class=""></a>
+				<a href="#" id="tab04" rel="con04" class=""></a>
+				<a href="#" id="tab05" rel="con05" class=""></a>
+				<a href="#" id="tab06" rel="con06" class=""></a>
+				<a href="#" id="tab07" rel="con07"></a>
+
+			</div>
+
+			<div id="con01" class="mCon">
+				<div class="top">
+					<p style="font-size:38px;color:#444;">
+						<span class="month m4"></span>
+						本月购物优惠</p>
+					<p class="month_stxt" style="font-size:20px;color:#444;">
+						等一下！接受折扣购买，得到各种赠品。</p>
+				</div>
+				<div class="level1">
+					<div class="area">
+						<p class="tit" style="font-size:28px;color:#444;">
+							采购活动优惠</p>
+						<div class="buyEvt">
+							<p>
+								<a href="#" target="_blank" style="display: inline;">
+									<img src="/public/images/img/Tricycle201603171549246505.jpg" alt="보리 제 1회 Botto" class="buyImg"/></a>
+								<a href="#" target="_self" style="display: none;">
+									<img src="/public/images/img/Tricycle20160404870789197.jpg" alt="앱 다운첫구매 혜택" class="buyImg"/></a>
+							</p>
+							<ul class="mainVisualTabs">
+								<li class="e01 on">
+									<a href="#" target="_blank">第一届Botto大麦</a>
+								</li>
+								<li class="e02">
+									<a href="#" target="_self">株式会社的首句每优惠</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="areaR">
+						<p class="tit" style="font-size:28px;color:#444;">
+							信用卡优惠
+							<a href="#" target="_self" style="float:right;font-size:16px;color:#444;margin-top:15px">更多 +</a>
+						</p>
+						<p class="card_img">
+							<a href="#" target="_self">
+								<img src="/public/images/img/Tricycle20160404693856826.jpg" alt="" width="407px"/></a>
+						</p>
+
+					</div>
+				</div>
+				<div class="couponBenefit">
+					<div class="couponBenefitTitle">
+						优惠券</div>
+					<div class="halfCell" id="parentCell1">
+						<div class="halfCellTitle">
+							<img src="/public/images/img/subTitle1.jpg" alt=""/></div>
+						<ul>
+							<li>
+								<a href="#" target="_self">
+									<img src="/public/images/img/sub1_1.jpg" alt=""/></a>
+							</li>
+							<li>
+								<a href="#" target="_self">
+									<img src="/public/images/img/sub1_2.jpg" alt=""/></a>
+							</li>
+							<li>
+								<a href="#" target="_self">
+									<img src="/public/images/img/sub1_3.jpg" alt=""/></a>
+							</li>
+							<li>
+								<a href="#" target="_blank">
+									<img src="/public/images/img/sub1_4.jpg" alt=""/></a>
+							</li>
+						</ul>
+					</div>
+					<div class="halfCell" style="float:right;">
+						<div class="halfCellTitle">
+							<img src="/public/images/img/subTitle2.jpg" alt=""/></div>
+						<ul>
+							<li>
+								<a href="#" target="_self">
+									<img src="/public/images/img/sub2_1.jpg" alt=""/></a>
+							</li>
+							<li>
+								<a href="#" target="_self">
+									<img src="/public/images/img/sub2_2.jpg" alt=""/></a>
+							</li>
+							<li>
+								<a href="#" target="_self">
+									<img src="/public/images/img/sub2_3.jpg" alt=""></a>
+							</li>
+							<li>
+								<a href="#" target="_self">
+									<img src="/public/images/img/sub2_4.jpg" alt=""/></a>
+							</li>
+						</ul>
+					</div>
+					<div class="clearFix"></div>
+					<div class="fullCell" id="parentCell2">
+						<div class="fullCellTitle">
+							<img src="/public/images/img/subTitle3.jpg" alt=""/></div>
+						<div class="halfCell">
+							<ul>
+								<li>
+									<a href="javascript:;">
+										<img src="/public/images/img/sub3_1.jpg" alt=""/></a>
+								</li>
+								<li>
+									<a href="javascript:;">
+										<img src="/public/images/img/sub3_2.jpg" alt=""/></a>
+								</li>
+								<li>
+									<a href="javascript:;">
+										<img src="/public/images/img/sub3_3.jpg" alt=""/></a>
+								</li>
+								<li>
+									<a href="javascript:;">
+										<img src="/public/images/img/sub3_4.jpg" alt=""/></a>
+								</li>
+							</ul>
+						</div>
+						<div class="halfCell" style="float:right;">
+							<ul>
+							<li>
+								<a href="javascript:;">
+									<img src="/public/images/img/sub3_7.jpg" alt=""/></a>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<img src="/public/images/img/sub3_8.jpg" alt=""/></a>
+							</li>
+						</ul>
+					</div>
+					<div class="divideLine"></div>
+				</div>
+				<div class="clearFix"></div>
+				<div class="fullCell" id="parentCell3">
+					<ul>
+						<li>
+							<img src="/public/images/img/sub4_1.jpg" alt=""/></li>
+						<li style="margin-left:53px;">
+							<a href="#" target="_self">
+								<img src="/public/images/img/sub4_2.jpg" alt=""/></a>
+						</li>
+						<li style="margin-left:57px;">
+							<a href="#" target="_blank">
+								<img src="/public/images/img/sub4_3.jpg" alt=""/></a>
+						</li>
+					</ul>
+				</div>
+				<div class="clearFix"></div>
+				<img src="/public/images/img/readme.jpg" class="couponReadme" alt=""/></div>
+		</div>
+
+	</div>
+</div>
+</div>
+#{set 'moreScripts'}
+<script src="@{'/public/javascripts/idangerous.swiper-3.0.min.js'}" type="text/javascript"></script>
+<script type="text/javascript">
+
+    $(function () {
+
+        $(".e01").mouseover(function () {
+
+            $("#con01 .level1 .area .buyEvt p a").hide();
+            $("#con01 .level1 .area .buyEvt p a").eq(0).show();
+            $(".buyEvt li").removeClass("on");
+            $(this).addClass("on");
+
+        });
+        $(".e02").mouseover(function () {
+            $("#con01 .level1 .area .buyEvt p a").hide();
+            $("#con01 .level1 .area .buyEvt p a").eq(1).show();
+            $(".buyEvt li").removeClass("on");
+            $(this).addClass("on");
+        });
+
+        mainBannerRollingVal = setTimeout(function () { mainBannerRolling(); }, 3000);
+
+        $(".level1 .area .buyEvt").hover(function () { clearTimeout(mainBannerRollingVal); }, function () { mainBannerRollingVal = setTimeout(function () { mainBannerRolling(); }, 3000); })
+
+
+    });
+
+    var mainBannerRollingVal = null
+
+    function mainBannerRolling() {
+        clearTimeout(mainBannerRollingVal);
+
+        var index = $("ul.mainVisualTabs li").index($("ul.mainVisualTabs .on"));
+
+        var flag = Math.abs(index - 1);
+
+        $("ul.mainVisualTabs li").eq(flag).trigger("mouseover");
+
+        mainBannerRollingVal = setTimeout(function () { mainBannerRolling(); }, 3000);
+    }
+
+
+    
+
+
+    
+
+</script>
+#{/set}

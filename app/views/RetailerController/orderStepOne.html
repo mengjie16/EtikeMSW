@@ -1,0 +1,36 @@
+#{extends 'UserCenter/user-frame.html' /}
+#{set title:'提交订单' /}
+#{set 'moreSubStyles'}
+<link href="@{'/public/stylesheets/retailer.css'}" rel="stylesheet" type="text/css" />
+#{/set}
+<div class="cont_mypage" style="margin-top:30px" id="container">
+	<div class="container_contents container_myMain_contents">
+		<div style="margin-top:0px;">
+			<div class="column_left">
+				<h3>提交订单 - (1/4)
+				</h3>
+			</div>
+		</div>
+		<div class="tbl_wrap_type02 pt20">
+			<h3>第一步：选择提交订单的方式</h3>
+			<a href="/retailer/order/stepTwo" class="mr20">
+				<div class="btnStd btnLarge btnYellow-shadow mt20">
+					我有订单数据的Excel
+				</div>
+			</a>
+			<a href="/retailer/order/manual">
+				<div class="btnStd btnLarge btnYellow-shadow mt20">
+					我想手工输入订单
+				</div>
+			</a>
+		</div>
+	</div>
+	<!-- //	cont_mypage -->
+</div>
+<!-- //content-area -->
+#{set 'moreSubScripts'}
+<script src="@{'/public/javascripts/libs/mustache.min.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/libs/jquery.validate.min.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/validate.plus.js'}" type="text/javascript"></script>
+<script type="text/javascript">App.module = 'orderStepOne';</script>
+#{/set}

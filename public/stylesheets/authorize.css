@@ -1,0 +1,64 @@
+.discribe {
+	height:30px;
+	border:1px solid #ebebeb;
+	padding-left: 30px;
+}
+.discribe p {
+	line-height: 30px;
+	color: #444;
+}
+.authorize_detail {
+	border:1px solid #ebebeb;
+	padding:20px 30px;
+	margin-top: 10px;
+}
+.detail_line {
+	margin-bottom: 30px;
+}
+.detail_line .dtname {
+	display: table-cell;
+	font-size: 14px;
+	color: #666;
+	width: 110px;
+}
+.detail_line .dtcont,.detail_line .dtimg {
+	display: table-cell;
+}
+.detail_line .dtcont span {
+	font-size: 14px;
+	color: #555;
+}
+.detail_line .dtimg span {
+	display: block;
+	border:1px solid #ebebeb;
+	width: 140px;
+	height: 100px;
+}
+.detail_line .dtimg span img {
+	max-width: 100%;
+	max-height: 100%;
+}
+.cancel {
+	text-align: right;
+}
+.cancel a {
+	display: inline-block;
+	width: 100px;
+	height: 24px;
+	line-height: 24px;
+	text-align: center;
+	background-color: #ffd200;
+	border:1px solid #f1f1f1;
+}
+.cancel a:hover {
+	background-color: #999;
+	border:1px solid #888;
+	color: #fff;
+}
+.cancel.left {
+	text-align: left;
+	margin-top: 30px;
+}
+.noauth {
+	height: 350px;
+}

@@ -1,0 +1,342 @@
+#{extends './manage-frame.html' /}
+#{set title:'注册用户管理' /}
+#{set 'moreManaStyles'}
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/common/datePicker.css'}" />
+<style>
+	.modalWndInner label {
+		display: inline
+	}
+</style>
+#{/set}
+<div class="cont_mypage container_body" style="margin-top:30px" id="container">
+	<div class="container_contents container_myMain_contents">
+		<div style="margin-top:0px;">
+			<div class="column_left">
+				<h3>注册用户管理</h3>
+			</div>
+		</div>
+		#{authenticityToken/}
+		<div class="tbl_wrap_type02 pt20">
+			<form name="Mypage_SubMit" method="post" id="frmEditReg">
+				<input type="hidden" value="" name="Gubun"/>
+				<div class="search_area">
+					<div class="search_box">
+						<div class="area_l">
+							<span class="txt_type01">手机号</span>
+							<input type="text" class="text" style="width:100px;" value="" id="user_mobile" maxlength="11" />
+						</div>
+						<div class="area_l">
+							<span class="txt_type01">名称</span>
+							<input type="text" class="text" id="user_name" name="titleName" maxlength="20"/>
+						</div>
+						<div class="area_l">
+							<span class="txt_type01">注册时间</span>
+							<input type="text" class="text inputDate" style="width:80px;" value="" id="startTime"/>
+							-
+							<input type="text" class="text inputDate" style="width:80px;" value="" id="endTime"/>
+							<span class="errorDate" style="color:#e4393c;line-height: 20px"></span>
+						</div>
+						<div class="area_r">
+							<div class="fl">
+								<a href="javascript:;" class="btnStd btnMedium mr6" id="searchBtn">查询</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			<div class="clearFix pt20" style=" padding-bottom: 10px;height: 20px">
+				<a href="javascript:void(0)" class="floatRight mr6 btnStd btnMedium" id="simulate">模拟用户登录</a>
+				<a href="javascript:void(0)" class="floatRight mr10 btnStd btnMedium" id="registNew">添加用户</a>
+				<a href="javascript:void(0)" class="floatRight mr10 btnStd btnMedium" id="smsCodeHelper">验证码助手</a>
+			</div>
+			<table summary="" class="tbl_type01 tbHoverable">
+				<thead>
+					<tr>
+						<th class="thcellId">
+							<div class="thcell">ID</div>
+						</th>
+						<th>
+							<div class="thcell">手机号</div>
+						</th>
+						<th>
+							<div class="thcell">类型</div>
+						</th>
+						<th class="thcellId">
+							<div class="thcell">认证</div>
+						</th>
+						<th>
+							<div class="thcell">所属角色ID</div>
+						</th>
+						<th>
+							<div class="thcell">注册时间</div>
+						</th>
+						<th>
+							<div class="thcell">操作</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody id="regContainer"></tbody>
+			</table>
+			<div class="pagin-btm clearFix">
+				<div class="pagination"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<textarea class="muban" id="regUserTemp" style="display:none">
+	{{#results}}
+	<tr mid="{{id}}"  data-type="{{role}}">
+		<td class="thcellId">
+			<div class="tdcell">{{id}}</div>
+		</td>
+		<td>
+			<div class="tdcell">
+				<a href="javascript:void(0)" class="resend">{{phone}}</a>
+			</div>
+		</td>
+		<td>
+			<div class="tdcell">{{userType}}</div>
+		</td>
+		{{#authShow}}
+		<td class="thcellId authHide">
+			<div class="tdcell">
+				{{#isAuth}} <i class="iconfont changeAuth" data-auth="{{isAuth}}" style="color: rgb(254, 207, 16);">&#xe620;</i>
+				{{/isAuth}}
+				{{^isAuth}} <i class="iconfont changeAuth" data-auth="{{isAuth}}">&#xe61f;</i>
+				{{/isAuth}}
+			</div>
+		</td>
+		{{/authShow}}
+		<td>
+			<div class="tdcell">{{userId}}</div>
+		</td>
+		<td>
+			<div class="tdcell">{{createTimeStr}}</div>
+		</td>
+		<td>
+			<div class="tdcell">
+				<a href="javascript:;" class="btnStd btnSmall editbtn" data-id="{{id}}">编辑</a>
+				<a href="javascript:;" class="btnStd btnSmall delbtn" data-id="{{id}}">删除</a>
+			</div>
+		</td>
+	</tr>
+	{{/results}}
+</textarea>
+*{ 重新给用户发送验证码 }*
+<div class="popWrapper" id="repeatSend">
+	<div class="popWndFrame">
+		<div class="modalWnd" tr-url="" id="reSendWrapper">
+			#{authenticityToken/}
+			<input type="hidden" id="hidReSendFormId" value=""/>
+			<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口">
+				<i class="iconfont mr10">&#xe60c;</i>
+			</a>
+			<div class="modalWndInner">
+				<form id="frmReSend">
+					<div class="form_line">
+						<label class="lbl">手机号码</label>
+						<div class="controls">
+							<input class="inputText" id="mobile" type="text" value="" name="user_mobile" maxlength="11"/>
+						</div>
+						<div for="mobile" class="validateLine clearfix"></div>
+					</div>
+					<div class="form_line">
+						<label class="lbl">当前验证码</label>
+						<div class="controls">
+							<input class="inputText" id="captcha" type="text" value="" name="captcha" readonly/>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="wndBotButtonSection">
+				<a id="btnReSend" href="javascript:;" class="btnStd btnLarge btnYellow-shadow trSubmit">重新发送注册验证码</a>
+			</div>
+		</div>
+	</div>
+</div>
+*{ 模拟用户登录 }*
+<div class="popWrapper" id="simulateLogin">
+	<div class="popWndFrame">
+		<div class="modalWnd" tr-url="" id="simulateLoginWrapper">
+			<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口">
+				<i class="iconfont mr10">&#xe60c;</i>
+			</a>
+			<div class="modalWndInner">
+				<form id="frmSimulateLogin" action="/sys/user/mock" method="post" target="_blank" >
+					#{authenticityToken/}
+					<div class="form_line">
+						<label class="lbl">手机号码</label>
+						<div class="controls">
+							<input class="inputText" id="simulateMobile" type="text" value="" name="phone" maxlength="11"/>
+						</div>
+						<div for="simulateMobile" class="validateLine clearfix"></div>
+					</div>
+				</form>
+			</div>
+			<div class="wndBotButtonSection">
+				<a id="btnSimulateLogin" href="javascript:;" class="btnStd btnLarge btnYellow-shadow trSubmit">登录</a>
+			</div>
+		</div>
+	</div>
+</div>
+*{ 编辑用户信息 }*
+<div class="popWrapper" id="editRegist">
+	<div class="popWndFrame">
+		<div class="modalWnd" tr-url="/sys/user/save" id="editUserWnd">
+			#{authenticityToken/}
+			<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口">
+				<i class="iconfont mr10">&#xe60c;</i>
+			</a>
+			<div class="modalWndInner">
+				<div class="supplierMessage">
+					<form id="frmEdit_sup">
+						<input type="hidden" id="hidReAddFormId" class="trControl" tr-param="user.id" value=""/>
+						<div class="column_left">
+							<h3>编辑注册用户</h3>
+						</div>
+						<div class="form_line">
+							<label class="lbl">手机号码</label>
+							<div class="controls">
+								<span class="editmess" id="ed_phone">13565127896</span>
+							</div>
+						</div>
+						<div class="form_line">
+							<label class="lbl">Email</label>
+							<div class="controls">
+								<input class="inputText trControl" id="ed_email" type="text" value="" name="edit.email" maxlength="25" tr-param="user.email"/>
+							</div>
+							<div for="ed_email" class="validateLine clearfix"></div>
+						</div>
+						<div class="form_line">
+							<label class="lbl">名称</label>
+							<div class="controls">
+								<input class="inputText trControl" id="ed_username" type="text" value="" name="edit.name" tr-param="user.name" maxlength="20"/>
+							</div>
+							<div for="ed_username" class="validateLine clearfix"></div>
+						</div>
+						<div class="form_line">
+							<label class="lbl">角色</label>
+							<div class="controls" style="padding-top: 3px;">
+								<input type="hidden" class="trControl" tr-param="user.role" value="RETAILER"/>
+								<input id="editret" type="radio" name="edit.role" value="RETAILER" checked="checked" /><label for="editret">零售商</label>
+								<input id="editsup" type="radio" name="edit.role" value="SUPPLIER" class="ml10" /><label for="editsup">供应商</label>
+							</div>
+						</div>
+						<div class="form_line">
+							<label class="lbl" id="changeIdName">角色ID</label>
+							<div class="controls">
+								<input class="inputText trControl" id="ed_userId" type="text" value="" name="edit.userId" maxlength="15" tr-param="user.userId"/>
+							</div>
+							<div for="ed_userId" class="validateLine clearfix"></div>
+						</div>
+						<div class="form_line">
+							<label class="lbl">qq号</label>
+							<div class="controls">
+								<input id="ed_qq" name="edit.qq" type="text" class="inputText trControl" maxlength="15" value="" tr-param="user.qq"/>
+							</div>
+							<div for="ed_qq" class="validateLine clearfix"></div>
+						</div>
+						<div class="form_line">
+							<label class="lbl">微信号</label>
+							<div class="controls">
+								<input id="ed_weixin" name="edit.weixin" type="text" class="inputText trControl"  maxlength="20" tr-param="user.weixin" />
+							</div>
+							<div for="ed_weixin" class="validateLine clearfix"></div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="wndBotButtonSection" style="border-bottom: 1px solid #ccc">
+				<a id="btnRegfirm" href="javascript:;" class="btnStd btnLarge btnYellow-shadow trSubmit">保存</a>
+			</div>
+			<div class="wndBotButtonSection">
+				<a id="btnrePass" href="javascript:;" class="btnStd btnLarge btnYellow-shadow">重置密码</a>
+			</div>
+		</div>
+	</div>
+</div>
+*{ 添加用户信息 }*
+<div class="popWrapper" id="registeUser">
+	<div class="popWndFrame">
+		<div class="modalWnd" tr-url="/sys/user/save" id="addUserWnd">	
+			<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口">
+				<i class="iconfont mr10">&#xe60c;</i>
+			</a>
+			<div class="modalWndInner">
+				<form id="frmRegistSupplier">
+					<div class="column_left">
+						<h3>添加用户</h3>
+					</div>
+					#{authenticityToken/}
+						<div class="form_line">
+							<label class="lbl">手机号码</label>
+							<div class="controls">
+								<input class="inputText trControl" id="add_phone" type="text" value="" name="add.phone" maxlength="11" tr-param="user.phone" placeholder="手机号码" />
+							</div>
+							<div for="add_phone" class="validateLine clearfix"></div>
+						</div>
+						<div class="form_line">
+							<label class="lbl">Email</label>
+							<div class="controls">
+								<input class="inputText trControl" id="add_email" type="text" value="" name="add.email" maxlength="25" tr-param="user.email" placeholder="Email"/>
+							</div>
+							<div for="add_email" class="validateLine clearfix"></div>
+						</div>
+						<div class="form_line">
+							<label class="lbl">密码</label>
+							<div class="controls">
+								<input class="inputText trControl" id="add_password" onfocus="this.type='password'" type="text" value="" name="add.password" maxlength="20" tr-param="user.password"/>
+							</div>
+							<div for="add_password" class="validateLine clearfix"></div>
+						</div>
+						<div class="form_line">
+							<label class="lbl">名称</label>
+							<div class="controls">
+								<input class="inputText trControl" id="add_username" type="text" value="" name="add.name" maxlength="20" tr-param="user.name" placeholder="名称"/>
+							</div>
+							<div for="add_username" class="validateLine clearfix"></div>
+						</div>
+						<div class="form_line">
+							<label class="lbl">角色</label>
+							<div class="controls " style="padding-top: 3px;">
+								<input type="hidden" class="trControl" tr-param="user.role" value="RETAILER"/>
+								<input id="addret" type="radio" name="add.role" value="RETAILER" checked="checked" /><label for="addret">零售商</label>
+								<input id="addsup" type="radio" name="add.role" value="SUPPLIER" style="margin-left: 10px"/><label for="addsup">供应商</label>
+							</div>
+						</div>
+						<div class="form_line">
+							<label class="lbl">角色ID</label>
+							<div class="controls">
+								<input class="inputText trControl" tr-param="user.userId" id="add_userId" type="text" value="" name="add.userId" maxlength="15" placeholder="角色ID"/>
+							</div>
+							<div for="add_userId" class="validateLine clearfix"></div>
+						</div>
+						<div class="form_line">
+							<label class="lbl">qq号</label>
+							<div class="controls">
+								<input id="add_qq" name="add.qq" type="text" class="inputText trControl" maxlength="15" value="" tr-param="user.qq" placeholder="qq号"/>
+							</div>
+							<div for="add_qq" class="validateLine clearfix"></div>
+						</div>
+						<div class="form_line">
+							<label class="lbl">微信号</label>
+							<div class="controls">
+								<input id="add_weixin" name="add.weixin" type="text" class="inputText trControl"  maxlength="20" tr-param="user.weixin" placeholder="微信号"/>
+							</div>
+							<div for="add_weixin" class="validateLine clearfix"></div>
+						</div>
+				</form>
+			</div>
+			<div class="wndBotButtonSection">
+				<a id="btnAdd" href="javascript:;" class="btnStd btnLarge btnYellow-shadow trSubmit">保存</a>
+			</div>
+		</div>
+	</div>
+</div>
+#{set 'moreManaScripts'}
+<script src="@{'/public/javascripts/date.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/jquery.datePicker.js'}" type="text/javascript"></script>
+<script type="text/javascript" src="/public/javascripts/bizComponents/manage/userManage.js"></script>
+<script type="text/javascript">APP.QnDomain = '${upload_domain}';App.module = 'userManage';</script>
+#{/set}

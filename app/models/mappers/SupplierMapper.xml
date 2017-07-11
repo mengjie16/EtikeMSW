@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="models.mappers.SupplierMapper">
+	<resultMap id="BaseResultMap" type="models.Supplier"></resultMap>
+	<insert id="insert" parameterType="models.Supplier">
+		<selectKey resultType="java.lang.Short" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into supplier
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			name,
+			product,
+			country,
+			country_id,
+			province,
+			province_id,
+			city,
+			region,
+			address,
+			domain,
+			type,
+			note,
+			create_time,
+			update_time,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{name},
+			#{product},
+			#{country},
+			#{countryId},
+			#{province},
+			#{provinceId},
+			#{city},
+			#{region},
+			#{address},
+			#{domain},
+			#{type},
+			#{note},
+			#{createTime},
+			#{updateTime}
+		</trim>
+	</insert>
+	<update id="updateById" parameterType="models.Supplier">
+		update supplier
+		<set>
+			<if test="name !=null and name !=''">
+				name = #{name},
+			</if>
+			<if test="product !=null and product !=''">
+				product = #{product},
+			</if>
+			<if test="country !=null and country !=''">
+				country = #{country},
+			</if>
+			<if test="countryId > 0 ">
+				country_id = #{countryId},
+			</if>
+			<if test="province !=null and province !=''">
+				province = #{province},
+			</if>
+			<if test="provinceId >0 ">
+				province_id = #{provinceId},
+			</if>
+			<if test="city !=null and city !=''">
+				city = #{city},
+			</if>
+			<if test="region!=null and region !=''">
+				region = #{region},
+			</if>
+			address = #{address},
+			domain = #{domain},
+			<if test="type !=null">
+				type = #{type},
+			</if>
+			note = #{note},
+			update_time = #{updateTime}
+		</set>
+		where id = #{id}
+	</update>
+	<update id="updateByVo" parameterType="vos.SupplierVo">
+		update supplier
+		<set>
+			<if test="name !=null and name!=''">
+				name = #{name},
+			</if>
+			<if test="company !=null and company !=''">
+				company = #{company},
+			</if>
+			<if test="industry !=null and industry!=''">
+				industry = #{industry},
+			</if>
+			<if test="product !=null and product!=''">
+				product = #{product},
+			</if>
+			<if test="email !=null and email!=''">
+				email = #{email},
+			</if>
+			<if test="country !=null and country!=''">
+				country = #{country},
+			</if>
+			<if test="countryId > 0 ">
+				country_id = #{countryId},
+			</if>
+			<if test="province !=null and province!=''">
+				province = #{province},
+			</if>
+			<if test="provinceId >0 ">
+				province_id = #{provinceId},
+			</if>
+			<if test="city !=null and city!=''">
+				city = #{city},
+			</if>
+			<if test="region!=null and region!=''">
+				region = #{region},
+			</if>
+			<if test="address !=null and address!=''">
+				address = #{address},
+			</if>
+			update_time = now()
+		</set>
+		where id = #{id}
+	</update>
+	<select id="selectListByPage" resultMap="BaseResultMap">
+		select * from supplier s
+		<include refid="where" />
+		order by s.create_time desc
+		limit #{startIndex},
+		#{pageSize}
+	</select>
+	<select id="countTotalVo" resultType="java.lang.Integer">
+		select count(1) from supplier s
+		<include refid="where" />
+	</select>
+	<sql id="where">
+		<where>
+			<if test="name !=null and name !=''">
+				and s.name like '%${name}%'
+			</if>
+			<if test="type!=null">
+				and s.type = #{type}
+			</if>
+			<if test="createTimeStart !=null">
+				<![CDATA[ and s.create_time>=#{createTimeStart} ]]>
+			</if>
+			<if test="createTimeEnd !=null">
+				<![CDATA[ and s.create_time<=#{createTimeEnd} ]]>
+			</if>
+		</where>
+	</sql>
+</mapper>

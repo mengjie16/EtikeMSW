@@ -1,0 +1,214 @@
+#{extends './manage-frame.html' /}
+#{set title:'专辑管理' /}
+#{set 'moreManaStyles'}
+<link href="@{'/public/stylesheets/album.css'}" rel="stylesheet" type="text/css" />
+<style type="text/css">
+	.popWndFrame {
+    margin: 0 auto;
+    max-width: 750px;
+}
+	.tbl_wrap_type01 {
+		max-height: 400px;
+		overflow-y: auto;
+	}
+	.modalWnd {
+		margin: 20px auto;
+	}
+	#albumItemsContainer .thcellId {
+		width: 130px;
+	}
+</style>
+#{/set}
+<div class="cont_mypage container_body" style="margin-top:30px">
+	<div class="container_contents container_myMain_contents">
+		<div style="margin-top:0px;">
+			<div class="column_left">
+				<h3>专辑管理
+				<a class="btnStd btnMedium mr6" id="albumCreateBtn" style="float:right">添加</a></h3>
+			</div>
+		</div>
+		<div class="tbl_wrap_type02 pt20" id="albumManageContainer" style="padding-top:0">
+			#{authenticityToken/}
+			<table summary="" class="tbl_type01 tbHoverable">
+				<thead>
+					<tr>
+						<th class="thcellId">
+							<div class="thcell">ID</div>
+						</th>
+						<th>
+							<div class="thcell">专辑名称</div>
+						</th>
+						<th class="thcell120">
+							<div class="thcell">商品数目</div>
+						</th>
+						<th class="thcell120">
+							<div class="thcell">创建时间</div>
+						</th>
+						<th>
+							<div class="thcell">操作</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+		<!-- <div class="popWrapper" style="display: none;" id="tr_loading_mask">
+			<img class="tr_juhua" src="@{'/public/images/pre_loading.gif'}" />
+		</div> -->
+	</div>
+</div>
+<textarea class="muban" id="albumTemp" style="display:none">
+	{{#results}}
+	<tr mid="{{id}}">
+		<td class="thcellId">
+			<div class="tdcell" style="text-align: center">{{id}}</div>
+		</td>
+		<td>
+			<div class="tdcell"><div class="albumTitle"><span class="titleText">{{name}}</span></div></div>
+		</td>
+		<td class="thcell120">
+			<div class="tdcell itemcount">{{itemCount}}</div>
+		</td>
+		<td class="thcell120">
+			<div class="tdcell">{{formatCreateTime}}</div>
+		</td>
+		<td>
+			<div class="tdcell">
+				<a href="javascript:;" class="btnStd btnSmall mr6 editbtn">编辑商品</a><a href="javascript:;" class="btnStd btnSmall mr6 authorizebtn">授权管理</a><a href="javascript:;" class="btnStd btnSmall delbtn">删除</a>
+			</div>
+		</td>
+	</tr>
+	{{/results}}
+</textarea>
+<textarea class="muban" id="itemsTemp" style="display:none">
+	{{#items}}
+	<tr mid="{{itemId}}" class="tritem">
+		<td>
+			<div class="tdcell" style="text-align: center">{{index}}</div>
+		</td>
+		<td class="tditemid">
+			<div class="thcellId">
+				<div class="tdcell">
+					<a href="/item/{{itemId}}" target="_blank" class="itemId">{{itemId}}</a>
+				</div>
+			</div>
+		</td>
+		<td>
+			<div class="tdcell" style="position:relative">
+				<div class="maskImg" id="al_item_img_{{index}}" img-container="al_img_{{index}}">
+					<input type="hidden" value="{{picUrl}}" name=""/></div>
+				<div class="albumImg" id="al_img_{{index}}">
+					<img src="{{picUrl}}?imageView2/2/w/50/q/100"/>	
+					<div class="tip"> <b></b>
+						<em>{{title}}</em>
+					</div>
+				</div>
+			</div>
+		</td>
+		<td class="tdprice">
+			<div class="tdcell">
+				<span class="price">{{formatPrice}}</span>
+			</div>
+		</td>
+		<td class="thcelledit">
+			<div class="tdcell">
+				<a href="javascript:;" class="btnStd btnSmall mr6 besure" style="display:none">确认</a>
+				<a href="javascript:;" class="btnStd btnSmall delbtn">删除</a>
+			</div>
+		</td>
+	</tr>
+	{{/items}}
+</textarea>
+<textarea class="muban" id="authTemp" style="display:none">
+	{{#wechatUsers}}
+	<li class="authuser" data-id="{{id}}">
+		<p class="userid">
+			ID: <em>{{id}}</em> <i class="iconfont delete">&#xe606;</i>
+		</p>
+		<div class="userimg">
+			<img src="{{avatar}}"/>	
+		</div>
+		<p class="username">{{nick}}</p>
+	</li>
+	{{/wechatUsers}}
+</textarea>
+<div class="popWrapper" id="editAlbum">
+	<div class="popWndFrame">
+		<div class="modalWnd" tr-url="" id="editAlbumWrapper">
+			<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口"><i class="iconfont mr10">&#xe60c;</i></a>
+			<div class="modalWndInner">
+				<form id="frmEditAlbum" method="post">
+					#{authenticityToken/}
+					<div class="column_left">
+						<h3>编辑<span id="album_title" class="ml10 mr10"></span>的商品</h3>
+						<div class="btncontainer"><span class="currentnum">当前商品数 <em>0</em></span><a class="btnStd btnSmall fr" id="itemCreateBtn">添加</a></div>
+					</div>
+					<div class="tbl_wrap_type01 pt20" id="albumItemsContainer" style="padding-top:0">
+						<table summary="" class="tbl_type01 tbHoverable">
+							<thead>
+								<tr>
+									<th>
+										<div class="thcell">序号</div>
+									</th>
+									<th class="thcellId">
+										<div class="thcell">ID</div>
+									</th>
+									<th>
+										<div class="thcell">图片</div>
+									</th>
+									<th>
+										<div class="thcell">显示价格</div>
+									</th>
+									<th class="thcelledit">
+										<div class="thcell">操作</div>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+				</form>
+			</div>
+			<div class="wndBotButtonSection">
+				<a id="btnAlbumfirm" href="javascript:;" class="btnStd btnLarge btnYellow-shadow trSubmit">保存</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="popWrapper" id="editAuthorize">
+	<div class="popWndFrame">
+		<div class="modalWnd" tr-url="" id="editAlbumWrapper">
+			<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口"><i class="iconfont mr10">&#xe60c;</i></a>
+			<div class="modalWndInner">
+				<form id="frmEditAlbum" method="post">
+					#{authenticityToken/}
+					<div class="column_left">
+						<h3>编辑<span id="album_title" class="ml10 mr10"></span>的授权用户</h3>
+						<div class="btncontainer"><a class="btnStd btnMedium mr6 fr" id="addUserBtn">添加现有用户</a><a class="btnStd btnMedium mr6 fr" id="preinstallBtn">预设用户</a></div>
+					</div>
+					<input type="hidden" name="am_id"/>
+					<div class="userlist">
+						<ul id="authUsers">
+							
+						</ul>
+					</div>
+					<div class="preinstalList">
+						<p>预设用户昵称关键词</p>
+						<ul id="preset">
+							
+						</ul>
+					</div>
+				</form>
+			</div>
+			<div class="wndBotButtonSection">
+				<a id="btnPrefirm" href="javascript:;" class="btnStd btnLarge btnYellow-shadow trSubmit">保存</a>
+			</div>
+		</div>
+	</div>
+</div>
+#{set 'moreManaScripts'}
+<script type="text/javascript" src="/public/javascripts/bizComponents/manage/albumManage.js"></script>
+<script type="text/javascript">APP.QnDomain = '${upload_domain}';App.module = 'albumManage';</script>
+#{/set}

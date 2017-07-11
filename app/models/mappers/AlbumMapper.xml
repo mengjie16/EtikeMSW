@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="models.mappers.AlbumMapper">
+	<resultMap id="BaseResultMap" type="models.Album">
+		<result column="album_items" property="albumItems" typeHandler="com.aton.db.handler.AlbumItemHandler"/>
+	</resultMap>
+	<insert id="insert" parameterType="models.Album">
+		insert into album
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			name,album_items,create_time
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+				#{name},
+				#{albumItems,typeHandler=com.aton.db.handler.AlbumItemHandler},
+				#{createTime}
+		</trim>
+	</insert>
+    <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    	select * from album where id=#{id}
+    </select>
+	<update id="updateById" parameterType="models.Album">
+		update album
+		<set>
+			<if test="name !=null and name != ''">
+				name = #{name},
+			</if>
+			<if test="albumItems!= null">
+				album_items = #{albumItems,typeHandler=com.aton.db.handler.AlbumItemHandler}
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	<update id="updateNameById" parameterType="models.Album">
+		update album
+		<set>
+			<if test="name !=null and name != ''">
+				name = #{name}
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	<select id="selectList" resultMap="BaseResultMap">
+		select * from album a
+		order by a.create_time desc
+	</select>
+</mapper>

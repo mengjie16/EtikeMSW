@@ -1,0 +1,146 @@
+#{extends 'UserCenter/user-frame.html' /}
+#{set title:'个人中心' /}
+<div class="cont_mypage" style="margin-top:30px">
+
+	<div class="container_contents container_myMain_contents">
+		<div id="T_adBanner">
+			<a href="#" target="_blank">
+				<img src="/public/images/img/121023_powermypagebanner_700.jpg"/></a>
+		</div>
+		<div class="tit_wrap" style="margin-top:0px;">
+
+			<div class="column_left" style="padding-top:20px;">
+				<h3 style="font-size:15px;color:#444;">你喜欢的活动信息</h3>
+			</div>
+			<div class="column_right" style="padding-top:20px;">
+				<a href="#" class="more" style="padding-top:3px">更多 +</a>
+			</div>
+		</div>
+		<div class="tbl_wrap">
+			<div class="tbl_wrap_type02">
+				<table summary="" class="tbl_type03">
+					<thead>
+						<tr>
+							<th scope="col" class="col_01">
+								<div class="thcell">注册的布告</div>
+							</th>
+							<th scope="col">
+								<div class="thcell">
+									注册的留言
+									<span class="bar">
+										<img src="/public/images/img/bar_tbl_type03.gif" alt=""/></span>
+								</div>
+							</th>
+							<th scope="col">
+								<div class="thcell">
+									我的帖子的回帖
+									<span class="bar">
+										<img src="/public/images/img/bar_tbl_type03.gif" alt=""/></span>
+								</div>
+							</th>
+							<th scope="col">
+								<div class="thcell">
+									中奖活动
+									<span class="bar">
+										<img src="/public/images/img/bar_tbl_type03.gif" alt=""/></span>
+								</div>
+							</th>
+							<th scope="col">
+								<div class="thcell">
+									问/答
+									<span class="bar">
+										<img src="/public/images/img/bar_tbl_type03.gif" alt=""/></span>
+								</div>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="col_01">
+								<div class="tdcell">
+									<a href="#" class="f_tahoma point_txt2">0</a>
+								</div>
+							</td>
+							<td>
+								<div class="tdcell">
+									<a href="#" class="f_tahoma point_txt2">0</a>
+								</div>
+							</td>
+							<td>
+								<div class="tdcell">
+									<a href="#" class="f_tahoma point_txt2">0</a>
+								</div>
+							</td>
+							<td>
+								<div class="tdcell">
+									<a href="#" class="f_tahoma point_txt2">0</a>
+								</div>
+							</td>
+							<td>
+								<div class="tdcell">
+									<a href="#" target="_blank" class="f_tahoma point_txt2">0/0</a>
+
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="tit_wrap">
+			<div class="column_left">
+				<h3 style="font-size:15px;color:#444;">最近两周的订单信息</h3>
+			</div>
+			<div class="column_right">
+				<a href="#" class="more" style="padding-top:3px">更多 +</a>
+			</div>
+		</div>
+		<div class="tbl_wrap">
+			<div class="tbl_wrap_type01">
+				<table summary="" class="tbl_type01">
+					<thead>
+						<tr>
+							<th scope="col" class="col_01">
+								<div class="thcell">订单号</div>
+							</th>
+							<th scope="col">
+								<div class="thcell">产品名称</div>
+							</th>
+							<th scope="col">
+								<div class="thcell">结算金额</div>
+							</th>
+							<th scope="col">
+								<div class="thcell">配送现状</div>
+							</th>
+							<th scope="col">
+								<div class="thcell">取消/退货</div>
+							</th>
+							<th scope="col">
+								<div class="thcell">购物积分</div>
+							</th>
+							<th scope="col">
+								<div class="thcell">产品评价</div>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						<tr>
+							<td height="69" colspan="7" style="text-align:center;padding-top:25px;font-size:14px;">近来订货明细.</td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- //	cont_mypage -->
+
+</div>
+<!-- //content-area -->
+#{set 'moreScripts'}
+<script type="text/javascript" src="/public/javascripts/libs/qiniu.min.js"></script>
+<script type="text/javascript" src="/public/javascripts/plupload/plupload.full.min.js"></script>
+<script type="text/javascript" src="/public/javascripts/bizComponents/home.js"></script>
+<script type="text/javascript">APP.QnDomain = '${upload_domain}';</script>
+#{/set}

@@ -1,0 +1,100 @@
+#{extends 'simple-frame.html' /}
+#{set title:'登录' /}
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/login.css'}" />
+#{/set}
+<div class="body">
+    <div class="contentWrap">
+        <div class="leftArea">
+            <div class="loginTabs">账号登录</div>
+            <div class="loginContents">
+                <div class="error_panel">${flash?.error}</div>
+                #{if quickLogin}
+                <form id="frmQuickLogin" tr-url="/user/quick_login">
+                    #{authenticityToken/}
+                    <div class="userInfo clearfix">
+                        <img style="height: 85px;width: 85px" src="${user.avatar}"/>
+                        <div class="loginBtn" id="btnquickLogin" style="margin-left:50px;float:left">
+                            <a href="javascript:;" class="rightLogin trSubmit">直接登录</a>
+                            <a href="/login?redirectUrl=${rUrl?.raw()}&switchUser=true" target="_self" class="changeUser">切换账号？</a>
+                        </div>
+                        <div class="clboth"></div>
+                        <div class="controls">${user.name}</div>
+                    </div>
+                </form>
+                #{/if}
+                #{else}
+                <form id="frmLogin" tr-url="/doLogin">
+                    #{authenticityToken/}
+                    <div class="clearfix">
+                        <ul class="loginInfo">
+                            <li>
+                                <div style="width:60px;" class="f14">手机号</div>
+                                <div style="width:180px;">
+                                    <input id="txtPhone" name="phone" type="text" class="inputText trControl" maxlength="11" placeholder="登录手机号" tr-param="phone"/>
+                                    <div for="txtPhone" class="validateLine clearfix"></div>
+                                </div>
+                            </li>
+                            <li>
+                                <div style="width:60px;" class="f14">密码</div>
+                                <div style="width:180px;">
+                                    <input id="txtPassword" name="password" type="password" class="inputText trControl" maxlength="20" placeholder="密码"  tr-param="password"/>
+                                    <div for="txtPassword" class="validateLine clearfix"></div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="loginBtn" id="btnLogin">
+                            <a href="javascript:;" class="normalLogin trSubmit">登 录</a>
+                        </div>
+                    </div>
+                    <div class="loginBottom mt10">
+                        <div class="login_bottom_l">
+                            <input type="checkbox" name="savePass" id="secure_connection1" class="mr4" tr-param="savePass" style="margin:0" />
+                            保存
+                        </div>
+                        <div class="login_bottom_r">
+                            <a href="/pwd/retrieve/check" target="_self">忘记密码?</a>
+                        </div>
+                    </div>
+                </form>
+                #{/else}
+                <input type="hidden" name="rUrl" value="${rUrl?.raw()}"/>
+            </div>
+        </div>
+        <!-- third party login -->
+        <!-- <div class="rightArea">
+            <form returnurl="" action="" id="ExternalLoginForm" method="post">
+                <input name="" type="hidden" value=""/>
+                <div class="">
+                    <p class="sns_tit1">第三方登录</p>
+                    <div class="third-party-login">
+                        <a href="#">
+                            <span class="icon weixin"></span>
+                        </a>
+                        <a href="#">
+                            <span class="icon qq"></span>
+                        </a>
+                        <a href="#">
+                            <span class="icon weibo"></span>
+                        </a>
+                    </div>
+                    <p class="sns_tit2">&nbsp;&nbsp;* 第三方可直接进行登录</p>
+                </div>
+            </form>
+        </div> -->
+    </div>
+    <div class="join_area">
+        <div class="join_area_l">
+            <p class="txt1">还不是会员?</p>
+            <p class="txt2">立即成为会员，享受更多积分/优惠券等优惠活动!</p>
+        </div>
+        <div class="join_area_r">
+            <a href="/regist"  style="display:inline-block;width:133px;height:48px;line-height:48px;text-align:center;color:#fff;background-color:#3B3B3B;font-size:15px;text-decoration:none">立即注册</a>
+        </div>
+    </div>
+</div>
+#{set 'moreScripts'}
+<script type="text/javascript" src="/public/javascripts/libs/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/public/javascripts/validate.plus.js"></script>
+<script type="text/javascript" src="/public/javascripts/bizComponents/login.js"></script>
+#{/set}

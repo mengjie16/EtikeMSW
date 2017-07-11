@@ -1,0 +1,107 @@
+#{extends 'UserCenter/user-frame.html' /}
+#{set title:'提交订单' /}
+#{set 'moreSubStyles'}
+<link href="@{'/public/stylesheets/retailer.css'}" rel="stylesheet" type="text/css" />
+#{/set}
+<div class="cont_mypage" style="margin-top:30px" id="container">
+	<div class="container_contents container_myMain_contents">
+		<div style="margin-top:0px;">
+			<div class="column_left">
+				<h3>提交订单 - (4/4)
+				</h3>
+			</div>
+		</div>
+		<div class="tbl_wrap_type02 pt20">
+			<h3 class="prevStep">上一步：您已将商品信息与吐司宝贝商品进行匹配</h3>
+				#{authenticityToken/}
+				<h3>第四步：核对最终结果</h3>
+				<div class="form_line">
+					<div class="searchDiv">
+						<span>输入搜索关键词</span>
+						<input type="text" class="inputText" name="" id="orderSearch"/>
+						<a class="btnStd btnSmall" id="orderSearchBtn">搜索</a>
+					</div>
+					<div class="orderList">
+						<table class="tbl">
+							<thead>
+								<tr>
+									<th>
+										<div>订单号</div>
+									</th>
+									<th>
+										<div>商品id</div>
+									</th>
+									<th>
+										<div>商品规格</div>
+									</th>
+									<th>
+										<div>数量</div>
+									</th>
+									<th>
+										<div>客户姓名</div>
+									</th>
+									<th>
+										<div>电话号码</div>
+									</th>
+									<th>
+										<div>客户地址-省</div>
+									</th>
+									<th>
+										<div>客户地址-市</div>
+									</th>
+									<th>
+										<div>客户地址-区</div>
+									</th>
+									<th>
+										<div>客户地址详细</div>
+									</th>
+									<th>
+										<div>操作</div>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								#{if orderVoList}
+									#{list items:orderVoList, as : 'orderVo'}
+										<tr data-order-no="${orderVo_index-1}">
+										<td>${orderVo.outOrderNo}</td>
+										<td><div>${orderVo.itemId}</div></td>
+										<td><div>${orderVo.skuStr}</div></td>
+										<td><div>${orderVo.num}</div></td>
+										<td><div>${orderVo.buyerName}</div></td>
+										<td><div>${orderVo.contact}</div></td>
+										<td><div>${orderVo.province}</div></td>
+										<td><div>${orderVo.city}</div></td>
+										<td><div>${orderVo.region}</div></td>
+										<td><div class="addresswidth">${orderVo.address}</div></td>
+										<td><div><a class="btnStd btnSmall delbtn"><i class="iconfont mr5">&#xe606;</i>删除</a></div></td>
+									</tr>
+									#{/list}
+								#{/if}
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+				<div class="button_section" id="btnSubmit" style="text-align: center">
+					<a class="btnStd btnLarge btnYellow-shadow" href="javascript:;">提交</a>
+				</div>
+		</div>
+	</div>
+	<!-- //	cont_mypage -->
+</div>
+<div class="popWrapper" style="display: none;" id="tr_loading_mask">
+	<img class="tr_juhua" src="@{'/public/images/pre_loading.gif'}" />
+</div>
+<div class="popupError">
+	<h3>警告</h3>
+	<div class="errorText"></div>
+	<div class="sureBtn">确 定</div>
+</div>
+<!-- //content-area -->
+#{set 'moreSubScripts'}
+<script src="@{'/public/javascripts/libs/mustache.min.js'}" type="text/javascript"></script>
+<script type="text/javascript" src="/public/javascripts/bizComponents/retailer/orderStepFour.js"></script>
+<script type="text/javascript">App.module = 'orderStepOne';</script>
+#{/set}

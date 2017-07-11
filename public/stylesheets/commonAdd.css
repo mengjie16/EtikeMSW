@@ -1,0 +1,89 @@
+#listDetail_Div {position:fixed; top:100px; left:50%; margin-left:-465px; background-color:transparent; z-index:10001; display:none;}
+strong{font-weight:bold; font-size:100%;}
+
+
+div.con_newGoods ul.cateB5 li.last a{background:none;}
+div.con_top5 ul.cateB5 li.last a{background:none;}
+
+
+.product_info P.price a{color:#727682;}
+div.con_trendShop ul li div.product_info p.price a{color:#ccc;}
+div.con_trendShop ul li:hover div.product_info p.price p a{color:#ccc;}
+.product_info P.price a strong.gray{color:#727682;}
+
+.BestBrandShopImgSize{width:293px; height:318px;}
+
+
+#newGood li a span {max-width:80px; height:50px; overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+#cateB5 li a span  {max-width:80px; height:50px; overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.mdChoiceTitle  {display:inline-block; max-width:200px; height:50px; overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+
+div.con_review div.con_review_txt p:first-child{text-overflow:ellipsis; white-space:nowrap;word-wrap:break-word;}
+div.con_review div.con_review_txt p:first-child a{font-size:11px; color:#939393; }
+
+.CategoryLocation div.content_top_left h3 {width:auto;}
+.CategoryLocation div.content_top_left div.left_con{width:190px;}
+.CategoryLocation div.content_top_left div.selectbox {width:140px}
+.CategoryLocation div.content_top_left div.selectbox select {width:150px;}
+.CategoryLocation div.content_top_left a.history_back img {position:relative; top:-1px;}
+
+
+.listDetail_CloseBtn {position:relative; left:-4px;} 
+
+
+div.con_review div.con_review_txt p em a{color:#58637e;}
+.hType .tabCont ul li .con_slider_list ul li.prod_3 a.product_wrap img{width:240px; height:240px;}
+
+
+.curtain {width:100%; height:100%; position:fixed; top:0px; left:0px; z-index:2507; background:#000; opacity:0.6;filter:alpha(opacity=60);}
+.magicStory {width:1060px; height:517px; position:fixed; top:246px; left:50%;z-index:2508; margin-left:-530px;}
+.magicStory .controls {width:808px; margin:0 auto; margin-bottom:27px;}
+.magicStory .controls:after {content:''; display:block; clear:both;}
+.magicStory .controls .closeBtns {width:230px; height:37px; position:relative;float:right;}
+.magicStory .controls .closeBtns input {position:absolute; top:15px; left:10px;}
+.magicStory .controls .closeBtns .curatinCloseBtn {display:block; width:74px; height:37px; float:right; }
+.magicStory .controls ul.bullets {float:right;}
+.magicStory .controls ul.bullets li {width:37px; height:37px; float:left;margin-right:8px;}
+.magicStory .controls ul.bullets li a {display:block; width:100%; height:100%; }
+.magicStory .controls ul.bullets li.selected a {background-position-y:-37px;}
+.magicStory .bannersWrap {}
+.magicStory .bannersWrap .curtainLeft {width:126px; height:278px; float:left; padding-top:175px;}
+.magicStory .bannersWrap .curtainBanner {width:808px; height:453px; float:left;}
+.magicStory .bannersWrap .curtainRight {width:126px; height:278px; float:left; padding-top:175px; text-align:right;}
+.magicStory .bannersWrap .curtainBanner .curtainBanners li {display:none;}
+.magicStory .bannersWrap .curtainBanner .curtainBanners li.selected {display:block;}
+
+#divTablet .Box_top { background-color: #A39789; height: 2px; }
+#divTablet .Box_Left { background-color: #A39789; width: 2px; }
+#divTablet .Box_Body { padding: 0 32px; }
+#divTablet .Box_Body_Zoom { padding: 10px; }
+#divTablet .Box_right { background-color: #A39789; width: 2px; }
+#divTablet .Box_Bottom { background-color: #A39789; height: 2px; }
+
+#divTablet .TopCont { padding: 30px 0 20px 0; text-align: center; }
+#divTablet .TopCont span { font: bold 14px/18px color: #544D46; text-decoration: underline; vertical-align: top; }
+#divTablet .TopCont input { vertical-align: top; }
+#divTablet .BtnArea { height: 57px; vertical-align: top; padding-top: 15px; text-align: center; }
+#divTablet table { border: :2px solid  #A39789}
+
+
+.special_top_location .content_top_left {float:left; padding:14px 0 0 3px; }
+.special_top_location{position:relative; z-index:2;}
+.special_top_location h3{float:left; width:auto; margin-right:25px;}
+.special_top_location .left_con{float:left; width:190px; margin-right:5px; margin-top:0px;}
+.special_top_location .left_con{*zoom:1;}
+.special_top_location .left_con p.location_area{float:left; width:22px; margin-right:8px; padding-top:7px; font-size:11px; color:#c0c0c0;}
+.special_top_location .left_con p.location_area img{margin-right:7px; vertical-align:baseline}
+.special_top_location .left_con div.selectbox{display:inline-block; position:relative; left:0; top:0; width:164px; height:22px;}
+.special_top_location .left_con div.selectbox{*display:inline; *zoom:1;}
+.special_top_location .left_con div.selectbox ul{position:absolute; left:0; top:0; z-index:30; width:162px; background:#fff; border:1px solid #dee0e1;}
+.special_top_location .left_con div.selectbox li{display:none; overflow:hidden;background:#fff;}
+.special_top_location .left_con div.selectbox li.on{display:block;}
+.special_top_location .left_con div.selectbox li:hover{background:#eee;}
+.special_top_location .left_con div.selectbox li a{float:left; display:block; width:162px; height:16px; padding:4px 0 0 6px; color:#919191;}
+.special_top_location .left_con div.selectbox li span{display:block; position:absolute; right:0; top:0; width:20px; height:20px; }
+.special_top_location a.history_back{display:inline-block; width:72px; height:22px; margin-top:1px;}
+.special_top_location a.history_back{*display:inline; *zoom:1;}
+.special_top_location select {font-family:'Hiragino Sans GB','microsoft yahei',arial,sans-serif; font-size:13px; color:#333; width:150px;}
+.special_top_location option {font-family:'Hiragino Sans GB','microsoft yahei',arial,sans-serif; font-size:13px; color:#333; }
+.content_top_right{float:right;}

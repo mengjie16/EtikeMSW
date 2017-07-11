@@ -1,0 +1,117 @@
+#{extends 'simple-frame.html' /}
+#{set title:'找回密码' /}
+#{set 'moreStyles'}
+<link href="@{'/public/stylesheets/regist.css'}" rel="stylesheet" type="text/css" />
+<link href="@{'/public/stylesheets/retrievePass.css'}" rel="stylesheet" type="text/css" />
+#{/set}
+<div class="contentBody">
+	<div class="title" style="height:35px;">
+		<div class="keyImg">
+			<img src="/public/images/img/keyImg.png" alt="" />
+		</div>
+	</div>
+	<div class="info1">
+		<span>找回密码</span>
+		<a href="/login">登录</a>
+		<span class="login">已有账号？</span>
+	</div>
+	#{if step == '1'}
+	<div class="contentTitle">
+		<h3>01.验证手机号码</h3>
+	</div>
+	<div class="certificationTypeBox">
+		<form id="frValidUser" tr-url="/smscode/check">
+			#{authenticityToken/}
+			<div class="formLine">
+				<div class="error_panel" style="padding-left: 198px;color: #f00;line-height: 33px;height: 33px"></div>
+				<label class="f14">输入手机号</label>
+				<input id="txtPhone_ret" name="phone" type="text" class="inputText middle trControl" placeholder="手机号码" tabindex="1" maxlength="11" value="" tr-param="phone" />
+				<a href="javascript:;" id="rpSendPhoneCaptcha" class="btnSendPhoneCaptcha" style="">获取动态验证码</a>
+				<div for="txtPhone_ret" class="validateLine clearfix"></div>
+			</div>
+			<div class="formLine">
+				<label class="f14">填写验证码</label>
+				<input id="txtCaptcha_ret" name="smsCode" type="text" class="inputText middle trControl" placeholder="手机上收到的验证码" tabindex="2" value="" maxlength="6" tr-param="smsCode" />
+				<div for="txtCaptcha_ret" class="validateLine clearfix"></div>
+			</div>
+
+			<div class="okBtn mt40">
+				<a href="javascript:" class="trSubmit" id="btnRetPassSend">
+					<p class="f14">下一步</p>
+				</a>
+			</div>
+		</form>
+		<div class="sendSmsPop">
+			<form id="captchaForm" tr-url="/uservalid/sendSms">
+				<a href="javascript:;" class="popCloser"> <i class="iconfont" style="font-size:26px;color:#444">&#xe60c;</i>
+				</a>
+				<div class="header">输入图中验证码</div>
+				<div class="tc mt20">
+					<img src="/captcha" class="imgCaptcha" alt="点击刷新" />
+				</div>
+				<div class="mt20 tc">
+					<input type="hidden" value="" tr-param="phone" />
+					<input id="txtImgCaptcha_ret" name="captchaCode" type="text" class="txtImgCaptcha_ret inputText short tc" placeholder="" maxlength="4" minlength="4" tr-param="imgCaptcha" />
+					<p class="tc grey mt4">点击刷新</p>
+				</div>
+				<div for="txtImgCaptcha_ret" class="validateLine clearfix tc" style=""></div>
+				<div class="okBtn mt10 confirmSendSmsBtn">
+					<a href="javascript:">
+						<p class="f14">确认发送</p>
+					</a>
+				</div>
+			</div>
+		</form>
+	</div>
+	#{/if}
+	#{if step == '2'}
+	<div class="contentTitle">
+		<h3>02.请重新设置密码</h3>
+	</div>
+	<div class="certificationTypeBox">
+		<form id="frConfirmPass" tr-url="/pwd/submit_retrieve">
+			#{authenticityToken/}
+			<input type="hidden" value="" name="hiduim" tr-param="utm" />
+			<input type="hidden" value="" name="hidsmdCode" tr-param="smdCode" />
+			<div class="formLine">
+				<div class="error_panel" style="padding-left: 198px;color: #f00;line-height: 33px"></div>
+				<label class="f14">输入新密码</label>
+				<input id="txtPass_ret" name="password" type="password" class="inputText middle trControl" placeholder="新密码" tabindex="1" minlength="6" tr-param="password" />
+				<div for="txtPass_ret" class="validateLine clearfix"></div>
+			</div>
+
+			<div class="formLine">
+				<label class="f14">再次确认密码</label>
+				<input id="txtPassRep_ret" name="password_rep" type="password" class="inputText middle trControl" placeholder="重复密码" tabindex="2" minlength="6"/>
+				<div for="txtPassRep_ret" class="validateLine clearfix"></div>
+			</div>
+			<div class="okBtn mt40" id="btnRetPass">
+				<a href="javascript:" class="trSubmit">
+					<p class="f14">确 认</p>
+				</a>
+			</div>
+		</form>
+	</div>
+	#{/if}
+	#{if step == '3'}
+	<div class="contentTitle">
+		<h3>03.恭喜您已成功修改登录密码</h3>
+	</div>
+	<div class="certificationTypeBox">
+		<div class="success"> <i class="iconfont">&#xe609;</i>
+			<span>您的登录密码已经重新设置，请妥善保管</span>
+		</div>
+		<div class="okBtn mt40" id="btnLoginNow">
+			<a href="javascript:">
+				<p class="f14">立即登录</p>
+			</a>
+		</div>
+	</div>
+	#{/if}
+	<div style="margin-left:25px; height:38px; padding-bottom:40px;"></div>
+</div>
+#{set 'moreScripts'}
+<script type="text/javascript" src="/public/javascripts/libs/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/public/javascripts/validate.plus.js"></script>
+<script type="text/javascript" src="/public/javascripts/bizComponents/retrievePass.js"></script>
+#{/set}

@@ -1,0 +1,20 @@
+.commonbtn {
+	display: inline-block;
+  padding: 0 15px;
+  height: 22px;
+  line-height: 22px;
+  text-align: center;
+  border: 1px solid #ccc;
+  background-color: #FFCE00;
+  cursor: pointer;
+  color: #444;
+}
+.result {
+	display: none;
+}
+.commonbtn i {
+	color:#444;
+}
+.backBtn {
+  display: none
+}

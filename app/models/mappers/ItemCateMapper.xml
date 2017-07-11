@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="models.mappers.ItemCateMapper">
+    <resultMap id="BaseResultMap" type="models.ItemCate">
+    </resultMap>
+    <insert id="inserts" parameterType="List">
+    	insert ignore into item_cate (name,parent_cid,is_parent,ordinal,level,create_time) values 
+    	<foreach collection="cats" item="cat"  separator=",">
+			(#{cat.name},#{cat.parentCid},#{cat.isParent},#{cat.ordinal},#{cat.level},#{cat.createTime})
+		</foreach>
+	</insert>
+	<insert id="insert" parameterType="models.ItemCate">
+		<selectKey resultType="java.lang.Short" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into item_cate
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			name,parent_cid,is_parent,ordinal,level,create_time
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{name},#{parentCid},#{isParent},#{ordinal},#{level},#{createTime}
+		</trim>
+	</insert>
+	<update id="updateById" parameterType="models.ItemCate">
+		update item_cate
+		<set>
+			<if test="name !=null and name!=''">
+				name = #{name}
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	<update id="updateIsParent" parameterType="models.ItemCate">
+		update item_cate
+		<set>
+			is_parent = #{isParent}
+		</set>
+		where id = #{id}
+	</update>
+	<update id="updateOrdinal" parameterType="models.ItemCate">
+		update item_cate
+		<set>
+			ordinal = #{ordinal}
+		</set>
+		where id = #{id}
+	</update>
+	<select id="selectByKeyWord" resultMap="BaseResultMap">
+		select * from  item_cate 
+		<where>
+			<![CDATA[ name like '%${keyWord}%']]>
+		</where>
+		order by ordinal desc
+	</select>
+	<select id="selectByVo" resultMap="BaseResultMap">
+		select * from item_cate ic
+		<include refid="where" />
+		order by ic.ordinal desc
+		limit #{startIndex},
+		#{pageSize}
+	</select>
+	<select id="countByVo" resultType="java.lang.Integer">
+		select count(1) from item_cate ic
+		<include refid="where" />
+	</select>
+	<sql id="where">
+		<where>
+			<if test="name!=null and name!=''">
+				and ic.name like '%${name}%'
+			</if>
+			<if test="queryLevel==true">
+				and ic.level=${level}
+			</if>
+			<if test="queryIsParent==true">
+				and ic.is_parent =${isParent}
+			</if>
+			<if test="querySub==true">
+				and parent_cid=${id}
+			</if>
+		</where>
+	</sql>
+</mapper>

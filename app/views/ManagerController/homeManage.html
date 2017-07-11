@@ -1,0 +1,342 @@
+#{extends './manage-frame.html' /}
+#{set 'moreManaStyles'}
+<style type="text/css">
+	.uploadImg i {
+    position: absolute;
+    top: 40px;
+    left: 90px;
+}
+</style>
+#{/set}
+#{set title:'主页编辑' /}
+<div class="cont_mypage container_body" style="margin-top:30px" id="container">
+	<div class="container_contents container_myMain_contents">
+		<div class="styleTypelist">
+			<div class="column_left">
+			<h3 style="font-size:15px;color:#444;">主页模板配置列表</h3>
+			</div>
+			<div class="tbl_wrap_type02 pt20">#{authenticityToken/}
+			<ul id="homePageSettings"></ul>
+			<div class="addStyleType"><i class="iconfont">&#xe622;</i></div></div>
+		</div>
+		<div class="styleActive">
+			<div id="buildSetting">
+				<h3>正在编辑的模板：<span style="color: #f00" id="editTempName" class="mr10">xxxx</span>
+			应用状态：<span style="color: #f00" id="editTempStatus">模板应用状态</span>
+			</h3>
+			</div>
+		</div>
+		<div class="homecontent" id="homecontent">
+			<div style="margin-top:0px;">
+				<div class="column_left">
+					<h3>轮播大Banner</h3>
+				</div>
+			</div>
+			<div class="tbl_wrap_type01 pt20">
+				<div class="bannerList">
+					<ul id="bannerContainer"></ul>
+					<div class="bannerimg addBanner" style="margin:0 0 10px 8px"> <i class="iconfont mr10">&#xe60b;</i>
+					</div>
+				</div>
+			</div>
+			<div style="margin-top:0px;">
+				<div class="column_left">
+					<h3>右上角小Banner</h3>
+				</div>
+			</div>
+			<div class="tbl_wrap_type01 pt20">
+				<div class="righttopList">
+					<ul id="righttopContainer"></ul>
+					<div class="righttopimg addRighttop" style="margin:0 0 10px 8px"> <i class="iconfont mr10">&#xe60b;</i>
+					</div>
+				</div>
+			</div>
+			<div style="margin-top:0px;">
+				<div class="column_left">
+					<h3>品牌列表</h3>
+				</div>
+			</div>
+			<div class="tbl_wrap_type01 pt20">
+				<div class="brandLists">
+					<ul id="brandContainer"></ul>
+					<div class="brandimg addBrand" style="margin:0 0 10px 8px">
+						<i class="iconfont mr10">&#xe60b;</i>
+					</div>
+				</div>
+			</div>
+			<div style="margin-top:0px;">
+				<div class="column_left">
+					<h3>活动列表</h3>
+				</div>
+			</div>
+			<div class="tbl_wrap_type01 pt20">
+				<div id="activityList" style="overflow:hidden"></div>
+				<div class="addactivity">
+					<i class="iconfont mr10">&#xe60b;</i>
+				</div>
+			</div>
+		</div>
+		<div class="popWrapper" style="display: none;" id="tr_loading_mask">
+			<img class="tr_juhua" src="@{'/public/images/pre_loading.gif'}" />
+		</div>
+	</div>
+</div>
+<textarea class="muban" id="bannerTemp" style="display:none">
+	{{#big_BannerSettings}}
+	<li>
+		<div class="bannerimg editbanner" data-title="{{title}}" data-url="{{url}}" >
+			<img src="{{imgUrl}}"/></div>
+	</li>
+	{{/big_BannerSettings}}
+</textarea>
+<textarea class="muban" id="righttopTemp" style="display:none">
+	{{#right_SmallBannerSettings}}
+	<li>
+		<div class="righttopimg editrighttop" data-title="{{title}}" data-url="{{url}}" >
+			<img src="{{imgUrl}}"/></div>
+	</li>
+	{{/right_SmallBannerSettings}}
+</textarea>
+<textarea class="muban" id="brandTemp" style="display:none">
+	{{#brandSettings}}
+	<li>
+		<div class="brandimg editBrand" data-bid="{{bid}}">
+			<img src="{{imgUrl}}"/></div>
+		<p class="brandName">{{title}}</p>
+	</li>
+	{{/brandSettings}}
+</textarea>
+<textarea class="muban" id="activityTemp" style="display:none">
+	{{#activitySettings}}
+	<div class="activityContainer">
+		<div class="leftimg editleftimg" data-url="{{url}}">
+			<img src="{{imgUrl}}"/></div>
+		<div class="rightimg">
+			{{#formatItemSettings}}
+			<div class="block itemSet" data-id="{{id}}" data-price="{{price}}">
+				<img src="{{img}}"/></div>
+			{{/formatItemSettings}}
+			<input type="checkbox" class="activityIsPublic mr5" name="is_public" {{#unedit}}disabled{{/unedit}} {{#isPublic}}checked{{/isPublic}} />可见</div>
+	</div>
+	{{/activitySettings}}
+</textarea>
+<div class="popWrapper" id="editBanner">
+	<div class="popWndFrame">
+		<div class="modalWnd" tr-url="" id="addBannerWrapper">
+			<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口">
+				<i class="iconfont mr10">&#xe60c;</i>
+			</a>
+			<div class="modalWndInner">
+				<form id="frmEditBanner">
+					#{authenticityToken/}
+					<div class="column_left title">
+						<h3>添加banner</h3>
+					</div>
+					<input class="inputText" type="hidden" value="0" name="homePageSet._id" />
+					<input class="inputText" type="hidden" value="bigBannerSetting" name="moudle" />
+					<input class="inputText" type="hidden" value="add" name="modifyType" />
+					<input class="inputText" type="hidden" value="0" name="index" />
+					<div class="form_line">
+						<div class="halfblock">
+							<label>title</label>
+							<input type="text" class="inputText" name="homePageSet.bigBannerSetting.title" id="txtBannerTitle" style="margin-bottom:5px;"/>
+							<div for="txtBannerTitle" class="validateLine clearfix"></div>
+							<label>url</label>
+							<input type="text" class="inputText" name="homePageSet.bigBannerSetting.url" id="txtBannerUrl"/>
+							<div for="txtBannerUrl" class="validateLine clearfix"></div>
+							<a id="btnBannerfirm" href="javascript:;" class="btnStd btnMedium mt6 fr mr30 trSubmit">保存</a>
+							<div class="clboth"></div>
+							<a id="btnBannerdel" href="javascript:;" class="btnStd btnMedium mt6 fr mr30 delButton">删除该条</a>
+							
+						</div>
+						<div class="uploadImg halfblock">
+							<div class="maskadd maskbigImg" id="">
+								<input class="inputText" id="" type="hidden" value="" name="homePageSet.bigBannerSetting.imgUrl"/>
+								<i class="iconfont mr10">&#xe60b;</i>
+							</div>
+							<div class="loadbigImg"></div>
+							<p>要求规格1100*450</p>
+						</div>
+						<div for="hidPicUrl_0" class="validateLine clearfix"></div>
+						<div class="clboth"></div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="popWrapper" id="editRighttop">
+	<div class="popWndFrame">
+		<div class="modalWnd" tr-url="" id="addRighttopWrapper">
+			<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口">
+				<i class="iconfont mr10">&#xe60c;</i>
+			</a>
+			<div class="modalWndInner">
+				<form id="frmEditRighttop">
+					#{authenticityToken/}
+					<div class="column_left title">
+						<h3>添加右上角小banner</h3>
+					</div>
+					<input class="inputText" type="hidden" value="0" name="homePageSet._id" />
+					<input class="inputText" type="hidden" value="right_SmallBannerSetting" name="moudle" />
+					<input class="inputText" type="hidden" value="add" name="modifyType" />
+					<input class="inputText" type="hidden" value="0" name="index" />
+					<div class="form_line">
+						<div class="halfblock">
+							<label>title</label>
+							<input type="text" class="inputText" name="homePageSet.right_SmallBannerSettig.title" id="txtRighttopTitle" style="margin-bottom:5px;"/>
+							<div for="txtRighttopTitle" class="validateLine clearfix"></div>
+							<label>url</label>
+							<input type="text" class="inputText" name="homePageSet.right_SmallBannerSettig.url" id="txtRighttopUrl"/>
+							<div for="txtRighttopUrl" class="validateLine clearfix"></div>
+							<a id="btnRighttopfirm" href="javascript:;" class="btnStd btnMedium mt6 fr mr30 trSubmit">保存</a>
+							<div class="clboth"></div>
+							<a id="btnRighttopdel" href="javascript:;" class="btnStd btnMedium mt6 fr mr30 delButton">删除该条</a>
+						</div>
+						<div class="uploadImg halfblock" style="margin-top:15px;">
+							<div class="maskadd maskbigImg" id="T_adBanner_a_0" img-container="imgBanner_a_0" style="width:259px;height:75px">
+								<input class="inputText" id="hidPicUrl_a_0" type="hidden" value="" name="homePageSet.right_SmallBannerSettig.imgUrl"/>
+								<i class="iconfont mr10" style="top:30px;left:120px">&#xe60b;</i>
+							</div>
+							<div id="imgBanner_a_0" class="loadbigImg" style="width:259px;height:75px"></div>
+							<p>要求规格260*75</p>
+						</div>
+						<div for="hidPicUrl_a_0" class="validateLine clearfix"></div>
+						<div class="clboth"></div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="popWrapper" id="editBrand">
+	<div class="popWndFrame" style="min-width:800px">
+		<div class="modalWnd" tr-url="" id="addBrandWrapper">
+			<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口">
+				<i class="iconfont mr10">&#xe60c;</i>
+			</a>
+			<div class="modalWndInner">
+				<form id="frmEditBrand">
+					<div class="column_left">
+						<h3>选择品牌</h3>
+					</div>
+					#{authenticityToken/}
+					<input class="inputText" type="hidden" value="0" name="homePageSet._id" />
+					<input class="inputText" type="hidden" value="brandSetting" name="moudle" />
+					<input class="inputText" type="hidden" value="add" name="modifyType" />
+					<input class="inputText" type="hidden" value="0" name="index" />
+					<input class="inputText" id="txtBrandImg" type="hidden" value="0" name="homePageSet.brandSetting.imgUrl" />
+					<input type="hidden" name="homePageSet.brandSetting.bid" id="brandSelects"/>
+					<!-- <div class="form_line">
+						<label class="lbl">选择品牌</label>
+						<div class="controls">
+							<select class="select" name="homePageSet.brandSetting.bid" id="brandSelects" style="width:260px;"></select>
+						</div>
+						<div for="txtTitle" class="validateLine clearfix"></div>
+					</div> -->
+					<div class="brandList" style="height:350px;overflow-y:auto">
+						<ul></ul>
+					</div>
+					<div class="halfblock">
+						<a id="btnBrandfirm" href="javascript:;" class="btnStd btnMedium mt6 fr mr30 trSubmit">保存</a>
+						<div class="clboth"></div>
+						<a id="btnBranddel" href="javascript:;" class="btnStd btnMedium mt6 fr mr30 delButton">删除该条</a>
+					</div>
+					<div class="clboth"></div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="popWrapper" id="editLeftimg">
+	<div class="popWndFrame">
+		<div class="modalWnd" tr-url="" id="addLeftimgWrapper">
+			<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口">
+				<i class="iconfont mr10">&#xe60c;</i>
+			</a>
+			<div class="modalWndInner">
+				<form id="frmEditLeftimg">
+					#{authenticityToken/}
+					<div class="column_left">
+						<h3>编辑</h3>
+					</div>
+					<div class="form_line">
+						<div class="controls uploadImg" style="padding-left:50px">
+							<div class="maskadd maskbigImg" id="T_adBanner_b_0" style="width:375px;height:175px;left: 50px;">
+								<input class="inputText" id="hidPicUrl_b_0" type="hidden" value="" name="leftImg"/>
+								<i class="iconfont mr10" style="top:80px;left:175px">&#xe60b;</i>
+							</div>
+							<div style="width:375px;height:175px" id="imgBanner_b_0" class="loadbigImg"></div>
+							<p>要求规格750*350</p>
+						</div>
+						<div for="hidPicUrl_b_0" class="validateLine clearfix"></div>
+					</div>
+					<div class="form_line">
+						<label class="lbl">链接地址</label>
+						<div class="controls">
+							<input class="inputText" id="txtLeftimgId" type="hidden" value="0" name="leftimg.id" />
+							<input type="text" class="inputText" name="leftimgUrl" id="txtLeftimgUrl"/></div>
+						<div for="txtLeftimgUrl" class="validateLine clearfix"></div>
+					</div>
+					<div class="halfblock">
+						<a id="btnLeftimgfirm" href="javascript:;" class="btnStd btnMedium fr trSubmit">保存</a>
+						<div class="clboth"></div>
+						<!-- 				<a id="btnBannerdel" href="javascript:;" class="delButton">删除该条</a>
+					-->
+				</div>
+				<div class="clboth"></div>
+			</form>
+		</div>
+	</div>
+</div>
+</div>
+<!-- 添加活动配置 -->
+<form id="frmEditActivity">
+#{authenticityToken/}
+<input class="inputText" type="hidden" value="0" name="homePageSet._id" />
+<input class="inputText" type="hidden" value="activitySetting" name="moudle" />
+<input class="inputText" type="hidden" value="add" name="modifyType" />
+<input class="inputText" type="hidden" value="0" name="index" />
+<input class="inputText" type="hidden" value="true" name="homePageSet.activitySetting.isPublic" />
+<div class="data-no-pub"></div>
+</form>
+<div class="popWrapper" id="editBlock">
+<div class="popWndFrame">
+	<div class="modalWnd" tr-url="" id="addBlockWrapper">
+		<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口">
+			<i class="iconfont mr10">&#xe60c;</i>
+		</a>
+		<div class="modalWndInner">
+			<form id="frmEditBlock">
+				#{authenticityToken/}
+				<div class="column_left">
+					<h3>编辑</h3>
+				</div>
+				<div class="form_line">
+					<label class="lbl">商品id</label>
+					<div class="controls">
+						<input type="text" class="inputText" id="txtCommId" name="comm.id"/></div>
+					<div for="txtCommId" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">打折前价格</label>
+					<div class="controls">
+						<input type="text" class="inputText" name="comm.price" id="txtBeforePrice"/></div>
+					<div for="txtBeforePrice" class="validateLine clearfix"></div>
+				</div>
+				<div class="halfblock">
+					<a id="btnBlockfirm" href="javascript:;" class="botButton trSubmit">保存</a>
+					<div class="clboth"></div>
+					<!-- <a id="btnBannerdel" href="javascript:;" class="delButton">删除该条</a>
+				-->
+			</div>
+			<div class="clboth"></div>
+		</form>
+	</div>
+</div>
+</div>
+</div>
+#{set 'moreManaScripts'}
+<script type="text/javascript" src="/public/javascripts/bizComponents/manage/indexManage.js"></script>
+<script type="text/javascript">APP.QnDomain = '${upload_domain}';App.module = 'indexManage';</script>
+#{/set}

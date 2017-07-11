@@ -1,0 +1,330 @@
+
+.wrap {width:1100px;margin:0 auto;}
+/*.txtRight{text-align:right;margin:33px 0 0 0;color:#666}*/
+.txtRight{text-align:right;margin:0px 0 0 0;color:#666}
+.txtRight .name{font-size:15px;color:#000;}
+.txtRight .point1{font-size:12px;color:#f84246;}
+.txtRight span{color:#c0c0c0}
+.tabBenefit{margin-top:13px}
+.tabBenefit:after{content:'';display:block;clear:both}
+.tabBenefit a{float:left;display:block;width:157px;height:98px;background:url(/public/images/img/tab_201507.png) no-repeat 0 0;}
+
+#tab01{background-position:0 0;}
+#tab02{background-position:-157px 0;}
+#tab03{background-position:-314px 0;}
+#tab04{background-position:-471px 0;}
+#tab05{background-position:-628px 0;}
+#tab06{background-position:-785px 0;}
+#tab07{background-position:-942px 0;width:158px}
+#tab01.on{background-position:0 -102px;}
+#tab02.on{background-position:-157px -102px;}
+#tab03.on{background-position:-314px -102px;}
+#tab04.on{background-position:-471px -102px;}
+#tab05.on{background-position:-628px -102px;}
+#tab06.on{background-position:-785px -102px;}
+#tab07.on{background-position:-942px -102px;}
+/*.mCon{clear:both;display:none;}*/
+.month{display:inline-block;width:59px;height:50px;background:url(/public/images/img/bg_month.gif) no-repeat 0 0;}
+			
+/*월별 이미지 포지션값*/
+.m1{background-position:0 0;} /*1월*/
+.m2{background-position:0 -50px;}  /*2월*/
+.m3{background-position:0 -100px;}  /*3월*/
+.m4{background-position:0 -150px;}  /*4월*/
+.m5{background-position:0 -200px;}  /*5월*/
+.m6{background-position:0 -250px;}  /*6월*/
+.m7{background-position:0 -300px;}  /*7월*/
+.m8{background-position:0 -350px;}  /*8월*/
+.m9{background-position:0 -400px;}  /*9월*/
+.m10{background-position:0 -450px;}  /*10월*/
+.m11{background-position:0 -500px;}  /*11월*/
+.m12{background-position:0 -550px;}  /*12월*/
+
+
+/*con01*/
+#con01{}
+#con01 .top{width:1047px;height:175px;padding:59px 0 0 53px;background:url(/public/images/img/bg_top.jpg) no-repeat 0 0;margin-bottom:30px;}
+#con01 .month_stxt{padding:21px 0 0 6px}
+#con01 .tit{padding-bottom:13px;text-align:left}
+#con01 .tit2{padding-bottom:13px;text-align:left;}
+.buyEvt{position:relative}
+.buyEvt a img {width:674px; height:309px;}
+.buyEvt ul{position:absolute;bottom:-32px;left:0}
+.buyEvt .buyImg{border:1px solid #c4c4c4;border-bottom:0}
+.buyEvt li{width:338px;height:22px;padding-top:17px;float:left;text-align:center;background: url(/public/images/img/bg_tab.png) repeat-x 0 0;}
+.buyEvt li.on{background: url(/public/images/img/bg_arrow.png) repeat-x 0 0;}
+.buyEvt li a{display:block;color:#fff}
+.mainVisualTabs li a {position:relative; left:10px;width:320px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis; text-align:center;}
+.area{float:left;width:676px;position:relative;}
+.areaR{float:left;margin-left:15px;position:relative;}
+.card_img img{border:1px solid #c4c4c4;}
+.card_img2{padding-top:14px;}
+.card_img2 img{border:1px solid #c4c4c4;}
+.more{position:absolute;top:7px;right:15px;display:block;width:60px;text-align:center;background:#fff;}
+.level1:after, .level2:after, .level3 ul:after{content:'';display:block;clear:both}
+.level2{clear:both;margin-top:40px}
+.level2 .area .gBox{background:#ededed;border-top:1px solid #d6d6d6;padding:29px 0 29px 35px;height:313px}
+.area .gBox  ul{width:620px;overflow:hidden}
+.area .gBox li{float:left;padding-left:40px}
+.area .gBox li.fir{border-right:1px solid #d6d6d6;padding-right:39px;padding-left:0}
+.level2 .areaR .gBox{background:#ededed;border-top:1px solid #d6d6d6;padding:29px 0 29px 30px;height:313px;}
+.areaR .gBox  ul{width:100%;overflow:hidden}
+.areaR .gBox li{float:left;padding-right:26px;text-align:center;}
+.areaR .gBox li.fir{}
+/* 추가 (김인환:20140205) */
+.areaR .gBox .imgThum{width:160px;height:136px;padding-top:24px;border:1px solid #e6e6e6;background:#fff;text-align:center}
+.areaR .gBox .imgThum img{width:160px;height:110px;}
+
+.prdName{font-weight:bold;color:#333;padding-top:28px; width:162px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis; text-align:center;}
+.beneDay{color:#666;padding:3px 0 8px 0;line-height:16px}
+.beneNum{font-weight:bold;color:#666;padding-bottom:20px}
+.beneNum span{color:#f84246;}
+.level3{clear:both;margin-top:40px;margin-bottom:75px}
+.level3 ul{width:1100px}
+.level3 li{float:left;padding-right:16px;}
+.level3 li.last{padding-right:0}
+
+/*con02*/
+#con02{}
+#con02 .top{width:1047px;height:157px;padding:59px 0 0 53px;}
+#con02 .month_stxt{padding:21px 0 0 6px}
+.bene01{padding:18px 0;position:relative;overflow:hidden}
+.bene01:after{content:'';display:block;clear:both}
+.bene02,.bene03{border-top:1px solid #d6d6d6;position:relative;padding:18px 0;overflow:hidden}
+.bene03{border-bottom:1px solid #d6d6d6}
+.bene_tit{position:absolute;top:0;left:0}
+.beneL{height:230px;float:left;}
+.beneL{border-right:1px solid #d6d6d6;width:523px}
+.bene01 .beneL .txt1{padding:24px 0 0 193px}
+.bene01 .beneL .txt2{padding:26px 0 0 186px}
+.beneR{float:left;padding:30px 0 0 40px;height:200px}
+.join{position:absolute;top:74px;right:43px;}
+.bene02 .beneL .txt1{padding:24px 0 0 152px}
+.bene02 .beneL .txt2{padding:26px 0 0 186px}
+.bene03 .beneL .txt1{padding:24px 0 0 193px}
+.bene03 .beneL .txt2{padding:26px 0 0 186px}
+.pl5{padding:23px 0 0 5px}
+.btnMore{text-align:center;padding:23px 0 62px 0}
+.BenefitBanner{text-align:center;padding:24px 0 18px 0;margin-bottom:10px}
+.boriOn{text-align:center;padding:24px 0 18px 0;border-top:2px solid #191919;border-bottom:1px solid #b5b5b5;margin-bottom:60px}
+			
+/*con03*/
+/*
+#con03{padding-bottom:70px; }
+#con03 .top{width:1047px;height:264px;padding:59px 0 0 53px;background:url('http://cdn.boribori.co.kr/Images_Web/2014/20140120_benefit/bg_top03.jpg') no-repeat 0 bottom;}
+.userInfo{margin:26px 0 0 0px;color:#666}
+.userInfo p{line-height:18px;width:260px;}
+ .userInfo strong{color:#333;}
+ .userInfo strong.point1{color:#f84246}
+ .userInfo strong.point2{color:#666}
+ .userInfo strong.point3{color:#333}
+
+.userInfo .userInfo_R{float:left}
+.userInfo .userInfo_R.logOut{padding-top:26px;text-align:center}
+
+ .userInfo .info1{padding-bottom:10px;border-bottom:1px solid #dedede}
+.userInfo .info2{padding:11px 0 10px 0; background-color:#FFFFFF;}
+ .userInfo .infotxt{font-size:11px;color:#b1b1b1;}
+.levelBox{background:#d8d8d8;border:1px solid #b3b0b0;width:133px;height:128px;padding-top:5px;text-align:center;float:left;margin-right:40px;}
+.level_table{text-align:center;position:relative;padding-top:17px;}
+
+.btn01{position:absolute;top:483px;left:239px;z-index:23}
+.btn02{position:absolute;top:483px;left:411px;z-index:23}
+.btn03{position:absolute;top:419px;left:581px;z-index:23}
+.btn04{position:absolute;top:355px;left:758px;z-index:23}
+.btn05{position:absolute;top:403px;left:930px;z-index:23}
+*/
+/*등급별 on이미지 포지션값*/
+.level_on1{position:absolute;top:1px;left:196px;z-index:22} /*보리행복 1등급*/
+.level_on2{position:absolute;top:1px;left:369px;z-index:22} /*보리행복 2등급*/
+.level_on3{position:absolute;top:1px;left:541px;z-index:22} /*보리행복 3등급*/
+.level_on4{position:absolute;top:1px;left:712px;z-index:22} /*보리행복 4등급*/
+.level_on5{position:absolute;top:1px;left:886px;z-index:22} /*보리행복 5등급*/
+
+
+#con03{padding-bottom:70px}
+#con03 .top{width:1047px;height:264px;padding:59px 0 0 53px;background:url(/public/images/img/bg_top03.jpg) no-repeat 0 bottom;}
+.userInfo{margin:26px 0 0 4px;color:#666;overflow:hidden;height:180px}
+.userInfo p{line-height:18px;width:260px;}
+.userInfo strong{color:#333;}
+.userInfo strong.point1{color:#f84246}
+.userInfo strong.point2{color:#666}
+.userInfo strong.point3{color:#333}
+.levelBox{background:#d8d8d8;border:1px solid #b3b0b0;width:133px;height:128px;padding-top:5px;text-align:center;float:left;margin-right:40px;}
+.userInfo_R{float:left}
+.userInfo_R.logOut{padding-top:26px;/*text-align:center*/}
+.info1{padding-bottom:10px;border-bottom:1px solid #dedede}
+.info2{padding:11px 0 10px 0; background-color:#FFFFFF;}
+.infotxt{font-size:11px;color:#b1b1b1}
+.levelBox{background:#d8d8d8;border:1px solid #b3b0b0;width:133px;height:123px;padding:5px 0;text-align:center;float:left;margin-right:40px;}
+.level_table{text-align:center;position:relative;padding-top:17px;width:1100px;margin:0 auto;}
+			
+.btn01{position:absolute;top:483px;left:248px;z-index:23}
+.btn02{position:absolute;top:483px;left:420px;z-index:23}
+.btn03{position:absolute;top:419px;left:590px;z-index:23}
+.btn04{position:absolute;top:355px;left:767px;z-index:23}
+.btn05{position:absolute;top:403px;left:939px;z-index:23}
+
+.BenefitBanner_Grade{text-align:center;padding:0px 0 0px 0;margin-bottom:0px;text-align:center;position:relative;left:10px;top:-30px;}
+.boriOn_Grade{text-align:center;padding:20px 0 5px 0;margin-bottom:0px;text-align:center;position:relative;left:22px;top:-30px;}
+
+		
+
+/*con04*/
+#con04{}
+#con04 .top{width:1047px;height:157px;padding:59px 0 0 53px;border-bottom:1px solid #b5b5b5}
+#con04 .month_stxt{padding:21px 0 0 6px}
+
+/*con05*/
+#con05{padding-bottom:100px}
+#con05 .top{width:1047px;height:193px;padding:25px 0 0 53px;}
+#con05 .month_stxt{padding:21px 0 0 6px}
+#con05 .month{margin-top:35px}
+.ban_day{padding:33px 0 43px 0}
+.tit05{padding-bottom:26px}
+.mobileC{padding:26px 0 19px 0;border-top:2px solid #2a2a2a;border-bottom:1px solid #404040;margin-bottom:50px;overflow:hidden;}
+.appForm{width:372px;text-align:center;float:left;}
+/*.form{margin-top:32px}*/
+.form input{width:63px;height:22px;border:2px solid #2a2a2a;line-height:22px;text-align:center;vertical-align:middle}
+.fBtn{text-align:center;padding:12px 0 34px 0}
+.icon_p{margin-right:10px;position:relative;top:-3px}
+.mo2, .mo3{float:left;margin:0 15px}
+.bene_area05{width:1100px;overflow:hidden}
+.bene_area05:after{content:'';display:block;clear:both}
+.bene_area05 img{float:left}
+.img_app{width:1100px;overflow:hidden}
+.img_app:after{content:'';display:block;clear:both}
+.img_app img{float:left}
+			
+
+/*con06*/
+#con06{}
+#con06 .top{width:1047px;height:157px;padding:59px 0 0 53px;border-bottom:1px solid #b5b5b5}
+#con06 .month_stxt{padding:21px 0 0 6px}
+
+
+.content_top_left{float:left; padding:14px 0 0;}
+.content_top_location{ z-index:3; position:relative; }
+.content_top_location h3{float:left; width:106px; margin-right:25px;}
+.content_top_location .left_con{float:left; width:194px; margin-right:5px;}
+.content_top_location .left_con{*zoom:1;}
+.content_top_location .left_con p.location_area{float:left; width:22px; margin-right:8px;  font-size:11px; color:#c0c0c0;}
+.content_top_location .left_con p.location_area img{margin-right:7px; vertical-align:baseline}
+.content_top_location .left_con div.selectbox{display:inline-block; position:relative; left:0; top:0; width:164px; height:22px;}
+.content_top_location .left_con div.selectbox{*display:inline; *zoom:1;}
+.content_top_location .left_con div.selectbox ul{position:absolute; left:0; top:0; z-index:30; width:162px; background:#fff; border:1px solid #dee0e1;}
+.content_top_location .left_con div.selectbox li{display:none; overflow:hidden;background:#fff;}
+.content_top_location .left_con div.selectbox li.on{display:block;}
+.content_top_location .left_con div.selectbox li:hover{background:#eee;}
+.content_top_location .left_con div.selectbox li a{float:left; display:block; width:162px; height:16px; padding:4px 0 0 6px; color:#919191;}
+.content_top_location .left_con div.selectbox li span{display:block; position:absolute; right:0; top:0; width:20px; height:20px; }
+.content_top_location a.history_back{display:inline-block; width:72px; height:22px;line-height: 22px;text-align: center;background-color: #ebebeb;border:1px solid #ccc;margin-top: -2px;}
+.content_top_location a.history_back{*display:inline; *zoom:1;}
+.content_top_right{float:right;}
+
+.iframeWrapper {position:relative;width:930px; margin:0 auto;}
+.iframeWrapper #EventViewWingLeft {position:absolute; top:0px; left:-84px;}
+.iframeWrapper #EventViewWingRignt {position:absolute; top:0px; right:-86px;}
+
+.vipRoungeLayer {display:none;position:absolute; left:40%; bottom:-400px;z-index:10000008;}
+
+.css1 {font-size:12px;}
+.css1 a {position:relative; top:0px;}
+.css2 {font-size:12px;}
+.bulletTd img {margin-top:6px;}
+
+
+.couponBenefit { margin-top:40px;}
+.halfCell {width:545px; float:left; border-top:2px solid #35383a; position:relative;}
+.halfCell .halfCellTitle {background:#eee; text-align:center;}
+.halfCell ul {width:332px; margin:0 auto;padding-top:40px;}
+.halfCell ul li {float:left;}
+.clearFix {clear:both;}
+.fullCell { border-top:2px solid #35383a; position:relative;}
+.fullCell .fullCellTitle {background:#eee; text-align:center;}
+.fullCell .halfCell {border:0px; padding-bottom:10px;}
+.fullCell > ul > li {float:left;}
+.fullCell .divideLine {width:1px; height:297px; position:absolute; background:#dfdfdf; left:549px; top:86px;}
+.couponReadme {border-top:1px solid #dbdbdb}
+.couponWrap {width:712px; height:268px; border:1px solid #35383a;  position:absolute; top:76px; left:192px; z-index:1;}
+.couponWrap .closeBtn {position:absolute; top:13px; right:14px; width:15px; height:14px; }
+.couponWrap .layerTitle {position:absolute; top:20px; left:209px; width:292px; height:23px; }
+
+.couponWrap1 .layerTitle {background-position:0 -23px;}
+.couponWrap2 .layerTitle {background-position:0 -46px;} 
+.couponWrap3 .layerTitle {background-position:0 -69px;} 
+.couponWrap4 .layerTitle {background-position:0 0px;} 
+.couponWrap .qrCode {position:absolute;top:121px; left:118px; width:81px; height:81px;}
+.couponWrap1 .qrCode {background-position:0 -81px;}
+.couponWrap2 .qrCode {background-position:0 -162px;}
+.couponWrap3 .qrCode {background-position:0 -243px;}
+.couponWrap4 .qrCode {background-position:0 0px;}
+.couponWrap .inputs {padding-top:130px; padding-left:359px;}
+.couponWrap .inputs input {border:0px; width:66px; height:23px; line-height:23px; margin-right:16px; text-align:center;}
+.couponWrap .smsBtn {width:107px; height:31px; margin-top:10px; margin-left:420px; display:block;}
+
+
+#con05 .top {border-bottom:1px solid #b5b5b5;margin-bottom:21px;}
+.appInstallTitle {margin-top:35px; border-bottom:3px solid #000; text-align:center;}
+.appInstallBody {height:271px;}
+.appInstallInputs {padding-left:86px; padding-top:116px; width:220px;}
+.appInstallInputs input {width:63px; height:22px; border:0px; margin-right:6px; text-align:center; line-height:26px;}
+.appInstallInputs .sendSMS {width:107px; height:31px; margin:12px 0 0 48px; display:block;}
+.infoBanner {margin-top:19px;}
+.appBenefitTitle {margin-top:48px; text-align:center;}
+.appBenefitBanners {border-top:3px solid #000;}
+.appBenefitBanners li {float:left; border-bottom:1px solid #d6d6d6; position:relative;}
+.appBenefitBanners li.lastLi {border-left:1px solid #d6d6d6}
+.appBenefitBanners li {width:549px;}
+.clearFix {clear:both;}
+.appAdTitle {margin-top:50px; text-align:center; border-bottom:3px solid #000;}
+.appBtn {display:block; width:237px; height:56px; margin:0 auto; margin-top:24px;}
+
+.couponWrap {width:712px; height:242px; border:1px solid #35383a;position:absolute; top:100px; left:192px; z-index:1;}
+.lastLi .couponWrap{left:-358px;}
+.Wrapmobile {top:15px}
+.couponWrap .closeBtn {position:absolute; top:13px; right:14px; width:15px; height:14px;}
+.couponWrap .layerTitle {position:absolute; top:16px; left:224px; width:292px; height:23px;}
+.couponWrap .layerTitle_Mobile{background:none;}
+.couponWrap1 .layerTitle {background-position:0 -23px;}
+.couponWrap2 .layerTitle {background-position:0 -46px;} 
+.couponWrap3 .layerTitle {background-position:0 -69px;} 
+.couponWrap .qrCode {position:absolute;top:94px; left:118px; width:81px; height:81px;}
+.couponWrap .qrCode_coupon{position:absolute;top:94px; left:118px; width:81px; height:81px;}
+.couponWrap1 .qrCode {background-position:0 -81px;}
+.couponWrap2 .qrCode {background-position:0 -162px;}
+.couponWrap3 .qrCode {background-position:0 -243px;}
+.couponWrap .inputs {padding-top:103px; padding-left:359px;}
+.couponWrap .inputs input {border:0px; width:66px; height:23px; line-height:26px; margin-right:16px;}
+.couponWrap .smsBtn {width:107px; height:31px; margin-top:10px; margin-left:420px; display:block;}
+
+
+
+/*카드헤택 - 2014.08.05 홍영선*/
+.areaR .tit {position:relative;}
+.areaR .tit a img {position:absolute; top:13px; right:0px;}
+	
+#con02 .top {}
+.card_benefit_title1 { height:88px; margin-bottom:22px;}
+ul.card_benefit_banner li {float:left;}
+ul.card_benefit_banner li.card_benefit_banner2 {float:right;}
+.clearFix {clear:both;}
+.card_benefit {border-top:1px solid #606060; background:#efefef; padding-top:32px; margin-top:48px;}
+.card_benefit .card_benefit_title2 {text-align:center; margin-bottom:28px;}
+.card_benefit .card_benefit_tabs {width:1015px;height:57px; padding-left:43px;}
+.card_benefit .card_benefit_tabs li {width:126px; height:57px; float:left;}
+.card_benefit .card_benefit_body {padding:18px 47px; background:#dcdcdc}
+.card_benefit .card_benefit_body td,
+.card_benefit .card_benefit_body th {border-right:1px solid #e5e5e5; border-bottom:1px solid #e5e5e5;background:#fff; text-align:left; vertical-align:top;}
+.card_benefit .card_benefit_body .lastTd {border-right:0px;}
+.card_benefit .card_benefit_body th {background:#f7f7f7; font-weight:bold; color:#838383; height:37px;text-align:center; vertical-align:middle;}
+.card_benefit .card_benefit_body td.card_img_td {text-align:center; vertical-align:middle; padding:18px 0 10px;}
+.card_benefit .card_benefit_body td > div {height:32px; border-bottom:1px dashed #f1f1f1; line-height:32px; padding-left:32px; font-size:11px;}
+.card_benefit .card_benefit_body td > div span {display:inline-block; *zoom:1; *display:inline; height:14px; font-size:11px; line-height:14px; position:relative; top:1px; *top:3px;}
+.card_benefit .card_benefit_body td > div .month_box {height:12px; border:1px solid #efb507;min-width:12px;background:#f9cc17; font-size:11px; line-height:17px;*line-height:15px; text-align:center; font-weight:bold; color:#212121; top:0px;}
+.card_benefit .card_benefit_body td.lastTd > div {padding-left:37px;}
+.card_benefit .card_benefit_body td.lastTd > div.notice {color:#aeaeae; border-bottom:0px; line-height:21px; padding:10px 0 10px 37px; height:auto;}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	.card_benefit .card_benefit_body td > div .month_box  { line-height:13px; }
+}

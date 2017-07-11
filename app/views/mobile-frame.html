@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta content="telephone=no,email=no" name="format-detection">
+	<meta content="width=device-width,initial-scale=1,user-scalable=no,maximum-scale=1,minimum-scale=1" name="viewport">
+	<title>#{get 'title' /}</title>
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<link rel="shortcut icon" href="/public/images/favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/mobile/m_common.css'}" />
+	#{get 'moreStyles' /}
+	<script src="@{'/public/javascripts/aplus.js'}" type="text/javascript"></script>
+</head>
+<body>
+<div id="wrapper">
+	#{doLayout /}
+</div>
+<div id="J-page-footer">
+	<div class="footer clearfix">
+		<div class="footer-nav clearfix">
+			#{if false}
+			<a href="javascript:;" class="vip-index">吐司宝贝首页</a>
+			<a href="javascript:;" class="vip-about f-left">关于我们</a>
+			
+			<a href="" class="register-btn" style="float:right;margin-left:4px;">注册</a>
+			<a href="" style="float:right">登录</a>
+			#{/if}
+		</div>
+		<p class="copyright">
+			Copyright © 2015-2016 www.tusibaby.com, All Rights Reserved 苏ICP备15047500号-1
+		</p>
+	</div>
+</div>
+<script src="@{'/public/javascripts/libs/mustache.min.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/zepto.min.js'}" type="text/javascript"></script>
+#{get 'moreScripts' /}
+</body>
+</html>

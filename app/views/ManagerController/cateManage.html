@@ -1,0 +1,141 @@
+#{extends './manage-frame.html' /}
+#{set title:'系统类目管理' /}
+<div class="cont_mypage container_body" style="margin-top:30px" id="container">
+	<div class="container_contents container_myMain_contents">
+		<div style="margin-top:0px;">
+			<div class="column_left">
+				<h3>系统类目管理<div class="funbar_region">
+				<span class="btnStd btnMedium markedred" id="saveBtn">保存</span>
+				<span class="btnStd btnMedium mr6" id="cateCreateBtn">添加</span>
+			</div></h3>
+			</div>
+		</div>
+		<div class="tbl_wrap_type02 pt20" id="cateContainer">
+			#{if cate}
+				<input type="hidden" value="${cate.id}" id="param_cid" />
+				<h3><span class="cateTitle">${cate.name}</span>下的子类目</h3>
+			#{/if}
+			#{authenticityToken/}
+			<form name="Mypage_SubMit" method="post" id="Mypage_SubMit">
+				<input type="hidden" value="" name="Gubun">						
+				<div class="search_area">
+					<div class="search_box">
+						<div class="area_l">
+							<span class="txt_type01">搜索</span>
+							<input type="text" class="text" style="width:160px;" value="" id="titleName" placeholder="类目名称">
+						</div>
+						<div class="area_r">
+							<div class="fl">
+								<a href="javascript:0" class="btnStd btnMedium mr6" id="cateSearchBtn">查询</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			<!-- 功能栏 -->
+			
+			<table summary="" class="tbl_type01 mt10 tbHoverable">
+				<thead>
+					<tr>
+						<th class="thcellId">
+							<div class="thcell">ID</div>
+						</th>
+						<th>
+							<div class="thcell">类目名称</div>
+						</th>
+						<th>
+							<div class="thcell">移动</div>
+						</th>
+						<th style="width:150px;">
+							<div class="thcell">创建时间</div>
+						</th>
+						<th style="width:252px;">
+							<div class="thcell">操作</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody class="container"></tbody>
+			</table>
+			<div class="pagin-btm clearFix">
+				<div class="pagination"></div>
+			</div>
+			<div class="popWrapper" style="display: none;" id="tr_loading_mask">
+				<img class="tr_juhua" src="@{'/public/images/pre_loading.gif'}" />
+			</div>
+		</div>
+	</div>
+</div>
+<textarea class="muban" id="cateTemp" style="display:none">
+	{{#results}}
+	<tr mid="{{id}}">
+		<td class="thcellId">
+			<div class="tdcell">{{id}}</div>
+		</td>
+		<td>
+			<div class="tdcell">
+				<input type="text" data-cname="{{name}}" data-cid="{{id}}" class="inputText cate_name_item" value="{{name}}"></div>
+		</td>
+		<td>
+			<div class="tdcell"> 
+				<i class="iconfont mr10 moveUpAll">&#xe604;</i> 
+				<i class="iconfont mr10 moveUp">&#xe600;</i>
+				<i class="iconfont mr10 moveDown">&#xe60d;</i>
+				<i class="iconfont mr10 moveDownAll">&#xe601;</i>
+			</div>
+		</td>
+		<td>
+			<div class="tdcell">{{formatTimer}}</div>
+		</td>
+		<td>
+			<div class="tdcell" style="text-align: right;">
+				<a href="javascript:;" class="btnStd btnSmall editbtn">查看</a>
+				<a href="javascript:;" class="btnStd btnSmall delbtn">删除</a>
+			</div>
+		</td>
+	</tr>
+	{{/results}}
+</textarea>
+<div class="popWrapper" id="editCate">
+	<div class="popWndFrame">
+		<div class="modalWnd" tr-url="" id="addCateWrapper">
+			<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口"><i class="iconfont mr10">&#xe60c;</i></a>
+			<div class="modalWndInner">
+				<form id="frmEditCate">
+					#{authenticityToken/}
+					<div class="column_left">
+						<h3>编辑类目</h3>
+					</div>
+					<div class="form_line">
+						<label class="lbl">类目名</label>
+						<div class="controls">
+							<input class="inputText" id="txtCateId" type="hidden" value="0" name="cate.id" />
+							<input class="inputText" id="txtTitle" type="text" value="" name="cate.name" tabindex="1"/>			
+						</div>
+						<div for="txtTitle" class="validateLine clearfix"></div>
+					</div>
+					<div class="form_line">
+						<label class="lbl">二级类目名</label>
+						<div class="controls">
+							<input class="inputText" id="txtSecondTitle" type="text" value="" name="cate.secondaryName" tabindex="2"/>					
+						</div>
+						<div for="txtSecondTitle" class="validateLine clearfix"></div>
+					</div>
+					<div class="form_line">
+						<label class="lbl">描述</label>
+						<div class="controls">
+							<textarea name="cate.note" id="texdiscribe" cols="33" rows="10"></textarea>					
+						</div>
+						<div for="texdiscribe" class="validateLine clearfix"></div>
+					</div>
+				</form>
+			</div>
+			<div class="wndBotButtonSection">
+				<a id="btnCatefirm" href="javascript:;" class="botButton trSubmit">保存</a>
+			</div>
+		</div>
+	</div>
+</div>
+#{set 'moreManaScripts'}
+<script type="text/javascript" src="/public/javascripts/bizComponents/manage/cateManage.js"></script>
+<script type="text/javascript">APP.QnDomain = '${upload_domain}';App.module = 'cateManage';</script>
+#{/set}

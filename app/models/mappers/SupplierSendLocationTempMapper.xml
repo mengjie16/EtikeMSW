@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="models.mappers.SupplierSendLocationTempMapper">
+	<resultMap id="BaseResultMap" type="models.SupplierSendLocationTemp">
+	</resultMap>
+	<insert id="insert" parameterType="models.SupplierSendLocationTemp">
+		insert into supplier_sendlocation_temp
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			supplier_id,
+			country,
+			country_id,
+			province,
+			province_id,
+			city,
+			region,
+			address,
+			create_time
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{supplierId},
+			#{country},
+			#{countryId},
+			#{province},
+			#{provinceId},
+			#{city},
+			#{region},
+			#{address},
+			#{createTime}
+		</trim>
+	</insert>
+	<update id="updateById" parameterType="models.SupplierSendLocationTemp">
+		update supplier_sendLocation_temp
+		<set>
+			<if test="country !=null and country !=''">
+				country = #{country}
+			</if>
+			<if test="countryId >=0">
+				country_id = #{countryId}
+			</if>
+			<if test="province !=null and province !=''">
+				province = #{province}
+			</if>
+			<if test="provinceId>=0">
+				province_id = #{provinceId}
+			</if>
+			<if test="city !=null and city !=''">
+				city = #{city}
+			</if>
+			<if test="region !=null and region !=''">
+				region = #{region}
+			</if>
+			<if test="address !=null and address !=''">
+				address = #{address}
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+</mapper>

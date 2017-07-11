@@ -1,0 +1,102 @@
+#{extends 'UserCenter/user-frame.html' /}
+#{set title:'提交订单' /}
+#{set 'moreSubStyles'}
+<link href="@{'/public/stylesheets/retailer.css'}" rel="stylesheet" type="text/css" />
+#{/set}
+<div class="cont_mypage" style="margin-top:30px" id="container">
+	<div class="container_contents container_myMain_contents">
+		<div style="margin-top:0px;">
+			<div class="column_left">
+				<h3>提交订单 - (3/4)
+				</h3>
+			</div>
+		</div>
+		<div class="tbl_wrap_type02 pt20">
+			<h3 class="prevStep">上一步：您已将上传的Excel和吐司宝贝系统的订单字段进行配对</h3>
+				<h3>第三步：匹配商品信息</h3>
+				#{if products}
+					<div id="product_list">
+					#{authenticityToken/}
+						#{list items:products, as : 'product'}
+						<div class="form_line order_product">
+							<div class="product_base_info">
+								<div class="left_title">
+									<p class="title_name">${product.name}</p>
+								</div>
+								<div class="status">未匹配</div>
+								<div class="matchId">
+									<p class="floatLeft mr5">商品ID</p>
+									<input type="text"  class="inputText short floatLeft mr5" name="itemId"/>
+									<a class="btnStd btnSmall readbtn floatLeft">匹配</a>
+								</div>
+							</div>
+							<div class="product_sku_info">
+								<div class="match_skus">
+									<div>
+										<div class="line_three"></div>
+									</div>
+									<div class="sku_items">
+										#{list items:product.keyStrs, as : 'sku_str'}
+											<div class="sku_item">
+											<div class="line_three"></div>
+											<div class="line_two"></div>
+											<div class="product_sku">
+												<span class="sku_name" data-key="${sku_str.get('key')}">规格：${sku_str?.get('value')==null||sku_str?.get('value')==''?'默认':sku_str.get('value')}</span>
+
+												<div class="sel_match">
+													<input type="text" class="inputText selected" name="selected"/>
+													<b></b>
+													<div class="selList">
+														<ul></ul>
+													</div>
+													<div class="imgcontainer"><img src=""/></div>
+												</div>
+												<span class="pleaseMatch">请选择</span>
+											</div>
+										</div>
+										#{/list}
+									</div>
+								</div>
+								<div class="match_done"><p class="btnStd btnSmall fr match_done_btn">匹配完成</p></div>
+							</div>
+							<div class="product_matched_content">
+								<input type="hidden" name="product_key" value="${product.nameMd5}" />
+								<input type="hidden" name="product_itemId" value="" />
+								<div class="product_head">
+									<div class="title_name">${product.name}</div>
+									<div class="rematch">
+										<i class="iconfont mr5">&#xe62f;</i>重新匹配
+									</div>
+								</div>
+								<div class="product_id">对应商品ID: <span class="itemId">310</span></div>
+								<div class="excel_list">
+									<ul>
+										#{list items:product.keyStrs, as : 'sku_str'}
+											<li data-key="${sku_str.get('key')}">${sku_str?.get('value')==null||sku_str?.get('value')==''?'默认':sku_str.get('value')}</li>
+										#{/list}
+									</ul>
+								</div>
+								<div class="match_list">
+									<ul></ul>
+								</div>
+								<div class="mark">已匹配</div>
+						</div>
+					</div>
+				#{/list}
+					</div>
+				#{/if}
+				<div class="button_section" style="text-align:center">
+					<a class="btnStd btnLarge btnYellow-shadow" href="javascript:;" id="btnSubmit">确认商品完毕，进入下一步</a>
+				</div>
+		</div>
+	</div>
+	<!-- //	cont_mypage -->
+</div>
+<!-- //content-area -->
+#{set 'moreSubScripts'}
+<script src="@{'/public/javascripts/libs/mustache.min.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/libs/jquery.validate.min.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/validate.plus.js'}" type="text/javascript"></script>
+<script type="text/javascript" src="/public/javascripts/bizComponents/retailer/orderStepThree.js"></script>
+<script type="text/javascript">App.module = 'orderStepOne';</script>
+#{/set}

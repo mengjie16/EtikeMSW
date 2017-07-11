@@ -1,0 +1,68 @@
+#{extends './manage-frame.html' /}
+#{set title:'H5活动编辑' /}
+<div class="cont_mypage container_body" style="margin-top:30px" id="container">
+	<div class="container_contents container_myMain_contents">
+		<div style="margin-top:0px;">
+			<div class="column_left">
+				<h3 id="h5activityTitle">-----</h3>
+			</div>
+		</div>
+		<div class="tbl_wrap_type02" id="itemContainer" style="border: none">  
+			#{authenticityToken/}
+		</div>
+		<div class="addactivity"><i class="iconfont mr10">&#xe60b;</i></div>
+	</div>
+</div>
+<div class="muban" id="groupitemsTemp" style="display:none">
+	{{#groupItemVos}}
+			<div class="cont_dep">
+			{{#groupItem}}
+		<div class="groupItem ex_type01" style="margin-top: 10px">
+			<div class="prt_list"> <i class="iconfont mr10 delbtns"></i>
+				<div class="loadlistImg">
+					<img src="{{picUrl}}"/>
+				</div>
+				<a href="">
+					<span class="item_name ">[{{brand.name}}]{{titleName}}</span>
+				</a>
+				<div class="price">
+					<span>{{retailPrice}}</span>
+					元
+				</div>
+			</div>
+			</div>
+			{{/groupItem}}
+			<div class="addList" style="width: 80px;height: 80px;"><i class="iconfont mr5" style="margin-top: 30px">&#xe60b;</i></div>
+		</div>
+	{{/groupItemVos}}
+</div>
+<div class="popWrapper" id="editbottomItems">
+	<div class="popWndFrame">
+		<div class="modalWnd" tr-url="" id="addbottomItemsWrapper">
+			<a href="javascript:;" class="wnd_Close_Icon" title="关闭窗口"><i class="iconfont mr10">&#xe60c;</i></a>
+			<div class="modalWndInner">
+				<form id="frmEditbottomItems" method="post">
+					#{authenticityToken/}
+				<input class="inputText" type="hidden" value="add" name="modifyType" />
+					<div class="column_left">
+						<h3>添加活动商品</h3>
+					</div>
+					<div class="form_line">
+						<label class="lbl">商品id</label>
+						<div class="controls">
+							<input type="text" class="inputText" id="txtItemId" name="bottomItems.id"/>	
+						</div>
+						<div for="txtItemId" class="validateLine clearfix"></div>
+					</div>
+				</form>
+			</div>
+			<div class="wndBotButtonSection">
+				<a id="btnbottomItemsfirm" href="javascript:;" class="botButton trSubmit">保存</a>
+			</div>
+		</div>
+	</div>
+</div>
+#{set 'moreManaScripts'}
+<script type="text/javascript" src="/public/javascripts/bizComponents/manage/h5activityEdit.js"></script>
+<script type="text/javascript">APP.QnDomain = '${upload_domain}';App.module = 'activityManage'; CDTH5.h5activityId='${h5aps_id}'</script>
+#{/set}

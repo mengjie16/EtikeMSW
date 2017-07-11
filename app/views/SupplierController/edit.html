@@ -1,0 +1,118 @@
+#{extends 'UserCenter/user-frame.html' /}
+#{set title:'修改信息' /}
+#{set 'moreSubStyles'}
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/itemEdit.css'}"  />
+<link href="@{'/public/stylesheets/regist.css'}" rel="stylesheet" type="text/css" />
+#{/set}
+<div class="cont_mypage" style="margin-top:30px" id="container">
+	<div class="container_contents container_myMain_contents">
+		<div style="margin-top:0px;">
+			<div class="column_left" style="padding-top:20px;">
+				<h3>修改用户信息</h3>
+			</div>
+		</div>
+		<div class="tbl_wrap_type02 pt20" style="padding-left: 30px;">
+			<div class="error_panel" style="padding-left: 198px;color: #f00;line-height: 33px">
+				${flash?.error}
+			</div>
+			<form action="" id="frmEditUser" method="post">
+				#{authenticityToken/}
+				<div class="form_line">
+					<label class="lbl">称呼</label>
+					<div class="controls">
+						<input class="inputText" id="txtName" type="text" value="${user?.name}" name="user.name" tabindex="1"/>
+					</div>
+					<div for="txtName" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">Email</label>
+					<div class="controls">
+						<input class="inputText" id="txtEmail" type="text" value="${user?.email}" name="user.email" tabindex="2"/>
+					</div>
+					<div for="txtEmail" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">手机号码</label>
+					<div class="controls">
+						<span style="display:inline-block;line-height: 24px;">${user?.phone}</span>
+					</div>
+				</div>
+				<div class="button_section" id="btnUserSubmit" style="padding-left:95px;">
+					<a class="btnStd btnLarge btnYellow-shadow" href="javascript:;">保存</a>
+				</div>
+			</form>
+		</div>
+		<div style="margin-top:50px;">
+			<div class="column_left" style="padding-top:20px;">
+				<h3>修改供应商信息</h3>
+			</div>
+		</div>
+		<div class="tbl_wrap_type02 pt20" style="padding-left: 30px;">
+			<form id="frmEditSup" method="post">
+				#{authenticityToken/}
+				<input type="hidden" name="supplier.id" value="${supplier?.id}" />
+				<div class="form_line">
+					<label class="lbl">供应商名称</label>
+					<div class="controls">
+						<input id="txtName_a" name="supplier.name" type="text" class="inputText long" tabindex="3" placeholder="公司简称或其他称呼" maxlength="15" value="${supplier?.name}" />			
+					</div>
+					<div for="txtName_a" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">主营产品</label>
+					<div class="controls">
+						<input id="txtProduct" name="supplier.product" type="text" class="inputText long" tabindex="6" value="${supplier?.product}" placeholder="主营产品" maxlength="50" />			
+					</div>
+					<div for="txtProduct" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">地址</label>
+					<div class="controls">
+						<input id="selCountry_id" type="hidden" name="supplier.country" value="${supplier?.country}" />			
+						<select id="selCountry" class="country" tabindex="8" data-val="${supplier?.countryId}" name="supplier.countryId">
+							<option value="">-- 国家 --</option>
+						</select>
+					</div>
+					<div for="selCountry_id" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line pro_city_region">
+					<label class="lbl">省/市/区</label>
+					<div class="controls">
+						<input id="selProvince" type="hidden" name="supplier.province" value="${supplier?.province}"/>			
+						<select id="selProvince_id" class="province" data-val="${supplier?.provinceId}" name="supplier.provinceId" tabindex="9">
+							<option rid="">-- 省份 --</option>
+						</select>
+						<select id="selCity" class="city ml10" name="supplier.city" tabindex="10">
+							<option>-- 城市 --</option>
+							<option selected="true">${supplier?.city}</option>
+						</select>
+						<select id="selRegion" class="region ml10" name="supplier.region" tabindex="11">
+							<option>-- 区域 --</option>
+							<option selected="true">${supplier?.region}</option>
+						</select>
+					</div>
+					<div for="selProvince" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">&nbsp;</label>
+					<div class="controls">
+						<input id="txtAddress" name="supplier.address" type="text" class="inputText long" placeholder="详细地址" value="${supplier?.address}" tabindex="12" maxlength="40" />			
+					</div>
+					<div for="txtAddress" class="validateLine clearfix"></div>
+				</div>
+				<div class="button_section" id="btnSubmitSup" style="padding-left:95px;">
+					<a class="btnStd btnLarge btnYellow-shadow" href="javascript:;">保存</a>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- //	cont_mypage -->
+</div>
+<!-- //content-area -->
+#{set 'moreSubScripts'}
+<script src="@{'/public/javascripts/libs/mustache.min.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/libs/jquery.validate.min.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/validate.plus.js'}" type="text/javascript"></script>
+<script type="text/javascript" src="/public/javascripts/bizComponents/supplier/supplierEdit.js"></script>
+<script type="text/javascript">APP.QnDomain = '${upload_domain}';App.module = 'supplierEdit';</script>
+#{/set}

@@ -1,0 +1,88 @@
+#{extends './user-frame.html' /}
+#{set title:'自定义类目管理' /}
+#{set 'moreSubStyles'}
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/itemEdit.css'}"  />
+#{/set}
+<div class="cont_mypage" style="margin-top:30px" id="container">
+	<div class="container_contents container_myMain_contents">
+		<div>
+			<a href="#" target="_blank">
+				<img src="/public/images/img/121023_powermypagebanner_700.jpg"></a>
+		</div>
+		<div style="margin-top:0px;">
+			<div class="column_left" style="padding-top:20px;">
+				<h3>自定义类目管理</h3>
+			</div>
+		</div>
+		<div class="tbl_wrap_type02 pt20">
+			<table summary="" class="tbl_type01 mt10">
+				<thead>
+					<tr>
+						<th class="col" width="30"></th>
+						<th>
+							<div class="thcell">类目名称</div>
+						</th>
+						<th>
+							<div class="thcell">移动</div>
+						</th>
+						<th style="width:150px;">
+							<div class="thcell">创建时间</div>
+						</th>
+						<th style="width:252px;">
+							<div class="thcell">操作</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody class="container">
+					<tr mid="">
+						<td>
+							<div class="tdcell">
+								<input type="checkbox" class="iCheck" />			
+							</div>
+						</td>
+						<td>
+							<div class="tdcell">
+								<input type="text" class="inputText">
+							</div>
+						</td>
+						<td>
+							<div class="tdcell"> <i class="iconfont mr10 moveUpAll">&#xe604;</i> 
+							<i class="iconfont mr10 moveUp">&#xe600;</i>
+								<i class="iconfont mr10 moveDown">&#xe60d;</i>
+								<i class="iconfont mr10 moveDownAll">&#xe601;</i>
+							</div>
+						</td>
+						<td>
+							<div class="tdcell">2016-06-01</div>
+						</td>
+						<td>
+							<div class="tdcell">
+								<a href="#" class="evaluate editbtn">查看</a>
+								<a href="#" class="evaluate delbtn">删除</a>
+								<a href="#" class="evaluate" style="display:none">返回</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<div class="alertChange">
+	<p>是否保存修改?</p>
+	<a href="javascript:;" class="besure">确定</a>
+	<a href="javascript:;" class="cansel">取消</a>
+</div>
+<!-- //content-area -->
+#{set 'moreSubScripts'}
+<script src="@{'/public/javascripts/libs/mustache.min.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/ueditor/ueditor.config.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/ueditor/editor_api.js'}" type="text/javascript"></script>
+<script type="text/javascript" charset="utf-8" src="@{'/public/javascripts/ueditor/lang/zh-cn/zh-cn.js'}"></script>
+<script src="@{'/public/javascripts/libs/jquery.validate.min.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/validate.plus.js'}" type="text/javascript"></script>
+<script type="text/javascript" src="/public/javascripts/plupload/plupload.full.min.js"></script>
+<script type="text/javascript" src="/public/javascripts/libs/qiniu.min.js"></script>
+<script type="text/javascript" src="/public/javascripts/bizComponents/supplier/cateList.js"></script>
+<script type="text/javascript">APP.QnDomain = '${upload_domain}';App.module = 'cateList';</script>
+#{/set}

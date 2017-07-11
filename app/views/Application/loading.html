@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta content="telephone=no,email=no" name="format-detection">
+	<meta content="width=device-width,initial-scale=1,user-scalable=no,maximum-scale=1,minimum-scale=1" name="viewport">
+	<title>授权等待中...</title>
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<link rel="shortcut icon" href="/public/images/favicon.ico" />
+	<link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/0.4.3/weui.min.css"/>
+	<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/mobile/loading.css'}" />
+    <script src="/public/javascripts/jquery.1.8.3.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	
+	var checkInterval = null;
+	$(function() {
+		checkInterval = setInterval ("doCheck()", 5000);
+	})
+	function doCheck () {
+		$.get('/h5/wx/role/check', {
+			'moudle':'${moudle}',
+			'moudleId':'${moudleId}'
+		}, function(data) {
+			if (data.code == 561 || data.code == 400 || data.code == 200) {
+				clear();
+				return;
+			}
+			// 权限没有继续轮询
+		});
+	}
+	function clear(){
+		clearInterval(checkInterval);
+		window.location.reload();
+	}
+	</script>
+</head>
+<body>
+<div class="msg">
+	<div class="weui_msg">
+    <div class="weui_icon_area"><i class="weui_icon_msg weui_icon_waiting"></i></div>
+    <div class="weui_text_area">
+        <h2 class="weui_msg_title">授权中</h2>
+        <div class="loading-3">
+					<i></i>
+					<i></i>
+					<i></i>
+				</div>
+        <p class="weui_msg_desc">如管理员开通，页面将自动跳转</p>
+    </div>
+    
+	</div>
+</div>
+</body>
+</html>

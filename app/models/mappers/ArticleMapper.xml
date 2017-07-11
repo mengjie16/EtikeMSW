@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="models.mappers.ArticleMapper">
+	<resultMap id="BaseResultMap" type="models.Article">
+	</resultMap>
+	<update id="updateById" parameterType="models.Article">
+		update article
+		<set>
+			<if test="authorId > 0 ">
+				author_id = #{authorId},
+			</if>
+			<if test="authorName!= null and authorName!= ''">
+				author_name = #{authorName},
+			</if>
+			<if test="title!= null and title!= ''">
+				title = #{title},
+			</if>
+			<if test="typeName!= null and typeName!= '' and typeId>0">
+				type_name = #{typeName},
+				type_id = #{typeId},
+			</if>
+			<if test="content!= null and content!= ''">
+				content = #{content},
+			</if>
+			is_public = #{isPublic},
+			is_inlist = #{isInList},
+			is_delete = #{isDelete}
+		</set>
+		where id = #{id}
+	</update>
+	<select id="selectList" resultMap="BaseResultMap">
+		select * from article A
+		<include refid="where" />
+		order by a.create_time desc
+	</select>
+	<select id="selectByVo" resultMap="BaseResultMap">
+		select * from article a
+		<include refid="where" />
+		order by a.create_time desc
+		limit #{startIndex},
+		#{pageSize}
+	</select>
+	<select id="countTotalVo" resultType="java.lang.Integer">
+		select count(1) from article a
+		<include refid="where" />
+	</select>
+	<sql id="where">
+		<where>
+			a.is_delete = #{isDelete} and 
+			a.is_public = #{isPublic} and
+			a.is_inlist = #{isList}
+		</where>
+	</sql>
+</mapper>

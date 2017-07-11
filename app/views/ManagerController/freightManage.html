@@ -1,0 +1,101 @@
+#{extends './manage-frame.html' /}
+#{set title:'运费模板管理' /}
+<div class="cont_mypage container_body" style="margin-top:30px" id="container">
+	<div class="container_contents container_myMain_contents">
+		<div style="margin-top:0px;">
+			<div class="column_left">
+				<h3>运费模板管理</h3>
+			</div>
+		</div> 
+		<div class="tbl_wrap_type02 pt20" id="freightContainer">			
+			<div class="search_area">
+				<div class="search_box">
+					<div class="area_l">
+						<span class="txt_type01">品牌</span>
+						<input type="text" class="text" style="width:160px;" value="" id="brandName">
+					</div>
+					<div class="area_l">
+						<span class="txt_type01">供应商</span>
+						<input type="text" class="text" style="width:160px;" value="" id="supName">
+					</div>
+					<div class="area_r">
+						<div class="fl">
+							<a href="javascript:;" class="btnStd btnMedium mr6" id="SearchBtn">查询</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<table summary="" class="tbl_type01 tbHoverable">
+				<thead>
+					<tr>
+						<th>
+							<div class="thcell">ID</div>
+						</th>
+						<th>
+							<div class="thcell">所属供应商</div>
+						</th>
+						<th>
+							<div class="thcell">公司名称</div>
+						</th>
+						<th>
+							<div class="thcell">模板名称</div>
+						</th>
+						<th>
+							<div class="thcell">类型</div>
+						</th>
+						<th>
+							<div class="thcell">档数</div>
+						</th>
+						<th>
+							<div class="thcell">创建时间</div>
+						</th>
+						<th style="width:150px;">
+							<div class="thcell">操作</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+			<div class="pagin-btm clearFix">
+				<div class="pagination"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<textarea class="muban" id="freightManageTemp" style="display:none">
+	{{#results}}
+	<tr mid="{{id}}">
+		<td>
+			<div class="tdcell" style="text-align:center">{{_id}}</div>
+		</td>
+		<td>
+			<div class="tdcell">{{userName}}</div>
+		</td>
+		<td>
+			<div class="tdcell">{{company}}</div>
+		</td>
+		<td>
+			<div class="tdcell">{{tempName}}</div>
+		</td>
+		<td>
+			<div class="tdcell">{{tempTypeTran}}</div>
+		</td>
+		<td>
+			<div class="tdcell">{{files}}</div>
+		</td>
+		<td>
+			<div class="tdcell">{{createTimeStr}}</div>
+		</td>
+		<td style="width:150px;">
+			<div class="tdcell">
+				<a href="/tools/freight/calc/{{_id}}" target="_blank" class="btnStd btnSmall viewbtn">查看</a>
+				<a href="/sys/freight/edit/{{_id}}" target="_blank" class="btnStd btnSmall editbtn">编辑</a>
+			</div>
+		</td>
+	</tr>
+	{{/results}}
+</textarea>
+#{set 'moreManaScripts'}
+<script type="text/javascript" src="/public/javascripts/bizComponents/manage/freightManage.js"></script>
+<script type="text/javascript">APP.QnDomain = '${upload_domain}';App.module = 'freightManage';</script>
+#{/set}

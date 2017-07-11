@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="models.mappers.RetailerMapper">
+	<resultMap id="BaseResultMap" type="models.Retailer"></resultMap>
+
+<insert id="insert" parameterType="models.Retailer">
+		<selectKey resultType="java.lang.Short" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into retailer
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			channel,
+			name,
+			shop_url,
+			note,
+			create_time,
+			update_time
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{channel},
+			#{name},
+			#{shopUrl},
+			#{note},
+			#{createTime},
+			#{updateTime}
+		</trim>
+	</insert>
+	<update id="updateById" parameterType="models.Retailer">
+		update retailer
+		<set>
+			<if test="name !=null">
+				name = #{name},
+			</if>
+			shop_url = #{shopUrl},
+			<if test="channel != null">
+				channel = #{channel},
+			</if>
+			note = #{note},
+			update_time = #{updateTime}
+		</set>
+		where id = #{id}
+	</update>
+	<select id="selectListByPage" resultMap="BaseResultMap">
+		select * from retailer r
+		<include refid="where" />
+		order by r.create_time desc
+		limit #{startIndex},
+		#{pageSize}
+	</select>
+	<select id="countTotalVo" resultType="java.lang.Integer">
+		select count(1) from retailer r
+		<include refid="where" />
+	</select>
+	<sql id="where">
+		<where>
+			<if test="name!=null and name!= ''">
+				and r.name like '%${name}%'
+			</if>
+			<if test="createTimeStart != null">
+				<![CDATA[ and r.create_time>=#{createTimeStart} ]]>
+			</if>
+			<if test="createTimeEnd != null">
+				<![CDATA[ and r.create_time<=#{createTimeEnd} ]]>
+			</if>
+		</where>
+	</sql>
+</mapper>

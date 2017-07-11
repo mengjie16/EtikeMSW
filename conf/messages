@@ -1,0 +1,35 @@
+# You can specialize this file for each language.
+# For example, for French create a messages.fr file
+#
+# For use in JavaExtensions.since tag
+since.seconds = %s second%s ago
+since.minutes = %s minute%s ago
+since.hours   = %s hour%s ago
+since.days    = %s day%s ago
+since.months  = %s month%s ago
+since.years   = %s year%s ago
+since.format  = MMM d, yyyy
+
+# Validation messages
+validation.required=[%s] 必填
+validation.minSize=[%s] 长度至少为 %2$d
+validation.maxSize=[%s] 长度最大为 %2$d
+validation.email=[%s] 不是正确的Email格式
+validation.range=[%s] 值不在 %2$d 和 %3$d 之间
+validation.min=[%s] 不能低于 %2$d
+validation.max=[%s] 不能高于 %2$d
+validation.match=[%s] 和 %2$s 不匹配
+validation.isTrue=[%s] 检验失败
+validation.equals=[%s] 不等于 &{%2$s}
+validation.invalid=数据校验错误
+validation.future=[%s] Must be in the future
+validation.after=[%s] 必须在 %2$s 之后
+validation.past=[%s] Must be in the past
+validation.before=[%s] 必须在 %2$s 之前
+validation.object=[%s] Validation failed
+validation.notFound=[%s] Object not found for id %2$s
+validation.url=[%s] 不是正确的URL
+validation.phone=[%s] 不是正确的手机号
+validation.ipv4=[%s] Not a valid IP address
+validation.ipv6=[%s] Not a valid IP v6 address
+validation.unique=[%s] 不唯一
