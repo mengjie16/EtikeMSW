@@ -242,6 +242,7 @@
  }
  .inputText{
  	height: 33px;
+ 	outline-color: #52D0C4;
  }
  .search-sel .inputText {
  	border: 0;

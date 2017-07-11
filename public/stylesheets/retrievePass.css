@@ -5,7 +5,7 @@
 	margin: 10px 22px;
 }
 .btnSendPhoneCaptcha.active {
-	background-color: #D450A6;
+	background-color: #52d0c4;
 }
 .contentBody .info1 {
 	padding-left: 0px;
@@ -54,7 +54,7 @@
 	background-color: #fff;
 	padding: 20px;
 	width: 320px;
-	height: 230px;
+	height: 300px;
 	top: 40px;
 	left: 194px;
 	z-index: 10;
@@ -65,11 +65,10 @@
 	height: 22px;
 	line-height: 22px;
 	text-align: center;
-	background-color: #D450A6;
+	background-color: #52d0c4;
 	color:#fff;
 	cursor: pointer;
 	float: right;
-	margin-right:200px;
 	margin-top: 2px;
 }
 .contentBody .info1 .login {

@@ -57,22 +57,6 @@ function ValidateSimulateOpts() {
 }
 
 $(function() {
-	//零售商复选框点击文字选中
-	$('.channel').each(function() {
-		var index = $(this).index();
-		$(this).find('input').attr('id', index);
-		$(this).find('label').attr('for', index);
-	});
-	var list = $('input[name="retailer.channel"]').val();
-	if (list) {
-		$.each($('input[type="checkbox"]'), function(index, obj) {
-			$.each(list.split(','), function(a, b) {
-				if ($(obj).val() == b) {
-					$(obj).attr('checked', 'checked');
-				}
-			});
-		})
-	}
 	// 点击发送验证码
 	$('.btnSendPhoneCaptcha').data('send', false);
 	$('.btnSendPhoneCaptcha').click(function() {
@@ -183,18 +167,6 @@ $(function() {
 		var validator = $('#frmRegistRetailer').validate(ValidateRetAddOpts());
 		if (!validator.form()) {
 			return;
-		}
-		var boxes = $('input[name=channel]:checked').length;
-		if (boxes <= 0) {
-			$('.checkboxval').html('<span class="errortxt">请至少选择一种</span>');
-			return false;
-		} else {
-			$('span.errortxt').remove();
-			var list = [];
-			$.each($('input[name=channel]:checked'), function(index, obj) {
-				list.push($(obj).val());
-			});
-			$('input[name="retailer.channel"]').val(list.join(','));
 		}
 		// 提交注册
 		$('#frmRegistRetailer').submit();

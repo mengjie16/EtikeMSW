@@ -5,32 +5,10 @@
 #{/set}
 <div class="contentBody">
 	<div class="title" style="height:35px;">
-		<div class="keyImg">
-			<img src="/public/images/img/keyImg.png" alt="" />
-		</div>
-	</div>
-	<div class="info1">
-		<span>吐司宝贝的一站式登录体系</span>
-		<br />
-		一个帐号可以登录本站的所有平台，APP，分销软件，并可以方便地和淘宝、阿里账号进行绑定。
 	</div>
 	<div class="contentBox">
-		#{if false}
 		<div class="contentTitle">
-			<h3>会员类型</h3>
-		</div>
-		<div class="info">选择适当的会员种类</div>
-		<ul class="userTypes">
-			<li>
-				<p class="m-font">品牌方/供应商/工厂</p>
-			</li>
-			<li>
-				<p class="active m-font">零售商/分销商</p>
-			</li>
-		</ul>
-		#{/if}
-		<div class="contentTitle">
-			<h3>填写注册信息</h3>
+			<h3 style="font-size: 14px">填写注册信息</h3>
 		</div>
 		<div class="certificationTypeBox">
 			 <div class="error_panel" style="text-align:left;padding-left:198px;color:#f00;">${flash?.error}</div>
@@ -55,23 +33,6 @@
 					<input id="txtPassword_ret" name="user.password" onfocus="this.type='password'" autocomplete="off" type="text" class="inputText long" placeholder="输入密码" tabindex="3" maxlength="20" minlength="6" />
 					<div for="txtPassword_ret" class="validateLine clearfix"></div>
 				</div>
-
-				<div class="formLine">
-					<label class="f14">选择渠道</label>
-					<div class="canal" id="channelList">
-					<input type="hidden" name="retailer.channel" value="${flash?.channel}"/>
-					#{if rcs}
-						#{list items:rcs,as :'retailerChannel'}
-						<div class="channel">
-							<input value="${retailerChannel.id}" name="channel" type="checkbox" class="mr4"/>
-							<label for="pop">${retailerChannel.channel}</label>
-						</div>
-						#{/list}
-						#{/if}
-						<div class="validateLine clearfix checkboxval"></div>
-					</div>
-				</div>
-				
 				<div class="okBtn mt40" id="btnRegisterRet">
 					<a href="javascript:">
 						<p class="f14">注 册</p>
@@ -87,7 +48,7 @@
 					<a href="javascript:;" class="popCloser">
 						<i class="iconfont" style="font-size:26px;color:#444">&#xe60c;</i>
 					</a>
-					<div class="header">输入图中验证码</div>
+					<div class="">输入图中验证码</div>
 					<div class="tc mt20">
 						<img src="/captcha" class="imgCaptcha" title="点击刷新" alt="点击刷新" />
 						<p class="tc grey mt4">点击刷新</p>
@@ -103,12 +64,6 @@
 					</div>
 				</form>
 			</div>
-		</div>
-		<div class="certificationTypeSubInfos">
-			<ul class="certificationTypeSubInfo">
-				<li>请如实填写，有利于供应商对您的能力评估</li>
-				<li>本站会对信息健全的零售商/分销商提供更优质的服务</li>
-			</ul>
 		</div>
 		<div class="ml20 mt40">
 			已有账号？

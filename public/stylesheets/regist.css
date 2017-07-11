@@ -7,7 +7,6 @@ a {
 .contentBody {
 	width: 880px;
 	margin: 0 auto;
-	background-image: url(/public/images/img/confirmBG.jpg);
 	background-repeat: no-repeat;
 	background-position: 671px top;
 }
@@ -139,7 +138,7 @@ a {
 }
 .certificationTypeBox_pop .okBtn p,.certificationTypeBox .okBtn p {
 	line-height: 38px;
-	background-color: #D450A6;
+	background-color: #52d0c4;
 	color: #fff;
 	text-align: center;
 }
@@ -158,6 +157,7 @@ a {
 	text-align: right;
 	line-height: 33px;
 	margin-right: 8px;
+	font-weight: normal;
 }
 .canal {
 	display: inline-block;
@@ -199,7 +199,7 @@ a {
 }
 .btnSendPhoneCaptcha.active{
 	color:#fff;
-	background-color:#D450A6;
+	background-color:#52d0c4;
 }
 #frmEditSup .inputMultiText {
 	line-height: 20px

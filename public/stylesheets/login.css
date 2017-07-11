@@ -17,7 +17,7 @@
     border: 2px solid #eaeaea;
 }
 .contentWrap .leftArea .loginTabs {
-    height: 18px;
+    height: 30px;
     width: 160px;
     padding-top: 9px;
     border: 1px solid #dcdcdc;
@@ -193,6 +193,7 @@
 .changeUser {
     display: inline-block;
     margin-top: 3px;
+    color: #444;
 }
 .loginBottom {
     width: 370px;
@@ -350,7 +351,7 @@
 }
 .controls {
     padding: 5px 0;
-    color: #ffa200;
+    color: #52d0c4;
 }
 .clboth {
     clear: both;
