@@ -1,0 +1,25 @@
+{
+	"config": {
+		"bulletBanners": [{
+			"image": "",
+			"url": ""
+		}, {
+			"image": "",
+			"url": ""
+		}],
+		"banners": [{
+			"image": "",
+			"url": ""
+		}, {
+			"image": "",
+			"url": ""
+		}],
+		"brandShowcase": [{
+			"image": "http://",
+			"url": "http://"
+		}],
+		"starSuppliers": [{
+			
+			}]
+	}
+}

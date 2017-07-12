@@ -1,0 +1,9 @@
+# Declare files that will always have CRLF line endings on checkout.
+*.java 			eol=lf
+*.js 			eol=lf
+*.html 			eol=lf
+*.css 			eol=lf
+*.xml 			eol=lf
+*.conf 			eol=lf
+*.properties   	eol=lf
+*.sql			eol=lf
