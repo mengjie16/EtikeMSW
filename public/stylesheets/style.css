@@ -1104,7 +1104,7 @@ height: 100px
 }
 
 .products {
-    padding: 2em 0;
+    padding: 3em 0;
 }
 
 
@@ -1133,14 +1133,18 @@ ul.kid-menu {
 .menu-drop > li > a {
     width: 100%;
     margin: 0.3em 0;
-    display: inline-block;
     position: relative;
     color: #B2B2B2;
     font-size: 0.9em;
     text-decoration: none;
     font-family: "微软雅黑";
 }
-
+.item1 {
+    height: 28px;
+}
+.item1 input[type="checkbox"] {
+    margin-top:-2px;
+}
 .menu-drop > li > a:hover {
     color: #52D0C4;
 }

@@ -1,6 +1,5 @@
 .pagin-btm {
 	height: 40px;
-	margin-top: 60px;
 	zoom: 1;
 	display: block;
 	text-align: center
@@ -24,7 +23,7 @@
 	text-align: center;
 	background-color: #fff;
 	font-size: 14px;
-	color: #FCA11F;
+	color: #52D0C4;
 	margin-right: 6px;
 }
 .pagination a{
@@ -33,12 +32,12 @@
 	cursor: pointer
 }
 .pagination a:hover {
-	border-color: #FCA11F
+	border-color: #52D0C4
 }
 .pagination .current {
-	border-color: #FCA11F;
+	border-color: #52D0C4;
 	color: #fff;
-	background-color: #FCA11F;
+	background-color: #52D0C4;
 }
 .pagination .current.T_prev, .pagination .current.T_next {
 	display: none
