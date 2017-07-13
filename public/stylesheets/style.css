@@ -1269,7 +1269,7 @@ span.price-in1 {
 
 .single .productPrice {
     font-size: 26px;
-    color: #52D0C4;
+    color: #FE6102;
     font-weight: 700;
     margin: 0;
 }
@@ -1312,13 +1312,12 @@ span.price-in1 {
 }
 
 .single-para h1 {
-    font-size: 1em;
+    font-size: 16px;
     color: #333;
     line-height: 1.5em;
-    margin-bottom: 15px;
+    margin: 15px 0;
     font-family: 'OleoScript-Regular', '微软雅黑';
 }
-
 label.add-to {
     display: block;
     font-size: 2em;
