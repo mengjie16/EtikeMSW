@@ -19,5 +19,5 @@ import utils.QnCloudUtil.QnFileBucket;
 @Target({ ElementType.METHOD })
 public @interface UploadSupport {
 
-    String bucket() default "tusibaby";
+    String bucket() default "eitak";
 }

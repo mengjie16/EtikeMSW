@@ -30,7 +30,7 @@ public class DataStore {
     // 数据库会话对象
     private static String MDB_HOST = Config.getProperty("mdb.host");
     private static int MDB_PORT = NumberUtils.toInt(Config.getProperty("mdb.port"));
-    private static String MDB_DB = Config.getProperty("mdb.db", "tusibaby");
+    private static String MDB_DB = Config.getProperty("mdb.db", "eitak");
     private static String MDB_USER = Config.getProperty("mdb.db.user");
     private static String MDB_PASS = Config.getProperty("mdb.db.pass");
     private static boolean MDB_AUTH = false;
@@ -41,7 +41,7 @@ public class DataStore {
             MDB_AUTH = true;
             MDB_HOST = Config.getProperty("mdb.auth.host");
             MDB_PORT = NumberUtils.toInt(Config.getProperty("mdb.auth.port"));
-            MDB_DB = Config.getProperty("mdb.auth.db", "tusibaby");
+            MDB_DB = Config.getProperty("mdb.auth.db", "eitak");
             MDB_USER = Config.getProperty("mdb.auth.db.user");
             MDB_PASS = Config.getProperty("mdb.auth.db.pass");
         }

@@ -201,7 +201,7 @@ function loadUpToken() {
 
 function initItemMainPicUploader() {
 	var option = Tr.uploadOption();
-	option.domain = APP.QnDomain + '.tusibaby.com/';
+	option.domain = APP.QnDomain + '.eitak.com/';
 	option.max_file_size = '500kb';
 	option.uptoken = CDT.uptoken;
 	option.browse_button = 'T_adBanner';

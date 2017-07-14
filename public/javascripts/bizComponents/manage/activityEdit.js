@@ -324,7 +324,7 @@ function setBtns() {
 
 function initItemMainPicUploader(domId) {
 	var option = Tr.uploadOption();
-	option.domain = APP.QnDomain + '.tusibaby.com/';
+	option.domain = APP.QnDomain + '.eitak.com/';
 	option.max_file_size = '500kb';
 	option.uptoken = CDT.uptoken;
 	option.browse_button = domId;
@@ -377,7 +377,7 @@ function initItemMainPicUploader(domId) {
 //上传大banner
 function initItemBigPicUploader() {
 	var option = Tr.uploadOption();
-	option.domain = APP.QnDomain + '.tusibaby.com/';
+	option.domain = APP.QnDomain + '.eitak.com/';
 	option.max_file_size = '500kb';
 	option.uptoken = CDT.uptoken;
 	option.browse_button = 'activityBanner';
@@ -447,7 +447,7 @@ function initItemBigPicUploader() {
 //上传middlePoster
 function initItemMidPicUploader() {
 	var option = Tr.uploadOption();
-	option.domain = APP.QnDomain + '.tusibaby.com/';
+	option.domain = APP.QnDomain + '.eitak.com/';
 	option.max_file_size = '500kb';
 	option.uptoken = CDT.uptoken;
 	option.browse_button = 'T_smBanner';

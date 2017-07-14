@@ -142,7 +142,7 @@ $(function() {
 });
 //绘制连线
 function creatline(){
-	$('.uploadStatus').text('请将左侧“您的Excel表头”和右侧“吐司宝贝数据字段”进行连线,系统会在连线后自动进行匹配');
+	$('.uploadStatus').text('请将左侧“您的Excel表头”和右侧“艾泰客数据字段”进行连线,系统会在连线后自动进行匹配');
 	var height = $(".lineTo").height();
 	var canvas = document.getElementById('line_canvas');
 	var paper = Raphael(canvas, 700, height);

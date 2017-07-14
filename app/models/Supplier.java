@@ -60,7 +60,7 @@ public class Supplier implements java.io.Serializable {
     /** 具体地址 */
     public String address;
 
-    /** 二级域名，通过domain.tusibaby.com可以访问到供应商的主页 */
+    /** 二级域名，通过domain.eitak.com可以访问到供应商的主页 */
     public String domain;
     /** 供应商类型 */
     public SupplierType type;
