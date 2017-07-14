@@ -165,8 +165,8 @@ public class SmsUtil {
             return false;
         }
 
-        String codeStr = "{\"code\":\"" + code + "\",\"product\":\"艾泰客\"}";
-        boolean result = invokeSendSmsApi(null, "艾泰客", "SMS_9661787", codeStr, phone);
+        String codeStr = "{\"code\":\"" + code + "\",\"product\":\"吐司宝贝\"}";
+        boolean result = invokeSendSmsApi(null, "吐司宝贝", "SMS_9661787", codeStr, phone);
 
         sendFinished(phone, code);
         return result;
@@ -190,8 +190,8 @@ public class SmsUtil {
             return false;
         }
 
-        String codeStr = "{\"code\":\"" + code + "\",\"product\":\"艾泰客\"}";
-        boolean result = invokeSendSmsApi(null, "艾泰客", "SMS_10210515", codeStr, phone);
+        String codeStr = "{\"code\":\"" + code + "\",\"product\":\"吐司宝贝\"}";
+        boolean result = invokeSendSmsApi(null, "吐司宝贝", "SMS_10210515", codeStr, phone);
 
         sendFinished(phone, code);
         return result;
@@ -214,7 +214,7 @@ public class SmsUtil {
         Validate.notEmpty(userName);
 
         String infoContent = "{\"name\":\"" + userName + "\",\"password\":\"" + pass + "\"}";
-        boolean result = invokeSendSmsApi(null, "艾泰客", "SMS_10642328", infoContent, phone);
+        boolean result = invokeSendSmsApi(null, "吐司宝贝", "SMS_10642328", infoContent, phone);
 
         return result;
     }
