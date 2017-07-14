@@ -81,7 +81,7 @@ public class HomePageSettingTest extends UnitTest {
         rss.url = "http://taobao.com";
         // 品牌列表
         BrandSetting bs =  new BrandSetting();
-        bs.imgUrl = "http://cdn.tusibaby.com/o_1akblopnf1sol10hjr9oof21u979.jpg";
+        bs.imgUrl = "http://cdn.eitak.com/o_1akblopnf1sol10hjr9oof21u979.jpg";
         bs.title = "帮宝适";
         // 活动列表
         ActivitySetting as = new ActivitySetting();

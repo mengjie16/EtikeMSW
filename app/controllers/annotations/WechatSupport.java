@@ -18,5 +18,5 @@ import utils.QnCloudUtil.QnFileBucket;
 @Target({ ElementType.METHOD })
 public @interface WechatSupport {
 
-    String bucket() default "tusibaby";
+    String bucket() default "eitak";
 }

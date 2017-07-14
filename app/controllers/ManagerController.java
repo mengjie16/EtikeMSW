@@ -882,7 +882,7 @@ public class ManagerController extends BaseController {
         }
         // 设置了邮件的话，发送一下邮件
         if (!Strings.isNullOrEmpty(user.email)) {
-            MailUtils.sendTextMail(user.email, "[吐司宝贝]密码重置成功", "您的新临时密码为:" + newPass + "，请尽快登录并修改密码");
+            MailUtils.sendTextMail(user.email, "[艾泰客]密码重置成功", "您的新临时密码为:" + newPass + "，请尽快登录并修改密码");
         }
         // 短信通知
         SmsUtil.sendUserModifyPassNotice(user.phone, newPass, "用户");

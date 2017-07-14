@@ -48,9 +48,9 @@ public class QnCloudUtil {
      */
     public enum QnFileBucket {
         /** 正式空间：普通图片 */
-        ONLINE_PUBLIC("tusibaby","//cdn"), 
-        DEV("tusibaby","//cdn"), 
-        TEST("tusibaby","//cdn");
+        ONLINE_PUBLIC("eitak","//cdn"), 
+        DEV("eitak","//cdn"), 
+        TEST("eitak","//cdn");
         // bucket的名字
         public String bucket;
         // 自定义域名前缀
@@ -132,7 +132,7 @@ public class QnCloudUtil {
         InputStream inputStream = WS.url(url).get().getStream();
 
         // 图片地址url头部
-        String DOMAIN = "http://cdn{0}.tusibaby.cn/";
+        String DOMAIN = "http://cdn{0}.eitak.cn/";
 
         // 获取upToken
         String uptoken = QnCloudUtil.generateUploadToken();
