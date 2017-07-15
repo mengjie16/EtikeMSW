@@ -7,21 +7,24 @@
     </div>
     <div class="content-top">
         <div class="content-top1">
-            <div class="col-md-3 col-md2">
-                <div class="col-md1 simpleCart_shelfItem">
-                    <a href="single.html">
-                        <img class="img-responsive" src="/public/images/02.jpg" alt="" />
-                    </a>
-                    <div class="price">
-                        <h5 class="item_price">¥123
-                            <span class="price-e">20€</span>
-                        </h5>
-                        <a href="#" class="item_add">Add To Cart</a>
-                        <div class="clearfix"> </div>
-                    </div>
-                    <h3><a href="single.html">保税区直发 澳大利亚Soulful 成人奶粉 50岁以上 900g【1袋起发】</a></h3>
-                </div>
-            </div>
+           #{if search_result?.items}
+          #{list items:search_result.items,as : 'item'}
+          <div class="col-md-3 col-md3" style="padding-left: 0;">
+              <div class="col-md1 simpleCart_shelfItem">
+                  <a href="/item/${item?.id}" target="_blank">
+                      <img class="img-responsive lazyImg" src="public/images/grey.gif"  data-original="${item?.picUrl+'?imageView2/2/h/183/q/100'}" border="0" alt="${item.title}" title="${item.title}" style="width: 193px;height: 193px;" />
+                  </a>
+                  <div class="price">
+                          <h5 class="item_price">${item.retailPrice/100} <span class="price-e">30€</span></h5>
+                          <span class="glyphicon glyphicon-star-empty item_collect"></span>
+                          <a href="#" class="item_add"><img src="/public/images/cart.png" alt="" style="width: 20px;height: 20px;" /></a>
+                          <div class="clearfix"> </div>
+                  </div>
+                  <h3><a href="/item/${item?.id}">${item?.title}</a></h3>
+              </div>
+          </div>  
+          #{/list}
+          #{/if}    
             <div class="clearfix"> </div>
         </div>
     </div>

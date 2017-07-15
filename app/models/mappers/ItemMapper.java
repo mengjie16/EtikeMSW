@@ -80,4 +80,7 @@ public interface ItemMapper {
     // 过滤基本条件后的商品id集合，除关键字过滤
     List<Long> selectListFilterByVo(ItemSearchVo vo);
     // ---------------
+    
+    
+    List<Item> selectListAllByCreateTime();
 }
