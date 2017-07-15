@@ -21,6 +21,7 @@ import enums.constants.BizConstants;
 import enums.constants.CacheType;
 import enums.constants.ErrorCode;
 import enums.constants.RegexConstants;
+import models.Item;
 import models.Retailer;
 import models.RetailerChannel;
 import models.User;
@@ -36,6 +37,7 @@ import play.mvc.Util;
 import play.mvc.With;
 import utils.SmsUtil;
 import utils.WechatHelper;
+import vos.ItemSearchResult;
 
 /**
  * 平台控制器
@@ -127,7 +129,10 @@ public class Application extends BaseController {
      * @author Calm
      * @created 2016年7月15日 上午1:28:07
      */
-    public static void indexList2() {
+    public static void indexList2() {    	
+    	ItemSearchResult search_result = Item.selectListAllByCreateTime();
+        renderArgs.put("search_result", search_result);
+    	
         render();
     }
 
