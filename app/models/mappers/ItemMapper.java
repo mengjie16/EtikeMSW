@@ -79,8 +79,7 @@ public interface ItemMapper {
     List<Item> selectIdsInAllIdsOrBids(@Param("keyWords") List<String> keyWords,@Param("brandIds") List<Long> brandIds,@Param("itemIds") List<Long> itemIds);
     // 过滤基本条件后的商品id集合，除关键字过滤
     List<Long> selectListFilterByVo(ItemSearchVo vo);
-    // ---------------
-    
+    // ---------------  
     
     List<Item> selectListAllByCreateTime();
 }
