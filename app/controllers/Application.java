@@ -130,8 +130,8 @@ public class Application extends BaseController {
      * @created 2016年7月15日 上午1:28:07
      */
     public static void indexList2() {    	
-    	ItemSearchResult search_result = Item.selectListAllByCreateTime();
-        renderArgs.put("search_result", search_result);
+//    	ItemSearchResult search_result = Item.selectListAllByCreateTime();
+//        renderArgs.put("search_result", search_result);
     	
         render();
     }

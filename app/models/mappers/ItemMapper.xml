@@ -349,9 +349,9 @@
 		</if>
 		</where>
 	</select>
-	
-	<select id="selectListAllByCreateTime" resultType="BaseResultMap">
+	<select id="selectListAllByCreateTime" resultMap="BaseResultMap">
 		select * from item i
-		order by i.create_time desc limit 0,8
+		order by i.create_time desc
+		limit 0,8
 	</select>
 </mapper>
