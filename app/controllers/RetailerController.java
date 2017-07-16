@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,9 +32,11 @@ import controllers.base.secure.Secure;
 import enums.AliPayTradeStatus;
 import enums.TradeStatus;
 import enums.constants.CacheType;
+import models.Address;
 import models.AliPayTrade;
 import models.Order;
 import models.Retailer;
+import models.Supplier;
 import models.Trade;
 import models.User;
 import play.data.binding.As;
@@ -41,6 +45,7 @@ import play.data.validation.MinSize;
 import play.data.validation.Required;
 import play.mvc.With;
 import utils.TSFileUtil;
+import vos.AddressVo;
 import vos.ItemVo;
 import vos.OrderProductResult;
 import vos.OrderVo;
@@ -173,6 +178,33 @@ public class RetailerController extends BaseController {
     public static void address() {
         render();
     }
+    
+    @UserLogonSupport(value = "RETAILER")
+    public static void addressList(AddressVo vo) {
+        if (Address.updateByVo(vo)) {
+            renderSuccessJson();
+        }
+        renderFailedJson(ReturnCode.FAIL);
+    }
+    
+    /**
+     * 地址管理页面
+     *
+     * @since v1.0
+     * @author Calm
+     * @created 2016年7月13日 上午2:02:31
+     */
+    @UserLogonSupport(value = "RETAILER")
+    public static void addressSave(@Required @Valid Address address) {
+        handleWrongInput(true);
+        boolean ret = Address.save(address);
+        if (ret) {
+            renderSuccessJson();
+        }
+        renderFailedJson(ReturnCode.FAIL, "添加失败");
+    }
+
+    
 
     /**
      * 我的订单页面

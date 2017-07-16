@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="models.mappers.AddressMapper">
+	<resultMap id="BaseResultMap" type="models.Address"></resultMap>
+	<insert id="insert" parameterType="models.Address">
+		<selectKey resultType="java.lang.Short" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into address
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			name,
+			phone,
+			country,
+			country_id,
+			province,
+			province_id,
+			city,
+			region,
+			address,
+			create_time,
+			update_time,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{name},
+			#{phone},
+			#{country},
+			#{countryId},
+			#{province},
+			#{provinceId},
+			#{city},
+			#{region},
+			#{address},
+			#{createTime},
+			#{updateTime}
+		</trim>
+	</insert>
+	<update id="updateById" parameterType="models.Address">
+		update address
+		<set>
+			<if test="name !=null and name !=''">
+				name = #{name},
+			</if>
+			<if test="phone !=null and phone !=''">
+				phone = #{phone},
+			</if>
+			<if test="country !=null and country !=''">
+				country = #{country},
+			</if>
+			<if test="countryId > 0 ">
+				country_id = #{countryId},
+			</if>
+			<if test="province !=null and province !=''">
+				province = #{province},
+			</if>
+			<if test="provinceId >0 ">
+				province_id = #{provinceId},
+			</if>
+			<if test="city !=null and city !=''">
+				city = #{city},
+			</if>
+			<if test="region!=null and region !=''">
+				region = #{region},
+			</if>
+			address = #{address},
+			update_time = #{updateTime}			
+		</set>
+		where id = #{id}
+	</update>
+	<update id="updateByVo" parameterType="vos.AddressVo">
+		update address
+		<set>
+			<if test="name !=null and name!=''">
+				name = #{name},
+			</if>
+			<if test="phone !=null and phone''">
+				phone = #{phone},
+			</if>
+			<if test="country !=null and country!=''">
+				country = #{country},
+			</if>
+			<if test="countryId > 0 ">
+				country_id = #{countryId},
+			</if>
+			<if test="province !=null and province!=''">
+				province = #{province},
+			</if>
+			<if test="provinceId >0 ">
+				province_id = #{provinceId},
+			</if>
+			<if test="city !=null and city!=''">
+				city = #{city},
+			</if>
+			<if test="region!=null and region!=''">
+				region = #{region},
+			</if>
+			<if test="address !=null and address!=''">
+				address = #{address},
+			</if>
+			update_time = now()
+		</set>
+		where id = #{id}
+	</update>
+	<select id="selectListByPage" resultMap="BaseResultMap">
+		select * from address s
+		<include refid="where" />
+		order by s.create_time desc
+		limit #{startIndex},
+		#{pageSize}
+	</select>
+	<select id="countTotalVo" resultType="java.lang.Integer">
+		select count(1) from address s
+		<include refid="where" />
+	</select>
+	<sql id="where">
+		<where>
+			<if test="name !=null and name !=''">
+				and s.name like '%${name}%'
+			</if>
+			<if test="createTimeStart !=null">
+				<![CDATA[ and s.create_time>=#{createTimeStart} ]]>
+			</if>
+			<if test="createTimeEnd !=null">
+				<![CDATA[ and s.create_time<=#{createTimeEnd} ]]>
+			</if>
+		</where>
+	</sql>
+</mapper>
