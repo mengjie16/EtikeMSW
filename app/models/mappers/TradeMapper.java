@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import enums.TradeStatus;
 import models.Trade;
 import vos.TradeSearchVo;
 
@@ -46,4 +47,7 @@ public interface TradeMapper {
     Trade selectWithOrdersById(@Param("tradeId") long tradeId);
 
     List<Trade> selectListWithOrderByVo(TradeSearchVo vo);
+    
+    List<Trade> selectListWithOrderTradeStatusByVo(@Param("vo")TradeSearchVo vo,@Param("tradeStatus")TradeStatus tradeStatus);
+    
 }

@@ -80,6 +80,17 @@
 		limit #{startIndex},
 		#{pageSize}
 	</select>
+	<select id="selectListWithOrderTradeStatusByVo" resultMap="TradeOrdersMap">
+		select * from trade t
+		<where>			
+			<if test="tradeStatus!=null">
+				and t.status = #{tradeStatus}
+			</if>
+		</where>
+		order by t.create_time desc
+		limit #{vo.startIndex},
+		#{vo.pageSize}
+	</select>	
 	<sql id="where">
 		<where>
 			<if test="id > 0">

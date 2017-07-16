@@ -28,6 +28,7 @@ import controllers.annotations.UserLogonSupport;
 import controllers.base.BaseController;
 import controllers.base.secure.Secure;
 import enums.AliPayTradeStatus;
+import enums.TradeStatus;
 import enums.constants.CacheType;
 import models.AliPayTrade;
 import models.Order;
@@ -593,6 +594,43 @@ public class RetailerController extends BaseController {
         vo.retailerId = user.userId;
         Page<TradeVo> page = Page.newInstance(vo.pageNo, vo.pageSize, 0);
         List<Trade> trades = Trade.findListWithOrdersByVo(vo);
+        if (MixHelper.isEmpty(trades)) {
+            renderPageJson(page.items, page.totalCount);
+        }
+        // 转换为交易视图
+        List<TradeVo> vos = trades.stream().map(t -> TradeVo.valueOfTrade(t)).filter(v -> v != null)
+            .collect(Collectors.toList());
+        if (MixHelper.isNotEmpty(vos)) {
+            page = Page.newInstance(vo.pageNo, vo.pageSize, vos.size());
+            page.items = vos;
+        }
+        renderPageJson(page.items, page.totalCount);
+    }
+    
+    
+    @UserLogonSupport(value = "RETAILER")
+    public static void queryTradeByVoAndTradeStatus(@Required TradeSearchVo vo ,@Required String status) {
+        TradeStatus tradeStatus = null;
+        switch(status){
+            case "TRADE_UNPAIED":
+                tradeStatus = TradeStatus.TRADE_UNPAIED;
+                break;
+            case "TRADE_UNSEND":
+                tradeStatus = TradeStatus.TRADE_UNSEND;
+                break;
+            case "TRADE_UNRECIIVED":
+                tradeStatus = TradeStatus.TRADE_UNRECIIVED;
+                break;            
+        }
+        
+        if (validation.hasErrors()) {
+            renderFailedJson(ReturnCode.FAIL, "查询失败！");
+        }
+        // 用户信息获取
+        User user = renderArgs.get(Secure.FIELD_USER, User.class);
+        vo.retailerId = user.userId;
+        Page<TradeVo> page = Page.newInstance(vo.pageNo, vo.pageSize, 0);
+        List<Trade> trades = Trade.selectListWithOrderTradeStatusByVo(vo, tradeStatus);
         if (MixHelper.isEmpty(trades)) {
             renderPageJson(page.items, page.totalCount);
         }

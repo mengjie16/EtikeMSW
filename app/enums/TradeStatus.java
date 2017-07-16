@@ -15,8 +15,12 @@ public enum TradeStatus {
     //TRADE_CONSIGN_BEEN("TRADE_CONSIGN_BEEN", "已发货"), //
     TRADE_SETTLEMENT_BEEN("TRADE_SETTLEMENT_BEEN", "货款已结算"), 
     TRADE_CLOSE("TRADE_CLOSE","交易关闭"), 
-    TRADE_USER_CANCELLED("TRADE_USER_CANCELLED", "交易已取消");
+    TRADE_USER_CANCELLED("TRADE_USER_CANCELLED", "交易已取消"),
     //TRADE_SYSTEM_CANCELLED("TRADE_SYSTEM_CANCELLED", "系统已取消");
+    
+    TRADE_UNPAIED("TRADE_UNPAIED","待付款"),
+    TRADE_UNSEND("TRADE_UNSEND", "待发货"),
+    TRADE_UNRECIIVED("TRADE_UNRECIIVED","待收货");
 
     private TradeStatus(String _code, String _text) {
         this.code = _code;
