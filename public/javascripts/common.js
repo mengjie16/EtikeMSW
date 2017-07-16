@@ -86,18 +86,6 @@ jQuery(document).ready(function () {
     $('#leftBest100LeftArrow').click(function(){
         bannerPagingPrev();
     });
-    var unslider = $('.banner_zoon_wrap').unslider({
-        speed: 500,               //  滚动速度
-        delay: 5000,              //  动画延迟
-        complete: function() {},  //  动画完成的回调函数
-        keys: false,               //  启动键盘导航
-        dots: false,               //  显示点导航
-        fluid: false,              //  支持响应式设计
-        arrows: true,
-        loop:true,
-        prev: '←', // 上一页按钮的文字 (string)
-        next: '→', // 下一页按钮的文字
-    });
 });
 
 $(window).load(function () {

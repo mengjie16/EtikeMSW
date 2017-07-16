@@ -50,7 +50,7 @@ a:hover {
 }
 
 .search a {
-    margin-right: 10%;
+    margin-right: 4%;
     color: #52d0c4;
 }
 
@@ -59,7 +59,8 @@ a:hover {
     font-size: 14px;
 }
 .glyphicon.glyphicon-user {
-    color: #000;
+    color: #999;
+    margin-right: 3px;
 }
 
 .header-top {
@@ -1237,7 +1238,7 @@ span.price-in1 {
     border: 1px solid #B2B2B2;
 }
 
-.tags li a:hover {
+.tags li a:hover,.tags li a.active {
     color: #fff;
     background: #52D0C4;
     border: 1px solid #52D0C4;

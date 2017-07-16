@@ -1,505 +1,145 @@
 #{extends 'main.html' /}
 #{set title:'购物车' /}
 #{set 'moreStyles'}
-<link href="@{'/public/stylesheets/Commons.css'}" rel="stylesheet" type="text/css">
-<link href="@{'/public/stylesheets/2nd_index.css'}" rel="stylesheet" type="text/css">
-<style type="text/css">
-	.CartList td .base_coupon{font-size:11px;color:#696969;}
-	.CartList td .base_coupon .coupon_tit{font-weight:bold;font-size:11px;color:#696969;}
-	.visuallyHidden { position:absolute; left:-99999px; top:-99999px; text-indent:-9999px; overflow:hidden; height:1px; line-height:1px; font-size:1px; }
-	.brpEvent-1100auto {width:1100px; margin:30px 0 30px;}
-	.brpEvent-1100auto .leftBody {width:858px; height:453px; padding-left:10px; padding-top:20px; border:1px solid #dbdbdb; background-color:#f4f4f4; float:left;}
-	.brpEvent-1100auto .leftBody a {display:block; float:left; margin-right:5px;}
-	.brpEvent-1100auto .leftBody a.longBanner {padding-top:21px; padding-left:19px;}
-	.brpEvent-1100auto .rightBody {width:219px; height:453px; border:1px solid #dbdbdb; border-left:0px; float:left;}
-	.brpEvent-1100auto .rightBody ul li {border-bottom:1px solid #dbdbdb}
-	.brpEvent-1100auto .rightBody .hotEvt {padding:15px 15px 4px 15px;}
-	.brpEvent-1100auto .rightBody ul.hotEvt li { padding-left:15px; padding-top:4px; width:160px;overflow:hidden; text-overflow:hidden; white-space:nowrap; background:url(/public/images/img/bullet.jpg) 0 11px no-repeat; border-bottom:0px; text-align:left;}
-	.brpEvent-1100auto .rightBody ul.hotEvt li a { font-size:11px;}
-</style>
+<link href="@{'/public/stylesheets/checkout.css'}" rel="stylesheet" type="text/css">
 #{/set}
-<table width="900" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto">
-	<tbody>
-		<tr>
-			<td>
-				<div class="step_box">
-					<ol>
-						<li class="active">
-							<div class="cart_step cart_step01">
-								<span>购物车</span>
-							</div>
-						</li>
-						<li class="">
-							<div class="cart_step cart_step02">
-								<span>订单前</span>
-							</div>
-						</li>
-						<li class="">
-							<div class="cart_step cart_step03">
-								<span>付款</span>
-							</div>
-						</li>
-				</ol>
-			</div>
-		</td>
-	</tr>
-	<tr height="10">
-		<td></td>
-	</tr>
-	<tr>
-		<td>
-			<div class="banner_barobori">
-				<a href="#" target="_blank">
-					<img src="/public/images/img/banner_barobori20130213.gif" alt=""></a>
-			</div>
-		</td>
-	</tr>
-	<tr height="9">
-		<td></td>
-	</tr>
-	<tr>
-		<td>
-			<div class="cart_desc">
-				<span class="ico_cartDesc">
-					<img src="/public/images/img/ico_cartDesc.gif" alt=""></span>
-				<dl>
-					<dt class="tit_cartDesc">
-						<span style="font-size:16px;color:#333;font-weight:bold">购物车</span></dt>
-					<dd>购物车里的商品在购物车里存放<strong >两天</strong>, 两天以后，感兴趣的商品 &gt; <strong>购物车的商品标签</strong> 
-						保管3天.
-					</dd>
-				</dl>
-			</div>
-		</td>
-	</tr>
-	<tr height="38">
-		<td></td>
-	</tr>
-	<!-- Left Navi -->
-	<tr valign="top">
-		<td>
-			<table width="100%" cellpadding="0" cellspacing="0" border="0" id="divCartTotalAll">
-				<tbody>
-					<tr>
-						<td>&nbsp;</td>
-					</tr>
-					<!-- Tab -->
-					<tr>
-						<td>
-							<table width="100%" cellpadding="0" cellspacing="0" border="0">
-								<tbody>
-									<tr><!-- 
-										<td style="text-align:left;">
-
-											<table width="" cellpadding="0" cellspacing="0" border="0">
-												<tbody>
-													<tr>
-														<td>
-															<img src="/public/images/img/Tab_Cart_01_.gif">
-														</td>
-														<td width="94">
-															<a href="#">
-																<img src="/public/images/img/Tab_Cart_02.gif"></a>
-														</td>
-												</tr>
-											</tbody>
-										</table>
-
-									</td> -->
-									<td style="text-align:right" class="CartAllSelect">
-										<input type="checkbox" id="allSelectCheck" checked="" name="a_allSelectCheck" style="margin-top:2px">全选</td>
-								</tr>
-							</tbody>
-						</table>
-					</td>
-				</tr>
-
-				<!-- CartList -->
-				<tr>
-					<td>
-
-						<form name="FormBoriBori" method="post">
-
-							<table width="100%" cellpadding="0" cellspacing="0" border="0" class="CartList" style="color:#736c60;">
-								<tbody>
-									<tr>
-										<th width="92">
-											<b>配送方式</b>
-										</th>
-										<th width="262">
-											<b>商品名称</b>
-										</th>
-										<th width="92">
-											<b>售价</b>
-										</th>
-										<th width="66">
-											<b>数量</b>
-										</th>
-										<th width="76">
-											<b>购买积分</b>
-										</th>
-										<th width="79">
-											<b>立即折扣</b>
-										</th>
-										<th width="79">
-											<b>合计金额</b>
-										</th>
-										<th width="71">
-											<b>免息</b>
-										</th>
-										<th width="83">
-											<b>选择</b>
-										</th>
-									</tr>
-									<tr style="display:none">
-										<td colspan="9" height="100" style="text-align:center">
-											<span style="height:15px;color:#736c60;padding-bottom:5px;font-size:14px;">购物车上的商品.</span>
-											<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<span style="height:25px;color:#736c60;vertical-align:middle;font-size:14px;">
-												购物商品存放2天, 之后
-												<strong style="font-size:14px;margin-top:3px">关注商品&gt;购物车上的商品</strong>
-												自动保存.
-											</span>
-											<span style="height:20px;color:#736c60;vertical-align:middle;margin-top:-10px;">
-												<img src="/public/images/img/wishrist_btn_01.gif" style="cursor:pointer"></span>
-										</td>
-									</tr>
-									<tr>
-
-										<td rowspan="1" style="border-right:solid 1px #80756C;text-align:center" class="Division">
-											企业配送
-											<br>[三先生…]</td>
-
-										<td align="center" style="border-right:solid 1px #80756C; text-align:left;">								
-											<table cellpadding="0" cellspacing="0" border="0" width="100%">
-												<tbody>
-													<tr>
-														<td width="5"></td>
-														<td width="60" align="center">
-															<a href="#">
-																<img src="/public/images/img/P027086254.jpg" width="60" height="60" vspace="5" border="0"></a>
-														</td>
-														<td width="5"></td>
-														<td>
-															<a href="#" onfocus="this.blur()"> <b>迷你的心(mini.mom)</b>
-																<br> <font color="#FE6102">[ 10 %额外的优惠券★限定数量]</font>
-																春季可爱连衣裙
-																<br> <b>[紫色/ L - 9号]</b>
-															</a>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</td>
-										<td style="border-right:solid 1px #80756C;text-align:center">
-
-											<b>31,000元</b>
-										</td>
-										<td style="border-right:solid 1px #80756C;text-align:center">
-											<table cellpadding="0" cellspacing="0" border="0" width="100%">
-												<tbody>
-													<tr>
-														<td style="text-align:center">								
-															<input type="text" name="PrdQty1" value="1" class="Order" size="3" maxlength="2" readonly style="font-size:8pt;">									
-															<br>									
-															<a href="javascript:" class="ShpA425E5U">修改</a>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</td>
-										<td style="border-right:solid 1px #80756C;text-align:center" class="alignC">
-											<a href="#">
-												<img src="/public/images/img/carticon_on.gif" alt="就在大麦" style="margin-bottom:5px;" onmouseover="document.getElementById('baroBori0').style.display = 'block';"></a>
-											<br>										
-											<img src="/public/images/img/shoppinglist_money.gif" border="0">										
-											<span style="color:red;">0元</span>
-										</td>
-									
-									<td style="border-right:solid 1px #80756C;text-align:center" class="alignC">
-										<p class="base_coupon" style="text-align:center">
-
-											<span class="coupon_tit">普通</span>
-											&nbsp;-3,100元
-											<br>									
-											-
-											<br>									
-											<img src="/public/images/img/Order_UseCoupon.gif" vspace="4" style="cursor:hand;" onclick="javascript:PopupSecurePopup('100014786','1','cuse');">									
-											<br>									
-											<!--, DbCpPri-->									
-
-										</p>
-									</td>
-									<td style="border-right:solid 1px #80756C;text-align:center" class="alignC">
-										27,900元
-										<br></td>
-									<td align="center" style="border-right:solid 1px #80756C" class="alignC">&nbsp;</td>
-									<td align="center" class="alignC" id="SeqTd">								
-										<input name="Seq" type="checkbox" value="100014786" style="border:0" class="seqClass cartSelectCheck" id="cartSelectCheck0" checked="">									
-										<br>
-									</td>
-									</tr>
-								</tbody>
-							</table>
-							<table width="100%" border="0" cellpadding="0" cellspacing="0">
-								<tbody>
-									<tr>
-										<td>
-											<img src="/public/images/img/Order_BunchBrand.gif" align="absmiddle" style="cursor:hand"></td>
-										<td style="padding:12px 9px 15px 0;text-align:right" class="SumTotal">
-											[产品合计金额] <b><span class="TXT_SumSalPri">31,000</span>
-												元</b> 
-											- [普通优惠券] <b><span class="TXT_SumCpPri">3,100</span>
-												元</b> 
-											<span style="display:none;" class="TXT_SumDbCpPri">0</span>
-											<span style="display:none;" class="TXT_SumAddCpPri">0</span>
-											+ [运费:50,000元以上购买免费]
-											<b>
-												<span class="TXT_DeliPri">2,500</span>
-												元 =
-												<span class="Txt_SumTotal">[总采购额]</span>
-												<b>
-													<span class="Txt_SumTotal_2 CartGrpSumTotal" id="CartGrpSumTotal">30,400</span>
-												</b>
-												元&nbsp;
-											</b>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-
-						</form>
-					</td>
-				</tr>
-				<tr>
-					<td style="text-align:right"><font color="red">*收费+免费送货或免费配送商品的购买优惠，免费送货，退货时付“往返运费”.</font></td>
-				</tr>
-				<tr>
-					<td class="My_SumTotal">
-						<table width="100%" cellpadding="0" cellspacing="0">
-							<tbody>
-								<tr>
-									<td width="297">
-										<img src="/public/images/img/Img_My_SumTotal_1.gif"></td>
-									<td style="padding:0,10,0,0;text-align:right" class="OrderSumClass">
-										<table cellpadding="0" cellspacing="3" border="0" width="400" style="margin-left:240px">
-											<tbody>
-												<tr>
-													<td>
-														<img src="/public/images/img/Dot_Arrow.gif" width="3" height="5" style="vertical-align:middle"></td>
-													<td width="100">产品合计金额</td>
-													<td width="20" style="text-align:center">:</td>
-													<td width="250" style="text-align:right">
-														<span class="CartSumPri">31,000</span>
-														元
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<img src="/public/images/img/Dot_Arrow.gif" width="3" height="5" style="vertical-align:middle"></td>
-													<td>普通券金额</td>
-													<td style="text-align:center">:</td>
-													<td style="text-align:right">
-														-
-														<span class="CartCpPri">3,100</span>
-														元
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<img src="/public/images/img/Dot_Arrow.gif" width="3" height="5" style="vertical-align:middle"></td>
-													<td>重复券金额</td>
-													<td style="text-align:center">:</td>
-													<td style="text-align:right">
-														<span class="CartDbCpPri">0</span>
-														元
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<img src="/public/images/img/Dot_Arrow.gif" width="3" height="5" style="vertical-align:middle"></td>
-													<td>运费</td>
-													<td style="text-align:center">:</td>
-													<td style="text-align:right">
-														<span class="CartDeliPri">2,500</span>
-														元
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<img src="/public/images/img/Dot_Arrow.gif" width="3" height="5" style="vertical-align:middle"></td>
-													<td>
-														<span class="Txt_SumTotal ft12">总付款金额</span>
-													</td>
-													<td style="text-align:center">:</td>
-													<td style="text-align:right" class="Red01"> <b><span class="Txt_SumTotal_2" id="CartSumTotal">30,400</span></b> 
-														元
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</td>				
-								</tr>
-							</tbody>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td class="BtnTD_R">
-						<table width="100%" cellpadding="0" cellspacing="0" border="0">
-							<tbody>
-								<tr>
-									<td width="114"></td>
-									<td style="text-align:right">
-										<table style="margin-left:630px" cellpadding="0" cellspacing="0" border="0">
-											<tbody>
-												<tr>
-													<td style="width:90px">
-														<a style="cursor:hand;">
-															<img src="/public/images/img/Order_CartEmpty.gif"></a>
-													</td>
-													<td style="width:90px">
-														<a style="cursor:hand;">
-															<img src="/public/images/img/Order_ChoiceDel.gif"></a>
-													</td>
-													<td style="width:90px">
-														<a style="cursor:hand;">
-															<img src="/public/images/img/Order_interestList.gif"></a>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</td>
-				</tr>
-				<tr height="30">
-					<td></td>
-				</tr>
-				<tr>
-					<td align="center">
-						<table style="margin-left:170px" cellpadding="0" cellspacing="0" border="0">
-							<tbody>
-								<tr>		
-									<td width="216">
-										<a href="/index.html">
-											<img src="/public/images/img/130308_btn_shoppingGo.gif"></a>
-									</td>
-									<td width="216">				
-
-										<img src="/public/images/img/130308_btn_selOrder.gif" style="cursor:hand;"></td>
-									<td>
-										<img src="/public/images/img/130308_btn_totalOrder.gif" style="cursor:hand;"></td>
-
-								</tr>
-							</tbody>
-						</table>
-					</td>
-				</tr>
-				<tr height="20">
-					<td></td>
-				</tr>
-				<tr>
-					<td>
-
-						<div class="cart_desc02">
-							<img src="/public/images/img/desc_cartU.gif" alt="">
-						
-						</div>
-					</td>
-				</tr>
-
-				<tr height="25">
-					<td></td>
-				</tr>
-
-			</tbody>
-		</table>
-	</td>
-</tr>
-</tbody>
-</table>
-<table cellpadding="0" cellspacing="0" style="margin:0 auto">
-	<tbody>
-		<tr>
-			<td>
-				<div class="brpEvent-1100auto">
-					<div class="leftBody">
-
-						<a href="#" target="_blank">
-							<img src="/public/images/img/Tricycle201604041929338146.jpg" alt=""></a>
-
-						<a href="#" target="_self">
-							<img src="/public/images/img/Tricycle201604041395263677.jpg" alt=""></a>
-
-						<a href="#" target="_blank">
-							<img src="/public/images/img/Tricycle201604111357065009.jpg" alt=""></a>
-
-						<a href="#" target="_self" class="longBanner">
-							<img src="/public/images/img/Tricycle201509251738263318.jpg" alt=""></a>
-
-					</div>
-					<div class="rightBody">
-						<ul>
-
-							<li>
-								<a href="#" target="_blank">
-									<img src="/public/images/img/Tricycle20140721914339448.jpg" alt="item.TitleSub"></a>
-							</li>
-
-							<li>
-								<a href="#" target="_blank">
-									<img src="/public/images/img/Tricycle2015090794209797.jpg" alt="item.TitleSub"></a>
-							</li>
-
-							<li>
-								<a href="#" target="_blank">
-									<img src="/public/images/img/Tricycle20140630881253405.jpg" alt="item.TitleSub"></a>
-							</li>
-
-						</ul>
-						<div class="hotEvt">
-							<a href="#" target="_blank">
-								<img src="/public/images/img/hotEvtTitle.jpg" alt=""></a>
-							<ul class="hotEvt">
-
-								<li style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 145px;">
-									<a href="#" target="_blank">无限的爱会邀请&lt;再见李子&gt;</a>
-								</li>
-
-								<li style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 145px;">
-									<a href="#" target="_blank">电影《魔术》首映式活动刷</a>
-								</li>
-
-								<li style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 145px;">
-									<a href="#" target="_blank">我们立即支付或折扣</a>
-								</li>
-
-								<li style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 145px;">
-									<a href="#" target="_blank">大麦8周年无限的爱：无限感激的礼物用转盘</a>
-								</li>
-
-								<li style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 145px;">
-									<a href="#" target="_blank">大麦8周年：无限的爱应用程序第一次启动加油！</a>
-								</li>
-
-							</ul>
-						</div>
-					</div>
-					<div style="height: 1px; font-size: 1px; line-height: 1px; clear: both;"></div>
-				</div>
-
-			</td>
-		</tr>
-
-		<tr height="16px">
-			<td></td>
-		</tr>
-		<tr height="16px">
-			<td></td>
-		</tr>
-	</tbody>
-</table>
+<div class="container">
+    <div class="check-out">
+        <h1>购物车</h1>
+        <form action="" method="post">
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            <div id="J_SelectAll1" class="select-all J_SelectAll">
+                                <div class="cart-checkbox">
+                                    <input class="J_CheckBoxShop" id="J_SelectAllCbx1" type="checkbox"  name="select-all" value="true">
+                                    <label for="J_SelectAllCbx1">&nbsp;&nbsp;全选</label>
+                                </div>
+                            </div>
+                            <div class='cart-goodinfo' >
+                                商品信息
+                            </div>
+                        </th>
+                        <th>单价</th>
+                        <th>数量</th>
+                        <th>总价</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="cartContainer">
+                    <tr>
+                        <td class="ring-in">
+                            <div class="cart-goods-checkbox">
+                                <input class="J_CheckBoxShop" id="J_SelectGoods1" type="checkbox" name="select-goods"  value="true">
+                            </div>
+                            <div>
+                                <a href="single.html" class="at-in"><img src="/public/images/02.jpg" class="img-responsive" alt=""></a>
+                                <div class="sed">
+                                    
+                                    <p>保税区直发 澳大利亚Soulful 成人奶粉 50岁以上 900g[1袋起发] </p>
+                                </div>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </td>
+                        <td class="per-price">
+                            <div class="check_price">¥<span class="price-rmb">123</span>
+                                <span class="price-e"><span class="price-o">20</span>€</span>
+                            </div>
+                        </td>
+                        <td class="check">
+                            <div class="amount-wrapper ">
+                                <div class="item-amount "><a class="J_Minus minus no-minus">-</a>
+                                    <input type="text" value="1" class="text text-amount J_ItemAmount" data-max="50" data-now="2" autocomplete="off"><a class="J_Plus plus">+</a></div>
+                                <div class="amount-msg J_AmountMsg"></div>
+                            </div>
+                        </td>
+                        <td class='total-price'>
+                            <div class="check_price">¥<span class="price-rmbs">123</span>
+                                <span class="price-e"><span class="price-os">20</span>€</span>
+                            </div>
+                        </td>
+                        <td class="check-goodsdelete">删除</td>
+                    </tr>
+                    <tr>
+                        <td class="ring-in">
+                            <div class="cart-goods-checkbox">
+                                <input class="J_CheckBoxShop" id="J_SelectGoods2" type="checkbox"  name="select-goods" value="true">
+                            </div>
+                            <a href="single.html" class="at-in"><img src="/public/images/03.jpg" class="img-responsive" alt=""></a>
+                            <div class="sed">
+                                
+                                <p>保税区直发 澳大利亚Soulful 成人奶粉 50岁以上 900g[1袋起发] </p>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </td>
+                        <td class="per-price">
+                            <div class="check_price">¥<span class="price-rmb">123</span>
+                                <span class="price-e"><span class="price-o">20</span>€</span>
+                            </div>
+                        </td>
+                        <td class="check">
+                            <div class="amount-wrapper ">
+                                <div class="item-amount "><a class="J_Minus minus no-minus">-</a>
+                                    <input type="text" value="1" class="text text-amount J_ItemAmount" data-max="50" data-now="2" autocomplete="off"><a class="J_Plus plus">+</a></div>
+                                <div class="amount-msg J_AmountMsg"></div>
+                            </div>
+                        </td>
+                        <td class='total-price'>
+                            <div class="check_price">¥<span class="price-rmbs">123</span>
+                                <span class="price-e"><span class="price-os">20</span>€</span>
+                            </div>
+                        </td>
+                        <td class="check-goodsdelete">删除</td>
+                    </tr>
+                    <tr>
+                        <td class="ring-in">
+                            <div class="cart-goods-checkbox">
+                                <input class="J_CheckBoxShop" id="J_SelectGoods3" type="checkbox" name="select-goods" value="true">
+                            </div>
+                            <a href="single.html" class="at-in"><img src="/public/images/04.jpg" class="img-responsive" alt=""></a>
+                            <div class="sed">
+                                
+                                <p>保税区直发 新西兰A2 Platinum酪蛋白婴儿奶粉1段(0-6个月宝宝) 900g </p>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </td>
+                        <td class="per-price">
+                            <div class="check_price">¥<span class="price-rmb">123</span>
+                                <span class="price-e"><span class="price-o">20</span>€</span>
+                            </div>
+                        </td>
+                        <td class="check">
+                            <div class="amount-wrapper ">
+                                <div class="item-amount "><a class="J_Minus minus no-minus">-</a>
+                                    <input type="text" value="1" class="text text-amount J_ItemAmount" data-max="50" data-now="2" autocomplete="off"><a class="J_Plus plus">+</a></div>
+                                <div class="amount-msg J_AmountMsg"></div>
+                            </div>
+                        </td>
+                        <td class='total-price'>
+                            <div class="check_price">¥<span class="price-rmbs">123</span>
+                                <span class="price-e"><span class="price-os">20</span>€</span>
+                            </div>
+                        </td>
+                        <td class="check-goodsdelete">删除</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="check-total">
+                <ul>
+                    <li>已选商品<span class='check-count'>0</span>件</li>
+                    <li>合计<span class='check-trans-rmb'>200</span>¥<span class='check-trans-euro'>30</span>€</li>
+                </ul>
+                <div class="clearfix"> </div>
+            </div>
+            <div class="check-foot">
+                <a href="index.html" class=" go-shopping">继续购物</a><a href="pay.html" class=" to-buy">去付款</a>
+            </div>
+        </form>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+#{set 'moreScripts'}
+<script src="@{'/public/javascripts/libs/mustache.min.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/bizComponents/cart.js'}" type="text/javascript"></script>
+#{/set}
