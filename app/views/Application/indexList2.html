@@ -14,7 +14,7 @@
                   <a href="/item/${item?.id}" target="_blank">
                       <img class="img-responsive lazyImg" src="public/images/grey.gif"  data-original="${item?.picUrl+'?imageView2/2/h/183/q/100'}" border="0" alt="${item.title}" title="${item.title}" style="width: 193px;height: 193px;" />
                   </a>
-                  <div class="price">
+                  <div class="price" style="margin:10px 30px;">
                           <h5 class="item_price">${item.retailPrice/100} <span class="price-e">30€</span></h5>
                           <span class="glyphicon glyphicon-star-empty item_collect"></span>
                           <a href="#" class="item_add"><img src="/public/images/cart.png" alt="" style="width: 20px;height: 20px;" /></a>
@@ -59,4 +59,5 @@
 #{set 'moreScripts'}
 <script type="text/javascript" src="/public/javascripts/plupload/plupload.full.min.js"></script>
 <script type="text/javascript" src="/public/javascripts/libs/qiniu.min.js"></script>
+<script type="text/javascript"  src="@{'/public/javascripts/src/jquery.lazyload.min.js'}"></script>
 #{/set}
