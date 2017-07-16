@@ -222,6 +222,8 @@ POST	/retailer/trade/cancel                  RetailerController.cancelTrade
 GET	 	/retailer/order/excel                   RetailerController.exportOrderExcel
 POST	/retailer/order/usergenerate            RetailerController.userGenerateOrder
 GET	 	/retailer/trade/queryByTradeStatus      RetailerController.queryTradeByVoAndTradeStatus
+POST 	/retailer/address/list					RetailerController.addressList
+POST 	/retailer/address/save					RetailerController.addressSave
 
 # 用户公共路由
 GET     /user/storeList                         UserCenter.storeList

@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -54,6 +55,8 @@ public class Retailer implements java.io.Serializable {
 
     public Date createTime;
     public Date updateTime;
+    
+    public List<Address> address = new ArrayList<Address>();
 
     /**
      * 查找零售商信息by ID

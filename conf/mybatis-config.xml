@@ -34,5 +34,6 @@
 		<mapper class="models.mappers.AliPayTradeMapper" />
 		<mapper class="models.mappers.TradeMapper" />
 		<mapper class="models.mappers.OrderMapper" />
+		<mapper class="models.mappers.AddressMapper"/>
 	</mappers>
 </configuration>
