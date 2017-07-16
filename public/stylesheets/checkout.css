@@ -1,0 +1,280 @@
+/*--checkout--*/
+*{
+    padding:0;
+    margin:0;
+}
+body,html,table{
+     padding:0;
+    margin:0;
+}
+.check-out {
+    padding: 2em 0em;
+}
+
+table {
+    width: 100%;
+    /*margin: 0em 0 2em;*/
+}
+thead tr {
+    border-bottom: 1px solid #ebebeb;
+}
+th {
+    color: #52D0C4;
+    font-size: 1em;
+    font-family: 'OleoScript-Regular';
+    font-weight: 400;
+}
+
+th,
+td {
+    padding: 10px;
+    padding: 0\9;
+
+}
+
+td {
+    color: #b2b2b2;
+    font-size: 1em;
+}
+
+.check-out table th:first-child {
+    text-align: center;
+}
+
+.check-out table tbody tr:firstchild th {
+    color: #000;
+    font-size: 14px;
+}
+
+a.at-in {
+    float: left;
+    width: 20%;
+}
+
+.sed {
+    float: right;
+    width: 74%;
+    width: 390px\9;
+    float: left\9;
+}
+
+.sed h5 {
+    color: #52D0C4;
+    font-size: 1.1em;
+    font-family: 'OleoScript-Regular';
+}
+
+.sed p {
+    color: #666;
+    font-size: 0.8em;
+    line-height: 1.8em;
+    padding: 1em 0 0;
+}
+
+.check input[type="text"] {
+    width: 100%;
+    margin: 1em 0;
+    background: #fff;
+    outline: none;
+    text-align: center;
+    border: 1px solid #e5e5e5;
+    height: 26px
+}
+
+.check {
+    width: 100px;
+}
+
+.ring-in {
+    width: 48%;
+    width: 527px\9;
+    
+
+}
+.ring-in .clearfix{
+    width: 1px;
+}
+
+.check-out h1 {
+    font-size: 18px;
+    color: #52D0C4;
+    font-family: 'OleoScript-Regular';
+    margin: 0 10px 1em;
+    text-align: left;
+}
+
+a.to-buy {
+    padding: 0.3em 0.7em;
+    color: #FFF;
+    background: #52D0C4;
+    margin: 0.5em 0 0;
+    font-size: 1em;
+    display: inline-block;
+    line-height: 1.6em;
+    text-align: center;
+    text-decoration: none;
+}
+
+a.to-buy:hover {
+    background: #52bfd0;
+}
+
+a.go-shopping {
+    padding: 0.3em 0.7em;
+    color: #FFF;
+    background: #52D0C4;
+    margin: 0.5em 1em 0;
+    font-size: 1em;
+    display: inline-block;
+    line-height: 1.6em;
+    text-align: center;
+    text-decoration: none;
+}
+
+.check-out .select-all {
+    float: left;
+    font-size: 14px;
+}
+
+.check-out div.select-all,
+.check-out div.select-all input,
+.check-out div.select-all label:hover {
+    cursor: pointer;
+}
+
+.check-out .select-all label {
+    font-weight: normal;
+}
+
+.check-out .cart-goods-checkbox {
+    float: left;
+    margin-right: 2%
+}
+
+.check-out .cart-goods-checkbox input:hover {
+    cursor: pointer;
+}
+
+a.go-shopping:hover {
+    background: #52bfd0;
+}
+
+.check-foot {
+    text-align: center;
+}
+
+.item-amount {
+    position: relative;
+    z-index: 2;
+}
+
+.item-amount a {
+    display: block;
+    height: 25px;
+    width: 17px;
+    border: 1px solid #e5e5e5;
+    background: #f0f0f0;
+    text-align: center;
+    text-decoration: none;
+    color: #444;
+    position: absolute;
+    top: 1em;
+    float: left;
+    cursor: pointer;
+}
+
+.item-amount .minus,
+.item-amount .no-minus {
+    left: 0
+}
+
+.item-amount .no-minus,
+.item-amount .no-plus {
+    color: #ccc;
+}
+
+.no-minus:hover,
+.no-plus:hover {
+    cursor: not-allowed;
+}
+
+.item-amount .plus,
+.item-amount .no-plus {
+    right: 0;
+}
+
+.check-out .check {
+    position: relative;
+}
+
+.check_price {
+    width: 100%;
+    color: #52D0C4;
+}
+
+.check-out table tr td.per-price {
+    width: 100px;
+    line-height: 4em;
+}
+
+.check-out table tr td.total-price {
+    padding-left: 2%;
+   padding-top: 0;
+    line-height: 4em;
+}
+
+.check-out table tr td.check-goodsdelete{
+    line-height: 4em;
+    padding-top: 0;
+}
+
+.check-out table tr th.total-price {
+    padding-left: 2%;
+}
+
+.check-out table tr td.per-price {
+    width: 100px;
+}
+
+.check-out table tr td.per-price,
+.check-out table tr td.check,
+.check-out table tr td.total-price ，.check-out table tr td.check-goodsdelete {
+    padding-top: 0
+}
+
+.check-out table tr td {
+    vertical-align: top
+}
+
+.check-goodsdelete {
+    font-size: 14px;
+    color: #000
+}
+
+.check-goodsdelete:hover {
+    cursor: pointer;
+    color: #6f6e6e
+}
+
+.check-total {
+    box-shadow: 0px 2px 5px #ccc;
+    margin-bottom: 10px;
+}
+
+.check-total li {
+    list-style-type: none;
+    float: left;
+    width: 30%;
+    text-align: center;
+    padding: 10px;
+    font-size: 14px
+}
+
+.check-total li span {
+    margin: 0 0 0 10px;
+    color: #52d0c4;
+    font-weight: bold;
+}
+
+
+/*--//checkout--*/

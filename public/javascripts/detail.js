@@ -21,7 +21,10 @@ function initBase(){
         removalDelay: 300,
         mainClass: 'my-mfp-zoom-in'
     });
-
+		$('.tags a').on('click',function() {
+				$('.tags a').removeClass('active');
+				$(this).addClass('active');
+		})
     $('.J_Minus').on('click', function(e) {
         $(this).next().next().removeClass('no-plus');
         if ($(this).next()[0].value > 1) {
@@ -38,6 +41,7 @@ function initBase(){
         $(this).prev().prev().removeClass('no-minus');
         if ($(this).prev()[0].value < storeNumber) {
             $(this).prev()[0].value++;
+            console.log($('.text-amount').val())
             if (parseInt($(this).prev()[0].value) === storeNumber) {
                 $(this).addClass('no-plus');
             }
@@ -66,17 +70,8 @@ function initBase(){
 		  }
 			$('.alertCart').show();
 		}
-		//$('html').addClass('overflow-hidden');
 	});
-	//关闭加入购物车弹框
-	$(document).on('click','.closeBtn_a',function(){
-		$('.alertCart').hide();
-		//$('html').removeClass('overflow-hidden');
-	});
-	$(document).on('click','.long-buy',function(){
-		$('.alertCart').hide();
-		//$('html').removeClass('overflow-hidden');
-	});
+	
 	
 }
 
