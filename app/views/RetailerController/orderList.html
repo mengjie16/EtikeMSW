@@ -1,129 +1,132 @@
 #{extends 'UserCenter/user-frame.html' /}
 #{set title:'订单管理' /}
 #{set 'moreSubStyles'}
-<link href="@{'/public/stylesheets/retailer.css'}" rel="stylesheet" type="text/css" />
-<link href="@{'/public/stylesheets/manage.css'}" rel="stylesheet" type="text/css" />
-<link href="@{'/public/stylesheets/mypage.css'}" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/common/datePicker.css'}" />
-<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/common/jquery.pagination.css'}"  />
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/common/jquery.pagination.css'}" />
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/orstyle.css'}" />
 #{/set}
-<div class="cont_mypage container_body" style="margin-top:30px" id="container">
-	<div class="container_contents container_myMain_contents">
-		<div style="margin-top:0px;">
-			<div class="column_left">
-				<h3>订单管理
-				<a href="javascript:void(0)" class="btnStd btnMedium mr6" id="CreateBtn" style="float:right">提交订单</a>
-				</h3>
-			</div>
-		</div>
-		<div class="tbl_wrap_type02 pt20">
-			#{authenticityToken/}
-			<div class="search_area">
-				<div class="search_box">
-					<div class="area_l">
-						<span class="txt_type01">订单号</span>
-						<input type="text" class="text" id="orderNo" name="orderNo"/ style="width:160px;"></div>
-					<div class="area_l">
-						<span class="txt_type01">创建时间</span>
-						<input type="text" class="text inputDate" style="width:80px;" value="" id="startTime"/>
-						-
-						<input type="text" class="text inputDate" style="width:80px;" value="" id="endTime"/></div>
-						<span class="errorDate"></span>
-					<div class="area_r">
-						<div class="fl">
-							<a href="javascript:;" class="btnStd btnMedium mr6" id="searchBtn">查询</a>
-						</div>
+<!--标题 -->
+<div class="user-order">
+
+	<!--标题 -->
+	<div class="am-cf am-padding">
+		<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">订单管理</strong> / <small>Order</small></div>
+	</div>
+	<hr/>
+
+	<div class="am-tabs am-tabs-d2 am-margin" data-am-tabs>
+
+		<ul class="am-avg-sm-5 am-tabs-nav am-nav am-nav-tabs">
+			<li class="am-active"><a href="#tab1">所有订单</a></li>
+			<li><a href="#tab2">待付款</a></li>
+			<li><a href="#tab3">待发货</a></li>
+			<li><a href="#tab4">待收货</a></li>
+			<!-- <li><a href="#tab5">待评价</a></li> -->
+		</ul>
+
+		<div class="am-tabs-bd">
+			<div class="am-tab-panel am-fade am-in am-active" id="tab1">
+				<div class="order-top">
+					<div class="th th-item">
+						<td class="td-inner">商品</td>
+					</div>
+					<div class="th th-price">
+						<td class="td-inner">单价</td>
+					</div>
+					<div class="th th-number">
+						<td class="td-inner">数量</td>
+					</div>
+					<div class="th th-operation">
+						<td class="td-inner">商品操作</td>
+					</div>
+					<div class="th th-amount">
+						<td class="td-inner">合计</td>
+					</div>
+					<div class="th th-status">
+						<td class="td-inner">交易状态</td>
+					</div>
+					<div class="th th-change">
+						<td class="td-inner">交易操作</td>
+					</div>
+				</div>
+
+				<div class="order-main">
+					<div class="order-list" id="listContainer">
+						<!--交易成功-->
 					</div>
 				</div>
 			</div>
-			<div class="orderListContainer" id="listContainer">
-			</div>
-			<div class="pagin-btm clearFix" style="text-align:center">
-				<div class="pagination" style="display:inline-block"></div>
-			</div>
 		</div>
+
 	</div>
 </div>
 <textarea class="muban" id="orderTemp" style="display:none">
 	{{#results}}
-	<div class="orderItem">
-		<div class="orangeBlock"></div>
+	<div class="order-status5">
 		<input value="{{id}}"  type="hidden" name="tradeId" />
-		<div class="itemhead">
-			<span class="lefttitle">订单号</span>
-			<span class="rightcontent tradeId">{{id}}</span>
-			<span class="lefttitle ml30">下单时间</span>
-			<span class="rightcontent">{{createTime}}</span>
+		<div class="order-title">
+			<div class="dd-num">订单编号：<a href="javascript:;">{{id}}</a></div>
+			<span>下单时间：{{createTime}}</span>
 		</div>
-		<div class="productinfo">
-			<div class="pictures">
+		<div class="order-content">
+			<div class="order-left">
 				{{#itemVos}}
-					<a href="/item/{{id}}" target="_blank"><img src="{{picUrl}}?imageView2/2/w/42/q/100"></a>
+				<ul class="item-list">
+					<li class="td td-item">
+						<div class="item-pic">
+							<a href="/item/{{id}}" class="J_MakePoint" target="_blank">
+								<img src="{{picUrl}}?imageView2/2/w/42/q/100" class="itempic J_ItemImg">
+							</a>
+						</div>
+						<div class="item-info">
+							<div class="item-basic-info">
+								<a href="#">
+									<p>{{title}}</p>
+									<p class="info-little">颜色：{{color}}</p>
+								</a>
+							</div>
+						</div>
+					</li>
+					<li class="td td-price">
+						<div class="item-price">
+							{{price}}
+						</div>
+					</li>
+					<li class="td td-number">
+						<div class="item-number">
+							<span>×</span>{{itemNum}}
+						</div>
+					</li>
+					<li class="td td-operation">
+						<div class="item-operation">
+							
+						</div>
+					</li>
+				</ul>
 				{{/itemVos}}
-				</div>
-			<div class="infocontent">
-				<div class="column">
-					<p class="rowcontainer">
-						<span class="lefttitle">商品数</span>
-						<span class="rightcontent">{{itemNum}}</span>
-					</p>
-					<p class="rowcontainer">
-						<span class="lefttitle">子订单数</span>
-						<span class="rightcontent">{{orderNum}}</span>
-					</p>
-					<p class="rowcontainer">
-						<span class="lefttitle">货款</span>
-						<span class="rightcontent price">{{paymentStr}}</span>
-					</p>
-				</div>
-				<div class="column">
-					<p class="rowcontainer"></p>
-					<p class="rowcontainer">
-						<span class="lefttitle">已有物流</span>
-						<span class="rightcontent">{{expbeen}}</span>
-					</p>
-					<p class="rowcontainer">
-						<span class="lefttitle">物流费用</span>
-						<span class="rightcontent price">{{shippingFeeStr}}</span>
-					</p>
-				</div>
 			</div>
-		</div>
-		<div class="expense">
-			<div class="totalPrice">
-				<p class="amount">总额</p>
-				<p class="price">{{totalAmountStr}}</p>
-				<p>
-					-
-					<span class="price">{{discountStr}}</span>
-				</p>
-				<p class="actualPrice">实际金额</p>
-				<p class="price">{{realityPaymentStr}}</p>
-			</div>
-			<div class="operate" style="position:relative">
-				<a href="/retailer/trade/order?tradeId={{id}}" target="_blank" class="btnStd btnMedium fr">查看</a>
-				<a class="btnStd btnMedium fr payFor mt10">付款</a>
-				<div class="payblock">
-					<p class="f14">
-						扫码下面的公司二维码进行支付
-					</p>
-					<div class="mt10">
-						<img src="/public/images/aton-copalipay-qrcode.png" title="扫码支付" />
+			<div class="order-right">
+				<li class="td td-amount">
+					<div class="item-amount">
+						合计：{{totalAmountStr}}
+						<p>含运费：<span>{{shippingFeeStr}}</span></p>
 					</div>
-					<a class="paytext">或使用密码进行支付>></a>
-					<form action="/retailer/fee/pay" id="payForm" method="post" target="_blank">
-						<input type="hidden" name="" value="{{realityPaymentStr}}"/>
-					</form>
+				</li>
+				<div class="move-right">
+					<li class="td td-status">
+						<div class="item-status">
+							<p class="Mystatus">交易成功</p>
+							<p class="order-info"><a href="orderinfo.html">订单详情</a></p>
+							<p class="order-info"><a href="logistics.html">查看物流</a></p>
+						</div>
+					</li>
+					<li class="td td-change">
+						<div class="am-btn am-btn-danger anniu">
+							删除订单</div>
+					</li>
 				</div>
-				<p style="height:34px;margin-bottom:15px">
-					{{#cancelBtn}}
-					<a href="javascript:void(0)" class="btnStd btnMedium fr mt10 mb10 cancelbtn">取消</a>
-					{{/cancelBtn}}
-				</p>
-				<p class="payStatus {{statusColor}}">{{statusStr}}</p>
 			</div>
 		</div>
-		<div class="clearFix"></div>
 	</div>
 	{{/results}}
 </textarea>
