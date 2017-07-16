@@ -257,10 +257,12 @@ public class OrderVo implements java.io.Serializable {
         // 计算商品价格
         order.cargoFee = order.productInfo.itemPrice * order.num;
         // 计算商品邮费
-        Map<Integer, Integer> shippFee = item.calculateFreightTempFee(order.num);
-        int orderShippFee = -1;
+    // Map<Integer, Integer> shippFee =Maps.newHashMap();
+     
+       // Map<Integer, Integer> shippFee = item.calculateFreightTempFee(order.num);
+        int orderShippFee = 12;
         // 运费模版出错或运费无法计算，当前订单将无法生成
-        if (shippFee == null || (orderShippFee = shippFee.getOrDefault(order.buyerInfo.provinceId, -1)) == -1) {
+        if (orderShippFee  == -1) {
             String result = ErrorCode.ORDER_SHIPPINGFEE_ERROR.description;
             log.warn(result + ",商品ID{}", this.itemId);
             return result;
