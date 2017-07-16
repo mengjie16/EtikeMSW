@@ -131,8 +131,9 @@ public class Application extends BaseController {
      */
     public static void indexList2() {    	
     	ItemSearchResult search_result = Item.selectListAllByCreateTime();
+    	ItemSearchResult search_result_random = Item.selectListAllRandom();
         renderArgs.put("search_result", search_result);
-    	
+        renderArgs.put("search_result_random", search_result_random);
         render();
     }
 
