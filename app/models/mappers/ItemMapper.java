@@ -82,4 +82,7 @@ public interface ItemMapper {
     // ---------------  
     
     List<Item> selectListAllByCreateTime();
+    
+    @Select("select * from item i order by i.create_time desc, rand() limit 8,16")
+    List<Item> selectListAllRandom();
 }
