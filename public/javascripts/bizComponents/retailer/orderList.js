@@ -117,7 +117,7 @@ function loadList(pageNo) {
 				return 0;
 			}
 		}));
-		$('#listContainer').html(output);
+		$('#listContainer1').html(output);
 		if(data.totalCount<=0){
 			$('.pagination').hide();
 			return;
@@ -163,7 +163,7 @@ function initRestList(e){
 	renderRestList(1,tradeStatus,tabindex);
 }
 function renderRestList(pageNo,tradeStatus,tabindex){
-	alert("hihi");
+
 	var obj = {
 		'vo.id':$('#orderNo').val(),
 		'vo.pageNo': pageNo,
