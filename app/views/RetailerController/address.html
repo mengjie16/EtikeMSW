@@ -61,8 +61,8 @@
                     <div class="am-form-group">
                         <label class="am-form-label">地址</label>
                         <div class="am-form-content address">
-                            <input id="selCountry_id" type="hidden" name="address.country" value="${address?.country}" />         
-                            <select id="selCountry" class="country" tabindex="8" data-val="${address?.countryId}" name="retailer.countryId">
+                            <input id="selCountry_id" type="hidden" name="address.countryId" value="${supplier?.country}" />         
+                            <select id="selCountry" class="country" tabindex="8" data-val="${supplier?.countryId}" name="address.country">
                                 <option value="">-- 国家 --</option>
                             </select>
                         </div>
@@ -136,7 +136,7 @@
                                 <option value="">-- 国家 --</option>
                             </select>
                         </div>
-                        <div for="selCountry_id" class="validateLine clearfix"></div>
+                        <div for="selCountry_id1" class="validateLine clearfix"></div>
                     </div>
                     <div class="am-form-group pro_city_region">
                         <label for="user-address" class="am-form-label">省/市/区</label>
