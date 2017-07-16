@@ -1,48 +1,44 @@
 #{extends 'UserCenter/user-frame.html' /}
-#{set title:'修改信息' /}
+#{set title:'个人信息' /}
 #{set 'moreSubStyles'}
-<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/itemEdit.css'}"  />
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/infstyle.css'}"  />
 #{/set}
-<div class="cont_mypage" style="margin-top:30px" id="container">
-	<div class="container_contents container_myMain_contents">
-		<div style="margin-top:0px;">
-			<div class="column_left" style="padding-top:20px;">
-				<h3>修改信息</h3>
-			</div>
-		</div>
-		<div class="tbl_wrap_type02 pt20" style="padding-left: 30px;">
-			<div class="error_panel" style="padding-left: 198px;color: #f00;line-height: 33px">
+<div class="user-info">
+    <div class="am-cf am-padding">
+        <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">个人资料</strong> / <small>Personal&nbsp;information</small></div>
+    </div>
+    <hr/>
+    <div class="info-main">
+    		<div class="error_panel" style="padding-left: 198px;color: #f00;line-height: 33px">
 				${flash?.error}
 			</div>
-			<form action="" id="frmEditUser" method="post">
+        <form action="" id="frmEditUser" method="post">
 				#{authenticityToken/}
-				<div class="form_line">
-					<label class="lbl">姓名</label>
-					<div class="controls">
-						<input class="inputText" id="txtName" type="text" value="${user?.name}" name="user.name" tabindex="1"/>
-					</div>
-					<div for="txtName" class="validateLine clearfix"></div>
+            <div class="am-form-group">
+                <label for="user-name" class="am-form-label">姓名</label>
+                <div class="am-form-content">
+                   <input class="inputText" id="txtName" type="text" value="${user?.name}" name="user.name" tabindex="1"/>
 				</div>
-				<div class="form_line">
-					<label class="lbl">Email</label>
-					<div class="controls">
-						<input class="inputText" id="txtEmail" type="text" value="${user?.email}" name="user.email" />
-					</div>
-					<div for="txtEmail" class="validateLine clearfix"></div>
+				<div for="txtName" class="validateLine clearfix"></div>
+            </div>
+            <div class="am-form-group">
+                <label for="user-phone" class="am-form-label">电话</label>
+                <div class="am-form-content">
+                    <span style="display:inline-block;line-height: 24px;">${user?.phone}</span>
+                </div>
+            </div>
+            <div class="am-form-group">
+                <label for="user-email" class="am-form-label">电子邮件</label>
+                <div class="am-form-content">
+                   <input class="inputText" id="txtEmail" type="text" value="${user?.email}" name="user.email" />
 				</div>
-				<div class="form_line">
-					<label class="lbl">手机号码</label>
-					<div class="controls">
-						<span style="display:inline-block;line-height: 24px;">${user?.phone}</span>
-					</div>
-				</div>
-				<div class="button_section" id="btnUserSubmit" style="padding-left:95px;">
-					<a class="btnStd btnLarge btnYellow-shadow" href="javascript:;">保存</a>
-				</div>
-			</form>
-		</div>
-	</div>
-	<!-- //	cont_mypage -->
+				<div for="txtEmail" class="validateLine clearfix"></div>
+            </div>
+            <div class="info-btn" id="btnUserSubmit">
+                <div class="am-btn am-btn-danger btnStd">保存修改</div>
+            </div>
+        </form>
+    </div>
 </div>
 <!-- //content-area -->
 #{set 'moreSubScripts'}

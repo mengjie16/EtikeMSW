@@ -53,7 +53,7 @@ public class AlbumTest extends UnitTest {
     @Test
     public void addAlbumItem(){
         Album album =  Album.findById(1);
-        if(album.addAlbumItem(new AlbumItem(7,785,"http://cdn.eitak.com/o_1anhlakdd1pc6h51ph211uv1fsgo.jpg"))){
+        if(album.addAlbumItem(new AlbumItem(7,785,"http://cdn.tusibaby.com/o_1anhlakdd1pc6h51ph211uv1fsgo.jpg"))){
             System.out.println("添加成功");
         }
     }
@@ -88,7 +88,7 @@ public class AlbumTest extends UnitTest {
     @Test
     public void test_updateAlbumItemByIndex(){
         Album album =  Album.findById(1);
-        if(album.updateAlbumItemByIndex(0,new AlbumItem(2,655,"http://cdn.eitak.com/o_1ao180a73t31ce61iqe1cskrstv.jpg"))){
+        if(album.updateAlbumItemByIndex(0,new AlbumItem(2,655,"http://cdn.tusibaby.com/o_1ao180a73t31ce61iqe1cskrstv.jpg"))){
             System.out.println("更新成功");
         }
     }
