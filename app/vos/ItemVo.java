@@ -21,6 +21,7 @@ import play.data.validation.CheckWith;
 import play.data.validation.Match;
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
+import utils.ExchangeRateUtil;
 import utils.SearchEndDateBinder;
 
 import com.aton.util.MixHelper;
@@ -143,6 +144,19 @@ public class ItemVo implements java.io.Serializable {
     /** 商品备注 */
     public String note;
 
+    public int cny2eur;
+    
+    
+    public int getCny2eur() {
+        return cny2eur;
+    }
+
+    
+    public void setCny2eur(int cny2eur) {
+        
+        this.cny2eur = (int)(this.retailPrice * ExchangeRateUtil.getExchangeRate()/100) ;
+    }
+    
     /**
      * 转换商品视图至实体
      *
@@ -205,6 +219,7 @@ public class ItemVo implements java.io.Serializable {
         vo.picUrl = item.picUrl;
         vo.brand = Brand.findBrandWithCacheMap(item.brandId);
         vo.retailPrice = item.retailPrice;
+        vo.cny2eur = item.cny2eur;
         vo.distPrice = item.distPrice;
         vo.cate = ItemCate.findByIdMap(item.cateId);
         return vo;
@@ -241,6 +256,7 @@ public class ItemVo implements java.io.Serializable {
         iv.quality = item.quality;
         iv.note = item.note;
         iv.num = item.num;
+        iv.cny2eur = item.cny2eur;
         if (!isBase) {
             // 查找类目信息
             iv.cates = ItemCate.findParentsCateWithSort(item.cateId);
