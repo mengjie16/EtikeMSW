@@ -198,6 +198,7 @@ GET     /supplier/freighttemp/query             SupplierController.querySupplier
 
 # 零售商
 GET     /retailer/edit                          RetailerController.edit
+GET     /retailer/address                       RetailerController.address
 GET     /retailer/finance                       RetailerController.finance
 GET     /retailer/pay                           RetailerController.payFor
 GET     /retailer/order/list                    RetailerController.orderList

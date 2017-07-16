@@ -37,7 +37,7 @@ public class Alerter {
         }
         for (String mail : Config.developerMails) {
             // 发邮件给开发人员
-            boolean result = MailUtils.sendTextMail(mail, "[eitak]" + subject, body);
+            boolean result = MailUtils.sendTextMail(mail, "[tusibaby]" + subject, body);
             if (!result) {
                 log.error("Send mail to developer {} failed", mail);
             }

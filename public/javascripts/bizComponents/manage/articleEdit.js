@@ -85,7 +85,7 @@ function loadUpToken_u() {
 		// 初始化SDK
 		CDT.uptoken = data.results;
 		var option = Tr.uploadOption();
-		option.domain = APP.QnDomain + '.eitak.com/';
+		option.domain = APP.QnDomain + '.tusibaby.com/';
 		option.uptoken = CDT.uptoken;
 		option.browse_button = 'edui147_body';
 		option.init = {

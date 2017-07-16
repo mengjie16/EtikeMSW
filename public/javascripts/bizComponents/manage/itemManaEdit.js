@@ -1150,7 +1150,7 @@ function setBtns() {
 
 function initItemMainPicUploader(domId) {
 	var option = Tr.uploadOption();
-	option.domain = APP.QnDomain + '.eitak.com/';
+	option.domain = APP.QnDomain + '.tusibaby.com/';
 	option.max_file_size = '500kb';
 	option.uptoken = CDT.uptoken;
 	option.browse_button = domId;
@@ -1208,7 +1208,7 @@ function initItemMainPicUploader(domId) {
 
 function loadUpToken_u(ueid) {
 	var option = Tr.uploadOption();
-	option.domain = APP.QnDomain + '.eitak.com/';
+	option.domain = APP.QnDomain + '.tusibaby.com/';
 	option.uptoken = CDT.uptoken;
 	option.browse_button = ueid;
 	option.container = 'PCcontainer';
@@ -1245,7 +1245,7 @@ function loadUpToken_u(ueid) {
 
 function loadUpToken_h(h5ueid) {
 	var option = Tr.uploadOption();
-	option.domain = APP.QnDomain + '.eitak.com/';
+	option.domain = APP.QnDomain + '.tusibaby.com/';
 	option.uptoken = CDT.uptoken;
 	option.browse_button = h5ueid;
 	option.container = 'h5container';

@@ -19,7 +19,7 @@ function userValidateOpts() {
 }
 $(function(){
 // 用户信息保存
-	$(document).on('click', '#btnUserSubmit a.btnStd', function() {
+	$(document).on('click', '#btnUserSubmit .btnStd', function() {
 		var validator = $('#frmEditUser').validate(userValidateOpts());
 		if (validator.form()) {
 			Tr.post('/user/info/edit',{
