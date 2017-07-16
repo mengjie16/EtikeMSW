@@ -868,27 +868,7 @@ public class Item implements Serializable {
         }
         return results;
     }
-    
-    public static ItemSearchResult selectListAllByCreateTime() {
-    	
-        ItemSearchResult results = ItemSearchResult.newInstance(0, 0, 0);
-        SqlSession ss = SessionFactory.getSqlSession();
-        try {
-            ItemMapper mapper = ss.getMapper(ItemMapper.class);
-            // 匹配的商品集合
-            List<Item> items = Lists.newArrayList();
-        
-            items = mapper.selectListAllByCreateTime();
-            results.totalCount = items != null ? items.size() : 0;
-            if (items != null) {
-                items = items.stream().filter(i -> i != null).collect(Collectors.toList());
-            }
-            results.items = items;
-        } finally {
-            ss.close();
-        }
-        return results;
-    }
+     
 
 
     /**
@@ -978,4 +958,45 @@ public class Item implements Serializable {
         }
         return price;
     }
+
+    public static ItemSearchResult selectListAllByCreateTime() {
+    	
+        ItemSearchResult results = ItemSearchResult.newInstance(0, 0, 0);
+        SqlSession ss = SessionFactory.getSqlSession();
+        try {
+            ItemMapper mapper = ss.getMapper(ItemMapper.class);
+            // 匹配的商品集合
+            List<Item> items = Lists.newArrayList();
+        
+            items = mapper.selectListAllByCreateTime();
+            results.totalCount = items != null ? items.size() : 0;
+            if (items != null) {
+                items = items.stream().filter(i -> i != null).collect(Collectors.toList());
+            }
+            results.items = items;
+        } finally {
+            ss.close();
+        }
+        return results;
+    }
+
+	public static ItemSearchResult selectListAllRandom() {
+		ItemSearchResult results = ItemSearchResult.newInstance(0, 0, 0);
+        SqlSession ss = SessionFactory.getSqlSession();
+        try {
+            ItemMapper mapper = ss.getMapper(ItemMapper.class);
+            // 匹配的商品集合
+            List<Item> items = Lists.newArrayList();
+        
+            items = mapper.selectListAllRandom();
+            results.totalCount = items != null ? items.size() : 0;
+            if (items != null) {
+                items = items.stream().filter(i -> i != null).collect(Collectors.toList());
+            }
+            results.items = items;
+        } finally {
+            ss.close();
+        }
+        return results;
+	}
 }
