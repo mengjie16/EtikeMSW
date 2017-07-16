@@ -30,9 +30,26 @@ function supValidateOpts() {
 	};
 	return options;
 }
+/*function loadAddressList(isPartRender){
+	var param = {};
+	Tr.get('/retailer/address/List', param,function(data) {
+				if (data.code != 200) {
+					alert(data.msg);
+					return;
+				}
+			var output = Mustache.render(CDT.addressList, data,);
+		$('#addressList').html(output);
+
+			
+	});
+}*/
 $(function(){
+	// CDT.addressList = $('#addressList').remove().val();
+	// Mustache.parse(CDT.addressList);
 	loadCountryHTML();
 	loadProviceHTML();
+	//加载地址
+	//loadAddressList(false);
 
 	// 地址信息保存
 	$(document).on('click', '#btnSubmitSup .btnSave', function() {
