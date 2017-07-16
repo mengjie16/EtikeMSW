@@ -37,6 +37,7 @@ import play.data.validation.CheckWith;
 import play.data.validation.Match;
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
+import utils.ExchangeRateUtil;
 import vos.BrandResult;
 import vos.CateResult;
 import vos.FreightSearchVo;
@@ -151,6 +152,20 @@ public class Item implements Serializable {
     public Date createTime;
     /** 商品更新时间 */
     public Date updateTime;
+    
+    @Transient
+    public int cny2eur;
+    
+   
+    public int getCny2eur() {
+        return cny2eur;
+    }
+
+    
+    public void setCny2eur(int cny2eur) {
+        
+        this.cny2eur = (int)(retailPrice * ExchangeRateUtil.getExchangeRate()/100) ;
+    }
 
     /**
      * 价格区间校验
@@ -820,6 +835,7 @@ public class Item implements Serializable {
                 List<Item> fyItems = mapper.selectListVoByIds(vo);
                 // 转换视图
                 List<ItemVo> vos = fyItems.stream().map(i -> ItemVo.valueOfItem(i, true)).collect(Collectors.toList());
+                             
                 results.items = vos;
             }
             // 品牌分组 --------[在未分页前数据集中归类,并且当前有查询结果]
