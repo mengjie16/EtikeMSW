@@ -64,15 +64,16 @@
                             <div class="amount-msg J_AmountMsg"></div>
                         </div>
                         %{
-                            int  i = 80;
-                          }% 
-                           
-                            <!-- #{list items:item.skus,as:'sku'}
-                             ${sku.quantity}                      
-                            #{/list} -->
-                         
-                         <span>库存(${i})</span>
-                        
+                                 productCount= 0;
+                            }%
+
+                                #{list items:item.skus,as:'sku'}
+                                %{
+                                productCount = productCount + sku.quantity;
+                                }%
+                              #{/list} 
+
+                        <span>库存(${productCount})</span>                       
                         <p>
                         <a href="#" class="cart item_add">加入购物车</a>
                         <a href="#" class="cart item_add item_collection">加入收藏夹</a>
