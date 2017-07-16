@@ -8,21 +8,21 @@ function supValidateOpts() {
 	var options = {
 		onkeyup: false,
 		rules: {
-			'retailer.name': {
+			'address.name': {
 				required: true,
 				username: true
 			},
-			'retailer.phone': {
+			'address.phone': {
 				required: true,
 				mobile: true
 			},
-			'retailer.country': {
+			'address.country': {
 				required: true
 			},
-			'retailer.province': {
+			'address.province': {
 				required: true
 			},
-			'retailer.address': {
+			'address.address': {
 				required: true
 			}
 		},
@@ -40,14 +40,14 @@ $(function(){
 		if (validator.form()) {
 			var param = {
 				'address.name': $('input[name="address.name"]').val(),
-				'address.country': $('#selCountry').val(),
+				'address.country': $('#selCountry option').val(),
 				'address.countryId': $('#selCountry_id').val(),
 				'address.province': $('#selProvince').val(),
 				'address.provinceId': $('#selProvince_id').val(),
 				'address.city': $('#selCity').val(),
 				'address.region': $('#selRegion').val(),
 				'address.address': $('#txtAddress').val(),
-				'address.phone': $('input[name="address.name"]').val()
+				'address.phone': $('input[name="address.phone"]').val()
 			};
 			Tr.post('/retailer/address/save',param, function(data) {
 				if (data.code != 200) {
@@ -75,7 +75,8 @@ $(function(){
 			$(this).prev().val('');
 			return;
 		}else{
-			$(this).siblings('#selCountry_id').val($option.text());
+			$('#selCountry option').attr('value',$option.text());
+			$(this).siblings('#selCountry_id').val(id);
 			$('div[for="selCountry_id"]').html('');
 		}
 		// 选国外，不显示省市区内容
