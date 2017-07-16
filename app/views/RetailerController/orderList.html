@@ -1,7 +1,6 @@
 #{extends 'UserCenter/user-frame.html' /}
 #{set title:'订单管理' /}
 #{set 'moreSubStyles'}
-<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/common/datePicker.css'}" />
 <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/common/jquery.pagination.css'}" />
 <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/orstyle.css'}" />
 #{/set}
@@ -54,6 +53,9 @@
 					<div class="order-list" id="listContainer">
 						<!--交易成功-->
 					</div>
+				</div>
+				<div class="pagin-btm clearFix" style="text-align:center">
+					<div class="pagination" style="display:inline-block"></div>
 				</div>
 			</div>
 		</div>

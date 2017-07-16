@@ -403,7 +403,7 @@ ul.callbacks_tabs.callbacks1_tabs {
 .col-md1 h3 a {
     color: #333;
     text-decoration: none;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .price h5 {
@@ -433,6 +433,7 @@ ul.callbacks_tabs.callbacks1_tabs {
 
 .col-md1 .price {
     margin: 10px 0;
+    overflow: hidden;
 }
 
 .col-md1 {
