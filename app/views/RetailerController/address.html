@@ -9,23 +9,23 @@
         <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">地址管理</strong> / <small>Address&nbsp;list</small></div>
     </div>
     <hr/>
-    <ul class="am-avg-sm-1 am-avg-md-3 am-thumbnails">
+    <ul class="am-avg-sm-1 am-avg-md-3 am-thumbnails" id="addressList">
         <li class="user-addresslist defaultAddr">
             <span class="new-option-r"><i class="am-icon-check-circle"></i>默认地址</span>
             <p class="new-tit new-p-re">
-                <span class="new-txt">小叮当</span>
-                <span class="new-txt-rd2">159****1622</span>
+                <span class="new-txt"  id="adderssUser">小叮当</span>
+                <span class="new-txt-rd2" id="addressPhone">159****1622</span>
             </p>
             <div class="new-mu_l2a new-p-re">
                 <p class="new-mu_l2cw">
-                    <span class="title">地址：</span>
-                    <span class="provinces">湖北</span>省
-                    <span class="citys">武汉</span>市
-                    <span class="dist">洪山</span>区
-                    <span class="street">雄楚大道666号(中南财经政法大学)</span></p>
+                    <span class="title" >地址：</span>
+                    <span class="provinces" id="provinces">湖北</span>省
+                    <span class="citys" id="citys">武汉</span>市
+                    <span class="dist" id="dist">洪山</span>区
+                    <span class="street" id="street">雄楚大道666号(中南财经政法大学)</span></p>
             </div>
             <div class="new-addr-btn">
-                <a href="#"><i class="am-icon-edit"></i>编辑</a>
+                <a href="javascript:void(0)" class ="editAddress" data-am-modal="{target: '#doc-modal-2', closeViaDimmer: 0}"><i class="am-icon-edit"></i>编辑</a>
                 <span class="new-addr-bar">|</span>
                 <a href="javascript:void(0);"><i class="am-icon-trash"></i>删除</a>
             </div>
@@ -47,22 +47,22 @@
                     <div class="am-form-group">
                         <label for="user-name" class="am-form-label">收货人</label>
                         <div class="am-form-content">
-                            <input type="text" id="user-name" name="retailer.name" placeholder="收货人">
+                            <input type="text" id="user-name" name="address.name" placeholder="收货人">
                         </div>
                         <div for="user-name" class="validateLine clearfix"></div>
                     </div>
                     <div class="am-form-group">
                         <label for="user-phone" class="am-form-label">手机号码</label>
                         <div class="am-form-content">
-                            <input id="user-phone" placeholder="手机号码" name="retailer.phone" type="email">
+                            <input id="user-phone" placeholder="手机号码" name="address.phone" type="phone">
                         </div>
                         <div for="user-phone" class="validateLine clearfix"></div>
                     </div>
                     <div class="am-form-group">
                         <label class="am-form-label">地址</label>
                         <div class="am-form-content address">
-                            <input id="selCountry_id" type="hidden" name="retailer.country" value="${retailer?.country}" />         
-                            <select id="selCountry" class="country" tabindex="8" data-val="${retailer?.countryId}" name="retailer.countryId">
+                            <input id="selCountry_id" type="hidden" name="address.country" value="${address?.country}" />         
+                            <select id="selCountry" class="country" tabindex="8" data-val="${address?.countryId}" name="retailer.countryId">
                                 <option value="">-- 国家 --</option>
                             </select>
                         </div>
@@ -71,14 +71,84 @@
                     <div class="am-form-group pro_city_region">
                         <label for="user-address" class="am-form-label">省/市/区</label>
                         <div class="am-form-content address">
-                            <input id="selProvince" type="hidden" name="retailer.province" value="${retailer?.province}"/>          
-                            <select id="selProvince_id" class="province" data-val="${retailer?.provinceId}" name="retailer.provinceId" tabindex="9">
+                            <input id="selProvince" type="hidden" name="address.province" value="${address?.province}"/>          
+                            <select id="selProvince_id" class="province" data-val="${address?.provinceId}" name="address.provinceId" tabindex="9">
                                 <option rid="">-- 省份 --</option>
                             </select>
-                            <select id="selCity" class="city ml10" name="retailer.city" tabindex="10">
+                            <select id="selCity" class="city ml10" name="address.city" tabindex="10">
                                 <option>-- 城市 --</option>
                             </select>
-                            <select id="selRegion" class="region ml10" name="retailer.region" tabindex="11">
+                            <select id="selRegion" class="region ml10" name="address.region" tabindex="11">
+                                <option>-- 区域 --</option>
+                            </select>
+                            
+                        </div>
+                        <div for="selProvince" class="validateLine clearfix"></div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="user-intro" class="am-form-label">详细地址</label>
+                        <div class="am-form-content">
+                            <input id="txtAddress" name="retailer.address" type="text" class="inputText long" placeholder="详细地址" value="${retailer?.address}" tabindex="12" maxlength="40" />   
+                            <small>40字符以内写出你的详细地址...</small>
+                        </div>
+                        <div for="txtAddress" class="validateLine clearfix"></div>
+                    </div>
+                    <div class="am-form-group">
+                        <div class="am-u-sm-9 am-u-sm-push-2" id="btnSubmitSup">
+                            <a class="am-btn am-btn-danger btnSave">保存</a>
+                            <a href="javascript: void(0)" class="am-close am-btn am-btn-danger" data-am-modal-close>取消</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- 编辑 -->
+    <div class="am-modal am-modal-no-btn" id="doc-modal-2">
+        <div class="add-dress">
+            <!--标题 -->
+            <div class="am-cf am-padding">
+                <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">编辑地址</strong> / <small>Edit&nbsp;address</small></div>
+            </div>
+            <hr/>
+            <div class="am-u-md-12 am-u-lg-8" style="margin-top: 20px;">
+                <form class="am-form am-form-horizontal" id="frmEditSup1" method="post">
+                #{authenticityToken/}
+                    <div class="am-form-group">
+                        <label for="user-name" class="am-form-label">收货人</label>
+                        <div class="am-form-content">
+                            <input type="text" id="user-name1" name="retailer.name" placeholder="收货人">
+                        </div>
+                        <div for="user-name1" class="validateLine clearfix"></div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="user-phone" class="am-form-label">手机号码</label>
+                        <div class="am-form-content">
+                            <input id="user-phone1" placeholder="手机号码" name="retailer.phone" type="phone">
+                        </div>
+                        <div for="user-phone1" class="validateLine clearfix"></div>
+                    </div>
+                    <div class="am-form-group">
+                        <label class="am-form-label">地址</label>
+                        <div class="am-form-content address">
+                            <input id="selCountry_id1" type="hidden" name="retailer.country" value="${retailer?.country}" />         
+                            <select id="selCountry1" class="country" tabindex="8" data-val="${retailer?.countryId}" name="retailer.countryId">
+                                <option value="">-- 国家 --</option>
+                            </select>
+                        </div>
+                        <div for="selCountry_id" class="validateLine clearfix"></div>
+                    </div>
+                    <div class="am-form-group pro_city_region">
+                        <label for="user-address" class="am-form-label">省/市/区</label>
+                        <div class="am-form-content address">
+                            <input id="selProvince1" type="hidden" name="retailer.province" value="${retailer?.province}"/>          
+                            <select id="selProvince_id1" class="province" data-val="${retailer?.provinceId}" name="retailer.provinceId" tabindex="9">
+                                <option rid="">-- 省份 --</option>
+                            </select>
+                            <select id="selCity1" class="city ml10" name="retailer.city" tabindex="10">
+                                <option>-- 城市 --</option>
+                            </select>
+                            <select id="selRegion1" class="region ml10" name="retailer.region" tabindex="11">
                                 <option>-- 区域 --</option>
                             </select>
                             
