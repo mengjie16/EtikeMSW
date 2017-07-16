@@ -38,26 +38,33 @@ $(function(){
 	$(document).on('click', '#btnSubmitSup .btnSave', function() {
 		var validator = $('#frmEditSup').validate(supValidateOpts());
 		if (validator.form()) {
-			// var param = {
-			// 	'retailer.name': $('input[name="retailer.name"]').val(),
-			// 	'retailer.country': $('#selCountry').val(),
-			// 	'retailer.countryId': $('#selCountry_id').val(),
-			// 	'retailer.province': $('#selProvince').val(),
-			// 	'retailer.provinceId': $('#selProvince_id').val(),
-			// 	'retailer.city': $('#selCity').val(),
-			// 	'retailer.region': $('#selRegion').val(),
-			// 	'retailer.address': $('#txtAddress').val()
-			// };
-			// Tr.post('/supplier/modify',param, function(data) {
-			// 	if (data.code != 200) {
-			// 		alert(data.msg);
-			// 		return;
-			// 	}
-			// 	alert('保存成功');
-			// 	window.location.reload();
-			// });
-			alert(1)
+			var param = {
+				'address.name': $('input[name="address.name"]').val(),
+				'address.country': $('#selCountry').val(),
+				'address.countryId': $('#selCountry_id').val(),
+				'address.province': $('#selProvince').val(),
+				'address.provinceId': $('#selProvince_id').val(),
+				'address.city': $('#selCity').val(),
+				'address.region': $('#selRegion').val(),
+				'address.address': $('#txtAddress').val(),
+				'address.phone': $('input[name="address.name"]').val()
+			};
+			Tr.post('/retailer/address/save',param, function(data) {
+				if (data.code != 200) {
+					alert(data.msg);
+					return;
+				}
+				alert('保存成功');
+				window.location.reload();
+			});
 		}
+	});
+	// 地址信息保存
+	$(document).on('click', '#addressList .editAddress', function(e) {
+		var eve = e?e:(window.event?window.event:null);
+		var target = eve.target;
+		var id = target.id;
+		$('.adderssUser')
 	});
 
 	// 选择国家
