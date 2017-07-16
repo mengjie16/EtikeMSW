@@ -1,6 +1,6 @@
 		*{ 这是零售商的user登录进来后看到的菜单 }*
 		<!-- hd_mysnbMenu -->		
-		<div class="hd_mysnbMenu" style="margin-top:200px;">
+		<!-- <div class="hd_mysnbMenu" style="margin-top:200px;">
 			<div class="mysnbMenu" style="border:0px;">
 				<div class="container_body">
 					<div class="container_left">
@@ -80,4 +80,28 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
+		<aside class="menu">
+        <ul>
+            <li class="person active">
+                <a href="/retailer/order/list"><i class="am-icon-user"></i>个人中心</a>
+            </li>
+            <li class="person">
+                <p><i class="am-icon-newspaper-o"></i>个人资料</p>
+                <ul>
+                    <li> <a href="/retailer/edit" class="navLink" module="retailerEdit">个人信息</a></li>
+                    <li> <a href="/user/edit/pass" class="navLink" module="editPass">密码设置</a></li>
+                    <li> <a href="address.html">地址管理</a></li>
+                   
+                </ul>
+            </li>
+            <li class="person">
+                <p><i class="am-icon-balance-scale"></i>我的交易</p>
+                <ul>
+                    <li><a href="/retailer/order/list" class="navLink" module="orderList">订单管理</a></li>
+                    <li><a href="/retailer/order/stepOne">退款售后</a></li>
+                    <li><a href="/user/storeList" class="navLink" module="storeList">我的收藏</a></li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
