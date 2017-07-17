@@ -145,6 +145,34 @@ public class RetailerController extends BaseController {
         }
         renderFailedJson(ReturnCode.FAIL);
     }
+    
+    @UserLogonSupport(value = "RETAILER")
+    public static void cartAdd(@Required @Min(1) long itemId, @Required ItemVo vo) {
+        // 用户信息获取
+        User user = renderArgs.get(Secure.FIELD_USER, User.class);
+        String key = CacheType.RETAILER_CART_INFO.getKey(user.phone);
+        List<ItemVo> cartItems = (List<ItemVo>) CacheUtils.get(key);
+        if (MixHelper.isEmpty(cartItems)) {
+            renderFailedJson(ReturnCode.FAIL);
+        }
+        // 添加购物车
+        Iterator<ItemVo> iterator = cartItems.iterator();
+        boolean newItem = false;
+        while (iterator.hasNext()) {
+            ItemVo iv = iterator.next();
+            if (iv.id == itemId) {
+                    iv.cartCount ++;
+                    newItem = true;
+            }
+        }
+        if(newItem == false){
+            cartItems.add(vo);
+        }
+        CacheUtils.set(key, cartItems, CacheType.RETAILER_CART_INFO.expiredTime);
+        
+        renderSuccessJson();
+    }
+
 
     /**
      * 付款页面
@@ -548,6 +576,16 @@ public class RetailerController extends BaseController {
      */
     @UserLogonSupport(value = "RETAILER")
     public static void orderStepTwo() {
+    //1、收货信息
+            
+    //2、支付方式
+        
+    //3、物流方式
+        
+    //4、商品清单
+        
+    //5、结算信息
+        
         render();
     }
 
