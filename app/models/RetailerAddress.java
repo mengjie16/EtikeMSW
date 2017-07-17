@@ -31,7 +31,6 @@ public class RetailerAddress extends Location {
     
     @Transient
     public static final String TABLE_NAME = "retailer_address";
-
     
     public long id;
     /** 名称 */
@@ -41,19 +40,6 @@ public class RetailerAddress extends Location {
     public String phone;    
     
     public int retailerId;
-    
-    
-    public int getRetailerId() {
-        return retailerId;
-    }
-
-
-    
-    public void setRetailerId(int retailerId) {
-        this.retailerId = retailerId;
-    }
-
-
     public Date createTime;
     public Date updateTime;
     
@@ -104,27 +90,7 @@ public class RetailerAddress extends Location {
         }
     }
 
-
-    public  boolean save() {
-        SqlSession ss = SessionFactory.getSqlSession();
-        try {
-            RetailerAddressMapper mapper = ss.getMapper(RetailerAddressMapper.class);
-            if (this.id > 0) {
-                mapper.updateById(this);
-            } else {
-                DateTime dtNow = DateTime.now();
-                this.createTime = dtNow.toDate();
-                this.updateTime = dtNow.toDate();
-                mapper.insert(this);
-            }
-        } catch (Exception ex) {
-            return false;
-        } finally {
-            ss.close();
-        }
-        return true;
-    }
-
+   
 
     public static boolean save(RetailerAddress address) {
         SqlSession ss = SessionFactory.getSqlSession();
