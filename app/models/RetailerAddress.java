@@ -62,9 +62,28 @@ public class RetailerAddress extends Location {
         }
         return true;
     }
+    
+    public static boolean update(RetailerAddress retailerAddress) {
+        if (retailerAddress == null) {
+            return false;
+        }
+        SqlSession ss = SessionFactory.getSqlSession();
+        try {
+            RetailerAddressMapper mapper = ss.getMapper(RetailerAddressMapper.class);
+            RetailerAddress address = findById(retailerAddress.id);
+            if (address == null) {
+                return false;
+            }
+            mapper.update(retailerAddress);
+        } finally {
+            ss.close();
+        }
+        return true;
+    }
 
 
-    private static RetailerAddress findById(int id) {
+
+    public static RetailerAddress findById(long id) {
         SqlSession ss = SessionFactory.getSqlSession();
         try {
             RetailerAddressMapper mapper = ss.getMapper(RetailerAddressMapper.class);
@@ -97,7 +116,7 @@ public class RetailerAddress extends Location {
         try {
             RetailerAddressMapper mapper = ss.getMapper(RetailerAddressMapper.class);
             if (address.id > 0) {
-                mapper.updateById(address);
+                mapper.update(address);
             } else {
                 DateTime dtNow = DateTime.now();
                 address.createTime = dtNow.toDate();
@@ -121,6 +140,21 @@ public class RetailerAddress extends Location {
         }
     }
     
+    public String toBaseLocationStr(){
+        return name+phone+province+city+region+address;
+    }
+    
+    
+    public static boolean deleteById(long id) {
+        SqlSession ss = SessionFactory.getSqlSession();
+        try {
+            RetailerAddressMapper mapper = ss.getMapper(RetailerAddressMapper.class);
+            mapper.deleteById(id);
+        }  finally {
+            ss.close();
+        }
+        return true;
+    }
     
 
 }

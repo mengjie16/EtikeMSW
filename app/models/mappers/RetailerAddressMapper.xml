@@ -36,7 +36,7 @@
 			#{updateTime}
 		</trim>
 	</insert>
-	<update id="updateById" parameterType="models.RetailerAddress">
+	<update id="update" parameterType="models.RetailerAddress">
 		update retailer_address
 		<set>
 			<if test="name !=null and name !=''">
