@@ -39,5 +39,18 @@ public class Location {
     /** 具体地址 */
     @MaxSize(32)
     public String address;
+    
+    /**
+     * 返回地址基本字符串拼接内容(province+city+region+address)
+     *
+     * @return
+     * @since  v1.0
+     * @author Calm
+     * @created 2016年7月18日 下午9:51:46
+     */
+    public String toBaseLocationStr(){
+        return province+city+region+address;
+    }
+    
 
 }
