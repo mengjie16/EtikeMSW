@@ -9,10 +9,10 @@
         <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">地址管理</strong> / <small>Address&nbsp;list</small></div>
     </div>
     <hr/>
-     #{if address_result?.name}
+     #{if addressList?.name}
     <ul class="am-avg-sm-1 am-avg-md-3 am-thumbnails" id="addressList">
      
-     #{list items:address_result, as : 'addr'}
+     #{list items:addressList, as : 'addr'}
         <li class="user-addresslist defaultAddr" id="${addr.id}">
             <span class="new-option-r"><i class="am-icon-check-circle"></i>默认地址</span>
             <p class="new-tit new-p-re">
