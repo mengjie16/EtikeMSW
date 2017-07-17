@@ -178,15 +178,10 @@ public class RetailerController extends BaseController {
      */
     @UserLogonSupport(value = "RETAILER")
     public static void address() {
+        User user = renderArgs.get(Secure.FIELD_USER, User.class);
+        List<RetailerAddress> list = RetailerAddress.findListByRetailerId(user.userId);
+        renderArgs.put("addressList", list);
         render();
-    }
-    
-    @UserLogonSupport(value = "RETAILER")
-    public static void addressList(AddressVo vo) {
-        if (RetailerAddress.updateByVo(vo)) {
-            renderSuccessJson();
-        }
-        renderFailedJson(ReturnCode.FAIL);
     }
     
     /**
