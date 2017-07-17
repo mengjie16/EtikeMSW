@@ -231,9 +231,11 @@ public class RetailerController extends BaseController {
     @UserLogonSupport(value = "RETAILER")
     public static void addressGet(@Required @Valid long id) {
         handleWrongInput(true);
-       
-        if ( RetailerAddress.findById(id) != null) {
-            renderSuccessJson();
+       RetailerAddress retailAddress = null;
+       retailAddress = RetailerAddress.findById(id);
+        if ( retailAddress != null) {
+        	renderArgs.put("retailAddress", retailAddress);
+            renderJson(ReturnCode.OK, retailAddress);
         }
         renderFailedJson(ReturnCode.FAIL, "该地址不存在");
     }

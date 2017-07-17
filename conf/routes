@@ -224,7 +224,7 @@ POST	/retailer/order/usergenerate            RetailerController.userGenerateOrde
 GET	 	/retailer/trade/queryByTradeStatus      RetailerController.queryTradeByVoAndTradeStatus
 POST 	/retailer/address/update				RetailerController.addressUpdate
 POST 	/retailer/address/save					RetailerController.addressSave
-POST 	/retailer/address/get					RetailerController.addressGet
+GET 	/retailer/address/get					RetailerController.addressGet
 POST 	/retailer/address/delete				RetailerController.addressDelete
 
 # 用户公共路由
