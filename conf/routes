@@ -212,6 +212,7 @@ GET     /retailer/order/manual                  RetailerController.manualOrder
 POST    /retailer/fee/pay                       RetailerController.payFee
 GET		/retailer/cart/query                    RetailerController.cart
 POST	/retailer/cart/remove                   RetailerController.cartRemove
+POST	/retailer/cart/add						RetailerController.cartAdd
 GET		/retailer/order/edit                    RetailerController.orderStepOne
 POST	/retailer/order/upload                  RetailerController.parseOrderFromExcel
 POST	/retailer/ordervo/parse                 RetailerController.parseOrderVo
