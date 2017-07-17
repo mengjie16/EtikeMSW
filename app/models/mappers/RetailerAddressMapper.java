@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import models.RetailerAddress;
 import models.SupplierSendLocationTemp;
@@ -39,4 +40,7 @@ public interface RetailerAddressMapper {
     
     @Select("select * from " + RetailerAddress.TABLE_NAME + "  where retailer_id=#{retailerId} order by create_time desc")
     public List<RetailerAddress> selectList(@Param("retailerId") int retailerId);
+    
+    @Update("update " +  RetailerAddress.TABLE_NAME + "  set default_address = case when  id !=#{id} then 0 when id= #{id}  then 1 end")
+    public void setDefaultAddress(@Param("id") long id);
 }
