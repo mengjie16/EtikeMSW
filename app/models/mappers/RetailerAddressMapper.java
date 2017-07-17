@@ -22,7 +22,7 @@ public interface RetailerAddressMapper {
 
     int insert(RetailerAddress address);
 
-    void updateById(RetailerAddress address);
+    void update(RetailerAddress address);
 
     void updateByVo(AddressVo vo);
 

@@ -217,6 +217,36 @@ public class RetailerController extends BaseController {
     }
 
     
+    
+    @UserLogonSupport(value = "RETAILER")
+    public static void addressUpdate(@Required @Valid RetailerAddress retailerAddress) {
+        handleWrongInput(true);
+       
+        if ( RetailerAddress.update(retailerAddress) ) {
+            renderSuccessJson();
+        }
+        renderFailedJson(ReturnCode.FAIL, "更新失败");
+    }
+    
+    @UserLogonSupport(value = "RETAILER")
+    public static void addressGet(@Required @Valid long id) {
+        handleWrongInput(true);
+       
+        if ( RetailerAddress.findById(id) != null) {
+            renderSuccessJson();
+        }
+        renderFailedJson(ReturnCode.FAIL, "该地址不存在");
+    }
+    
+    @UserLogonSupport(value = "RETAILER")
+    public static void addressDelete(@Required @Valid long id) {
+        handleWrongInput(true);
+       
+        if ( RetailerAddress.deleteById(id) ) {
+            renderSuccessJson();
+        }
+        renderFailedJson(ReturnCode.FAIL, "删除失败");
+    }
 
     /**
      * 我的订单页面
