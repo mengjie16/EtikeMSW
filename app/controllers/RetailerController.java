@@ -198,6 +198,30 @@ public class RetailerController extends BaseController {
     }
 
     /**
+     * 订单详情页面
+     *
+     * @since v1.0
+     * @author Calm
+     * @created 2016年7月13日 上午2:02:31
+     */
+    @UserLogonSupport(value = "RETAILER")
+    public static void orderinfo() {
+        render();
+    }
+
+    /**
+     * 物流详情页面
+     *
+     * @since v1.0
+     * @author Calm
+     * @created 2016年7月13日 上午2:02:31
+     */
+    @UserLogonSupport(value = "RETAILER")
+    public static void logistics() {
+        render();
+    }
+
+    /**
      * 地址管理页面
      *
      * @since v1.0

@@ -1,0 +1,183 @@
+#{extends 'UserCenter/user-frame.html' /}
+#{set title:'订单管理' /}
+#{set 'moreSubStyles'}
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/orstyle.css'}" />
+#{/set}
+<div class="user-orderinfo">
+    <!--标题 -->
+    <div class="am-cf am-padding">
+        <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">订单详情</strong> / <small>Order&nbsp;details</small></div>
+    </div>
+    <hr/>
+    <div class="order-infoaside">
+        <div class="order-logistics">
+            <a href="logistics.html">
+                <div class="icon-log">
+                    <i><img src=""></i>
+                </div>
+                <div class="latest-logistics">
+                    <p class="text">已签收,签收人是青年城签收，感谢使用天天快递，期待再次为您服务</p>
+                    <div class="time-list">
+                        <span class="date">2015-12-19</span><span class="week">周六</span><span class="time">15:35:42</span>
+                    </div>
+                    <div class="inquire">
+                        <span class="package-detail">物流：天天快递</span>
+                        <span class="package-detail">快递单号: </span>
+                        <span class="package-number">373269427868</span>
+                        <a href="/retailer/logistics">查看</a>
+                    </div>
+                </div>
+                <span class="am-icon-angle-right icon"></span>
+            </a>
+            <div class="clear"></div>
+        </div>
+        <div class="order-addresslist">
+            <div class="order-address">
+                <div class="icon-add">
+                </div>
+                <p class="new-tit new-p-re">
+                    <span class="new-txt">${name}</span>
+                    <span class="new-txt-rd2">${phone}</span>
+                </p>
+                <div class="new-mu_l2a new-p-re">
+                    <p class="new-mu_l2cw">
+                        <span class="title">收货地址：</span>
+                        <span class="country">${country}</span>
+                        <span class="province">${province}</span>省
+                        <span class="city">${city}</span>市
+                        <span class="dist">${region}</span>区
+                        <span class="street">${address}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="order-infomain">
+        <div class="order-top">
+            <div class="th th-item">
+                <td class="td-inner">商品</td>
+            </div>
+            <div class="th th-price">
+                <td class="td-inner">单价</td>
+            </div>
+            <div class="th th-number">
+                <td class="td-inner">数量</td>
+            </div>
+            <div class="th th-operation">
+                <td class="td-inner">商品操作</td>
+            </div>
+            <div class="th th-amount">
+                <td class="td-inner">合计</td>
+            </div>
+            <div class="th th-status">
+                <td class="td-inner">交易状态</td>
+            </div>
+            <div class="th th-change">
+                <td class="td-inner">交易操作</td>
+            </div>
+        </div>
+        <div class="order-main">
+            <div class="order-status3">
+                <div class="order-title">
+                    <div class="dd-num">订单编号：<a href="javascript:;">${id}</a></div>
+                    <span>成交时间：${createTime}</span>
+                    <!--    <em>店铺：小桔灯</em>-->
+                </div>
+                <div class="order-content">
+                    <div class="order-left">
+                    	#{list items:orderList, as: 'list'}
+                        <ul class="item-list">
+                            <li class="td td-item">
+                                <div class="item-pic">
+                                    <a href="#" class="J_MakePoint">
+                                        <img src="images/kouhong.jpg_80x80.jpg" class="itempic J_ItemImg">
+                                    </a>
+                                </div>
+                                <div class="item-info">
+                                    <div class="item-basic-info">
+                                        <a href="#">
+                                            <p>${list.title}</p>
+                                            <p class="info-little">颜色：${list.color}</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="td td-price">
+                                <div class="item-price">
+                                    ${list.price}
+                                </div>
+                            </li>
+                            <li class="td td-number">
+                                <div class="item-number">
+                                    <span>×</span>${list.itemNum}
+                                </div>
+                            </li>
+                            <li class="td td-operation">
+                                <div class="item-operation">
+                                    退款/退货
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="item-list">
+                            <li class="td td-item">
+                                <div class="item-pic">
+                                    <a href="#" class="J_MakePoint">
+                                        <img src="images/62988.jpg_80x80.jpg" class="itempic J_ItemImg">
+                                    </a>
+                                </div>
+                                <div class="item-info">
+                                    <div class="item-basic-info">
+                                        <a href="#">
+                                            <p>礼盒袜子女秋冬 纯棉袜加厚 韩国可爱 </p>
+                                            <p class="info-little">颜色分类：李清照
+                                                <br/>尺码：均码</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="td td-price">
+                                <div class="item-price">
+                                    333.00
+                                </div>
+                            </li>
+                            <li class="td td-number">
+                                <div class="item-number">
+                                    <span>×</span>2
+                                </div>
+                            </li>
+                            <li class="td td-operation">
+                                <div class="item-operation">
+                                    退款/退货
+                                </div>
+                            </li>
+                        </ul>
+                      #{/list}
+                    </div>
+                    <div class="order-right">
+                        <li class="td td-amount">
+                            <div class="item-amount">
+                                合计：${totalAmountStr}
+                                <p>含运费：<span>${shippingFeeStr}</span></p>
+                            </div>
+                        </li>
+                        <div class="move-right">
+                            <li class="td td-status">
+                                <div class="item-status">
+                                    <p class="Mystatus">卖家已发货</p>
+                                    <p class="order-info"><a href="/retailer/logistics">查看物流</a></p>
+                                    <p class="order-info"><a href="#">延长收货</a></p>
+                                </div>
+                            </li>
+                            <li class="td td-change">
+                                <div class="am-btn am-btn-danger anniu">
+                                    确认收货</div>
+                            </li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+#{set 'moreSubScripts'}
+<script type="text/javascript">App.module = 'orderList';</script>
+#{/set}

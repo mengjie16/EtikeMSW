@@ -201,8 +201,10 @@ GET     /retailer/edit                          RetailerController.edit
 GET     /retailer/address                       RetailerController.address
 GET     /retailer/finance                       RetailerController.finance
 GET     /retailer/pay                           RetailerController.payFor
-GET     /retailer/refund                    	RetailerController.refund
+GET     /retailer/refund                    	  RetailerController.refund
 GET     /retailer/order/list                    RetailerController.orderList
+GET     /retailer/order/info                    RetailerController.orderinfo
+GET     /retailer/logistics                     RetailerController.logistics
 GET     /retailer/trade/order                   RetailerController.tradeOrders
 GET     /retailer/order/stepOne                 RetailerController.orderStepOne
 GET     /retailer/order/stepTwo                 RetailerController.orderStepTwo
