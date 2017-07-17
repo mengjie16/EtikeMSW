@@ -172,7 +172,7 @@ public class UserCenter extends BaseController {
 
     /**
      * 
-     * 我的购物车2
+     * 确认订单
      * 
      * @since v1.0
      * @author tr0j4n

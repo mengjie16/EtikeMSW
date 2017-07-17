@@ -1,850 +1,148 @@
 #{extends 'main.html' /}
 #{set title:'确认订单' /}
 #{set 'moreStyles'}
-<link href="@{'/public/stylesheets/Commons.css'}" rel="stylesheet" type="text/css">
-<link href="@{'/public/stylesheets/2nd_index.css'}" rel="stylesheet" type="text/css">
-<style type="text/css">
-	.CartList td .base_coupon{font-size:11px;color:#696969;}
-	.CartList td .base_coupon .coupon_tit{font-weight:bold;font-size:11px;color:#696969;}
-	.clauseArea {position:relative; margin-top:15px;}
-	.clauseArea .clauseTitle {height:20px; color:#d051a5; font-weight:bold; background-image:url(/public/images/img/squareRedBullet.png); background-repeat:no-repeat; background-position:left 5px; text-indent:10px;}
-	.clauseArea .clauseTitle b {
-		color:#d051a5;font-size: 14px;margin-top: -2px;
-	}
-	.clauseArea .clauseTxt {width:986px; height:90px; border:2px solid #c9c9c9; overflow:hidden; overflow-y:auto; margin-bottom:12px;padding:5px; padding-right:0px;} 
-	.clauseArea .clauseTxt table {border-left:1px solid #000; border-bottom:1px solid #000;}
-	.clauseArea .clauseTxt th {border:1px solid #000; border-left:0px; border-bottom:0px;vertical-align:middle; text-align:center; height:50px;}
-	.clauseArea .clauseTxt td {border:1px solid #000; border-left:0px; border-bottom:0px; vertical-align:middle; height:25px; padding-left:7px;}
-	.clauseArea .clauseAgreeCheck {float:right;font-weight:bold; color:#4e4e4e;}
-	.clauseArea .clauseAgreeCheck span {color:#4e4e4e;}
-	.clauseArea .clauseOderTxt {width:990px; border:2px solid #c9c9c9; overflow:hidden; overflow-y:auto; margin-bottom:12px;padding:5px; padding-right:0px;}
-	.visuallyHidden { position:absolute; left:-99999px; top:-99999px; text-indent:-9999px; overflow:hidden; height:1px; line-height:1px; font-size:1px; }
-	.brpEvent-1100auto {width:1100px; margin:30px 0 30px;}
-	.brpEvent-1100auto .leftBody {width:858px; height:453px; padding-left:10px; padding-top:20px; border:1px solid #dbdbdb; background-color:#f4f4f4; float:left;}
-	.brpEvent-1100auto .leftBody a {display:block; float:left; margin-right:5px;}
-	.brpEvent-1100auto .leftBody a.longBanner {padding-top:21px; padding-left:19px;}
-	.brpEvent-1100auto .rightBody {width:219px; height:453px; border:1px solid #dbdbdb; border-left:0px; float:left;}
-	.brpEvent-1100auto .rightBody ul li {border-bottom:1px solid #dbdbdb}
-	.brpEvent-1100auto .rightBody .hotEvt {padding:15px 15px 4px 15px;}
-	.brpEvent-1100auto .rightBody ul.hotEvt li { padding-left:15px; padding-top:4px; width:160px;overflow:hidden; text-overflow:hidden; white-space:nowrap; background:url(/public/images/img/bullet.jpg) 0 11px no-repeat; border-bottom:0px; text-align:left;}
-	.brpEvent-1100auto .rightBody ul.hotEvt li a {letter-spacing:-1px; font-size:11px;} 
-</style>
+<link href="@{'/public/stylesheets/orstyle.css'}" rel="stylesheet" type="text/css">
 #{/set}
-<table width="900" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto">
-	<tbody>
-		<tr>
-			<td>
-				<div class="step_box">
-					<ol>
-						<li class="">
-							<div class="cart_step cart_step01">
-								<span>购物车</span>
-							</div>
-						</li>
-						<li class="active">
-							<div class="cart_step cart_step02">
-								<span>订单前</span>
-							</div>
-						</li>
-						<li class="">
-							<div class="cart_step cart_step03">
-								<span>付款</span>
-							</div>
-						</li>
-					</ol>
-				</div>
-			</td>
-		</tr>
-		<tr height="10">
-			<td></td>
-		</tr>
-		<tr>
-			<td>
-				<div class="banner_barobori">
-					<a href="#" target="_blank">
-						<img src="/public/images/img/banner_barobori20130213.gif" alt=""></a>
-				</div>
-			</td>
-		</tr>
-		<tr height="30">
-			<td></td>
-		</tr>
-		<tr>
-			<td style="text-align:left;">
-				<img src="/public/images/img/Tit_Cart_3.gif"></td>
-		</tr>
-		<!-- Left Navi -->
-		<tr valign="top">
-			<td>
-				<table width="100%" cellpadding="0" cellspacing="0" border="0" id="divCartTotalAll">
-					<tbody>
-						<tr>
-							<td>&nbsp;</td>
-						</tr>
-						<!-- Tab -->
-						<tr>
-							<td>
-								<table width="100%" cellpadding="0" cellspacing="0" border="0">
-									<tbody>
-										<tr>
-											<td style="text-align:right;padding-bottom:4px" class="CartAllSelect">一些低利润商品优惠券的使用限制</td>
-										</tr>
-									</tbody>
-								</table>
-							</td>
-						</tr>
-
-						<!-- CartList -->
-						<tr>
-							<td>
-
-								<form name="FormBoriBori" method="post">
-
-									<table width="100%" cellpadding="0" cellspacing="0" border="0" class="CartList" style="color:#736c60;">
-										<tbody>
-											<tr>
-												<th width="92"> <b>配送方式</b>
-												</th>
-												<th width="262"> <b>商品名称</b>
-												</th>
-												<th width="92">
-													<b>售价</b>
-												</th>
-												<th width="66">
-													<b>数量</b>
-												</th>
-												<th width="76">
-													<b>购买积分</b>
-												</th>
-												<th width="79">
-													<b>立即折扣</b>
-												</th>
-												<th width="79">
-													<b>合计金额</b>
-												</th>
-												<th width="71">
-													<b>免息</b>
-												</th>
-												<th width="83">
-													<b>选择</b>
-												</th>
-											</tr>
-											<tr style="display:none">
-												<td colspan="9" height="100" style="text-align:center">
-													<span style="height:15px;color:#736c60;padding-bottom:5px;font-size:14px;">购物车上的商品.</span>
-													<br>
-													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-													<span style="height:25px;color:#736c60;vertical-align:middle;font-size:14px;">
-														购物商品存放2天, 之后 <strong style="font-size:14px;margin-top:3px">关注商品&gt;购物车上的商品</strong>
-														自动保存.
-													</span>
-													<span style="height:20px;color:#736c60;vertical-align:middle;margin-top:-10px;">
-														<img src="/public/images/img/wishrist_btn_01.gif" style="cursor:pointer"></span>
-												</td>
-											</tr>
-											<tr>
-
-												<td rowspan="1" style="border-right:solid 1px #80756C;text-align:center" class="Division">
-													企业配送
-													<br>[三先生…]</td>
-
-												<td align="center" style="border-right:solid 1px #80756C; text-align:left;">
-													<table cellpadding="0" cellspacing="0" border="0" width="100%">
-														<tbody>
-															<tr>
-																<td width="5"></td>
-																<td width="60" align="center">
-																	<a href="#">
-																		<img src="/public/images/img/P027086254.jpg" width="60" height="60" vspace="5" border="0"></a>
-																</td>
-																<td width="5"></td>
-																<td>
-																	<a href="#" onfocus="this.blur()">
-																		<b>迷你的心(mini.mom)</b>
-																		<br> <font color="#FE6102">[ 10 %额外的优惠券★限定数量]</font>
-																		春季可爱连衣裙
-																		<br>
-																		<b>[紫色/ L - 9号]</b>
-																	</a>
-																</td>
-															</tr>
-														</tbody>
-													</table>
-												</td>
-												<td style="border-right:solid 1px #80756C;text-align:center">
-
-													<b>31,000元</b>
-												</td>
-												<td style="border-right:solid 1px #80756C;text-align:center">
-													<table cellpadding="0" cellspacing="0" border="0" width="100%">
-														<tbody>
-															<tr>
-																<td style="text-align:center">
-																	<input type="text" name="PrdQty1" value="1" class="Order" size="3" maxlength="2" readonly style="font-size:8pt;">
-																	<br>
-																	<a href="javascript:" class="ShpA425E5U">修改</a>
-																</td>
-															</tr>
-														</tbody>
-													</table>
-												</td>
-												<td style="border-right:solid 1px #80756C;text-align:center" class="alignC">
-													<a href="#">
-														<img src="/public/images/img/carticon_on.gif" alt="就在大麦" style="margin-bottom:5px;" onmouseover="document.getElementById('baroBori0').style.display = 'block';"></a>
-													<br>
-													<img src="/public/images/img/shoppinglist_money.gif" border="0">
-													<span style="color:red;">0元</span>
-												</td>
-
-												<td style="border-right:solid 1px #80756C;text-align:center" class="alignC">
-													<p class="base_coupon" style="text-align:center">
-
-														<span class="coupon_tit">普通</span>
-														&nbsp;-3,100元
-														<br>
-														-
-														<br>
-														<img src="/public/images/img/Order_UseCoupon.gif" vspace="4" style="cursor:hand;" onclick="javascript:PopupSecurePopup('100014786','1','cuse');">
-														<br>
-														<!--, DbCpPri-->
-
-													</p>
-												</td>
-												<td style="border-right:solid 1px #80756C;text-align:center" class="alignC">
-													27,900元
-													<br></td>
-												<td align="center" style="border-right:solid 1px #80756C" class="alignC">&nbsp;</td>
-												<td align="center" class="alignC" id="SeqTd">
-													<input name="Seq" type="checkbox" value="100014786" style="border:0" class="seqClass cartSelectCheck" id="cartSelectCheck0" checked="">
-													<br></td>
-											</tr>
-										</tbody>
-									</table>
-									<table width="100%" border="0" cellpadding="0" cellspacing="0">
-										<tbody>
-											<tr>
-												<td></td>
-												<td style="padding:12px 9px 15px 0;text-align:right" class="SumTotal">
-													[产品合计金额]
-													<b><span class="TXT_SumSalPri">31,000</span>
-														元</b> 
-													- [普通优惠券]
-													<b><span class="TXT_SumCpPri">3,100</span>
-														元</b> 
-													<span style="display:none;" class="TXT_SumDbCpPri">0</span>
-													<span style="display:none;" class="TXT_SumAddCpPri">0</span>
-													+ [运费:50,000元以上购买免费]
-													<b>
-														<span class="TXT_DeliPri">2,500</span>
-														元 =
-														<span class="Txt_SumTotal">[总采购额]</span>
-														<b>
-															<span class="Txt_SumTotal_2 CartGrpSumTotal" id="CartGrpSumTotal">30,400</span>
-														</b>
-														元&nbsp;
-													</b>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-
-								</form>
-							</td>
-						</tr>
-						<tr>
-							<td class="My_SumTotal">
-								<table width="100%" cellpadding="0" cellspacing="0">
-									<tbody>
-										<tr>
-											<td width="297">
-												<img src="/public/images/img/Img_My_SumTotal_1.gif"></td>
-											<td style="padding:0,10,0,0;text-align:right" class="OrderSumClass">
-												<table cellpadding="0" cellspacing="3" border="0" width="400" style="margin-left:240px">
-													<tbody>
-														<tr>
-															<td>
-																<img src="/public/images/img/Dot_Arrow.gif" width="3" height="5" style="vertical-align:middle"></td>
-															<td width="100">产品合计金额</td>
-															<td width="20" style="text-align:center">:</td>
-															<td width="250" style="text-align:right">
-																<span class="CartSumPri">31,000</span>
-																元
-															</td>
-														</tr>
-														<tr>
-															<td>
-																<img src="/public/images/img/Dot_Arrow.gif" width="3" height="5" style="vertical-align:middle"></td>
-															<td>普通券金额</td>
-															<td style="text-align:center">:</td>
-															<td style="text-align:right">
-																-
-																<span class="CartCpPri">3,100</span>
-																元
-															</td>
-														</tr>
-														<tr>
-															<td>
-																<img src="/public/images/img/Dot_Arrow.gif" width="3" height="5" style="vertical-align:middle"></td>
-															<td>重复券金额</td>
-															<td style="text-align:center">:</td>
-															<td style="text-align:right">
-																<span class="CartDbCpPri">0</span>
-																元
-															</td>
-														</tr>
-														<tr>
-															<td>
-																<img src="/public/images/img/Dot_Arrow.gif" width="3" height="5" style="vertical-align:middle"></td>
-															<td>运费</td>
-															<td style="text-align:center">:</td>
-															<td style="text-align:right">
-																<span class="CartDeliPri">2,500</span>
-																元
-															</td>
-														</tr>
-														<tr>
-															<td>
-																<img src="/public/images/img/Dot_Arrow.gif" width="3" height="5" style="vertical-align:middle"></td>
-															<td>
-																<span class="Txt_SumTotal ft12">总付款金额</span>
-															</td>
-															<td style="text-align:center">:</td>
-															<td style="text-align:right" class="Red01">
-																<b>
-																	<span class="Txt_SumTotal_2" id="CartSumTotal">30,400</span>
-																</b>
-																元
-															</td>
-														</tr>
-													</tbody>
-												</table>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</td>
-						</tr>
-						<tr height="50">
-							<td></td>
-						</tr>
-						<tr>
-							<td>
-								<div class="clauseArea">
-									<div class="clauseTitle">
-										<b>非会员条款</b>
-									</div>
-									<div class="clauseTxt" style="width:99%">
-										测试
-										<br>
-										测试
-										<br>
-										测试
-										<br>
-										测试
-										<br>
-										测试
-										<br>
-										测试
-										<br>
-										测试
-										<br>
-										测试
-										<br></div>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td style="text-align:right">
-								&nbsp;&nbsp;&nbsp;艾泰客非会员同意使用条款?
-								<input type="radio" name="ChkClause" id="ChkClause_1" value="1" style="border:0" onfocus="this.blur()">
-								<label for="ChkClause_1" style="cursor:pointer;" onfocus="this.blur()">同意</label>
-								<input type="radio" name="ChkClause" id="ChkClause_2" value="2" style="border:0" onfocus="this.blur()">
-								<label for="ChkClause_2" style="cursor:pointer;" onfocus="this.blur()">不同意</label>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="clauseArea">
-									<div class="clauseTitle">
-										<b>非会员的隐私权政策</b>
-									</div>
-									<div class="clauseTxt" style="width:99%">测试</div>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td style="text-align:right">
-								&nbsp;&nbsp;&nbsp;艾泰客非会员的隐私权政策，同意吗?
-								<input type="radio" name="ChkPolicy" id="ChkPolicy_1" value="1" style="border:0" onfocus="this.blur()">
-								<label for="ChkPolicy_1" style="cursor:pointer;" onfocus="this.blur()">同意</label>
-								<input type="radio" name="ChkPolicy" id="ChkPolicy_2" value="2" style="border:0" onfocus="this.blur()">
-								<label for="ChkPolicy_2" style="cursor:pointer;" onfocus="this.blur()">不同意</label>
-							</td>
-						</tr>
-						<tr height="24" valign="top">
-							<td style="text-align:left;">
-								<img src="/public/images/img/Tit_OrderInfo.gif"></td>
-						</tr>
-						<tr>
-							<td style="text-align:left;">
-								<table width="100%" cellpadding="0" cellspacing="0" border="0" class="Tbl_OrderInfo">
-									<tbody>
-										<tr height="5">
-											<td colspan="3"></td>
-										</tr>
-										<tr>
-											<td class="L36" rowspan="4">
-												<div style="font-size:13px;color:#333;">用户信息</div>
-											</td>
-											<td class="L12">
-												<div>用户名</div>
-											</td>
-											<td width="750">
-												<input type="text" name="m_name" value="" maxlength="10" class="text" style="width: 126px;">
-												<a href="#" style="display:inline-block;background-color:#9A9185;color:#fff;width:80px;height:20px;line-height:20px;text-align:center">成为会员</a>
-											</td>
-										</tr>
-										<tr>
-											<td class="L12">
-												<div>用户名</div>
-											</td>
-											<td class="C_Green">
-												<input name="m_name3" type="text" style="width:200px; height:18px; border:0; color:#699BA5; font-size:9pt;" value="biweilun@live.com" size="30" maxlength="30" readonly=""></td>
-										</tr>
-										<tr>
-											<td class="L12">
-												<div>电话号码</div>
-											</td>
-
-											<td class="C_Green">
-												<input name="snsTel1" class="text" maxlength="3" type="text" style="width:25px;"  value="">
-												<span style="display:inline-block; *zoom:1; *display:inline;">-</span>
-												<input name="snsTel2" class="text" maxlength="4" type="text" style="width:35px;"  value="">
-												<span style="display:inline-block; *zoom:1; *display:inline">-</span>
-												<input name="snsTel3" class="text" maxlength="4" type="text" style="width:35px;"  value=""></td>
-
-											<input name="phone" type="hidden" style="width:100; height:18; border:0; color:#699BA5; font-size:9pt;" value="000-0000-0000" maxlength="3" readonly=""></tr>
-										<tr height="5">
-											<td colspan="3"></td>
-										</tr>
-										<tr>
-											<td class="DotLine" colspan="3"></td>
-										</tr>
-										<tr height="5">
-											<td colspan="3"></td>
-										</tr>
-										<tr>
-											<td class="L36" rowspan="9">
-												<div style="font-size:13px;color:#333;">订单信息</div>
-											</td>
-											<td class="L12">
-												<div>地址</div>
-											</td>
-											<td>
-												<table width="" cellpadding="0" cellspacing="0" border="0">
-													<tbody>
-														<tr>
-															<td style="padding-right:20">
-																<input type="radio" name="ChkAddr" id="ChkAddr_1" value="1" style="border:0">
-																<label for="ChkAddr_1" style="cursor:pointer;">同客户和订单</label>
-															</td>
-															<td style="padding-right:20">
-																<input type="radio" name="ChkAddr" id="ChkAddr_2" value="2" style="border:0">
-																<label for="ChkAddr_2" style="cursor:pointer;">地址簿中选择</label>
-															</td>
-															<td style="padding-right:20">
-																<input type="radio" name="ChkAddr" id="ChkAddr_3" value="3" style="border:0">
-																<label for="ChkAddr_3" style="cursor:pointer;">新的地址</label>
-															</td>
-
-															<td style="padding-right:20">
-																<input type="radio" name="ChkAddr" id="ChkAddr_4" value="4" style="border:0">
-																<label for="ChkAddr_4" style="cursor:pointer;">近来订货配送（3个月）</label>
-															</td>
-
-														</tr>
-													</tbody>
-												</table>
-											</td>
-										</tr>
-										<tr>
-											<td class="L12">
-												<div>街道</div>
-											</td>
-											<td>
-												<input type="text" name="m_name1" maxlength="10" value="" class="text" style="width: 126px;"></td>
-										</tr>
-										<tr>
-											<td class="L12">
-												<div>固定号码</div>
-											</td>
-											<td class="phoneInputs">
-												<input name="phone1" class="text" maxlength="3" type="text" style="width:25px;" value="">
-												<span style="display:inline-block; *zoom:1; *display:inline;">-</span>
-												<input name="phone2" class="text" maxlength="4" type="text" style="width:35px;" value="">
-												<span style="display:inline-block; *zoom:1; *display:inline;">-</span>
-												<input name="phone3" class="text" maxlength="4" type="text" style="width:35px;" value=""></td>
-										</tr>
-										<tr>
-											<td class="L12">
-												<div>手机号码</div>
-											</td>
-											<td class="phoneInputs">
-												<input name="uphone1" class="text" maxlength="3" type="text" style="width:25px;" value="">
-												<span style="display:inline-block; *zoom:1; *display:inline;">-</span>
-												<input name="uphone2" class="text" type="text" style="width:35px;" maxlength="4" value="">
-												<span style="display:inline-block; *zoom:1; *display:inline;">-</span>
-												<input name="uphone3" class="text" type="text" style="width:35px;" maxlength="4" value=""></td>
-										</tr>
-										<tr>
-											<td class="L12">
-												<div>SNS</div>
-											</td>
-											<td>
-												<table width="" cellpadding="0" cellspacing="0" border="0">
-													<tbody>
-														<tr>
-															<td> <font color="#d06c6c">出厂时，引导信息?</font>
-																<input type="radio" name="SMSGuBun" value="Y" id="SMSGuBun_Y" style="border:0" checked="">
-																<label for="SMSGuBun_Y" style="cursor:pointer;">是的</label>
-																<input type="radio" name="SMSGuBun" value="N" id="SMSGuBun_N" style="border:0">
-																<label for="SMSGuBun_N" style="cursor:pointer;">不是的</label>
-															</td>
-														</tr>
-													</tbody>
-												</table>
-											</td>
-										</tr>
-										<tr>
-											<td class="L12">
-												<div>邮编</div>
-											</td>
-											<td>
-												<table width="" cellpadding="0" cellspacing="0" border="0">
-													<tbody>
-														<tr height="26">
-															<td>
-																<input type="text" name="zip11" class="text" maxlength="3" size="10" readonly="" style="width:50px;" value="">
-																<a href="#" style="display:inline-block;background-color:#9A9185;color:#fff;width:70px;height:20px;line-height:20px;text-align:center">邮编</a>
-															</td>
-														</tr>
-														<tr height="26">
-															<td>
-																<input name="addr11" class="text" maxlength="50" type="text" size="50" readonly="" value="" style="width:308px;"></td>
-														</tr>
-														<tr height="26">
-															<td>
-																<input name="addr12" class="text" maxlength="70" type="text" size="50" value="" style="width:308px;"></td>
-														</tr>
-													</tbody>
-												</table>
-											</td>
-										</tr>
-										<tr>
-											<td class="L12">
-												<div>留言</div>
-											</td>
-											<td>
-												<input name="memo" type="text" class="text" size="50" maxlength="50" style="width:308px;">
-												<span style="display:inline-block; *zoom:1; *display:inline;">最大输入50字</span>
-												<br>
-												<span class="C_Pink">※ 产品变更的客户服务中心联系</span>
-											</td>
-										</tr>
-										<tr height="5">
-											<td colspan="3"></td>
-										</tr>
-										<tr>
-											<td class="DotLine" colspan="3"></td>
-										</tr>
-										<tr height="5">
-											<td colspan="3"></td>
-										</tr>
-										<tr>
-											<td class="L36"></td>
-											<td class="L12"></td>
-											<td></td>
-										</tr>
-										<tr>
-											<td class="L36">
-												<div style="font-size:13px;color:#333;">付款信息</div>
-											</td>
-											<td>
-												<div>付款方式</div>
-											</td>
-											<td>
-												<table width="100%" cellpadding="0" cellspacing="0" border="0" style="table-layout:fixed">
-													<tbody>
-														<tr>
-															<td height="28">
-																<input type="radio" name="Pay_Method" value="onlycard" style="border:0" id="id_Card">
-																<a style="cursor:pointer;">信用卡付款（国内发放）</a>
-															</td>
-														</tr>
-														<tr>
-															<td height="28">
-																<input type="radio" name="Pay_Method" value="onlydbank" style="border:0" id="id_Bank" checked="">
-																<a style="cursor:pointer;">实时账户转账</a>
-															</td>
-														</tr>
-														<tr>
-															<td height="28">
-																<input type="radio" name="Pay_Method" value="onlyvbank" style="border:0" id="id_Cas">
-																<a style="cursor:pointer;">虚拟账户存折汇款[无]</a>
-															</td>
-
-														</tr>
-														<tr>
-															<td height="28">
-																<input type="radio" name="Pay_Method" value="onlyhpp" style="border:0" id="id_Mobile">
-																<a style="cursor:pointer;">手机支付[7万以下可能]</a>
-															</td>
-														</tr>
-														<tr>
-															<td height="28">
-																<input type="radio" name="Pay_Method" value="paynow" style="border:0" id="id_Paynow">
-																<a style="cursor:pointer;">我们支付</a>
-															</td>
-														</tr>
-														<tr>
-															<td height="28">
-																<input type="radio" name="Pay_Method" value="kakao" style="border:0" id="id_Kakao">
-																<a style="cursor:pointer;">
-																	卡卡来支付
-																	<img src="/public/images/img/icon_kakaopay.gif" alt=""></a>
-															</td>
-														</tr>
-														<tr>
-															<td height="28">
-																<input type="radio" name="Pay_Method" value="payco" style="border:0" id="id_Payco">
-																<a style="cursor:pointer;">PAYCO</a>
-															</td>
-														</tr>
-
-													</tbody>
-												</table>
-											</td>
-										</tr>
-										<tr name="Div_Receipt" id="Div_Receipt" style="display:;">
-											<td class="L36">
-												<div style="font-size:13px;color:#333;">其他信息</div>
-											</td>
-											<td class="L12"></td>
-											<td>
-												<table width="100%" border="0" cellpadding="0" cellspacing="0">
-													<tbody>
-														<tr>
-															<td colspan="2" height="5"></td>
-														</tr>
-														<tr height="30">
-															<td width="120" height="30">
-																<img src="/public/images/img/Arrow_OrderInfo.gif" align="absmiddle" style="margin-top: 6px; margin-left: 2px;">
-																&nbsp;
-																<span>发票信息</span>
-															</td>
-															<td>
-																<table cellpadding="0" cellspacing="0" border="0">
-																	<tbody>
-																		<tr height="27">
-																			<td>
-																				<input type="radio" name="useopt" style="border:0" value="0" checked="">
-																				所得税扣除
-																				<input type="radio" name="useopt" style="border:0" value="1">
-																				支出凭证
-																				<input type="radio" name="useopt" style="border:0" value="2">发行不含</td>
-																			<td style="text-align:center" width="150">
-																				<a href="#" style="display:inline-block;background-color:#9A9185;color:#fff;width:70px;height:20px;line-height:20px;text-align:center">发票</a>
-																			</td>
-																		</tr>
-																	</tbody>
-																</table>
-															</td>
-														</tr>
-
-														<tr height="30" id="useopt_0" style="display:''">
-															<td width="120" height="30">
-																<table width="100%" cellpadding="0" cellspacing="0" border="0">
-																	<tbody>
-																		<tr>
-																			<td rowspan="4">
-																				<img src="/public/images/img/Arrow_OrderInfo.gif" align="absmiddle" style="margin-bottom: 2px; margin-left: 2px;"></td>
-																		</tr>
-																		<tr>
-																			<td>
-																				<span>XXXXXXX</span>
-																			</td>
-																		</tr>
-																		<tr>
-																			<td>
-																				<span>XXXXXXX</span>
-																			</td>
-																		</tr>
-
-																	</tbody>
-																</table>
-															</td>
-															<td>
-																<table cellpadding="0" cellspacing="0" border="0">
-																	<tbody>
-																		<tr height="27">
-																			<td>
-																				<input type="text" size="19" maxlength="19" name="reg_num_0" class="text">
-																				&nbsp;
-																				<span style="display:inline-block; *zoom:1; *display:inline;">"-"请输入除了数字以外</span>
-																			</td>
-																		</tr>
-																	</tbody>
-																</table>
-															</td>
-														</tr>
-
-													</tbody>
-												</table>
-											</td>
-										</tr>
-										<tr name="divCard2_Line" id="divCard2_Line" style="display:'block';">
-											<td colspan="3"></td>
-										</tr>
-										<tr>
-											<td colspan="3" class="DotLine" style="padding-top:1px;">
-
-												<img id="detailOrderInfo" src="/public/images/img/order02.gif" usemap="#addition2" alt="" style="width:100%">
-												<map name="addition1">
-													<area shape="rect" coords="611,10,631,28" href="javascript:;" alt="" onclick="window.open('/order/additionPop1.asp?param=2','','width=490,height=600')">
-													<area shape="rect" coords="580,43,598,62" href="javascript:;" alt="" onclick="window.open('/order/additionPop1.asp?param=1','','width=490,height=600')">
-													<area shape="rect" coords="678,79,696,97" href="javascript:;" alt="" onclick="window.open('/order/additionPop1.asp?param=0','','width=490,height=600')">
-													<area shape="rect" coords="649,111,668,131" href="javascript:;" alt="" onclick="window.open('/order/additionPop1.asp?param=0','','width=490,height=600')"></map>
-												<map name="addition2">
-													<area shape="rect" coords="666,112,715,131" href="#none" onclick="window.open('http://www.halfclub.com/Events/Popup/HanaPop.html','','width=490,height=600');return false;" target="_blank" alt=""></map>
-												<map name="addition3">
-													<area shape="rect" coords="666,129,715,148" href="http://www.halfclub.com/Events/Popup/HanaPop.html" onclick="window.open('http://www.halfclub.com/Events/Popup/HanaPop.html','','width=490,height=600');return false;" target="_blank" alt=""></map>
-												<map name="addition4">
-													<area shape="rect" coords="34,15,193,35" href="javascript:;" alt="" onclick="window.open('/order/additionPop2.asp?param=2','','width=490,height=525')"></map>
-												<map name="addition6">
-													<area shape="rect" coords="135,15,293,35" href="http://www.paynow.co.kr/main" alt="" target="_blank"></map>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-
-							</td>
-						</tr>
-						<tr height="30">
-							<td></td>
-						</tr>
-						<tr>
-							<td>
-								<div class="clauseArea">
-									<div class="clauseTitle">订单同意</div>
-									<div class="clauseOderTxt">
-										订购的商品的商品名称、商品价格、配送信息确认，同意购买吗？
-										<br>（电子商务法第八条第2项）</div>
-									<div class="clauseAgreeCheck">
-										<input type="checkbox" name="caluseAgreeCheck" id="OtherAgree" style="margin-top:2px">
-										&nbsp;
-										<label for="OtherAgree">
-											<span style="font-weight:normal">同意.</span>
-										</label>
-										&nbsp;
-									</div>
-									<div class="clearBoth"></div>
-								</div>
-
-							</td>
-						</tr>
-						<tr>
-							<td style="text-align:center">
-								<span style="display:inline-block;width:82px;height:34px;line-height:34px;text-align:center;border:1px solid #ccc;color:#444">上一步</span>
-								<span style="display:inline-block;width:82px;height:34px;line-height:34px;text-align:center;border:1px solid #ccc;color:#6A9299;background-color:#CFDEE0;">结算</span>
-							</td>
-						</tr>
-						<tr height="30">
-							<td></td>
-						</tr>
-					</tbody>
-				</table>
-			</td>
-		</tr>
-	</tbody>
-</table>
-<table cellpadding="0" cellspacing="0" style="margin:0 auto">
-	<tbody>
-		<tr>
-			<td>
-				<div class="brpEvent-1100auto">
-					<div class="leftBody">
-
-						<a href="#" target="_blank">
-							<img src="/public/images/img/Tricycle201604041929338146.jpg" alt=""></a>
-
-						<a href="#" target="_self">
-							<img src="/public/images/img/Tricycle201604041395263677.jpg" alt=""></a>
-
-						<a href="#" target="_blank">
-							<img src="/public/images/img/Tricycle201604111357065009.jpg" alt=""></a>
-
-						<a href="#" target="_self" class="longBanner">
-							<img src="/public/images/img/Tricycle201509251738263318.jpg" alt=""></a>
-
-					</div>
-					<div class="rightBody">
-						<ul>
-
-							<li>
-								<a href="#" target="_blank">
-									<img src="/public/images/img/Tricycle20140721914339448.jpg" alt="item.TitleSub"></a>
-							</li>
-
-							<li>
-								<a href="#" target="_blank">
-									<img src="/public/images/img/Tricycle2015090794209797.jpg" alt="item.TitleSub"></a>
-							</li>
-
-							<li>
-								<a href="#" target="_blank">
-									<img src="/public/images/img/Tricycle20140630881253405.jpg" alt="item.TitleSub"></a>
-							</li>
-
-						</ul>
-						<div class="hotEvt">
-							<a href="#" target="_blank">
-								<img src="/public/images/img/hotEvtTitle.jpg" alt=""></a>
-							<ul class="hotEvt">
-
-								<li style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 145px;">
-									<a href="#" target="_blank">无限的爱会邀请&lt;再见李子&gt;</a>
-								</li>
-
-								<li style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 145px;">
-									<a href="#" target="_blank">电影《魔术》首映式活动刷</a>
-								</li>
-
-								<li style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 145px;">
-									<a href="#" target="_blank">我们立即支付或折扣</a>
-								</li>
-
-								<li style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 145px;">
-									<a href="#" target="_blank">大麦8周年无限的爱：无限感激的礼物用转盘</a>
-								</li>
-
-								<li style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 145px;">
-									<a href="#" target="_blank">大麦8周年：无限的爱应用程序第一次启动加油！</a>
-								</li>
-
-							</ul>
-						</div>
-					</div>
-					<div style="height: 1px; font-size: 1px; line-height: 1px; clear: both;"></div>
-				</div>
-
-			</td>
-		</tr>
-
-		<tr height="16px">
-			<td></td>
-		</tr>
-		<tr height="16px">
-			<td></td>
-		</tr>
-	</tbody>
-</table>
+<div class="container">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10 cart_box">
+        <div class="main_tit">  
+            确认订单信息 
+            <span style="float: right"><a href="account.html">返回</a></span> 
+        </div>
+        <form id="payForm" method="post" target="_blank" url="/retailer/fee/pay">
+        #{authenticityToken/}
+            <h3 class="bar_tit">1、收货信息</h3>
+            <div class="line20"></div>
+            <div class="order-addresslist">
+                <div class="order-address">
+                    <div class="icon-add">
+                    </div>
+                    <p class="new-tit new-p-re">
+                        <span class="new-txt">小叮当</span>
+                        <span class="new-txt-rd2">159****1622</span>
+                    </p>
+                    <div class="new-mu_l2a new-p-re">
+                        <p class="new-mu_l2cw">
+                            <span class="title">收货地址：</span>
+                            <span class="province">湖北</span>省
+                            <span class="city">武汉</span>市
+                            <span class="dist">洪山</span>区
+                            <span class="street">雄楚大道666号(中南财经政法大学)</span>
+                        </p>
+                    </div>
+                </div>
+                <a class="otherAdd">使用其他地址</a>
+            </div>
+            <div class="clearfix"></div>
+            <h3 class="bar_tit">2、支付方式</h3>
+            <div class="line20"></div>
+            <ul class="item_box">
+                <li>支付宝</li>
+            </ul>
+            <h3 class="bar_tit">3、物流方式</h3>
+            <div class="line20"></div>
+            <ul class="item_box">
+                <li>
+                    <label>
+                        <input name="express_id" type="radio" onclick="FreightAmountTotal(this);" value="1">
+                        <input name="express_price" type="hidden" value="20.00">拼箱
+                        <span>费用：20.00元</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input name="express_id" type="radio" onclick="FreightAmountTotal(this);" value="2" datatype="*" sucmsg=" ">
+                        <input name="express_price" type="hidden" value="14.00">postnl
+                        <span>费用：14.00元</span><span class="Validform_checktip"></span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input name="express_id" type="radio" onclick="FreightAmountTotal(this);" value="2" datatype="*" sucmsg=" ">
+                        <input name="express_price" type="hidden" value="14.00">阳关清关
+                        <span>费用：34.00元</span><span class="Validform_checktip"></span>
+                    </label>
+                </li>
+            </ul>
+            <h3 class="bar_tit">4、商品清单</h3>
+            <div class="line20"></div>
+            <table border="0" align="center" cellpadding="8" cellspacing="0" class="cart_table">
+                <thead>
+                    <tr>
+                        <th width="64"></th>
+                        <th align="left">商品名称</th>
+                        <th width="110" align="center">分类</th>
+                        <th width="80" align="center">尺寸</th>
+                        <th width="80" align="center">单价</th>
+                        <th width="80" align="center">数量</th>
+                        <th width="80" align="center">优惠</th>
+                        <th width="100" align="center">金额小计</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <a target="_blank" href="single.html"><img src="images/03.jpg" class="img"></a>
+                        </td>
+                        <td><a target="_blank" href="single.html">FORMILA plus 福美乐出生段奶粉Pre段</a></td>
+                        <td align="center">
+                            <input name="goods_color" type="hidden" value="">
+                        </td>
+                        <td align="center">
+                            + 10
+                        </td>
+                        <td align="center">￥5500.00
+                            <input name="goods_price" type="hidden" value="5500.00">
+                        </td>
+                        <td align="center">1</td>
+                        <td align="center">￥
+                            <label name="discount_amount">5500</label>
+                        </td>
+                        <td align="center">
+                            <font color="#FF0000" size="2">￥
+                                <label name="real_amount">5500</label>
+                            </font>
+                        </td>
+                        <td>
+                            <input id="car_id" name="car_id" type="hidden" value="63">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3 class="bar_tit">5、结算信息</h3>
+            <div class="line20"></div>
+            <div>
+                <div class="left">
+                    <h5>订单留言<span>字数控制在100个字符内</span></h5>
+                    <textarea name="message" class="input" style="width:100%;height:70px;"></textarea>
+                </div>
+                <div class="right" style="text-align:right;line-height:40px;">
+                    商品件数：
+                    <font color="#FF0000">1</font> 件 总积分：
+                    <font color="#FF0000">10</font> 分 商品金额：
+                    <font color="#FF0000">￥
+                        <label id="goods_amount">5500</label>
+                    </font> + 运费：
+                    <font color="#FF0000">￥
+                        <label id="express_fee">0.00</label>
+                    </font> + 支付手续费：
+                    <font color="#FF0000">￥
+                        <label id="payment_fee">0.00</label>
+                    </font>
+                    <br>
+                    <b class="font18">应付总金额：<font color="#FF0000">￥<label id="order_amount">5500</label></font></b>
+                </div>
+            </div>
+            <div class="line20"></div>
+            <div class="right">
+            <a id="btnSubmit" class="btn btn-success marL10">确认提交</a>
+            </div>
+            <div class="clear"></div>
+        </form>
+    </div>
+</div>
+#{set 'moreScripts'}
+<script src="@{'/public/javascripts/libs/mustache.min.js'}" type="text/javascript"></script>
+<script src="@{'/public/javascripts/bizComponents/stepTwo.js'}" type="text/javascript"></script>
+#{/set}

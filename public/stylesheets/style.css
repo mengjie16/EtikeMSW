@@ -1004,10 +1004,10 @@ a.forgot {
     }
     .main_tit span a,.cart_box .right a.btn{
         
-        color:#52d0c4;
+        /*color:#52d0c4;*/
     }
     .main_tit span a:hover,.cart_box .right a.btn:hover{
-        color: #52d0c4;
+        /*color: #52d0c4;*/
         cursor:pointer;
         text-decoration: none;
     }
