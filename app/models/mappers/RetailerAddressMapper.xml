@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="models.mappers.AddressMapper">
-	<resultMap id="BaseResultMap" type="models.Address"></resultMap>
-	<insert id="insert" parameterType="models.Address">
+<mapper namespace="models.mappers.RetailerAddressMapper">
+	<resultMap id="BaseResultMap" type="models.RetailerAddress"></resultMap>
+	<insert id="insert" parameterType="models.RetailerAddress">
 		<selectKey resultType="java.lang.Short" order="AFTER" keyProperty="id">
 			SELECT LAST_INSERT_ID() AS id
 		</selectKey>
-		insert into address
+		insert into retailer_address
 		<trim prefix="(" suffix=")" suffixOverrides=",">
+			retailer_id,
 			name,
 			phone,
 			country,
@@ -21,6 +22,7 @@
 			update_time,
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{retailerId},
 			#{name},
 			#{phone},
 			#{country},
@@ -34,8 +36,8 @@
 			#{updateTime}
 		</trim>
 	</insert>
-	<update id="updateById" parameterType="models.Address">
-		update address
+	<update id="updateById" parameterType="models.RetailerAddress">
+		update retailer_address
 		<set>
 			<if test="name !=null and name !=''">
 				name = #{name},
@@ -67,7 +69,7 @@
 		where id = #{id}
 	</update>
 	<update id="updateByVo" parameterType="vos.AddressVo">
-		update address
+		update retailer_address
 		<set>
 			<if test="name !=null and name!=''">
 				name = #{name},
@@ -101,7 +103,7 @@
 		where id = #{id}
 	</update>
 	<select id="selectListByPage" resultMap="BaseResultMap">
-		select * from address s
+		select * from retailer_address s
 		<include refid="where" />
 		order by s.create_time desc
 		limit #{startIndex},

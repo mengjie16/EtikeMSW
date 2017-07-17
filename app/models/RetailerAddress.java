@@ -1,6 +1,7 @@
 package models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Transient;
 import javax.validation.Valid;
@@ -14,8 +15,9 @@ import com.aton.vo.Page;
 
 import enums.constants.RegexConstants;
 import models.Supplier.ProvinceCheck;
-import models.mappers.AddressMapper;
+import models.mappers.RetailerAddressMapper;
 import models.mappers.SupplierMapper;
+import models.mappers.SupplierSendLocationTempMapper;
 import play.data.validation.CheckWith;
 import play.data.validation.Match;
 import play.data.validation.MinSize;
@@ -24,39 +26,34 @@ import vos.AddressSearchVo;
 import vos.AddressVo;
 
 
-public class Address implements java.io.Serializable {
+public class RetailerAddress extends Location {
     
     
     @Transient
-    public static final String TABLE_NAME = "address";
+    public static final String TABLE_NAME = "retailer_address";
 
     
-    public int id;
+    public long id;
     /** 名称 */
     public String name;
     
     @Match(RegexConstants.PHONE)
     public String phone;    
     
-    @Required
-    @MinSize(1)
-    /** 国家 */
-    public String country;
-    /** 国家的地区id */
-    public int countryId;
-    /** 省 */
-    @CheckWith(value = ProvinceCheck.class, message = "省份需填写")
-    public String province;
-    /** 省的地区id */
-    public int provinceId;
+    public int retailerId;
     
-    /** 城市 */
-    public String city;
-    /** 区域 */
-    public String region;
-    /** 具体地址 */
-    public String address;
     
+    public int getRetailerId() {
+        return retailerId;
+    }
+
+
+    
+    public void setRetailerId(int retailerId) {
+        this.retailerId = retailerId;
+    }
+
+
     public Date createTime;
     public Date updateTime;
     
@@ -66,8 +63,8 @@ public class Address implements java.io.Serializable {
         }
         SqlSession ss = SessionFactory.getSqlSession();
         try {
-            AddressMapper mapper = ss.getMapper(AddressMapper.class);
-            Address address = findById(vo.id);
+            RetailerAddressMapper mapper = ss.getMapper(RetailerAddressMapper.class);
+            RetailerAddress address = findById(vo.id);
             if (address == null) {
                 return false;
             }
@@ -81,23 +78,23 @@ public class Address implements java.io.Serializable {
     }
 
 
-    private static Address findById(int id) {
+    private static RetailerAddress findById(int id) {
         SqlSession ss = SessionFactory.getSqlSession();
         try {
-            AddressMapper mapper = ss.getMapper(AddressMapper.class);
-            Address address = mapper.selectById(id);
+            RetailerAddressMapper mapper = ss.getMapper(RetailerAddressMapper.class);
+            RetailerAddress address = mapper.selectById(id);
             return address;
         } finally {
             ss.close();
         }
     }
     
-    public static Page<Address> findPageByVo(AddressSearchVo vo) {
+    public static Page<RetailerAddress> findPageByVo(AddressSearchVo vo) {
         SqlSession ss = SessionFactory.getSqlSession();
         try {
-            AddressMapper mapper = ss.getMapper(AddressMapper.class);
+            RetailerAddressMapper mapper = ss.getMapper(RetailerAddressMapper.class);
             int totalCount = mapper.countTotalVo(vo);
-            Page<Address> page = Page.newInstance(vo.pageNo, vo.pageSize, totalCount);
+            Page<RetailerAddress> page = Page.newInstance(vo.pageNo, vo.pageSize, totalCount);
             if (totalCount > 0) {
                 page.items = mapper.selectListByPage(vo);
             }
@@ -111,7 +108,7 @@ public class Address implements java.io.Serializable {
     public  boolean save() {
         SqlSession ss = SessionFactory.getSqlSession();
         try {
-            AddressMapper mapper = ss.getMapper(AddressMapper.class);
+            RetailerAddressMapper mapper = ss.getMapper(RetailerAddressMapper.class);
             if (this.id > 0) {
                 mapper.updateById(this);
             } else {
@@ -129,10 +126,10 @@ public class Address implements java.io.Serializable {
     }
 
 
-    public static boolean save(Address address) {
+    public static boolean save(RetailerAddress address) {
         SqlSession ss = SessionFactory.getSqlSession();
         try {
-            AddressMapper mapper = ss.getMapper(AddressMapper.class);
+            RetailerAddressMapper mapper = ss.getMapper(RetailerAddressMapper.class);
             if (address.id > 0) {
                 mapper.updateById(address);
             } else {
@@ -141,12 +138,21 @@ public class Address implements java.io.Serializable {
                 address.updateTime = dtNow.toDate();
                 mapper.insert(address);
             }
-        } catch (Exception ex) {
-            return false;
-        } finally {
+        }  finally {
             ss.close();
         }
         return true;
+    }
+
+
+    public static List<RetailerAddress> findListByRetailerId(int retailerId) {
+        SqlSession ss = SessionFactory.getSqlSession();
+        try {
+            RetailerAddressMapper mapper = ss.getMapper(RetailerAddressMapper.class);
+            return mapper.selectList(retailerId);
+        } finally {
+            ss.close();
+        }
     }
     
     

@@ -32,13 +32,15 @@ import controllers.base.secure.Secure;
 import enums.AliPayTradeStatus;
 import enums.TradeStatus;
 import enums.constants.CacheType;
-import models.Address;
+import models.RetailerAddress;
 import models.AliPayTrade;
 import models.Order;
 import models.Retailer;
 import models.Supplier;
+import models.SupplierSendLocationTemp;
 import models.Trade;
 import models.User;
+import models.mappers.RetailerAddressMapper;
 import play.data.binding.As;
 import play.data.validation.Min;
 import play.data.validation.MinSize;
@@ -181,7 +183,7 @@ public class RetailerController extends BaseController {
     
     @UserLogonSupport(value = "RETAILER")
     public static void addressList(AddressVo vo) {
-        if (Address.updateByVo(vo)) {
+        if (RetailerAddress.updateByVo(vo)) {
             renderSuccessJson();
         }
         renderFailedJson(ReturnCode.FAIL);
@@ -195,9 +197,24 @@ public class RetailerController extends BaseController {
      * @created 2016年7月13日 上午2:02:31
      */
     @UserLogonSupport(value = "RETAILER")
-    public static void addressSave(@Required @Valid Address address) {
+    public static void addressSave(@Required @Valid RetailerAddress address) {
         handleWrongInput(true);
-        boolean ret = Address.save(address);
+        
+        User user = renderArgs.get(Secure.FIELD_USER, User.class);
+        // 检查模板地址是否重复
+        List<RetailerAddress> lsst = RetailerAddress.findListByRetailerId(user.userId);
+        String currentBaseStr = address.toBaseLocationStr();
+        if (MixHelper.isNotEmpty(lsst)) {
+            for (RetailerAddress sst : lsst) {
+                if (Objects.equal(sst.toBaseLocationStr(), currentBaseStr)) {
+                    renderFailedJson(ReturnCode.BIZ_LIMIT);
+                    break;
+                }
+            }
+        }
+        address.retailerId = user.userId;
+              
+        boolean ret = RetailerAddress.save(address);
         if (ret) {
             renderSuccessJson();
         }
