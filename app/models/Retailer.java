@@ -56,7 +56,6 @@ public class Retailer implements java.io.Serializable {
     public Date createTime;
     public Date updateTime;
     
-    public List<RetailerAddress> address = new ArrayList<RetailerAddress>();
 
     /**
      * 查找零售商信息by ID
