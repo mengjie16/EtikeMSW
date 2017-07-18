@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,6 +18,7 @@ import controllers.base.secure.Secure;
 import enums.constants.CacheType;
 import enums.constants.ErrorCode;
 import enums.constants.RegexConstants;
+import models.RetailerAddress;
 import models.User;
 import play.data.validation.Email;
 import play.data.validation.Match;
@@ -25,6 +28,7 @@ import play.data.validation.Required;
 import play.data.validation.URL;
 import play.mvc.With;
 import utils.SmsUtil;
+import vos.ItemVo;
 
 /**
  * 
@@ -179,7 +183,23 @@ public class UserCenter extends BaseController {
      * @created 2015-4-9 下午3:22:12
      */
     @UserLogonSupport
-    public static void stepTwo() {
+    public static void stepTwo(@Required List<ItemVo> itemVos) {
+        //1、收货信息
+        User user = renderArgs.get(Secure.FIELD_USER, User.class);
+        RetailerAddress retailerAddress = RetailerAddress.findByDefaultAddress((int)user.id);
+        
+            
+        //2、支付方式
+            
+        //3、物流方式
+            
+        //4、商品清单
+        //        List<ItemVo>
+            
+        
+        //5、结算信息
+        
+        renderArgs.put("retailerAddress", retailerAddress);
         render();
     }
 
