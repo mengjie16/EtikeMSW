@@ -169,11 +169,11 @@ public class RetailerAddress extends Location {
         }
     }
     
-    public static boolean updateDefaultAddress(long id) {
+    public static boolean updateDefaultAddress(int retailerId, long  id ) {
         SqlSession ss = SessionFactory.getSqlSession();
         try {
             RetailerAddressMapper mapper = ss.getMapper(RetailerAddressMapper.class);
-             mapper.setDefaultAddress(id);
+             mapper.setDefaultAddress(retailerId,id);
         } finally {
             ss.close();
         }

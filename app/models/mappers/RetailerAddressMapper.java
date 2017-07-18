@@ -40,8 +40,8 @@ public interface RetailerAddressMapper {
     @Select("select * from " + RetailerAddress.TABLE_NAME + "  where retailer_id=#{retailerId} order by create_time desc")
     public List<RetailerAddress> selectList(@Param("retailerId") int retailerId);
     
-    @Update("update " +  RetailerAddress.TABLE_NAME + "  set default_address = case when  id !=#{id} then 0 when id= #{id}  then 1 end")
-    public void setDefaultAddress(@Param("id") long id);
+    @Update("update " +  RetailerAddress.TABLE_NAME + "  set default_address = case when  id !=#{id} then 0 when id= #{id}  then 1 end where  retailer_id=#{retailerId} ")
+    public void setDefaultAddress(@Param("retailerId") int retailerId, @Param("id") long id);
    
     @Select("select * from " + RetailerAddress.TABLE_NAME + " where default_address=1 and retailer_id=#{retailerId}")
     RetailerAddress selectByDefaultAddress(@Param("retailerId") int retailerId);
