@@ -37,10 +37,14 @@ public interface RetailerAddressMapper {
 
     List<RetailerAddress> selectListByPage(AddressSearchVo vo);
     
-    
     @Select("select * from " + RetailerAddress.TABLE_NAME + "  where retailer_id=#{retailerId} order by create_time desc")
     public List<RetailerAddress> selectList(@Param("retailerId") int retailerId);
     
     @Update("update " +  RetailerAddress.TABLE_NAME + "  set default_address = case when  id !=#{id} then 0 when id= #{id}  then 1 end")
     public void setDefaultAddress(@Param("id") long id);
+   
+    @Select("select * from " + RetailerAddress.TABLE_NAME + " where default_address=1")
+    RetailerAddress selectByDefaultAddress( );
+    
+    
 }
