@@ -10,7 +10,7 @@
             确认订单信息 
             <span style="float: right"><a href="account.html">返回</a></span> 
         </div>
-        <form id="payForm" method="post" target="_blank" url="/retailer/fee/pay">
+        <form id="payForm" method="post" target="_blank" action="/retailer/fee/pay">
         #{authenticityToken/}
             <h3 class="bar_tit">1、收货信息</h3>
             <div class="line20"></div>
@@ -132,7 +132,7 @@
                     </font>
                     <br>
                     <b class="font18">应付总金额：<font color="#FF0000">￥<label id="order_amount">5500</label></font></b>
-                    <input id="txtFee" type="hidden" name="fee"/>
+                    <input id="txtFee" type="hidden" name="fee" value="0.1"/>
                 </div>
             </div>
             <div class="line20"></div>
