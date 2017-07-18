@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="models.mappers.FavoriteMapper">
+	
+	<insert id="insert" parameterType="models.Favorite">
+		<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into item
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			title,
+			retailer_id,
+			item_id,
+			retail_price,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{title},
+			#{retailerId},
+			#{itemId},
+			#{retailPrice},
+			#{title}
+		</trim>
+	</insert>
+	
+</mapper>

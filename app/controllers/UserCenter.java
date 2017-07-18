@@ -2,6 +2,8 @@ package controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +20,7 @@ import controllers.base.secure.Secure;
 import enums.constants.CacheType;
 import enums.constants.ErrorCode;
 import enums.constants.RegexConstants;
+import models.Favorite;
 import models.RetailerAddress;
 import models.User;
 import play.data.validation.Email;
@@ -115,7 +118,21 @@ public class UserCenter extends BaseController {
      */
     @UploadSupport
     public static void storeList() {
+        User user = renderArgs.get(Secure.FIELD_USER, User.class);
+        List<Favorite> res = Favorite.findList(user.id);
+        renderArgs.put("favoriteList", res);
         render();
+    }
+    
+    public static void setFavorite(@Required @Valid Favorite favorite){
+        handleWrongInput(true);
+        
+        User user = renderArgs.get(Secure.FIELD_USER, User.class);
+        favorite.retailerId = (int) user.id; 
+        if ( Favorite.save(favorite)) {
+            renderSuccessJson();
+        }
+        renderFailedJson(ReturnCode.FAIL, "收藏失败");
     }
 
     /**

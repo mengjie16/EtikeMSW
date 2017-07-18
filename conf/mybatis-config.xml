@@ -35,5 +35,6 @@
 		<mapper class="models.mappers.TradeMapper" />
 		<mapper class="models.mappers.OrderMapper" />
 		<mapper class="models.mappers.RetailerAddressMapper"/>
+		<mapper class="models.mappers.FavoriteMapper"/>
 	</mappers>
 </configuration>
