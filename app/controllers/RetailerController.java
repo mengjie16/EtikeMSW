@@ -171,11 +171,13 @@ public class RetailerController extends BaseController {
             }
             
             if(exist == false){
+                itemVo.id = itemId;
                 cartItems.add(itemVo);
             }
         }
         else{
             cartItems = Lists.newArrayList();
+            itemVo.id = itemId;
             cartItems.add(itemVo);
         }
         CacheUtils.set(key, cartItems, CacheType.RETAILER_CART_INFO.expiredTime);
