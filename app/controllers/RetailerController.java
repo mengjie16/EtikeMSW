@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -147,26 +148,29 @@ public class RetailerController extends BaseController {
     }
     
     @UserLogonSupport(value = "RETAILER")
-    public static void cartAdd(@Required @Min(1) long itemId, @Required ItemVo vo) {
+    public static void cartAdd(@Required @Min(1) long itemId, @Required @Valid ItemVo itemVo) {
+        handleWrongInput(true);
+        
         // 用户信息获取
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
         String key = CacheType.RETAILER_CART_INFO.getKey(user.phone);
-        List<ItemVo> cartItems = (List<ItemVo>) CacheUtils.get(key);
-        if (MixHelper.isEmpty(cartItems)) {
-            renderFailedJson(ReturnCode.FAIL);
-        }
+        
         // 添加购物车
-        Iterator<ItemVo> iterator = cartItems.iterator();
-        boolean newItem = false;
-        while (iterator.hasNext()) {
-            ItemVo iv = iterator.next();
-            if (iv.id == itemId) {
-                    iv.cartCount ++;
-                    newItem = true;
+        List<ItemVo> cartItems = (List<ItemVo>) CacheUtils.get(key);
+        if ( !MixHelper.isEmpty(cartItems)) {
+           
+            Iterator<ItemVo> iterator = cartItems.iterator();
+            while (iterator.hasNext()) {
+                ItemVo iv = iterator.next();
+                if (iv.id == itemId) {
+                        iv.cartCount ++;
+                        break;
+                }
             }
         }
-        if(newItem == false){
-            cartItems.add(vo);
+        else{
+            cartItems = new ArrayList<ItemVo>();
+            cartItems.add(itemVo);
         }
         CacheUtils.set(key, cartItems, CacheType.RETAILER_CART_INFO.expiredTime);
         
