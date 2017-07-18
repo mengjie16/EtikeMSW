@@ -134,6 +134,16 @@ public class UserCenter extends BaseController {
         }
         renderFailedJson(ReturnCode.FAIL, "收藏失败");
     }
+    
+    public static void deleteFavorite(@Required @Valid long retailerId){
+        handleWrongInput(true);
+        
+        User user = renderArgs.get(Secure.FIELD_USER, User.class);
+        if ( Favorite.delete(user.id, retailerId)) {
+            renderSuccessJson();
+        }
+        renderFailedJson(ReturnCode.FAIL, "取消收藏失败");
+    }
 
     /**
      * 
