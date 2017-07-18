@@ -71,6 +71,35 @@ function initBase(){
 			$('.alertCart').show();
 		}
 	});
+
+    //添加购物车
+
+    $(document).on('click', '.item_add', function() {
+       var itemId = $('#single .container').attr('mid');
+       var itemVo ={
+        ItemSku:{}
+       };
+       /*var $isCheck = $(element).find('li.active').eq(0);
+            if($isCheck.prop('checked')==true){
+                ids.push($(element).attr('mid'));
+            }*/
+        /*itemVo.ItemSku.color=
+        itemVo.picUrl=*/
+        itemVo.cartCount=1;
+        itemVo.cartPrice=180;
+        itemVo.title="sasa"
+        Tr.post('/retailer/cart/add', {
+            "itemId": itemId,
+            "vo":itemVo
+        }, function(data) {
+            if (data.code != 200) {
+                alert('下架失败');
+                return;
+            }
+            alert('下架成功');
+           
+        });
+    });
 	
 	
 }
