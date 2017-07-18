@@ -33,7 +33,7 @@
                     <ul class="slides">
                     	#{list items:item.skus,as:'sku'}
                         <li data-thumb="${sku.img}">
-                            <div class="thumb-image"> <img src="${sku.img}" data-imagezoom="true" class="img-responsive"> </div>
+                            <div class="picUrl thumb-image"> <img src="${sku.img}" data-imagezoom="true" class="img-responsive"> </div>
                         </li>
                       #{/list} 
                     </ul>
@@ -41,19 +41,19 @@
             </div>
             <div class="col-md-8 single-top-in">
                 <div class="single-para simpleCart_shelfItem">
-                    <h1><span style="color:#52D0C4;font-size:18px">
+                    <h1><span style="color:#52D0C4;font-size:18px" id="detailBrand">
 							${item?.brand?.getMainSubName()?'['+item?.brand?.getMainSubName()+']':''}
 						</span>
-						${item?.title}</h1>
-                    <div class="productPrice">¥${item?.retailPrice/100}
-                        <span class="price-e">${item?.cny2eur}€</span>
+						<span id="detailTitle">${item?.title}</span></h1>
+                    <div  class="productPrice"><span id="detailRmb">¥${item?.retailPrice/100}</span>
+                        <span id="detailEur" class="price-e">€${item?.cny2eur}</span>
                     </div>
                     <div class="tag">
                         <h3 class="cate">分类:</h3>
                         <div class="tags">
                             <ul>
                             	#{list items:item.skus,as:'sku'}
-                                <li><a href="#">${sku.color}</a></li>
+                                <li class="skuColor"><a href="javascript:void(0)">${sku.color}</a></li>
                               #{/list} 
                             </ul>
                         </div>
@@ -61,8 +61,8 @@
                     <div class="numberBlock">
                         <span class="transPrice">数量:</span>
                         <div class="detail-amount-wrapper ">
-                            <div class="detail-amount "><a href="#" class="J_Minus minus no-minus">-</a>
-                                <input type="text" value="1" class="text text-amount J_ItemAmount" data-max="50" data-now="2" autocomplete="off"><a href="#" class="J_Plus plus">+</a></div>
+                            <div class="detail-amount "><a href="javascript:void(0)" class="J_Minus minus no-minus">-</a>
+                                <input type="text" name="cartAccount" value="1" class="text text-amount J_ItemAmount" data-max="50" data-now="2" autocomplete="off"><a href="javascript:void(0)" class="J_Plus plus">+</a></div>
                             <div class="amount-msg J_AmountMsg"></div>
                         </div>
                         %{

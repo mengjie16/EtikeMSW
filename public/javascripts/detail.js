@@ -1,5 +1,5 @@
 CDT = {
-	provinceCache: {}
+    provinceCache: {}
 };
 var able = 0;
 $(window).load(function() {
@@ -7,10 +7,11 @@ $(window).load(function() {
         animation: "slide",
         controlNav: "thumbnails"
     });
-	});
-function initBase(){
-	$(".memenu").memenu();
-	$('.popup-with-zoom-anim').magnificPopup({
+});
+
+function initBase() {
+    $(".memenu").memenu();
+    $('.popup-with-zoom-anim').magnificPopup({
         type: 'inline',
         fixedContentPos: false,
         fixedBgPos: true,
@@ -21,10 +22,10 @@ function initBase(){
         removalDelay: 300,
         mainClass: 'my-mfp-zoom-in'
     });
-		$('.tags a').on('click',function() {
-				$('.tags a').removeClass('active');
-				$(this).addClass('active');
-		})
+    $('.tags a').on('click', function() {
+        $('.tags a').removeClass('active');
+        $(this).addClass('active');
+    })
     $('.J_Minus').on('click', function(e) {
         $(this).next().next().removeClass('no-plus');
         if ($(this).next()[0].value > 1) {
@@ -49,64 +50,62 @@ function initBase(){
             $(this).addClass('no-plus');
         }
     });
-	//收藏
-	$(document).on('click','.b-cartIn',function(){
-		$(this).find('span').text('已收藏');
-		$(this).find('i').html('&#xe619;');
-	});
-	
-	//加入购物车弹出弹框
-	$(document).on('click','.b-buyNow',function(){
-		if(able==0){
-			var num = 0;
-			$('.qnty').each(function(){ 
-		    if($(this).val() !=''){ 
-		     num += parseInt($(this).val()); 
-		    } 
-		  }); 
-		  if(!num){
-		  	alert('请选择商品！');
-		  	return;
-		  }
-			$('.alertCart').show();
-		}
-	});
+    //收藏
+    $(document).on('click', '.b-cartIn', function() {
+        $(this).find('span').text('已收藏');
+        $(this).find('i').html('&#xe619;');
+    });
+
+    //加入购物车弹出弹框
+    $(document).on('click', '.b-buyNow', function() {
+        if (able == 0) {
+            var num = 0;
+            $('.qnty').each(function() {
+                if ($(this).val() != '') {
+                    num += parseInt($(this).val());
+                }
+            });
+            if (!num) {
+                alert('请选择商品！');
+                return;
+            }
+            $('.alertCart').show();
+        }
+    });
 
     //添加购物车
 
     $(document).on('click', '.item_add', function() {
-       var itemId = $('#single .container').attr('mid');
-       var itemVo ={
-        ItemSku:{}
-       };
-       /*var $isCheck = $(element).find('li.active').eq(0);
-            if($isCheck.prop('checked')==true){
-                ids.push($(element).attr('mid'));
-            }*/
-        /*itemVo.ItemSku.color=
-        itemVo.picUrl=*/
-        
-
-        var obj = {
-        	"itemId": itemId,
-        	"itemVo.cartCount":1,
-	        "itemVo.cartPrice":180,
-	        "itemVo.title":"sasa"
+        var itemId = $('#single .container').attr('mid');
+        var $getColor = $('#single .container').find('li.skuColor a.active').eq(0);
+        var cnt =$('#single .container input[name="cartAccount"]').val();
+        var totalPriceRMB = parseInt($('#single .container #detailRmb').text().substring(1))*cnt;
+        var totalPriceEUR = parseInt($('#single .container #detailEur').text().substring(1))*cnt;
+        var params = {
+            "itemId": itemId,
+            "itemVo.sku.color":$getColor.text(),
+            "itemVo.picUrl" : $('#single .container').find('div.picUrl img').eq(0).attr('src'),
+            "itemVo.cartCount" : $('#single .container input[name="cartAccount"]').val(),
+            "itemVo.retailPrice" : parseInt($('#single .container #detailRmb').text().substring(1)),
+            "itemVo.cny2eur":parseInt($('#single .container #detailEur').text().substring(1)),
+            "itemVo.cartPrice" : totalPriceRMB,
+            "itemVo.title" : $('#single .container #detailTitle').text(),
+            "itemVo.brand.name" : $('#single .container #detailBrand').text()
         };
+        Tr.post('/retailer/cart/add', params, function(data) {
 
-        Tr.post('/retailer/cart/add', obj, function(data) {
             if (data.code != 200) {
-                alert('下架失败');
+                alert('加入购物车失败');
                 return;
             }
-            alert('下架成功');
-           
+            alert('加入成功');
+
         });
     });
-	
-	
+
+
 }
 
 $(function() {
-	initBase();
+    initBase();
 });
