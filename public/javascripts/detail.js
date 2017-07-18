@@ -85,13 +85,16 @@ function initBase(){
             }*/
         /*itemVo.ItemSku.color=
         itemVo.picUrl=*/
-        itemVo.cartCount=1;
-        itemVo.cartPrice=180;
-        itemVo.title="sasa"
-        Tr.post('/retailer/cart/add', {
-            "itemId": itemId,
-            "vo":itemVo
-        }, function(data) {
+        
+
+        var obj = {
+        	"itemId": itemId,
+        	"itemVo.cartCount":1,
+	        "itemVo.cartPrice":180,
+	        "itemVo.title":"sasa"
+        };
+
+        Tr.post('/retailer/cart/add', obj, function(data) {
             if (data.code != 200) {
                 alert('下架失败');
                 return;
