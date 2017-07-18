@@ -158,5 +158,27 @@ public class RetailerAddress extends Location {
         return true;
     }
     
+    public static RetailerAddress findByDefaultAddress(int retailerId) {
+        SqlSession ss = SessionFactory.getSqlSession();
+        try {
+            RetailerAddressMapper mapper = ss.getMapper(RetailerAddressMapper.class);
+            RetailerAddress address = mapper.selectByDefaultAddress(retailerId);
+            return address;
+        } finally {
+            ss.close();
+        }
+    }
+    
+    public static boolean updateDefaultAddress(long id) {
+        SqlSession ss = SessionFactory.getSqlSession();
+        try {
+            RetailerAddressMapper mapper = ss.getMapper(RetailerAddressMapper.class);
+             mapper.setDefaultAddress(id);
+        } finally {
+            ss.close();
+        }
+        return true;
+    }
+    
 
 }

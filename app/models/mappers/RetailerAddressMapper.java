@@ -43,8 +43,8 @@ public interface RetailerAddressMapper {
     @Update("update " +  RetailerAddress.TABLE_NAME + "  set default_address = case when  id !=#{id} then 0 when id= #{id}  then 1 end")
     public void setDefaultAddress(@Param("id") long id);
    
-    @Select("select * from " + RetailerAddress.TABLE_NAME + " where default_address=1")
-    RetailerAddress selectByDefaultAddress( );
+    @Select("select * from " + RetailerAddress.TABLE_NAME + " where default_address=1 and retailer_id=#{retailerId}")
+    RetailerAddress selectByDefaultAddress(@Param("retailerId") int retailerId);
     
     
 }

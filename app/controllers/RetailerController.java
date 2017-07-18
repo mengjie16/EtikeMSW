@@ -240,13 +240,6 @@ public class RetailerController extends BaseController {
         render();
     }
     
-    /**
-     * 地址管理页面
-     *
-     * @since v1.0
-     * @author Calm
-     * @created 2016年7月13日 上午2:02:31
-     */
     @UserLogonSupport(value = "RETAILER")
     public static void addressSave(@Required @Valid RetailerAddress address) {
         handleWrongInput(true);
@@ -298,6 +291,18 @@ public class RetailerController extends BaseController {
         }
         renderFailedJson(ReturnCode.FAIL, "该地址不存在");
     }
+
+    @UserLogonSupport(value = "RETAILER")
+    public static void addressGet(@Required @Valid long id) {
+        handleWrongInput(true);
+       RetailerAddress retailAddress = null;
+       retailAddress = RetailerAddress.findById(id);
+        if ( retailAddress != null) {
+        	renderArgs.put("retailAddress", retailAddress);
+            renderJson(ReturnCode.OK, retailAddress);
+        }
+        renderFailedJson(ReturnCode.FAIL, "该地址不存在");
+    }
     
     @UserLogonSupport(value = "RETAILER")
     public static void addressDelete(@Required @Valid long id) {
@@ -308,6 +313,19 @@ public class RetailerController extends BaseController {
         }
         renderFailedJson(ReturnCode.FAIL, "删除失败");
     }
+    
+    
+    @UserLogonSupport(value = "RETAILER")
+    public static void addressUpdateDefault(@Required @Valid long id) {
+        handleWrongInput(true);
+        
+        User user = renderArgs.get(Secure.FIELD_USER, User.class);
+        if ( RetailerAddress.updateDefaultAddress(user.id)  ) {
+            renderSuccessJson();
+        }
+        renderFailedJson(ReturnCode.FAIL, "删除失败");
+    }
+
 
     /**
      * 我的订单页面
@@ -607,16 +625,6 @@ public class RetailerController extends BaseController {
      */
     @UserLogonSupport(value = "RETAILER")
     public static void orderStepTwo() {
-    //1、收货信息
-            
-    //2、支付方式
-        
-    //3、物流方式
-        
-    //4、商品清单
-        
-    //5、结算信息
-        
         render();
     }
 
