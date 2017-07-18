@@ -43,6 +43,8 @@ public class RetailerAddress extends Location {
     public Date createTime;
     public Date updateTime;
     
+    public boolean defaultAddress;
+    
     public static boolean updateByVo(AddressVo vo) {
         if (vo == null) {
             return false;

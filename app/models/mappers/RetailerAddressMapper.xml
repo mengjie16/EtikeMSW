@@ -20,6 +20,7 @@
 			address,
 			create_time,
 			update_time,
+			default_address
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			#{retailerId},
@@ -33,7 +34,8 @@
 			#{region},
 			#{address},
 			#{createTime},
-			#{updateTime}
+			#{updateTime},
+			#{defaultAddress}
 		</trim>
 	</insert>
 	<update id="update" parameterType="models.RetailerAddress">

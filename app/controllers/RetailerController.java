@@ -254,11 +254,14 @@ public class RetailerController extends BaseController {
         if (MixHelper.isNotEmpty(lsst)) {
             for (RetailerAddress sst : lsst) {
                 if (Objects.equal(sst.toBaseLocationStr(), currentBaseStr)) {
-                    renderFailedJson(ReturnCode.BIZ_LIMIT);
+                    renderFailedJson(ReturnCode.BIZ_LIMIT, "模板名称相同，添加失败");
                     break;
                 }
             }
+        }else{
+            address.defaultAddress = true;
         }
+        
         address.retailerId = user.userId;
               
         boolean ret = RetailerAddress.save(address);
