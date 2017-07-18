@@ -67,7 +67,9 @@ $(function() {
     loadProviceHTML1();*/
     //加载地址
     //loadAddressList(false);
-
+    $(".new-option-r").click(function() {
+        $(this).parent('.user-addresslist').addClass("defaultAddr").siblings().removeClass("defaultAddr");
+    });
     // 地址信息保存
     $(document).on('click', '#btnSubmitSup .btnSave', function() {
         var validator = $('#frmEditSup').validate(supValidateOpts1());
