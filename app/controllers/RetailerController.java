@@ -317,10 +317,10 @@ public class RetailerController extends BaseController {
         handleWrongInput(true);
         
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
-        if ( RetailerAddress.updateDefaultAddress(user.id)  ) {
+        if ( RetailerAddress.updateDefaultAddress((int)user.id, id)  ) {
             renderSuccessJson();
         }
-        renderFailedJson(ReturnCode.FAIL, "删除失败");
+        renderFailedJson(ReturnCode.FAIL, "更新默认地址失败");
     }
 
 
