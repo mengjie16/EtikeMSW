@@ -50,10 +50,22 @@ function initBase() {
             $(this).addClass('no-plus');
         }
     });
-    //收藏
-    $(document).on('click', '.b-cartIn', function() {
-        $(this).find('span').text('已收藏');
-        $(this).find('i').html('&#xe619;');
+    //加入收藏
+    $(document).on('click', '.item_collection', function() {
+        $(this).text('已收藏').css('background','#ebebeb');
+        var itemId = $('#single .container').attr('mid');
+        var params = {
+            "itemId": itemId
+        };
+        Tr.post('/', params, function(data) {
+
+            if (data.code != 200) {
+                alert('加入失败');
+                return;
+            }
+            alert('加入成功');
+
+        });
     });
 
     //加入购物车弹出弹框

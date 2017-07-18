@@ -67,8 +67,21 @@ $(function() {
     loadProviceHTML1();*/
     //加载地址
     //loadAddressList(false);
+    //设置为默认地址
     $(".new-option-r").click(function() {
         $(this).parent('.user-addresslist').addClass("defaultAddr").siblings().removeClass("defaultAddr");
+        var aid = $(this).parent().attr('id');
+        var param = {
+            'retailerAddress.id': aid
+        }
+        Tr.post('/retailer/address/updateDefaultAddress', param, function(data) {
+            if (data.code != 200) {
+                alert(data.msg);
+                return;
+            }
+            alert('保存成功');
+            window.location.reload();
+        });
     });
     // 地址信息保存
     $(document).on('click', '#btnSubmitSup .btnSave', function() {
