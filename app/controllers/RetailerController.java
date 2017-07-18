@@ -157,6 +157,7 @@ public class RetailerController extends BaseController {
         
         // 添加购物车
         List<ItemVo> cartItems = (List<ItemVo>) CacheUtils.get(key);
+        boolean exist = false;
         if ( !MixHelper.isEmpty(cartItems)) {
            
             Iterator<ItemVo> iterator = cartItems.iterator();
@@ -164,12 +165,17 @@ public class RetailerController extends BaseController {
                 ItemVo iv = iterator.next();
                 if (iv.id == itemId) {
                         iv.cartCount ++;
+                        exist = true;
                         break;
                 }
             }
+            
+            if(exist == false){
+                cartItems.add(itemVo);
+            }
         }
         else{
-            cartItems = new ArrayList<ItemVo>();
+            cartItems = Lists.newArrayList();
             cartItems.add(itemVo);
         }
         CacheUtils.set(key, cartItems, CacheType.RETAILER_CART_INFO.expiredTime);
