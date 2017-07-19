@@ -102,7 +102,7 @@ $(function() {
             var parm = JSON.stringify(params);
             var pa = {
                 "authenticityToken": $('input[name=authenticityToken]').val(),
-                itemVo: parm
+                itemVos: parm
             }
             $.ajax({
 
@@ -123,6 +123,9 @@ $(function() {
             });
         };
         $('.to-buy').on('click', function() {
+            if(!validEditDone()){
+                alert('请完成商品数量编辑')；
+            }
             if (validCheckBox()) {
                 var itemId = $(this).prev().data('id');
                 var $line = $('tr#' + itemId);
