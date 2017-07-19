@@ -130,6 +130,20 @@ a.go-shopping {
     text-align: center;
     text-decoration: none;
 }
+a#editCount {
+    padding: 0.3em 0.7em;
+    color: #FFF;
+    background: #52D0C4;
+    margin: 0.5em 1em 0;
+    font-size: 1em;
+    display: inline-block;
+    line-height: 1.6em;
+    text-align: center;
+    text-decoration: none;
+}
+a#editCount:hover {
+    background: #52bfd0;
+}
 
 .check-out .select-all {
     float: left;
