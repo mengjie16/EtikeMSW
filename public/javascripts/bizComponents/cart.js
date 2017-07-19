@@ -123,33 +123,13 @@ $(function() {
             });
         };
         $('.to-buy').on('click', function() {
-            if(!validEditDone()){
-                alert('请完成商品数量编辑')；
-            }
+            /*if(!validEditDone()){
+                alert('请完成商品数量编辑');
+            }*/
             if (validCheckBox()) {
-                var itemId = $(this).prev().data('id');
-                var $line = $('tr#' + itemId);
-                var $brandName = $line.find('.detailCart .brand').text();
-                var $title = $line.find('.detailCart .title').text();
-                var $color = $line.find('.detailCart .color').text();
-                var $picUrl = $line.find('.detailCart img').attr('src');
-                var $retailPrice = $line.find('.detailCart check_price').text().substring();
-                var $cartCount = $(this).prev()[0].value;
-                var totalPriceRMB = $cartCount * $retailPrice;
-                var params = {
-                    "itemId": itemId,
-                    "itemVo.sku.color": $color,
-                    "itemVo.picUrl": $picUrl,
-                    "itemVo.cartCount": $cartCount,
-                    "itemVo.retailPrice": $retailPrice,
-                    "itemVo.cny2eur": 0,
-                    "itemVo.cartPrice": totalPriceRMB,
-                    "itemVo.title": $title,
-                    "itemVo.brand.name": $brandName
-                };
-                $.when(addCntUploadCart(params)).done(function() {
-                    $line.find('.detailCart perTotalPrice').text(totalPriceRMB);
-                });
+                var checkLines =[];
+                checkLines = seletcCheckBox();
+                postToPay(checkLines);                
             }
         });
 
@@ -255,5 +235,13 @@ function addCntUploadCart(obj) {
 }
 
 function validCheckBox() {
-    return true;
+    $('#cartContainer .lineCart').each(function(index,ele){
+        if($(ele).find('input.J_CheckBoxShop').prop('checked')===true){
+            return true
+        }else{
+            continue;
+        }               
+                
+    });
+    return false;
 }
