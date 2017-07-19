@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,9 +12,11 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.apache.commons.lang.StringUtils;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.alibaba.fastjson.JSONObject;
 import com.aton.config.ReturnCode;
 import com.aton.util.CacheUtils;
 import com.aton.util.DateUtils;
@@ -183,31 +186,44 @@ public class RetailerController extends BaseController {
     }
     
     @UserLogonSupport(value = "RETAILER")
-    public static void cartUpdateCount(@Required @Valid ItemVo itemVo) {
+    public static void cartUpdateCount(@Required @Valid String itemVos) {
         handleWrongInput(true);
+        List<ItemVo> vos = null;
+        ObjectMapper mapper = new  ObjectMapper();
+        
+        
+        JSONObject jsStr = JSONObject.parseObject(itemVos);
+        
+        String itemVosString = jsStr.getString("itemVos");//获取id的值
+        try {
+            vos = mapper.readValue(itemVosString, List.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        String s ="{\"itemVos\":[{\"sku\":{\"color\":1},\"cartCount\":12,\"id\":\"dd\"},"
+//                              + "{\"sku\":{\"color\":1},\"cartCount\":12,\"id\":\"dd\"}]}" ;
         
         // 用户信息获取
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
         String key = CacheType.RETAILER_CART_INFO.getKey(user.phone);
         
         // 更新购物车
-        List<ItemVo> cartItems = (List<ItemVo>) CacheUtils.get(key);
-        if ( !MixHelper.isEmpty(cartItems)) {
-            Iterator<ItemVo> iterator = cartItems.iterator();
-            while (iterator.hasNext()) {
-                ItemVo iv = iterator.next();
-                if (iv.id == itemVo.id && iv.sku.color == itemVo.sku.color) {
-                        iv.cartCount += itemVo.cartCount;
-                        break;
-                }
-            }
-        }
+//        List<ItemVo> cartItems = (List<ItemVo>) CacheUtils.get(key);
+//        if ( !MixHelper.isEmpty(cartItems)) {
+//            Iterator<ItemVo> iterator = cartItems.iterator();
+//            while (iterator.hasNext()) {
+//                ItemVo iv = iterator.next();
+//                if (iv.id == itemVo.id && iv.sku.color == itemVo.sku.color) {
+//                        iv.cartCount += itemVo.cartCount;
+//                        break;
+//                }
+//            }
+//        }
         
-        CacheUtils.set(key, cartItems, CacheType.RETAILER_CART_INFO.expiredTime);
+//        CacheUtils.set(key, cartItems, CacheType.RETAILER_CART_INFO.expiredTime);
         
         renderSuccessJson();
     }
-
 
 
 
