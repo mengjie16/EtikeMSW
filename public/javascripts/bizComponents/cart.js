@@ -84,29 +84,31 @@ $(function() {
         });
 
         function updateCart() {
+            $('#cartContainer .lineCart').map(index,ele){
+                
+            }
             var itemId = $('#single .container').attr('mid');
             var $getColor = $('#single .container').find('li.skuColor a.active').eq(0);
             var cnt = $('#single .container input[name="cartAccount"]').val();
             var totalPriceRMB = parseInt($('#single .container #detailRmb').text().substring(1)) * cnt;
             var totalPriceEUR = parseInt($('#single .container #detailEur').text().substring(1)) * cnt;
             var params = {
-                "itemVo": {
-                    "sku": {
-                        "color": $getColor.text()
-                    },
-                    "picUrl": $('#single .container').find('div.picUrl img').eq(0).attr('src'),
-                    "cartCount": $('#single .container input[name="cartAccount"]').val(),
-                    "retailPrice": parseInt($('#single .container #detailRmb').text().substring(1)),
-                    "id": itemId,
-                    "cny2eur": parseInt($('#single .container #detailEur').text().substring(1)),
-                    "cartPrice": totalPriceRMB,
-                    "title": $('#single .container #detailTitle').text(),
-                    "brand": {
-                        "name": $('#single .container #detailBrand').text()
-                    }
+                "itemVos":[ {
 
-                },
-                "authenticityToken": $('input[name=authenticityToken]').val()
+                    "sku": {
+                        "color": 1
+                    },                    
+                    "cartCount": 12,                   
+                    "id": 'dd'                    
+                }, 
+                 {
+
+                    "sku": {
+                        "color": 1
+                    },                    
+                    "cartCount": 12,                   
+                    "id": 'dd'                    
+                }]               
             };
             var parm = JSON.stringify(params);
             var pa = {
@@ -121,10 +123,12 @@ $(function() {
                 success: function(data) {
 
                     if (data.code != 200) {
-                        alert('加入购物车失败');
+                        //alert('加入购物车失败');
                         return;
+                    }else if(data.code === 200){
+                        alert('更新购物车');
                     }
-                    alert('加入购物车成功');
+                    
                 }
 
             });
