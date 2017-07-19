@@ -71,6 +71,8 @@ public class Favorite implements Serializable {
     public int retailPrice;
 
     public String title;    
+    
+    public String picUrl;
      
    
 
@@ -79,21 +81,22 @@ public class Favorite implements Serializable {
         try {
             FavoriteMapper mapper = ss.getMapper(FavoriteMapper.class);
             mapper.insert(favorite);
+            return true;
         }  finally {
             ss.close();
         }
-        return true;
+        
     }
     
-    public static boolean delete(long itemId, long id) {
+    public static boolean delete(long id) {
         SqlSession ss = SessionFactory.getSqlSession();
         try {
             FavoriteMapper mapper = ss.getMapper(FavoriteMapper.class);
-            mapper.delete(itemId, id);
+            mapper.delete(id);
+            return true;
         }  finally {
             ss.close();
         }
-        return true;
     }
     
     
@@ -107,6 +110,17 @@ public class Favorite implements Serializable {
             ss.close();
         }
        
+    }
+    
+    public static boolean findById(long itemId, long id) {
+        SqlSession ss = SessionFactory.getSqlSession();
+        try {
+            FavoriteMapper mapper = ss.getMapper(FavoriteMapper.class);
+            mapper.selectById(itemId, id);
+        }  finally {
+            ss.close();
+        }
+        return true;
     }
     
 
