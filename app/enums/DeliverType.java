@@ -12,6 +12,8 @@ public enum DeliverType {
 	
     DOMESTIC_SPOT("国内现货"),
     BONDED_WAREHOUSE_GOODS("保税仓商品"),
+    ONLINE_ORDER("国内R货"),
+    UN_LOGISTICS("保税Q仓商品"),
     OVERSEA_DIRECT_DELIVERY("海外直邮");
     public String description;
 
