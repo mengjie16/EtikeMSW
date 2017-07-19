@@ -119,19 +119,18 @@ $(function() {
                 itemVos.push(itemVo);
                 
             });
+            
             var params = {
-                "itemVos": itemVos           
-            };
-            var parm = JSON.stringify(params);
-            var pa = {
                 "authenticityToken": $('input[name=authenticityToken]').val(),
-                itemVos: parm
+                itemVos:  JSON.stringify(itemVos)
             }
+            
+           // var data = JSON.stringify(itemVos);
             $.ajax({
 
                 type: "post",
                 url: '/retailer/cart/updateCount',
-                data: pa,
+                data: params,
                 success: function(data) {
 
                     if (data.code != 200) {
