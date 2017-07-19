@@ -11,37 +11,57 @@ $(function() {
     var dtd = $.Deferred();
     $(".memenu").memenu();
     $.when(loadCartData()).done(function() {
-
-
         $("#J_SelectAllCbx1").click(function() {
             if (this.checked) {
                 $('input[name="select-goods"]:input').prop("checked", true);
+                var number = 0;
+                $('.price-rmbs').each(function(){ 
+                    if($(this).text() !=''){ 
+                     number += parseInt($(this).text()); 
+                    } 
+                });
+                $('.check-trans-rmb').text(number);
+                $('.check-count').text($('.price-rmbs').length);
             } else {
                 $('input[name="select-goods"]:input').prop("checked", false);
+                $('input[name="select-goods"]:input').prop("checked", false);
+                $('.check-trans-rmb').text('0');
+                $('.check-count').text('0');
             }
         });
         $('input[name="select-goods"]').on('click', function() {
+            var num = parseInt($('.check-trans-rmb').text());
+            var number = parseInt($('.check-count').text());
+            var price = $(this).parents('tr').find('.price-rmbs').text();
             if (!this.checked) {
                 $("#J_SelectAllCbx1").prop("checked", false);
+                num -= parseInt(price);
+                number -= 1;
+            }else{
+                num += parseInt(price);
+                number += 1;
             }
+            $('.check-trans-rmb').text(num);
+            $('.check-count').text(number);
         })
-        $('.check-goodsdelete').on('click', function(e) {
-            $(this).parent().remove();
-        });
+        // $('.check-goodsdelete').on('click', function(e) {
+        //     $(this).parent().remove();
+        // });
 
         function J_Minus() {
             $('.J_Minus').bind('click', function(e) {
                 $(this).next().next().removeClass('no-plus');
                 if ($(this).next()[0].value > 1) {
                     $(this).next()[0].value--;
-
+                    var num = $('.text-amount').val();
+                    var price = $(this).parents('.check').prev('.per-price').find('.price-rmb').text();
+                    $(this).parents('.check').next('.total-price').find('.price-rmbs').text(num*price);
                     if (parseInt($(this).next()[0].value) === 1) {
-                        $(this).addClass('no-minus');
-                    }
+                            $(this).addClass('no-minus');
+                        }
                 } else {
                     $(this).addClass('no-minus');
                 }
-
             });
         };
 
@@ -52,6 +72,9 @@ $(function() {
                 $(this).prev().prev().removeClass('no-minus');
                 if ($(this).prev()[0].value < storeNumber) {
                     $(this).prev()[0].value++;
+                    var num = $('.text-amount').val();
+                    var price = $(this).parents('.check').prev('.per-price').find('.price-rmb').text();
+                    $(this).parents('.check').next('.total-price').find('.price-rmbs').text(num*price);
                     if (parseInt($(this).prev()[0].value) === storeNumber) {
                         $(this).addClass('no-plus');
                     }
@@ -213,11 +236,10 @@ function printCartHtml() {
             var color = obj.sku.color;
             var quantity = obj.sku.quantity;
             var perTotalPrice = cartCount * retailPrice;
-
-            var $titledt = $("<td class='ring-in'><div class='cart-goods-checkbox'><input class='J_CheckBoxShop' type='checkbox' name='select-goods'  value='true'></div><div><a target='_blank' href='/item/" + obj.id + "' class='at-in'><img src='" + picUrl + "' class='img-responsive' alt=''></a><div class='sed'><p class='detailCart><span class='brand'>" + brandName + "</span><span class='title'>" + title + "</span><span class='color'>" + color +"绿色</span></p></div></div><div class='clearfix'></div></td>");
-            var $basedd = $("<td class='per-price'><div class='check_price'>¥" + retailPrice + "<span class='price-e'></span></div></td>");
+            var $titledt = $("<td class='ring-in'><div class='cart-goods-checkbox'><input class='J_CheckBoxShop' type='checkbox' name='select-goods'  value='true'></div><div><a target='_blank' href='/item/" + obj.id + "' class='at-in'><img src='" + picUrl + "' class='img-responsive' alt=''></a><div class='sed'><p class='detailCart><span class='brand'>" + brandName + "</span><span class='title'>" + title + "</span><span class='color'>" + color + "</span></p></div></div><div class='clearfix'></div></td>");
+            var $basedd = $("<td class='per-price'><div class='check_price'>¥<span class='price-rmb'>" + retailPrice + "</span></div></td>");
             var $skudd = $("<td class='check'><div class='amount-wrapper'><div class='item-amount '><a class='J_Minus minus no-minus updateVal'>-</a><input type='text' data-id='" + itemId + "' value='" + cartCount + "' class='cartCount text text-amount J_ItemAmount' data-max='" + quantity + "' data-now='2' autocomplete='off'><a class='updateVal J_Plus plus'>+</a></div><div class='amount-msg J_AmountMsg'></div></div></td>");
-            var $totaldd = $("<td class='total-price'><div class='check_price allrmb'>¥<span class='price-e allou perTotalPrice'>" + perTotalPrice + "</span></div></td>");
+            var $totaldd = $("<td class='total-price'><div class='check_price allrmb'>¥<span class='price-rmbs'>" + perTotalPrice + "</span></div></td>");
             var $fundd = $("<td data-id='" + obj.id + "' class='check-goodsdelete delete'>删除</td>");
             var $itemdl = $("<tr class='lineCart' id='" + obj.id + "'></tr>");
             $itemdl.append($titledt);
