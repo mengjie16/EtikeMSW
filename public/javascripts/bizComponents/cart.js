@@ -84,31 +84,20 @@ $(function() {
         });
 
         function updateCart() {
-            $('#cartContainer .lineCart').map(index,ele){
-                
-            }
-            var itemId = $('#single .container').attr('mid');
-            var $getColor = $('#single .container').find('li.skuColor a.active').eq(0);
-            var cnt = $('#single .container input[name="cartAccount"]').val();
-            var totalPriceRMB = parseInt($('#single .container #detailRmb').text().substring(1)) * cnt;
-            var totalPriceEUR = parseInt($('#single .container #detailEur').text().substring(1)) * cnt;
+            var itemVos = [];
+            itemVos = $('#cartContainer .lineCart').map(function(index,ele){
+                var itemVo ={};
+                var $id = ele.id;
+                var $cartCount = ele.find('.cartCount').val();
+                var $color=ele.find('.sed .color');
+                itemVo["sku"]["color"] = $color;
+                itemVo["cartCount"] = $cartCount;
+                itemVo["id"]=$id;
+                itemVos.push(itemVo);
+                return itemVos;
+            });
             var params = {
-                "itemVos":[ {
-
-                    "sku": {
-                        "color": 1
-                    },                    
-                    "cartCount": 12,                   
-                    "id": 'dd'                    
-                }, 
-                 {
-
-                    "sku": {
-                        "color": 1
-                    },                    
-                    "cartCount": 12,                   
-                    "id": 'dd'                    
-                }]               
+                "itemVos": itemVos           
             };
             var parm = JSON.stringify(params);
             var pa = {
