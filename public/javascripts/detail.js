@@ -38,7 +38,8 @@ function initBase() {
         }
     });
     $('.J_Plus').on('click', function(e) {
-        var storeNumber = 12;
+        //var storeNumber = $('.kucun').text();
+        var storeNumber = 100;
         $(this).prev().prev().removeClass('no-minus');
         if ($(this).prev()[0].value < storeNumber) {
             $(this).prev()[0].value++;
@@ -97,7 +98,7 @@ function initBase() {
         var totalPriceRMB = parseInt($('#single .container #detailRmb').text().substring(1))*cnt;
         var totalPriceEUR = parseInt($('#single .container #detailEur').text().substring(1))*cnt;
         var params = {
-            "itemId": itemId,
+            "itemVo.id": itemId,
             "itemVo.sku.color":$getColor.text(),
             "itemVo.picUrl" : $('#single .container').find('div.picUrl img').eq(0).attr('src'),
             "itemVo.cartCount" : $('#single .container input[name="cartAccount"]').val(),

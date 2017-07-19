@@ -148,7 +148,7 @@ public class RetailerController extends BaseController {
     }
     
     @UserLogonSupport(value = "RETAILER")
-    public static void cartAdd(@Required @Valid ItemVo itemVo) {
+    public static void cartAdd(@Required @Valid String itemVo) {
         handleWrongInput(true);
         
         // 用户信息获取
@@ -158,7 +158,7 @@ public class RetailerController extends BaseController {
         // 添加购物车
         List<ItemVo> cartItems = (List<ItemVo>) CacheUtils.get(key);
         
-        if ( !MixHelper.isEmpty(cartItems)) {
+        /*if ( !MixHelper.isEmpty(cartItems)) {
             Iterator<ItemVo> iterator = cartItems.iterator();
             while (iterator.hasNext()) {
                 ItemVo iv = iterator.next();
@@ -177,7 +177,7 @@ public class RetailerController extends BaseController {
         else{
             cartItems = Lists.newArrayList();
             cartItems.add(itemVo);
-        }
+        }*/
         CacheUtils.set(key, cartItems, CacheType.RETAILER_CART_INFO.expiredTime);
         
         renderSuccessJson();
