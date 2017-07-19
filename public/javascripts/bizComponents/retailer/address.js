@@ -72,7 +72,7 @@ $(function() {
         $(this).parent('.user-addresslist').addClass("defaultAddr").siblings().removeClass("defaultAddr");
         var aid = $(this).parent().attr('id');
         var param = {
-            'retailerAddress.id': aid
+            'id': aid
         }
         Tr.post('/retailer/address/updateDefaultAddress', param, function(data) {
             if (data.code != 200) {

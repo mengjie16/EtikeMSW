@@ -80,7 +80,7 @@ public class RetailerController extends BaseController {
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
         renderArgs.put("user", user);
         // 供应商信息获取
-        Retailer retailer = Retailer.findById(user.userId);
+        Retailer retailer = Retailer.findById(user.id);
         renderArgs.put("retailer", retailer);
         render();
     }
@@ -243,7 +243,7 @@ public class RetailerController extends BaseController {
     @UserLogonSupport(value = "RETAILER")
     public static void address() {
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
-        List<RetailerAddress> list = RetailerAddress.findListByRetailerId(user.userId);
+        List<RetailerAddress> list = RetailerAddress.findListByRetailerId((int) user.id);
         renderArgs.put("addressList", list);
         render();
     }
@@ -254,7 +254,7 @@ public class RetailerController extends BaseController {
         
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
         // 检查模板地址是否重复
-        List<RetailerAddress> lsst = RetailerAddress.findListByRetailerId(user.userId);
+        List<RetailerAddress> lsst = RetailerAddress.findListByRetailerId((int) user.id);
         String currentBaseStr = address.toBaseLocationStr();
         if (MixHelper.isNotEmpty(lsst)) {
             for (RetailerAddress sst : lsst) {
@@ -267,7 +267,7 @@ public class RetailerController extends BaseController {
             address.defaultAddress = true;
         }
         
-        address.retailerId = user.userId;
+        address.retailerId = (int) user.id;
               
         boolean ret = RetailerAddress.save(address);
         if (ret) {
@@ -400,7 +400,7 @@ public class RetailerController extends BaseController {
         if (orderData != null) {
             // 删除文件
             orderFile.delete();
-            CacheUtils.set(CacheType.RETAILER_ORDER_TABLE_DATA.getKey(user.userId), orderData,
+            CacheUtils.set(CacheType.RETAILER_ORDER_TABLE_DATA.getKey(user.id), orderData,
                 CacheType.RETAILER_ORDER_TABLE_DATA.expiredTime);
             // 首行
             Map<Integer, String> rowData = orderData.row(0);
@@ -434,7 +434,7 @@ public class RetailerController extends BaseController {
         // 用户信息获取
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
         // 获取读取解析过的数据
-        String key = CacheType.RETAILER_ORDER_TABLE_DATA.getKey(user.userId);
+        String key = CacheType.RETAILER_ORDER_TABLE_DATA.getKey(user.id);
         Table orderData = CacheUtils.get(key);
         if (orderData == null) {
             log.error("文件未上传，或数据已丢失！");
@@ -554,7 +554,7 @@ public class RetailerController extends BaseController {
             renderJson(ReturnCode.BIZ_LIMIT, messages);
         }
         // 缓存订单视图
-        String ordervoKey = CacheType.RETAILER_ORDER_VO_DATA.getKey(user.userId);
+        String ordervoKey = CacheType.RETAILER_ORDER_VO_DATA.getKey(user.id);
         CacheUtils.set(ordervoKey, listOrderVo, CacheType.RETAILER_ORDER_VO_DATA.expiredTime);
 
         // 订单信息商品归组
@@ -566,7 +566,7 @@ public class RetailerController extends BaseController {
             renderFailedJson(ReturnCode.FAIL, "订单解析失败,商品信息解析，匹配失败！");
         }
         // 缓存当前解析成功的商品信息
-        String pkey = CacheType.RETAILER_ORDER_PRODUCT_DATA.getKey(user.userId);
+        String pkey = CacheType.RETAILER_ORDER_PRODUCT_DATA.getKey(user.id);
         CacheUtils.set(pkey, results, CacheType.RETAILER_ORDER_PRODUCT_DATA.expiredTime);
         // 解析成功
         renderSuccessJson();
@@ -585,7 +585,7 @@ public class RetailerController extends BaseController {
         // 用户信息获取
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
         // 获取订单
-        String ordervoKey = CacheType.RETAILER_ORDER_VO_DATA.getKey(user.userId);
+        String ordervoKey = CacheType.RETAILER_ORDER_VO_DATA.getKey(user.id);
         List<OrderVo> listOrderVo = CacheUtils.get(ordervoKey);
         if (MixHelper.isEmpty(listOrderVo)) {
             renderFailedJson(ReturnCode.FAIL, "订单数据丢失，订单商品匹配失败");
@@ -596,7 +596,7 @@ public class RetailerController extends BaseController {
             renderFailedJson(ReturnCode.FAIL, "订单商品匹配失败");
         }
         // 缓存当前解析成功的商品信息
-        String pkey = CacheType.RETAILER_ORDER_VO_ALL.getKey(user.userId);
+        String pkey = CacheType.RETAILER_ORDER_VO_ALL.getKey(user.id);
         CacheUtils.set(pkey, orderVoList, CacheType.RETAILER_ORDER_VO_ALL.expiredTime);
         renderSuccessJson();
     }
@@ -637,7 +637,7 @@ public class RetailerController extends BaseController {
         // 用户信息获取
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
         // 缓存当前解析成功的商品信息
-        String pkey = CacheType.RETAILER_ORDER_PRODUCT_DATA.getKey(user.userId);
+        String pkey = CacheType.RETAILER_ORDER_PRODUCT_DATA.getKey(user.id);
         List<OrderProductResult> products = CacheUtils.get(pkey);
         renderArgs.put("products", products);
         render();
@@ -655,7 +655,7 @@ public class RetailerController extends BaseController {
         // 用户信息获取
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
         // 缓存当前解析成功的商品信息
-        String pkey = CacheType.RETAILER_ORDER_VO_ALL.getKey(user.userId);
+        String pkey = CacheType.RETAILER_ORDER_VO_ALL.getKey(user.id);
         List<OrderVo> orderVoList = CacheUtils.get(pkey);
         renderArgs.put("orderVoList", orderVoList);
         render();
@@ -690,7 +690,7 @@ public class RetailerController extends BaseController {
         // 用户信息获取
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
         // 缓存当前解析成功的商品信息
-        String pkey = CacheType.RETAILER_ORDER_VO_ALL.getKey(user.userId);
+        String pkey = CacheType.RETAILER_ORDER_VO_ALL.getKey(user.id);
         List<OrderVo> orderVoList = CacheUtils.get(pkey);
         if (MixHelper.isEmpty(orderVoList)) {
             log.info("无订单excel文件解析数据，或已丢失");
@@ -712,7 +712,7 @@ public class RetailerController extends BaseController {
                 break;
             }
             // 创建订单
-            Order order = new Order(user.userId);
+            Order order = new Order((int) user.id);
             // 从视图中转换订单
             String message = vo.parseToOrder(order);
             if (!Strings.isNullOrEmpty(message)) {
@@ -727,7 +727,7 @@ public class RetailerController extends BaseController {
             renderJson(ReturnCode.BIZ_LIMIT, messages);
         }
         // 生成交易
-        Trade trade = new Trade(user.userId).tradeAuiting();
+        Trade trade = new Trade((int) user.id).tradeAuiting();
         Iterator<Order> orderIterator = orders.iterator();
         while (orderIterator.hasNext()) {
             Order order = orderIterator.next();
@@ -764,7 +764,7 @@ public class RetailerController extends BaseController {
         }
         // 用户信息获取
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
-        vo.retailerId = user.userId;
+        vo.retailerId = (int) user.id;
         Page<TradeVo> page = Page.newInstance(vo.pageNo, vo.pageSize, 0);
         List<Trade> trades = Trade.findListWithOrdersByVo(vo);
         if (MixHelper.isEmpty(trades)) {
@@ -801,7 +801,7 @@ public class RetailerController extends BaseController {
         }
         // 用户信息获取
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
-        vo.retailerId = user.userId;
+        vo.retailerId = (int) user.id;
         Page<TradeVo> page = Page.newInstance(vo.pageNo, vo.pageSize, 0);
         List<Trade> trades = Trade.selectListWithOrderTradeStatusByVo(vo, tradeStatus);
         if (MixHelper.isEmpty(trades)) {
@@ -949,7 +949,7 @@ public class RetailerController extends BaseController {
                 continue;
             }
             // 创建订单
-            Order order = new Order(user.userId);
+            Order order = new Order((int) user.id);
             // 从视图中转换订单
             message = vo.parseToOrder(order);
             if (!Strings.isNullOrEmpty(message)) {
@@ -964,7 +964,7 @@ public class RetailerController extends BaseController {
             renderJson(ReturnCode.BIZ_LIMIT, messages);
         }
         // 生成交易
-        Trade trade = new Trade(user.userId).tradeAuiting();
+        Trade trade = new Trade((int) user.id).tradeAuiting();
         Iterator<Order> orderIterator = parseOrders.iterator();
         while (orderIterator.hasNext()) {
             Order order = orderIterator.next();
