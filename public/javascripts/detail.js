@@ -10,6 +10,16 @@ $(window).load(function() {
 });
 
 function initBase() {
+    var mid = $('.container').attr('mid');
+    Tr.get('/user/favorite/hasSetFavorite', {
+        "id": mid
+    }, function(data) {
+        if (data.code != 200) {
+            alert(data.msg);
+            return;
+        }
+        $('.item_collection').text('已收藏').css('background','#333');
+    },{loadingMask: false});
     $(".memenu").memenu();
     $('.popup-with-zoom-anim').magnificPopup({
         type: 'inline',
@@ -53,7 +63,8 @@ function initBase() {
     });
     //加入收藏
     $(document).on('click', '.item_collection', function() {
-        $(this).text('已收藏').css('background','#ebebeb');
+        if($(this).text() == '已收藏') return;
+        $(this).text('已收藏').css('background','#333');
         var itemId = $('#single .container').attr('mid');
         var params = {
             "favorite.itemId": itemId,
@@ -69,7 +80,7 @@ function initBase() {
             }
             alert('加入成功');
 
-        });
+        },{loadingMask: false});
     });
 
     //加入购物车弹出弹框
@@ -116,7 +127,7 @@ function initBase() {
             }
             alert('加入购物车成功');
 
-        });
+        },{loadingMask: false});
     });
 
 

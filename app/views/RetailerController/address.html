@@ -12,7 +12,7 @@
     <ul class="am-avg-sm-1 am-avg-md-3 am-thumbnails" id="addressList">
 
         #{list items:addressList, as : 'addr'}
-        <li class="user-addresslist defaultAddr" id="${addr.id}">
+        <li class="user-addresslist ${!addr?.defaultAddress?'':'defaultAddr'}" id="${addr.id}">
             <span class="new-option-r"><i class="am-icon-check-circle"></i>默认地址</span>
             <p class="new-tit new-p-re">
                 <span class="new-txt" id="adderssUser${addr.id}">${addr.name}</span>
