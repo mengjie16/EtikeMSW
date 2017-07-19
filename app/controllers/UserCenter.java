@@ -3,6 +3,7 @@ package controllers;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -124,6 +125,16 @@ public class UserCenter extends BaseController {
         render();
     }
     
+    public static void hasSetFavorite(@Required @Valid long itemId){
+        User user = renderArgs.get(Secure.FIELD_USER, User.class);
+        boolean ret = false;
+        if ( Favorite.findById(itemId,user.id)) {
+            ret = true;
+        }
+        renderArgs.put("marked", ret);
+        renderSuccessJson();
+    }
+    
     public static void setFavorite(@Required @Valid Favorite favorite){
         handleWrongInput(true);
         
@@ -135,11 +146,9 @@ public class UserCenter extends BaseController {
         renderFailedJson(ReturnCode.FAIL, "收藏失败");
     }
     
-    public static void deleteFavorite(@Required @Valid long retailerId){
-        handleWrongInput(true);
+    public static void deleteFavorite(@Required @Min(1) long id){
         
-        User user = renderArgs.get(Secure.FIELD_USER, User.class);
-        if ( Favorite.delete(user.id, retailerId)) {
+        if ( Favorite.delete(id)) {
             renderSuccessJson();
         }
         renderFailedJson(ReturnCode.FAIL, "取消收藏失败");

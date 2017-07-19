@@ -6,19 +6,20 @@
 		<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
 			SELECT LAST_INSERT_ID() AS id
 		</selectKey>
-		insert into item
+		insert into favorite
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			title,
 			retailer_id,
 			item_id,
 			retail_price,
+			pic_url
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			#{title},
 			#{retailerId},
 			#{itemId},
 			#{retailPrice},
-			#{title}
+			#{picUrl}
 		</trim>
 	</insert>
 	

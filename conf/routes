@@ -237,8 +237,12 @@ GET     /user/markList                          UserCenter.markList
 GET     /user/authorize                         UserCenter.authorize
 
 GET     /user/order/list                        UserCenter.orderList
-GET     /user/cart                             	 UserCenter.cart
+GET     /user/cart                             	UserCenter.cart
 GET     /user/cart/stepTwo                      UserCenter.stepTwo
+
+POST	/user/favorite/save						UserCenter.setFavorite
+POST	/user/favorite/delete					UserCenter.deleteFavorite
+GET		/user/favorite/hasSetFavorite			UserCenter.hasSetFavorite
 
 #---------------------------------------------------------------------------------------------------------------
 

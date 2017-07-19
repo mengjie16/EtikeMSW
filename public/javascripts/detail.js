@@ -55,9 +55,12 @@ function initBase() {
         $(this).text('已收藏').css('background','#ebebeb');
         var itemId = $('#single .container').attr('mid');
         var params = {
-            "itemId": itemId
+            "favorite.itemId": itemId,
+            "favorite.retailPrice" : parseInt($('#single .container #detailRmb').text().substring(1)),
+            "favorite.title" : $('#single .container #detailTitle').text(),
+            "favorite.picUrl" : $('#single .container').find('div.picUrl img').eq(0).attr('src')
         };
-        Tr.post('/', params, function(data) {
+        Tr.post('/user/favorite/save', params, function(data) {
 
             if (data.code != 200) {
                 alert('加入失败');
@@ -110,7 +113,7 @@ function initBase() {
                 alert('加入购物车失败');
                 return;
             }
-            alert('加入成功');
+            alert('加入购物车成功');
 
         });
     });
