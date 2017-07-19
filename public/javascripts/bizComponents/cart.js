@@ -85,16 +85,16 @@ $(function() {
 
         function updateCart() {
             var itemVos = [];
-            itemVos = $('#cartContainer .lineCart').map(function(index,ele){
-                var itemVo ={};
-                var $id = ele.id;
-                var $cartCount = ele.find('.cartCount').val();
-                var $color=ele.find('.sed .color');
+            $('#cartContainer .lineCart').each(function(index,ele){
+                var itemVo ={"sku":{}};
+                var $id = $(ele)[0].id;
+                var $cartCount = $(ele).find('.cartCount').val();
+                var $color=$($(ele).find('.sed .color')[0]).text();
                 itemVo["sku"]["color"] = $color;
                 itemVo["cartCount"] = $cartCount;
                 itemVo["id"]=$id;
                 itemVos.push(itemVo);
-                return itemVos;
+                
             });
             var params = {
                 "itemVos": itemVos           
@@ -211,7 +211,7 @@ function printCartHtml() {
             var quantity = obj.sku.quantity;
             var perTotalPrice = cartCount * retailPrice;
 
-            var $titledt = $("<td class='ring-in'><div class='cart-goods-checkbox'><input class='J_CheckBoxShop' type='checkbox' name='select-goods'  value='true'></div><div><a target='_blank' href='/item/" + obj.id + "' class='at-in'><img src='" + picUrl + "' class='img-responsive' alt=''></a><div class='sed'><p class='detailCart><span class='brand'>" + brandName + "</span><span class='title'>" + title + "</span><span class='color'>" + color + "</span></p></div></div><div class='clearfix'></div></td>");
+            var $titledt = $("<td class='ring-in'><div class='cart-goods-checkbox'><input class='J_CheckBoxShop' type='checkbox' name='select-goods'  value='true'></div><div><a target='_blank' href='/item/" + obj.id + "' class='at-in'><img src='" + picUrl + "' class='img-responsive' alt=''></a><div class='sed'><p class='detailCart><span class='brand'>" + brandName + "</span><span class='title'>" + title + "</span><span class='color'>" + color +"绿色</span></p></div></div><div class='clearfix'></div></td>");
             var $basedd = $("<td class='per-price'><div class='check_price'>¥" + retailPrice + "<span class='price-e'></span></div></td>");
             var $skudd = $("<td class='check'><div class='amount-wrapper'><div class='item-amount '><a class='J_Minus minus no-minus updateVal'>-</a><input type='text' data-id='" + itemId + "' value='" + cartCount + "' class='cartCount text text-amount J_ItemAmount' data-max='" + quantity + "' data-now='2' autocomplete='off'><a class='updateVal J_Plus plus'>+</a></div><div class='amount-msg J_AmountMsg'></div></div></td>");
             var $totaldd = $("<td class='total-price'><div class='check_price allrmb'>¥<span class='price-e allou perTotalPrice'>" + perTotalPrice + "</span></div></td>");
