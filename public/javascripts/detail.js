@@ -15,7 +15,6 @@ function initBase() {
         "itemId": mid
     }, function(data) {
         if (data.code != 200) {
-            alert(data.msg);
             return;
         }
         $('.item_collection').text('已收藏').css('background','#333');
