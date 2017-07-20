@@ -5,6 +5,7 @@ CART = {
     totalPrice: 0,
     totalCount: 0
 };
+
 // 初始化内容
 $(function() {
     // 加载购物车
@@ -83,31 +84,43 @@ $(function() {
                 }
             });
         };
-
         $('#editCount').on('click', function() {
             $(this).toggleClass('editCount');
             if ($(this).hasClass('editCount')) {
                 $('#cartContainer .cartCount').each(function(index, ele) {
-                    ele.readOnly = false;
-                    $('.J_Plus').bind('click', J_Plus());
-                    $('.J_Minus').bind('click', J_Minus());
+                    ele.readOnly = false;                    
                     $('#editCount').text('完成编辑');
+                    $('#editCount').addClass('doneEdit');
                 });
+                $('.J_Plus').bind('click', J_Plus());
+                $('.J_Minus').bind('click', J_Minus());
             } else {
                 $('#cartContainer .cartCount').each(function(index, ele) {
                     ele.readOnly = true;
                 });
                 $('.J_Plus').unbind('click');
-                $('.J_Minus').unbind('click');
-                $('#editCount').text('编辑数量');
-                updateCart();
+                $('.J_Minus').unbind('click');                
+                $.when(doneEdit()).done(function(){
+                    $.when(updateCart()).done(function(){
+                        
+                        alert('更新购物车');
+                       
+                   });
+                        
+                  
+                   
+                });
+                
             }
-
-
         });
-
-        function updateCart() {
+        function doneEdit(){
+            $('#editCount').removeClass('doneEdit');
+            $('#editCount').text('编辑数量');
+        };
+        function updateCart(tag) {
+            var dtd=$.Deferred();
             var itemVos = [];
+            var tag;
             $('#cartContainer .lineCart').each(function(index,ele){
                 var itemVo ={"sku":{}};
                 var $id = $(ele)[0].id;
@@ -137,12 +150,16 @@ $(function() {
                         //alert('加入购物车失败');
                         return;
                     }else if(data.code === 200){
-                        alert('更新购物车');
+                        tag = true;
+                        dtd.resolve(tag);
                     }
                     
                 }
 
             });
+            return dtd.promise(tag);
+            
+
         };
         $('.to-buy').on('click', function() {
             /*if(!validEditDone()){
@@ -231,6 +248,7 @@ function printCartHtml() {
             if ($itemdl) {
                 $('#cartContainer').append($itemdl);
             }
+            $('.cartCount')[0].readOnly=true;
         });
         return dtd.resolve();
     }

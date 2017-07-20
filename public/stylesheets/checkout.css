@@ -145,6 +145,9 @@ a#editCount {
 a#editCount:hover {
     background: #52bfd0;
 }
+a#editCount.doneEdit{
+    background: orange;
+}
 
 .check-out .select-all {
     float: left;
