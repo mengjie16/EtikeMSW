@@ -127,12 +127,10 @@ public class UserCenter extends BaseController {
     
     public static void hasSetFavorite(@Required @Valid long itemId){
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
-        boolean ret = false;
-        if ( Favorite.findById(itemId,user.id)) {
-            ret = true;
+        if ( Favorite.findById(itemId,user.id) > 0) {
+            renderSuccessJson();
         }
-        renderArgs.put("marked", ret);
-        renderSuccessJson();
+        renderFailedJson(ReturnCode.FAIL);
     }
     
     public static void setFavorite(@Required @Valid Favorite favorite){

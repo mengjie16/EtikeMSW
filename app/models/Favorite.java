@@ -112,15 +112,14 @@ public class Favorite implements Serializable {
        
     }
     
-    public static boolean findById(long itemId, long id) {
+    public static int findById(long itemId, long id) {
         SqlSession ss = SessionFactory.getSqlSession();
         try {
             FavoriteMapper mapper = ss.getMapper(FavoriteMapper.class);
-            mapper.selectById(itemId, id);
+            return mapper.selectById(itemId, id);
         }  finally {
             ss.close();
         }
-        return true;
     }
     
 
