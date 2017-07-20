@@ -9,12 +9,12 @@ $(function(){
 	// Tr.get('', {},
 	// 	function(data) {
 	// 		if (data.code == 200) {
-	// 			CART.cartCache = data.results;
+	// 			CART.cartCache = data.results;s
 	// 		};
 	// 		printCartHtml();
 	// },{loadingMask:false});
 	$('.otherAdd').on('click',function () {
-		Tr.get('', {}, function(data) {
+		Tr.get('/retailer/address/get', {}, function(data) {
 			if (data.code != 200 || !data.results) return;
 			CART.sendLoactionTempCache = data.results;
 			printSendLocationTempHtml();
@@ -47,6 +47,12 @@ $(function(){
 	});
 	// 提交支付
 	$(document).on('click', '#btnSubmit', function() {
+		var boxes = $('input[name="express_id"]:checked').length;
+		if (boxes <= 0) {
+			alert("请至少选择一种物流方式");
+			return false;
+		}
+		var expressid = $('input[name="express_id"]:checked').attr('id');
 		var itemVos = [];
     $('#stepContainer tr').each(function(index, obj) {
         var itemVo = {
@@ -63,12 +69,14 @@ $(function(){
     });
 		var param = {
 				"authenticityToken": $('input[name=authenticityToken]').val(),
-        addressId: $('.order-addresslist').attr('id'),
+        addressID: $('.order-addresslist').attr('id'),
         itemVos: JSON.stringify(itemVos),
+        expressID: expressid,
         express: $('#express_fee').text(),
-        totalPrice: $('#order_amount').text()
+        totalPrice: $('#order_amount').text(),
+        comment: $('#comment').val(),
     };
-    Tr.post('', param, function(data) {
+    Tr.post('/retailer/order/post', param, function(data) {
 			if (data.code != 200){
 				alert('提交失败!');
 				return;
@@ -122,4 +130,4 @@ function FreightAmountTotal(obj) {
 	$('#express_fee').text(price);
 	$('#order_amount').text(price+parseInt($('#goods_amount').text()));
 	$('#txtFee').val(price+parseInt($('#goods_amount').text()));
-}
+} 
