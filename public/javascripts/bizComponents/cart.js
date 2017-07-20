@@ -2,52 +2,65 @@
 CART = {
     cartCache: new Array(),
     loadCart: false,
-    totalPrice: 0,
-    totalCount: 0
+
+
 };
 
 // 初始化内容
 $(function() {
     // 加载购物车
     var dtd = $.Deferred();
+
     $(".memenu").memenu();
     $.when(loadCartData()).done(function() {
-        $("#J_SelectAllCbx1").click(function() {
+        var hasCheckedBoxes = [];
+        $("#J_SelectAllCbx1").click(function(e) {
             if (this.checked) {
                 $('input[name="select-goods"]:input').prop("checked", true);
                 var number = 0;
-                $('.price-rmbs').each(function(){ 
-                    if($(this).text() !=''){ 
-                     number += parseInt($(this).text()); 
-                    } 
+                $('.price-rmbs').each(function() {
+                    if ($(this).text() != '') {
+                        number += parseInt($(this).text());
+                    }
                 });
                 $('.check-trans-rmb').text(number);
                 $('.check-count').text($('.price-rmbs').length);
+                var arrCheckBox = $('input[name="select-goods"]:input');
+                hasCheckedBoxes = $.map(arrCheckBox, function(ele, index) {
+                    return $(ele).data('cart');
+                });
             } else {
                 $('input[name="select-goods"]:input').prop("checked", false);
-                $('input[name="select-goods"]:input').prop("checked", false);
+                /*$('input[name="select-goods"]:input').prop("checked", false);*/
                 $('.check-trans-rmb').text('0');
                 $('.check-count').text('0');
+                hasCheckedBoxes = [];
             }
         });
-        $('input[name="select-goods"]').on('click', function() {
-            var num = parseInt($('.check-trans-rmb').text());
-            var number = parseInt($('.check-count').text());
-            var price = $(this).parents('tr').find('.price-rmbs').text();
-            if (!this.checked) {
-                $("#J_SelectAllCbx1").prop("checked", false);
-                num -= parseInt(price);
-                number -= 1;
-            }else{
-                num += parseInt(price);
-                number += 1;
-            }
-            $('.check-trans-rmb').text(num);
-            $('.check-count').text(number);
-        })
-        // $('.check-goodsdelete').on('click', function(e) {
-        //     $(this).parent().remove();
-        // });
+        $('input[name="select-goods"]').on('click', function(e) {
+                var num = parseInt($('.check-trans-rmb').text());
+                var number = parseInt($('.check-count').text());
+                var price = $(this).parents('tr').find('.price-rmbs').text();
+                var cartId = $(this).data('cart');
+                if (!this.checked) {
+                    $("#J_SelectAllCbx1").prop("checked", false);
+                    num -= parseInt(price);
+                    number -= 1;
+                    var index = hasCheckedBoxes.indexOf(cartId);
+                    if (index > -1) {
+                        hasCheckedBoxes.splice(index, 1);
+                    }
+                } else {
+                    num += parseInt(price);
+                    number += 1;
+                    hasCheckedBoxes.push(cartId);
+                }
+                $('.check-trans-rmb').text(num);
+                $('.check-count').text(number);
+            })
+            // $('.check-goodsdelete').on('click', function(e) {
+            //     $(this).parent().remove();
+            // });
 
         function J_Minus() {
             $('.J_Minus').bind('click', function(e) {
@@ -56,10 +69,10 @@ $(function() {
                     $(this).next()[0].value--;
                     var num = $('.text-amount').val();
                     var price = $(this).parents('.check').prev('.per-price').find('.price-rmb').text();
-                    $(this).parents('.check').next('.total-price').find('.price-rmbs').text(num*price);
+                    $(this).parents('.check').next('.total-price').find('.price-rmbs').text(num * price);
                     if (parseInt($(this).next()[0].value) === 1) {
-                            $(this).addClass('no-minus');
-                        }
+                        $(this).addClass('no-minus');
+                    }
                 } else {
                     $(this).addClass('no-minus');
                 }
@@ -75,7 +88,7 @@ $(function() {
                     $(this).prev()[0].value++;
                     var num = $('.text-amount').val();
                     var price = $(this).parents('.check').prev('.per-price').find('.price-rmb').text();
-                    $(this).parents('.check').next('.total-price').find('.price-rmbs').text(num*price);
+                    $(this).parents('.check').next('.total-price').find('.price-rmbs').text(num * price);
                     if (parseInt($(this).prev()[0].value) === storeNumber) {
                         $(this).addClass('no-plus');
                     }
@@ -85,12 +98,12 @@ $(function() {
             });
         };
         $('#editCount').on('click', function() {
-            $(this).toggleClass('editCount');
+            $(this).toggleClass('editCount'); //逻辑
             if ($(this).hasClass('editCount')) {
                 $('#cartContainer .cartCount').each(function(index, ele) {
-                    ele.readOnly = false;                    
+                    ele.readOnly = false;
                     $('#editCount').text('完成编辑');
-                    $('#editCount').addClass('doneEdit');
+                    $('#editCount').addClass('doneEdit'); //样式
                 });
                 $('.J_Plus').bind('click', J_Plus());
                 $('.J_Minus').bind('click', J_Minus());
@@ -99,46 +112,50 @@ $(function() {
                     ele.readOnly = true;
                 });
                 $('.J_Plus').unbind('click');
-                $('.J_Minus').unbind('click');                
-                $.when(doneEdit()).done(function(){
-                    $.when(updateCart()).done(function(){
-                        
+                $('.J_Minus').unbind('click');
+                $.when(doneEdit()).done(function() {
+                    $.when(updateCart()).done(function() {
+
                         alert('更新购物车');
-                       
-                   });
-                        
-                  
-                   
+
+                    });
+
+
+
                 });
-                
+
             }
         });
-        function doneEdit(){
+
+        function doneEdit() {
             $('#editCount').removeClass('doneEdit');
             $('#editCount').text('编辑数量');
         };
+
         function updateCart(tag) {
-            var dtd=$.Deferred();
+            var dtd = $.Deferred();
             var itemVos = [];
             var tag;
-            $('#cartContainer .lineCart').each(function(index,ele){
-                var itemVo ={"sku":{}};
+            $('#cartContainer .lineCart').each(function(index, ele) {
+                var itemVo = {
+                    "sku": {}
+                };
                 var $id = $(ele)[0].id;
                 var $cartCount = $(ele).find('.cartCount').val();
-                var $color=$($(ele).find('.sed .color')[0]).text();
+                var $color = $($(ele).find('.sed .color')[0]).text();
                 itemVo["sku"]["color"] = $color;
                 itemVo["cartCount"] = $cartCount;
-                itemVo["id"]=$id;
+                itemVo["id"] = $id;
                 itemVos.push(itemVo);
-                
+
             });
-            
+
             var params = {
                 "authenticityToken": $('input[name=authenticityToken]').val(),
-                itemVos:  JSON.stringify(itemVos)
+                itemVos: JSON.stringify(itemVos)
             }
-            
-           // var data = JSON.stringify(itemVos);
+
+            // var data = JSON.stringify(itemVos);
             $.ajax({
 
                 type: "post",
@@ -149,27 +166,40 @@ $(function() {
                     if (data.code != 200) {
                         //alert('加入购物车失败');
                         return;
-                    }else if(data.code === 200){
+                    } else if (data.code === 200) {
                         tag = true;
                         dtd.resolve(tag);
                     }
-                    
+
                 }
 
             });
             return dtd.promise(tag);
-            
+
 
         };
         $('.to-buy').on('click', function() {
-            /*if(!validEditDone()){
+            var that = this;
+            if (!validEditDone()) {
                 alert('请完成商品数量编辑');
-            }*/
-            if (validCheckBox()) {
-                var checkLines =[];
-                checkLines = seletcCheckBox();
-                postToPay(checkLines);                
+                $(this).attr('href', 'javascript:void(0);');
+                return;
+            } else {
+                if (hasCheckedBoxes.length > 0) {
+                    $.when(checkedToPay(hasCheckedBoxes)).done(function() {
+                        $(that).attr('href', '/user/cart/stepTwo');
+                    }).fail(function() {
+                        alert("跳转失败");
+                        $(that).attr('href', 'javascript:void(0);');
+                        return;
+                    });
+                } else {
+                    alert('未选择商品');
+                    $(that).attr('href', 'javascript:void(0);');
+                    return;
+                }
             }
+
         });
 
         //删除购物车里的条目
@@ -232,7 +262,7 @@ function printCartHtml() {
             var color = obj.sku.color;
             var quantity = obj.sku.quantity;
             var perTotalPrice = cartCount * retailPrice;
-            var $titledt = $("<td class='ring-in'><div class='cart-goods-checkbox'><input class='J_CheckBoxShop' type='checkbox' name='select-goods'  value='true'></div><div><a target='_blank' href='/item/" + obj.id + "' class='at-in'><img src='" + picUrl + "' class='img-responsive' alt=''></a><div class='sed'><p class='detailCart><span class='brand'>" + brandName + "</span><span class='title'>" + title + "</span><span class='color'>" + color + "</span></p></div></div><div class='clearfix'></div></td>");
+            var $titledt = $("<td class='ring-in'><div class='cart-goods-checkbox'><input data-cart='" + obj.id + "' class='J_CheckBoxShop' type='checkbox' name='select-goods'  value='true'></div><div><a target='_blank' href='/item/" + obj.id + "' class='at-in'><img src='" + picUrl + "' class='img-responsive' alt=''></a><div class='sed'><p class='detailCart><span class='brand'>" + brandName + "</span><span class='title'>" + title + "</span><span class='color'>" + color + "</span></p></div></div><div class='clearfix'></div></td>");
             var $basedd = $("<td class='per-price'><div class='check_price'>¥<span class='price-rmb'>" + retailPrice + "</span></div></td>");
             var $skudd = $("<td class='check'><div class='amount-wrapper'><div class='item-amount '><a class='J_Minus minus no-minus updateVal'>-</a><input type='text' data-id='" + itemId + "' value='" + cartCount + "' class='cartCount text text-amount J_ItemAmount' data-max='" + quantity + "' data-now='2' autocomplete='off'><a class='updateVal J_Plus plus'>+</a></div><div class='amount-msg J_AmountMsg'></div></div></td>");
             var $totaldd = $("<td class='total-price'><div class='check_price allrmb'>¥<span class='price-rmbs'>" + perTotalPrice + "</span></div></td>");
@@ -248,20 +278,21 @@ function printCartHtml() {
             if ($itemdl) {
                 $('#cartContainer').append($itemdl);
             }
-            $('.cartCount')[0].readOnly=true;
+            $('.cartCount')[0].readOnly = true;
         });
         return dtd.resolve();
     }
-}
+};
 
-function addCntUploadCart(obj) {
-    //var params = JSON.stringify(obj)
+
+function checkedToPay(cartIds) {
     var dtd = $.Deferred();
-    var params = obj;
-    Tr.post('/retailer/cart/add', params, function(data) {
-
+    var cartIdArr = cartIds;
+    var params = {
+        "cartIds": cartIdArr.join(',')
+    };
+    Tr.post('/user/cart/stepTwo', params, function(data) {
         if (data.code != 200) {
-            /*alert('购物车失败');*/
             dtd.reject();
         } else {
             dtd.resolve();
@@ -270,17 +301,8 @@ function addCntUploadCart(obj) {
 
     });
     return dtd.promise();
-
 }
 
-function validCheckBox() {
-    $('#cartContainer .lineCart').each(function(index,ele){
-        if($(ele).find('input.J_CheckBoxShop').prop('checked')===true){
-            return true
-        }else{
-            continue;
-        }               
-                
-    });
-    return false;
-}
+function validEditDone() {
+    return !$('#editCount').hasClass('editCount');
+};
