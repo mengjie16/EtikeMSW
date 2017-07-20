@@ -49,14 +49,6 @@ import vos.ItemSearchVo;
 import vos.ItemVo;
 import vos.PriceRangeVo;
 
-/**
- * 
- * 商品信息
- * 
- * @author tr0j4n
- * @since v1.0
- * @created 2016年4月11日 下午8:13:55
- */
 public class Favorite implements Serializable {
 
     public static final String TABLE_NAME = "favorite";
@@ -74,8 +66,6 @@ public class Favorite implements Serializable {
     
     public String picUrl;
      
-   
-
     public static boolean save(Favorite favorite) {
         SqlSession ss = SessionFactory.getSqlSession();
         try {

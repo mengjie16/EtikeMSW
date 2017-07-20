@@ -201,7 +201,7 @@ GET     /retailer/edit                          RetailerController.edit
 GET     /retailer/address                       RetailerController.address
 GET     /retailer/finance                       RetailerController.finance
 GET     /retailer/pay                           RetailerController.payFor
-GET     /retailer/refund                    	  RetailerController.refund
+GET     /retailer/refund                    	RetailerController.refund
 GET     /retailer/order/list                    RetailerController.orderList
 GET     /retailer/order/info                    RetailerController.orderinfo
 GET     /retailer/logistics                     RetailerController.logistics
@@ -215,7 +215,7 @@ POST    /retailer/fee/pay                       RetailerController.payFee
 GET		/retailer/cart/query                    RetailerController.cart
 POST	/retailer/cart/remove                   RetailerController.cartRemove
 POST	/retailer/cart/add						RetailerController.cartAdd
-POST	/retailer/cart/updateCount				RetailerController.cartUpdateCount
+POST	/retailer/cart/updateBatchCount			RetailerController.cartUpdateBatchCount
 GET		/retailer/order/edit                    RetailerController.orderStepOne
 POST	/retailer/order/upload                  RetailerController.parseOrderFromExcel
 POST	/retailer/ordervo/parse                 RetailerController.parseOrderVo
@@ -239,7 +239,7 @@ GET     /user/authorize                         UserCenter.authorize
 
 GET     /user/order/list                        UserCenter.orderList
 GET     /user/cart                             	UserCenter.cart
-GET     /user/cart/stepTwo                      UserCenter.stepTwo
+POST    /user/cart/stepTwo                      UserCenter.stepTwo
 
 POST	/user/favorite/save						UserCenter.setFavorite
 POST	/user/favorite/delete					UserCenter.deleteFavorite
