@@ -246,21 +246,27 @@ public class UserCenter extends BaseController {
         renderArgs.put("retailerAddress", retailerAddress);
         
         
-//        Long[] catList= cartIds
-//            
-//        //2、支付方式
-//            
-//        //3、物流方式
-//            
-//        //4、商品清单
-//            
-//        //5.删除购物车
-//        if ( !MixHelper.isEmpty(catList)) {
-//            for(Cart cart : catList) {
-//                cart.delete(cart.id);
-//            }
-//        }
-//        
+        String[] cartIdsString= cartIds.split(",", -1);
+        List<Cart> cartList = null;
+        Cart cart = null ;
+        for(String s : cartIdsString){
+            cart = Cart.findById(Long.parseLong(s), user.id);
+            cartList.add(cart);
+        }
+            
+        //2、支付方式
+            
+        //3、物流方式
+            
+        //4、商品清单
+            
+        //5.删除购物车
+        if ( !MixHelper.isEmpty(cartList)) {
+            for(Cart c : cartList) {
+                cart.delete(c.id);
+            }
+        }
+        
         //6、结算信息
         
         render();
