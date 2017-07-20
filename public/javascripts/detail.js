@@ -10,9 +10,9 @@ $(window).load(function() {
 });
 
 function initBase() {
-    var mid = $('.container').attr('mid');
+    var mid = $('#single .container').attr('mid');
     Tr.get('/user/favorite/hasSetFavorite', {
-        "id": mid
+        "itemId": mid
     }, function(data) {
         if (data.code != 200) {
             alert(data.msg);
@@ -70,7 +70,7 @@ function initBase() {
             "favorite.itemId": itemId,
             "favorite.retailPrice" : parseInt($('#single .container #detailRmb').text().substring(1)),
             "favorite.title" : $('#single .container #detailTitle').text(),
-            "favorite.picUrl" : $('#single .container').find('div.picUrl img').eq(0).attr('src')
+            "favorite.picUrl" : "//cdn.tusibaby.com/o_1b1jigcebu4r16741duu1hua6ju.jpg"
         };
         Tr.post('/user/favorite/save', params, function(data) {
 

@@ -18,8 +18,8 @@ public interface FavoriteMapper {
 
     int insert(Favorite favorite);
     
-    @Select("select * from " + Retailer.TABLE_NAME + " retailer_id = ${retailerId} and item_id=#{itemId}")
-    Retailer selectById(@Param("itemId") long itemId,@Param("retailerId") long retailerId);
+    @Select("select count(*) from " + Favorite.TABLE_NAME + " where retailer_id = #{retailerId} and item_id=#{itemId}")
+    int selectById(@Param("itemId") long itemId,@Param("retailerId") long retailerId);
     
     
 }
