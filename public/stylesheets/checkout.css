@@ -135,11 +135,12 @@ a#editCount {
     color: #FFF;
     background: #52D0C4;
     margin: 0.5em 1em 0;
-    font-size: 1em;
+    font-size: 13px;
     display: inline-block;
     line-height: 1.6em;
     text-align: center;
     text-decoration: none;
+    float: right;
 }
 a#editCount:hover {
     background: #52bfd0;
