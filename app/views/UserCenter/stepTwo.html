@@ -14,21 +14,21 @@
         #{authenticityToken/}
             <h3 class="bar_tit">1、收货信息</h3>
             <div class="line20"></div>
-            <div class="order-addresslist">
+            <div class="order-addresslist" id="${addr.id}">
                 <div class="order-address">
                     <div class="icon-add">
                     </div>
                     <p class="new-tit new-p-re">
-                        <span class="new-txt">小叮当</span>
-                        <span class="new-txt-rd2">159****1622</span>
+                        <span class="new-txt" id="user-name">${addr.name}</span>
+                        <span class="new-txt-rd2" id="user-phone">${addr.phone}</span>
                     </p>
                     <div class="new-mu_l2a new-p-re">
                         <p class="new-mu_l2cw">
                             <span class="title">收货地址：</span>
-                            <span class="province">湖北</span>省
-                            <span class="city">武汉</span>市
-                            <span class="dist">洪山</span>区
-                            <span class="street">雄楚大道666号(中南财经政法大学)</span>
+                            <span class="province">${addr.province}</span>省
+                            <span class="city">${addr.city}</span>市
+                            <span class="dist">${addr.region}</span>区
+                            <span class="street">${addr.address}</span>
                         </p>
                     </div>
                 </div>
@@ -45,23 +45,20 @@
             <ul class="item_box">
                 <li>
                     <label>
-                        <input name="express_id" type="radio" onclick="FreightAmountTotal(this);" value="1">
-                        <input name="express_price" type="hidden" value="20.00">拼箱
-                        <span>费用：20.00元</span>
+                        <input name="express_id" type="radio" onclick="FreightAmountTotal(this);" value="1">拼箱
+                        <span>费用：￥</span><span class="Validform_checktip">20</span>
                     </label>
                 </li>
                 <li>
                     <label>
-                        <input name="express_id" type="radio" onclick="FreightAmountTotal(this);" value="2" datatype="*" sucmsg=" ">
-                        <input name="express_price" type="hidden" value="14.00">postnl
-                        <span>费用：14.00元</span><span class="Validform_checktip"></span>
+                        <input name="express_id" type="radio" onclick="FreightAmountTotal(this);" value="2" datatype="*" sucmsg=" ">postnl
+                        <span>费用：￥</span><span class="Validform_checktip">14</span>
                     </label>
                 </li>
                 <li>
                     <label>
-                        <input name="express_id" type="radio" onclick="FreightAmountTotal(this);" value="2" datatype="*" sucmsg=" ">
-                        <input name="express_price" type="hidden" value="14.00">阳关清关
-                        <span>费用：34.00元</span><span class="Validform_checktip"></span>
+                        <input name="express_id" type="radio" onclick="FreightAmountTotal(this);" value="3" datatype="*" sucmsg=" ">阳关清关
+                        <span>费用：￥</span><span class="Validform_checktip">14</span>
                     </label>
                 </li>
             </ul>
@@ -76,38 +73,29 @@
                         <th width="80" align="center">尺寸</th>
                         <th width="80" align="center">单价</th>
                         <th width="80" align="center">数量</th>
-                        <th width="80" align="center">优惠</th>
                         <th width="100" align="center">金额小计</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
+                <tbody id="stepContainer">
+                    #{list items:cartList, as : 'cart'}
+                    <tr mid="${cart.id}">
                         <td>
-                            <a target="_blank" href="single.html"><img src="images/03.jpg" class="img"></a>
+                            <a target="_blank" href="single.html"><img src="${cart.img}" class="img"></a>
                         </td>
-                        <td><a target="_blank" href="single.html">FORMILA plus 福美乐出生段奶粉Pre段</a></td>
-                        <td align="center">
-                            <input name="goods_color" type="hidden" value="">
+                        <td><a target="_blank" href="single.html" class="cartTitle">${cart.title}</a></td>
+                        <td align="center" class="cartColor">
+                            ${cart.color}
                         </td>
-                        <td align="center">
-                            + 10
+                        <td align="center">￥<span class="cartPrice">${cart.price}</span>
                         </td>
-                        <td align="center">￥5500.00
-                            <input name="goods_price" type="hidden" value="5500.00">
-                        </td>
-                        <td align="center">1</td>
-                        <td align="center">￥
-                            <label name="discount_amount">5500</label>
-                        </td>
+                        <td align="center" class="cartCount">${cart.count}</td>
                         <td align="center">
                             <font color="#FF0000" size="2">￥
-                                <label name="real_amount">5500</label>
+                                <label name="real_amount">${cart.totalPrice}</label>
                             </font>
                         </td>
-                        <td>
-                            <input id="car_id" name="car_id" type="hidden" value="63">
-                        </td>
                     </tr>
+                    #{/list}
                 </tbody>
             </table>
             <h3 class="bar_tit">5、结算信息</h3>
@@ -119,25 +107,21 @@
                 </div>
                 <div class="right" style="text-align:right;line-height:40px;">
                     商品件数：
-                    <font color="#FF0000">1</font> 件 总积分：
-                    <font color="#FF0000">10</font> 分 商品金额：
+                    <font color="#FF0000" id="cartNum">${totalCount}</font> 件 商品金额：
                     <font color="#FF0000">￥
-                        <label id="goods_amount">5500</label>
+                        <label id="goods_amount">${totalPrice}</label>
                     </font> + 运费：
                     <font color="#FF0000">￥
-                        <label id="express_fee">0.00</label>
-                    </font> + 支付手续费：
-                    <font color="#FF0000">￥
-                        <label id="payment_fee">0.00</label>
+                        <label id="express_fee">0</label>
                     </font>
                     <br>
-                    <b class="font18">应付总金额：<font color="#FF0000">￥<label id="order_amount">5500</label></font></b>
-                    <input id="txtFee" type="hidden" name="fee" value="2"/>
+                    <b class="font18">应付总金额：<font color="#FF0000">￥<label id="order_amount">${totalPrice}</label></font></b>
+                    <input id="txtFee" type="hidden" name="fee" value=""/>
                 </div>
             </div>
             <div class="line20"></div>
             <div class="right">
-            <a id="btnSubmit" class="btn btn-success marL10">确认提交</a>
+            <a id="btnSubmit" class="btn btn-success marL10">付款</a>
             </div>
             <div class="clear"></div>
         </form>
@@ -147,15 +131,21 @@
             <!--标题 -->
             <div class="am-cf am-padding">
                 <div class="am-fl am-cf">
-                    <strong class="am-text-danger am-text-lg">新增地址</strong>/
-                    <small>Add&nbsp;address</small>
+                    <strong class="am-text-danger am-text-lg">其他地址</strong>/
+                    <small>Other&nbsp;address</small>
                 </div>
             </div>
             <hr/>
             <div class="am-u-md-12 am-u-lg-8" style="margin-top: 20px;">
                 <select class="select" name="" id="addressSelects" style="width:260px;">
-									<option value="others">其他</option>
-								</select>
+					<option value="others">其他</option>
+				</select>
+            </div>
+            <div class="am-form-group">
+                <div class="am-u-sm-9 am-u-sm-push-2" id="btnSubmitAdd">
+                    <a class="am-btn am-btn-danger btnSave">保存</a>
+                    <a href="javascript: void(0)" class="am-close am-btn am-btn-danger" data-am-modal-close>取消</a>
+                </div>
             </div>
         </div>
     </div>
