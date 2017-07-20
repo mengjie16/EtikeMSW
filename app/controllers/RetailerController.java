@@ -37,10 +37,14 @@ import controllers.annotations.UserLogonSupport;
 import controllers.base.BaseController;
 import controllers.base.secure.Secure;
 import enums.AliPayTradeStatus;
+import enums.ItemStatus;
 import enums.TradeStatus;
 import enums.constants.CacheType;
 import models.RetailerAddress;
 import models.AliPayTrade;
+import models.Cart;
+import models.Favorite;
+import models.Item;
 import models.Order;
 import models.Retailer;
 import models.Supplier;
@@ -103,11 +107,17 @@ public class RetailerController extends BaseController {
     public static void cart() {
         // 用户信息获取
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
-        String key = CacheType.RETAILER_CART_INFO.getKey(user.phone);
-        List<ItemVo> cartItems = (List<ItemVo>) CacheUtils.get(key);
-        if (MixHelper.isEmpty(cartItems)) {
-            cartItems = Lists.newArrayList();
+        List<Cart> cartItems = Cart.findList(user.id);
+        
+        //hide offline item.
+        List<Cart> res = null;
+        for(Cart cart : cartItems){
+            Item item = Item.findBaseInfoById(cart.itemId);
+            if(item.status == ItemStatus.ONLINE){
+                res.add(cart);
+            }
         }
+        
         renderJson(cartItems);
     }
 
@@ -121,100 +131,32 @@ public class RetailerController extends BaseController {
      * @created 2016年7月14日 下午3:06:46
      */
     @UserLogonSupport(value = "RETAILER")
-    public static void cartRemove(@Required @Min(1) long itemId, int count) {
-        // 用户信息获取
-        User user = renderArgs.get(Secure.FIELD_USER, User.class);
-        String key = CacheType.RETAILER_CART_INFO.getKey(user.phone);
-        List<ItemVo> cartItems = (List<ItemVo>) CacheUtils.get(key);
-        if (MixHelper.isEmpty(cartItems)) {
-            renderFailedJson(ReturnCode.FAIL);
-        }
+    public static void cartRemove(@Required @Min(1) long id) {
         // 移除购物车
-        boolean remove = false;
-        List<ItemVo> lastCartItems = Lists.newArrayList();
-        Iterator<ItemVo> iterator = cartItems.iterator();
-        while (iterator.hasNext()) {
-            ItemVo iv = iterator.next();
-            if (iv.id == itemId) {
-                if (count > 0) {
-                    iv.cartCount -= count;
-                } else {
-                    iv.cartCount = 0;
-                }
-                remove = true;
-            }
-            if (iv.cartCount > 0) {
-                lastCartItems.add(iv);
-            }
-        }
-        if (remove) {
-            CacheUtils.set(key, lastCartItems, CacheType.RETAILER_CART_INFO.expiredTime);
+        if (Cart.delete(id)) {
             renderSuccessJson();
         }
-        renderFailedJson(ReturnCode.FAIL);
+        renderFailedJson(ReturnCode.FAIL, "删除购物车失败");
     }
     
     @UserLogonSupport(value = "RETAILER")
-    public static void cartAdd(@Required @Valid ItemVo itemVo) {
+    public static void cartAdd(@Required @Valid Cart cart) {
         handleWrongInput(true);
-        
-        // 用户信息获取
-        User user = renderArgs.get(Secure.FIELD_USER, User.class);
-        String key = CacheType.RETAILER_CART_INFO.getKey(user.phone);
-        
-        // 添加购物车
-        List<ItemVo> cartItems = (List<ItemVo>) CacheUtils.get(key);
-        
-        boolean exist = false;
-        if ( !MixHelper.isEmpty(cartItems)) {
-            Iterator<ItemVo> iterator = cartItems.iterator();
-            while (iterator.hasNext()) {
-                ItemVo iv = iterator.next();
-                if (iv.id == itemVo.id  && StringUtils.equals(iv.sku.color, itemVo.sku.color)){
-                    iv.cartCount += itemVo.cartCount;
-                    exist = true;
-                    break;
-                }
-            }
-            if(exist == false){
-                cartItems.add(itemVo);
-            }
+        if(Cart.save(cart)){
+            renderSuccessJson();
         }
-        else{
-            cartItems = Lists.newArrayList();
-            cartItems.add(itemVo);
-        }
-        CacheUtils.set(key, cartItems, CacheType.RETAILER_CART_INFO.expiredTime);
-        
-        renderSuccessJson();
+        renderFailedJson(ReturnCode.FAIL, "添加购物车失败");
     }
     
     @UserLogonSupport(value = "RETAILER")
-    public static void cartUpdateCount(@Required @Valid String itemVos) {
-        handleWrongInput(true);
-        
-       List<ItemVo> itemVOList= (List<ItemVo>)JSONArray.toList(JSONArray.fromObject(itemVos), ItemVo.class);
-        
-        // 用户信息获取
-        User user = renderArgs.get(Secure.FIELD_USER, User.class);
-        String key = CacheType.RETAILER_CART_INFO.getKey(user.phone);
-        
-        // 更新购物车
-        List<ItemVo> cartItems = (List<ItemVo>) CacheUtils.get(key);
-        if ( !MixHelper.isEmpty(cartItems)) {
-        	for(ItemVo itemVo : itemVOList) {
-	            Iterator<ItemVo> iterator = cartItems.iterator();
-	            while (iterator.hasNext()) {
-	                ItemVo iv = iterator.next();               
-		                if (iv.id == itemVo.id &&StringUtils.equals(iv.sku.color, itemVo.sku.color)) {
-		                        iv.cartCount = itemVo.cartCount;
-		                        break;
-		                }
-	                }
-            }
+    public static void cartUpdateBatchCount(@Required @Valid String carts) {
+       handleWrongInput(true);
+      
+       List<Cart> catList= (List<Cart>)JSONArray.toList(JSONArray.fromObject(carts), Cart.class);
+       
+        for(Cart cart : catList) {
+            cart.updateCount(cart.cartCount, cart.id);
         }
-        
-        CacheUtils.set(key, cartItems, CacheType.RETAILER_CART_INFO.expiredTime);
         
         renderSuccessJson();
     }
@@ -282,6 +224,14 @@ public class RetailerController extends BaseController {
         renderArgs.put("addressList", list);
         render();
     }
+    
+    @UserLogonSupport(value = "RETAILER")
+    public static void addressList() {
+        User user = renderArgs.get(Secure.FIELD_USER, User.class);
+        List<RetailerAddress> list = RetailerAddress.findListByRetailerId((int) user.id);
+        renderJson(list);
+    }
+    
     
     @UserLogonSupport(value = "RETAILER")
     public static void addressSave(@Required @Valid RetailerAddress address) {

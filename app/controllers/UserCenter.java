@@ -1,14 +1,18 @@
 package controllers;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aton.config.ReturnCode;
+import com.aton.util.CacheUtils;
+import com.aton.util.MixHelper;
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
@@ -18,12 +22,16 @@ import controllers.annotations.UploadSupport;
 import controllers.annotations.UserLogonSupport;
 import controllers.base.BaseController;
 import controllers.base.secure.Secure;
+import enums.ItemStatus;
 import enums.constants.CacheType;
 import enums.constants.ErrorCode;
 import enums.constants.RegexConstants;
+import models.Cart;
 import models.Favorite;
+import models.Item;
 import models.RetailerAddress;
 import models.User;
+import net.sf.json.JSONArray;
 import play.data.validation.Email;
 import play.data.validation.Match;
 import play.data.validation.MaxSize;
@@ -120,7 +128,17 @@ public class UserCenter extends BaseController {
     @UploadSupport
     public static void storeList() {
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
-        List<Favorite> res = Favorite.findList(user.id);
+        List<Favorite> favorites = Favorite.findList(user.id);
+        
+        //hide offline item.
+        List<Favorite> res = null;
+        for(Favorite favor : favorites){
+            Item item = Item.findBaseInfoById(favor.itemId);
+            if(item.status == ItemStatus.ONLINE){
+                res.add(favor);
+            }
+        }
+        
         renderArgs.put("favoriteList", res);
         render();
     }
@@ -217,23 +235,34 @@ public class UserCenter extends BaseController {
      * @created 2015-4-9 下午3:22:12
      */
     @UserLogonSupport
-    public static void stepTwo(@Required List<ItemVo> itemVos) {
-        //1、收货信息
+    public static void stepTwo(@Required String cartIds) {
+        handleWrongInput(true);
+        
+        // 0.用户信息获取
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
+        
+        //1、收货信息
         RetailerAddress retailerAddress = RetailerAddress.findByDefaultAddress((int)user.id);
-        
-            
-        //2、支付方式
-            
-        //3、物流方式
-            
-        //4、商品清单
-        //        List<ItemVo>
-            
-        
-        //5、结算信息
-        
         renderArgs.put("retailerAddress", retailerAddress);
+        
+        
+//        Long[] catList= cartIds
+//            
+//        //2、支付方式
+//            
+//        //3、物流方式
+//            
+//        //4、商品清单
+//            
+//        //5.删除购物车
+//        if ( !MixHelper.isEmpty(catList)) {
+//            for(Cart cart : catList) {
+//                cart.delete(cart.id);
+//            }
+//        }
+//        
+        //6、结算信息
+        
         render();
     }
 
