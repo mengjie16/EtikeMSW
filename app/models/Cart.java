@@ -1,7 +1,9 @@
 package models;
 
+import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 
 import org.apache.ibatis.session.SqlSession;
@@ -11,7 +13,7 @@ import com.aton.db.SessionFactory;
 import models.mappers.CartMapper;
 import models.mappers.FavoriteMapper;
 
-public class Cart {
+public class Cart implements Serializable {
 
     public static final String TABLE_NAME = "cart";
     /** 自增主键 */
@@ -25,6 +27,7 @@ public class Cart {
     public long brandId;
     
     /* 购物车价格 */
+    @Transient
     public int cartPrice;
  
     /* 商品规格 */
@@ -46,11 +49,12 @@ public class Cart {
         SqlSession ss = SessionFactory.getSqlSession();
         try {
             CartMapper mapper = ss.getMapper(CartMapper.class);
-            int id = mapper.selectByItemIdAndColor(cart.itemId, cart.skuColor);
-            if(id > 0){
-                mapper.updateCount(cart.cartCount+1, id);
+            Cart existCart= mapper.selectByItemIdAndColor(cart.itemId, cart.skuColor);
+            if(existCart != null){
+                mapper.updateCount(cart.cartCount+existCart.cartCount, existCart.id);
+            }else{
+                mapper.insert(cart);
             }
-            mapper.insert(cart);
             return true;
         }  finally {
             ss.close();
@@ -104,6 +108,16 @@ public class Cart {
             ss.close();
         }
         
+    }
+
+    
+    public int getCartPrice() {
+        return cartPrice;
+    }
+
+    
+    public void setCartPrice(int cartPrice) {
+        this.cartPrice = cartPrice;
     }
     
     

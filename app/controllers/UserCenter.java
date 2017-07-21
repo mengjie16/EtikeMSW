@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -131,7 +132,7 @@ public class UserCenter extends BaseController {
         List<Favorite> favorites = Favorite.findList(user.id);
         
         //hide offline item.
-        List<Favorite> res = null;
+        List<Favorite> res = new ArrayList<Favorite>();
         for(Favorite favor : favorites){
             Item item = Item.findBaseInfoById(favor.itemId);
             if(item.status == ItemStatus.ONLINE){

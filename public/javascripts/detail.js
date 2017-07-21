@@ -108,15 +108,15 @@ function initBase() {
         var totalPriceRMB = parseInt($('#single .container #detailRmb').text().substring(1))*cnt;
         var totalPriceEUR = parseInt($('#single .container #detailEur').text().substring(1))*cnt;
         var params = {
-            "itemVo.id": itemId,
-            "itemVo.sku.color":$getColor.text(),
-            "itemVo.picUrl" : $('#single .container').find('div.picUrl img').eq(0).attr('src'),
-            "itemVo.cartCount" : $('#single .container input[name="cartAccount"]').val(),
-            "itemVo.retailPrice" : parseInt($('#single .container #detailRmb').text().substring(1)),
-            "itemVo.cny2eur":parseInt($('#single .container #detailEur').text().substring(1)),
-            "itemVo.cartPrice" : totalPriceRMB,
-            "itemVo.title" : $('#single .container #detailTitle').text(),
-            "itemVo.brand.name" : $('#single .container #detailBrand').text()
+            "cart.itemId": itemId,
+            "cart.skuColor":$getColor.text(),
+            "cart.picUrl" : $('#single .container').find('div.picUrl img').eq(0).attr('src'),
+            "cart.cartCount" : $('#single .container input[name="cartAccount"]').val(),
+            "cart.retailPrice" : parseInt($('#single .container #detailRmb').text().substring(1)),
+            "cart.cny2eur":parseInt($('#single .container #detailEur').text().substring(1)),
+            "cart.cartPrice" : totalPriceRMB,
+            "cart.title" : $('#single .container #detailTitle').text(),
+            "cart.brandId":$('#single .container #brandId').val()
         };
         Tr.post('/retailer/cart/add', params, function(data) {
 

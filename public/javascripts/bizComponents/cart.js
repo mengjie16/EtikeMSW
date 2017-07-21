@@ -130,41 +130,34 @@ $(function() {
         function doneEdit() {
             $('#editCount').removeClass('doneEdit');
             $('#editCount').text('编辑数量');
-        };
+        }
 
         function updateCart(tag) {
             var dtd = $.Deferred();
-            var itemVos = [];
+            var carts = [];
             var tag;
             $('#cartContainer .lineCart').each(function(index, ele) {
-                var itemVo = {
-                    "sku": {}
-                };
+                var cart = {};
                 var $id = $(ele)[0].id;
                 var $cartCount = $(ele).find('.cartCount').val();
-                var $color = $($(ele).find('.sed .color')[0]).text();
-                itemVo["sku"]["color"] = $color;
-                itemVo["cartCount"] = $cartCount;
-                itemVo["id"] = $id;
-                itemVos.push(itemVo);
+                cart["cartCount"] = $cartCount;
+                cart["id"] = $id;
+                carts.push(cart);
 
             });
 
             var params = {
                 "authenticityToken": $('input[name=authenticityToken]').val(),
-                itemVos: JSON.stringify(itemVos)
-            }
+                carts: JSON.stringify(carts)
+            };
 
-            // var data = JSON.stringify(itemVos);
             $.ajax({
-
                 type: "post",
-                url: '/retailer/cart/updateCount',
+                url: '/retailer/cart/updateBatchCount',
                 data: params,
                 success: function(data) {
 
                     if (data.code != 200) {
-                        //alert('加入购物车失败');
                         return;
                     } else if (data.code === 200) {
                         tag = true;
@@ -175,9 +168,8 @@ $(function() {
 
             });
             return dtd.promise(tag);
+        }
 
-
-        };
         $('.to-buy').on('click', function() {
             var that = this;
             if (!validEditDone()) {
@@ -210,7 +202,7 @@ $(function() {
             }
             Tr.post('/retailer/cart/remove', {
                 'authenticityToken': $('input[name=authenticityToken]').val(),
-                'itemId': id
+                'id': id
             }, function(data) {
                 if (data.code != 200) return;
                 CART.cartCache = new Array();
@@ -253,21 +245,22 @@ function printCartHtml() {
     if (CART.cartCache.length > 0) {
         $('#cartContainer').empty();
         $.each(CART.cartCache, function(index, obj) {
-            var itemId = obj.id;
+            var id = obj.id;
+            var itemId = obj.itemId;
             var brandName = obj.brand.name;
             var cartCount = obj.cartCount;
             var picUrl = obj.picUrl;
             var retailPrice = obj.retailPrice;
             var title = obj.title;
-            var color = obj.sku.color;
-            var quantity = obj.sku.quantity;
+            var color = obj.skuColor;
+            var quantity = obj.skuQuantity;
             var perTotalPrice = cartCount * retailPrice;
-            var $titledt = $("<td class='ring-in'><div class='cart-goods-checkbox'><input data-cart='" + obj.id + "' class='J_CheckBoxShop' type='checkbox' name='select-goods'  value='true'></div><div><a target='_blank' href='/item/" + obj.id + "' class='at-in'><img src='" + picUrl + "' class='img-responsive' alt=''></a><div class='sed'><p class='detailCart><span class='brand'>" + brandName + "</span><span class='title'>" + title + "</span><span class='color'>" + color + "</span></p></div></div><div class='clearfix'></div></td>");
+            var $titledt = $("<td class='ring-in'><div class='cart-goods-checkbox'><input data-cart='" + id + "' class='J_CheckBoxShop' type='checkbox' name='select-goods'  value='true'></div><div><a target='_blank' href='/item/" + itemId + "' class='at-in'><img src='" + picUrl + "' class='img-responsive' alt=''></a><div class='sed'><p class='detailCart><span class='brand'>" + brandName + "</span><span class='title'>" + title + "</span><span class='color'>" + color + "</span></p></div></div><div class='clearfix'></div></td>");
             var $basedd = $("<td class='per-price'><div class='check_price'>¥<span class='price-rmb'>" + retailPrice + "</span></div></td>");
             var $skudd = $("<td class='check'><div class='amount-wrapper'><div class='item-amount '><a class='J_Minus minus no-minus updateVal'>-</a><input type='text' data-id='" + itemId + "' value='" + cartCount + "' class='cartCount text text-amount J_ItemAmount' data-max='" + quantity + "' data-now='2' autocomplete='off'><a class='updateVal J_Plus plus'>+</a></div><div class='amount-msg J_AmountMsg'></div></div></td>");
             var $totaldd = $("<td class='total-price'><div class='check_price allrmb'>¥<span class='price-rmbs'>" + perTotalPrice + "</span></div></td>");
-            var $fundd = $("<td data-id='" + obj.id + "' class='check-goodsdelete delete'>删除</td>");
-            var $itemdl = $("<tr class='lineCart' id='" + obj.id + "'></tr>");
+            var $fundd = $("<td data-id='" + id + "' class='check-goodsdelete delete'>删除</td>");
+            var $itemdl = $("<tr class='lineCart' id='" + id + "'></tr>");
             $itemdl.append($titledt);
             $itemdl.append($basedd);
             $itemdl.append($skudd);

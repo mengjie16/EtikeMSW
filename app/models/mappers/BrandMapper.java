@@ -22,7 +22,7 @@ import vos.BrandSearchVo;
 public interface BrandMapper {
 
     @Select("select * from " + Brand.TABLE_NAME + " where id=#{id} limit 1")
-    Brand selectById(long id);
+    Brand selectById(@Param("id") long id);
     
     @Select("select * from " + Brand.TABLE_NAME + " where ${field}=#{value} limit 1")
     Brand selectByField(@Param("field") String field, @Param("value") Object value);
