@@ -179,7 +179,7 @@ $(function() {
             } else {
                 if (hasCheckedBoxes.length > 0) {
                     $.when(checkedToPay(hasCheckedBoxes)).done(function() {
-                        $(that).attr('href', '/user/cart/stepTwo');
+                        /*$(that).attr('href', '/user/cart/stepTwo');*/
                     }).fail(function() {
                         alert("跳转失败");
                         $(that).attr('href', 'javascript:void(0);');
@@ -284,7 +284,7 @@ function checkedToPay(cartIds) {
     var params = {
         "cartIds": cartIdArr.join(',')
     };
-    Tr.post('/user/cart/stepTwo', params, function(data) {
+    Tr.post('/user/cart/confirmOrder', params, function(data) {
         if (data.code != 200) {
             dtd.reject();
         } else {
