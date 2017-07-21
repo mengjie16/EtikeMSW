@@ -13,13 +13,8 @@ $(function(){
 	// 		};
 	// 		printCartHtml();
 	// },{loadingMask:false});
-$('#popup').on('click',function(){
-	$('#doc-modal-1').openModal();
 
-
-
-})
-	/*$('.otherAdd').on('click',function () {
+	$('.otherAdd').on('click',function () {
 		Tr.get('/retailer/address/addressList', {}, function(data) {
 			if (data.code != 200 || !data.results) return;
 			CART.sendLoactionTempCache = data.results;
@@ -45,6 +40,7 @@ $('#popup').on('click',function(){
             $('.city').text(obj.city);
             $('.dist').text(obj.region);
             $('.street').text(obj.address);
+           
         },
         error: function(ex) {
             console.log('can not get the address');
@@ -90,7 +86,7 @@ $('#popup').on('click',function(){
 			$('#payForm').submit();
 		});
 		
-	});*/
+	});
 });
 // function printCartHtml() {
 // 	if(CART.cartCache.length>0){
@@ -122,14 +118,14 @@ $('#popup').on('click',function(){
 function printSendLocationTempHtml() {
 	var $loactions = $('#addressSelects');
 	$loactions.find('option').slice(1).remove();
-	/*$.each(CART.sendLoactionTempCache, function(index, location) {
-		var locatintxt = location.country +
+	$.each(CART.sendLoactionTempCache, function(index, location) {
+		var locatintxt = location.name +' '+location.phone+' '+location.country +
 			location.province +
 			location.city +
 			location.region +
 			location.address;
 		$loactions.append("<option value='" + location.id + "'>" + locatintxt + "</option>");
-	});*/
+	});
 }
 function FreightAmountTotal(obj) {
 	var price = parseInt(obj.siblings('.Validform_checktip').text());
