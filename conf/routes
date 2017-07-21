@@ -239,7 +239,8 @@ GET     /user/authorize                         UserCenter.authorize
 
 GET     /user/order/list                        UserCenter.orderList
 GET     /user/cart                             	UserCenter.cart
-POST    /user/cart/stepTwo                      UserCenter.stepTwo
+GET    /user/cart/stepTwo                      UserCenter.stepTwo
+POST    /user/cart/confirmOrder                  UserCenter.confirmOrder
 
 POST	/user/favorite/save						UserCenter.setFavorite
 POST	/user/favorite/delete					UserCenter.deleteFavorite

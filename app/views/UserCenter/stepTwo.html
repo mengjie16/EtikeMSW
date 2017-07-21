@@ -80,11 +80,11 @@
                     #{list items:cartList, as : 'cart'}
                     <tr mid="${cart.id}">
                         <td>
-                            <a target="_blank" href="single.html"><img src="${cart.img}" class="img"></a>
+                            <a target="_blank" href="single.html"><img src="${cart.picUrl}" class="img"></a>
                         </td>
                         <td><a target="_blank" href="single.html" class="cartTitle">${cart.title}</a></td>
                         <td align="center" class="cartColor">
-                            ${cart.color}
+                            ${cart.skuColor}
                         </td>
                         <td align="center">￥<span class="cartPrice">${cart.retailPrice}</span>
                         </td>

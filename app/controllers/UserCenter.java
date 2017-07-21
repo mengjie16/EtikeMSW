@@ -55,6 +55,8 @@ import vos.ItemVo;
 public class UserCenter extends BaseController {
 
     private static final Logger log = LoggerFactory.getLogger(UserCenter.class);
+    
+    private static String[] globalCartIds = null;
 
     /**
      * 
@@ -234,9 +236,10 @@ public class UserCenter extends BaseController {
      * @since v1.0
      * @author tr0j4n
      * @created 2015-4-9 下午3:22:12
+     * 
      */
     @UserLogonSupport
-    public static void stepTwo(@Required String cartIds) {
+    public static void confirmOrder(@Required String cartIds) {
         handleWrongInput(true);
         
         // 0.用户信息获取
@@ -247,9 +250,23 @@ public class UserCenter extends BaseController {
         renderArgs.put("addr", retailerAddress);
         
         String[] cartIdsString= cartIds.split(",", -1);
+        globalCartIds = cartIdsString;
+        renderSuccessJson();
+    }
+    @UserLogonSupport
+    public static void stepTwo() {
+        handleWrongInput(true);
+        
+        // 0.用户信息获取
+        User user = renderArgs.get(Secure.FIELD_USER, User.class);
+        
+        //1、收货信息
+        RetailerAddress retailerAddress = RetailerAddress.findByDefaultAddress((int)user.id);
+        renderArgs.put("addr", retailerAddress);
+        
         List<Cart> cartList = new ArrayList<Cart>();
         Cart cart = null ;
-        for(String s : cartIdsString){
+        for(String s : globalCartIds){
             cart = Cart.findById(Long.parseLong(s), user.id);
             if(cart!=null){
                 cartList.add(cart);
@@ -271,7 +288,7 @@ public class UserCenter extends BaseController {
 //        }
         
         //6、结算信息
-        
+      
         render();
     }
 
