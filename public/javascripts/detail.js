@@ -69,7 +69,7 @@ function initBase() {
             "favorite.itemId": itemId,
             "favorite.retailPrice" : parseInt($('#single .container #detailRmb').text().substring(1)),
             "favorite.title" : $('#single .container #detailTitle').text(),
-            "favorite.picUrl" : "//cdn.tusibaby.com/o_1b1jigcebu4r16741duu1hua6ju.jpg"
+            "favorite.picUrl" : $('#single .container').find('div.picUrl img').eq(0).attr('src')
         };
         Tr.post('/user/favorite/save', params, function(data) {
 
