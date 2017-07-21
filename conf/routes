@@ -231,6 +231,7 @@ POST 	/retailer/address/save					RetailerController.addressSave
 GET 	/retailer/address/get					RetailerController.addressGet
 POST 	/retailer/address/delete				RetailerController.addressDelete
 POST	/retailer/address/updateDefaultAddress	RetailerController.addressUpdateDefault
+GET 	/retailer/address/addressList			RetailerController.addressList
 
 # 用户公共路由
 GET     /user/storeList                         UserCenter.storeList
