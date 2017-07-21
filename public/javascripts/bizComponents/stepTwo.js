@@ -13,11 +13,17 @@ $(function(){
 	// 		};
 	// 		printCartHtml();
 	// },{loadingMask:false});
-	$('.otherAdd').on('click',function () {
-		Tr.get('/retailer/address/get', {}, function(data) {
+$('#popup').on('click',function(){
+	$('#doc-modal-1').openModal();
+
+
+
+})
+	/*$('.otherAdd').on('click',function () {
+		Tr.get('/retailer/address/addressList', {}, function(data) {
 			if (data.code != 200 || !data.results) return;
 			CART.sendLoactionTempCache = data.results;
-			printSendLocationTempHtml();
+			printSendLocationTempHtml(CART.sendLoactionTempCache);
 		}, {
 			loadingMask: false
 		});
@@ -84,7 +90,7 @@ $(function(){
 			$('#payForm').submit();
 		});
 		
-	});
+	});*/
 });
 // function printCartHtml() {
 // 	if(CART.cartCache.length>0){
@@ -116,14 +122,14 @@ $(function(){
 function printSendLocationTempHtml() {
 	var $loactions = $('#addressSelects');
 	$loactions.find('option').slice(1).remove();
-	$.each(CART.sendLoactionTempCache, function(index, location) {
+	/*$.each(CART.sendLoactionTempCache, function(index, location) {
 		var locatintxt = location.country +
 			location.province +
 			location.city +
 			location.region +
 			location.address;
 		$loactions.append("<option value='" + location.id + "'>" + locatintxt + "</option>");
-	});
+	});*/
 }
 function FreightAmountTotal(obj) {
 	var price = parseInt(obj.siblings('.Validform_checktip').text());
