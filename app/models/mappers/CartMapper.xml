@@ -10,10 +10,9 @@
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			retailer_id,
 			item_id,
-			brand_id
-			cart_price,
+			brand_id,
 			sku_color,
-			sku_quantity
+			sku_quantity,
 			cart_count,
 			retail_price,
 			title,
@@ -23,10 +22,9 @@
 			#{retailerId},
 			#{itemId},
 			#{brandId},
-			#{cartPrice},
 			#{skuColor},
 			#{skuQuantity},
-			#{cartCount}
+			#{cartCount},
 			#{retailPrice},
 			#{title},
 			#{picUrl}

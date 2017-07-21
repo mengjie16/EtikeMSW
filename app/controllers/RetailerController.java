@@ -60,6 +60,7 @@ import play.data.validation.Required;
 import play.mvc.With;
 import utils.TSFileUtil;
 import vos.AddressVo;
+import vos.CartVo;
 import vos.ItemVo;
 import vos.OrderProductResult;
 import vos.OrderVo;
@@ -110,7 +111,7 @@ public class RetailerController extends BaseController {
         List<Cart> cartItems = Cart.findList(user.id);
         
         //hide offline item.
-        List<Cart> res = null;
+        List<Cart> res = new ArrayList<Cart>();
         for(Cart cart : cartItems){
             Item item = Item.findBaseInfoById(cart.itemId);
             if(item.status == ItemStatus.ONLINE){
@@ -118,7 +119,9 @@ public class RetailerController extends BaseController {
             }
         }
         
-        renderJson(cartItems);
+        List<CartVo> cartVos = CartVo.valueOfcartList(res);
+        
+        renderJson(cartVos);
     }
 
     /**
@@ -142,6 +145,8 @@ public class RetailerController extends BaseController {
     @UserLogonSupport(value = "RETAILER")
     public static void cartAdd(@Required @Valid Cart cart) {
         handleWrongInput(true);
+        User user = renderArgs.get(Secure.FIELD_USER, User.class);
+        cart.retailerId = (int) user.id;
         if(Cart.save(cart)){
             renderSuccessJson();
         }

@@ -41,7 +41,9 @@
             </div>
             <div class="col-md-8 single-top-in">
                 <div class="single-para simpleCart_shelfItem">
-                    <h1><span style="color:#52D0C4;font-size:18px" id="detailBrand">
+                    <h1>
+                        <input type="hidden" id="brandId" value="${item?.brand?.id}"/>
+                        <span style="color:#52D0C4;font-size:18px" id="detailBrand">
 							${item?.brand?.getMainSubName()?'['+item?.brand?.getMainSubName()+']':''}
 						</span>
 						<span id="detailTitle">${item?.title}</span></h1>
