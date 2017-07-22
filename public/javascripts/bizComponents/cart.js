@@ -291,6 +291,8 @@ function checkedToPay(cartIds) {
         if (data.code != 200) {
             dtd.reject();
         } else {
+            var tradeId = data.results;
+            window.location.href="/user/cart/stepTwo?tradeId="+tradeId; 
             dtd.resolve();
         }
 
