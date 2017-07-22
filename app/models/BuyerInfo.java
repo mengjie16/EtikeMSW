@@ -30,4 +30,17 @@ public class BuyerInfo {
 
     public BuyerInfo() {
     }
+
+    public BuyerInfo(String name, String contact, String province, String city, String region, String address, int provinceId) {
+        super();
+        this.name = name;
+        this.contact = contact;
+        this.province = province;
+        this.city = city;
+        this.region = region;
+        this.address = address;
+        this.provinceId = provinceId;
+    }
+    
+    
 }

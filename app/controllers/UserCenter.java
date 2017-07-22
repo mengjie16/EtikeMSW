@@ -30,6 +30,7 @@ import enums.constants.RegexConstants;
 import models.Cart;
 import models.Favorite;
 import models.Item;
+import models.Order;
 import models.RetailerAddress;
 import models.User;
 import net.sf.json.JSONArray;
@@ -257,32 +258,17 @@ public class UserCenter extends BaseController {
     
     
     @UserLogonSupport
-    public static void stepTwo() {
+    public static void stepTwo(@Required @Valid long tradeId) {
         handleWrongInput(true);
         
-        // 0.用户信息获取
-        User user = renderArgs.get(Secure.FIELD_USER, User.class);
-        
-        //1、收货信息
-        RetailerAddress retailerAddress = RetailerAddress.findByDefaultAddress((int)user.id);
-        renderArgs.put("addr", retailerAddress);
-        
-        long totalCartPrice=0;
-        
-        List<Cart> cartList = new ArrayList<Cart>();
-        Cart cart = null ;
-        for(String s : globalCartIds){
-            cart = Cart.findById(Long.parseLong(s), user.id);
-            if(cart!=null){
-                cartList.add(cart);
-                totalCartPrice += cart.cartPrice;
-            }
+        long totalOrderPrice = 0;
+        List<Order> orderList = Order.findListByTradeId(tradeId);
+        for(Order s : orderList){
+            totalOrderPrice += s.cargoFee;
         }
-        
-        List<CartVo> cartVos = CartVo.valueOfcartList(cartList);
             
-        renderArgs.put("cartList", cartVos);
-        renderArgs.put("totalCartPrice", totalCartPrice);
+        renderArgs.put("orderList", orderList);
+        renderArgs.put("totalOrderPrice", totalOrderPrice);
         
         //2、支付方式
             
