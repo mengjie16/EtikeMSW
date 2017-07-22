@@ -397,32 +397,7 @@ public class ManagerController extends BaseController {
         render();
     }
     
-    /**
-     * 
-     * 编辑或发布商品信息页面
-     *
-     * @param id
-     * @since v1.0
-     * @author tr0j4n
-     * @created 2016年5月7日 上午12:14:30
-     */
-    @UploadSupport
-    @UserLogonSupport
-    public static void itemManaCreate(long id) {
-        // 用户信息获取
-        User user = renderArgs.get(Secure.FIELD_USER, User.class);
-        // 编辑或发布
-        ItemVo item = Item.itemDetailCacheById(id);
-        if (item != null) {
-            renderArgs.put("item", item);
-        }
-        // 供应商运费模板
-        List<FreightTemp> freightTemps = FreightTemp.findUserFreightTempAllInCache(user.userId);
-        if (freightTemps != null) {
-            renderArgs.put("supFreightTemps", freightTemps);
-        }
-        render();
-    }
+    
 
     /**
      * 管理员保存商品
