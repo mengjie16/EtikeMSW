@@ -76,7 +76,6 @@
                         <th width="64"></th>
                         <th align="left">商品名称</th>
                         <th width="110" align="center">分类</th>
-                        <th width="80" align="center">尺寸</th>
                         <th width="80" align="center">单价</th>
                         <th width="80" align="center">数量</th>
                         <th width="100" align="center">金额小计</th>
@@ -84,13 +83,14 @@
                 </thead>
                 <tbody id="stepContainer">
                     #{list items:cartList, as : 'cart'}
+               
                     <tr mid="${cart.id}">
                         <td>
                             <a target="_blank" href="single.html">
                                 <img src="${cart.picUrl}" class="img">
                             </a>
                         </td>
-                        <td><a target="_blank" href="single.html" class="cartTitle">${cart.title}</a>
+                        <td><a target="_blank" href="single.html" class="cartTitle">${cart.brand.name+'['+cart.title+']'}</a>
                         </td>
                         <td align="center" class="cartColor">
                             ${cart.skuColor}
@@ -121,7 +121,7 @@
                     商品件数：
                     <font color="#FF0000" id="cartNum">${totalCount}</font>件 商品金额：
                     <font color="#FF0000">￥
-                        <label id="goods_amount">${totalPrice}</label>
+                        <label id="goods_amount">${cart.cartPrice}</label>
                     </font>+ 运费：
                     <font color="#FF0000">￥
                         <label id="express_fee">0</label>

@@ -45,7 +45,7 @@ $(function(){
             $('.city').text(obj.city);
             $('.dist').text(obj.region);
             $('.street').text(obj.address);
-           $("#btnSubmitAdd .closePopUp").click();
+            $("#btnSubmitAdd .closePopUp").click();
             
 
             

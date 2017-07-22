@@ -107,10 +107,14 @@ function initBase() {
         var cnt =$('#single .container input[name="cartAccount"]').val();
         var totalPriceRMB = parseInt($('#single .container #detailRmb').text().substring(1))*cnt;
         var totalPriceEUR = parseInt($('#single .container #detailEur').text().substring(1))*cnt;
+        var purl=$('#single .container').find('div.picUrl img').eq(0).attr('src');
+        if(!purl){
+            purl = 'http://img0.imgtn.bdimg.com/it/u=2517962916,2542239999&fm=214&gp=0.jpg';
+        }
         var params = {
             "cart.itemId": itemId,
             "cart.skuColor":$getColor.text(),
-            "cart.picUrl" : $('#single .container').find('div.picUrl img').eq(0).attr('src'),
+            "cart.picUrl" : purl,
             "cart.cartCount" : $('#single .container input[name="cartAccount"]').val(),
             "cart.retailPrice" : parseInt($('#single .container #detailRmb').text().substring(1)),
             "cart.cny2eur":parseInt($('#single .container #detailEur').text().substring(1)),
