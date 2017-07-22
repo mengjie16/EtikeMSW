@@ -29,6 +29,7 @@ import com.google.common.collect.Lists;
 import com.taobao.api.internal.util.WebUtils;
 
 import controllers.annotations.UploadSupport;
+import controllers.annotations.UserLogonSupport;
 import controllers.base.BaseController;
 import controllers.base.secure.Secure;
 import enums.ItemStatus;
@@ -161,7 +162,10 @@ public class ManagerController extends BaseController {
     public static void articleManage() {
         render();
     }
+    
 
+    
+    
     /**
      * 文章编辑
      *
@@ -376,17 +380,44 @@ public class ManagerController extends BaseController {
      * @created 2016年5月25日 下午4:17:02
      */
     @UploadSupport
-    public static void itemManaEdit(@Required @Min(0) long id) {
+    public static void itemManaEdit(long id) {
         handleWrongInput(true);
         ItemVo item = Item.itemDetailCacheById(id);
-        if (item == null) {
-            renderFailedJson(ReturnCode.WRONG_INPUT, "商品不存在");
+        if (item != null) {
+            renderArgs.put("item", item);
+            List<ReferUrl> rerferList = ReferUrl.getDefaultList();           
+            renderArgs.put("rerferUrls", rerferList);
         }
-        List<ReferUrl> rerferList = ReferUrl.getDefaultList();
-        renderArgs.put("item", item);
-        renderArgs.put("rerferUrls", rerferList);
+        
         // 供应商运费模版
-        List<FreightTemp> freightTemps = FreightTemp.findUserFreightTempAllInCache(item.supplierId);
+        /*List<FreightTemp> freightTemps = FreightTemp.findUserFreightTempAllInCache(item.supplierId);
+        if (freightTemps != null) {
+            renderArgs.put("supFreightTemps", freightTemps);
+        }*/
+        render();
+    }
+    
+    /**
+     * 
+     * 编辑或发布商品信息页面
+     *
+     * @param id
+     * @since v1.0
+     * @author tr0j4n
+     * @created 2016年5月7日 上午12:14:30
+     */
+    @UploadSupport
+    @UserLogonSupport
+    public static void itemManaCreate(long id) {
+        // 用户信息获取
+        User user = renderArgs.get(Secure.FIELD_USER, User.class);
+        // 编辑或发布
+        ItemVo item = Item.itemDetailCacheById(id);
+        if (item != null) {
+            renderArgs.put("item", item);
+        }
+        // 供应商运费模板
+        List<FreightTemp> freightTemps = FreightTemp.findUserFreightTempAllInCache(user.userId);
         if (freightTemps != null) {
             renderArgs.put("supFreightTemps", freightTemps);
         }
