@@ -9,9 +9,11 @@
             <span style="float: right"><a href="/user/cart">返回</a>
             </span>
         </div>
+        <div>订单号</div>
         <form id="payForm" method="post" target="_blank" action="/retailer/fee/pay">
             #{authenticityToken/}
             <h3 class="bar_tit">1、收货信息</h3>
+
             <div class="line20"></div>
             <div class="order-addresslist" id="${addr.id}">
                 <div class="order-address">
@@ -121,13 +123,13 @@
                     商品件数：
                     <font color="#FF0000" id="cartNum">${totalCount}</font>件 商品金额：
                     <font color="#FF0000">￥
-                        <label id="goods_amount">${cart.cartPrice}</label>
+                        <label id="goods_amount">${totalCartPrice}</label>
                     </font>+ 运费：
                     <font color="#FF0000">￥
                         <label id="express_fee">0</label>
                     </font>
                     <br>
-                    <b class="font18">应付总金额：<font color="#FF0000">￥<label id="order_amount">${totalPrice}</label></font></b>
+                    <b class="font18">应付总金额：<font color="#FF0000">￥<label id="order_amount"></label></font></b>
                     <input id="txtFee" type="hidden" name="fee" value="" />
                 </div>
             </div>
