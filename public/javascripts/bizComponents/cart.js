@@ -81,8 +81,8 @@ $(function() {
 
         function J_Plus() {
             $('.J_Plus').bind('click', function(e) {
-                //var storeNumber = $($(this).prev()[0]).data('max');
-                var storeNumber = 100;
+                var storeNumber = $($(this).prev()[0]).data('max');
+                //var storeNumber = 100;
                 $(this).prev().prev().removeClass('no-minus');
                 if ($(this).prev()[0].value < storeNumber) {
                     $(this).prev()[0].value++;
