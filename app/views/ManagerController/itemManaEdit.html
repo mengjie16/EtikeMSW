@@ -14,7 +14,7 @@
 			<div class="error_panel" style="padding-left: 198px;color: #f00;line-height: 33px">
 				${flash?.error}
 			</div>
-			<form action="/supplier/item/save" id="formComm" method="post">
+			<form action="/sys/item/save" id="formComm" method="post">
 				#{authenticityToken/}
 				<input class="inputText" type="hidden" value="${item?.id}" name="item.id"/>
 				<div class="form_line">
@@ -124,13 +124,7 @@
 				<div class="form_line">
 					<label class="lbl">产地</label>
 					<div class="controls" id="regionControls">
-						<input type="hidden" />
-						<div class="search-sel"> <b></b>
-							<input type="text" class="inputText" value="${item?.origin?item.origin:'中国'}" name="item.origin" id="placePro"/>
-							<div class="selectboxs" id="placeList">
-								<ul></ul>
-							</div>
-						</div>
+						<input type="text" class="inputText" value="${item?.origin?item.origin:'德国'}" name="item.origin" id="placePro"/>
 					</div>
 					<div for="placePro" class="validateLine clearfix"></div>
 				</div>

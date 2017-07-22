@@ -2,10 +2,10 @@ CDT = {
 	token: null,
 	uptoken: null,
 	ue: null,
-	h5ue: null,
 	uploadImgCache: new Array(),
 	suggestSearchCache: {},
 	placeSearchCache: {},
+	brandSearchCache:{},
 	provinceCache: {},
 	cityCache: {},
 	regionCache: {},
@@ -18,6 +18,7 @@ CDT = {
 $.validator.setDefaults({
 	ignore: ""
 });
+
 //发布商品的表单验证
 function ValidateOpts() {
 	// 校验规则
@@ -77,7 +78,7 @@ function ValidateOpts() {
 				required: true,
 				number: '库存',
 				digits: true
-			},
+			}
 		},
 		success: function(label, element) {}
 	}
@@ -93,34 +94,38 @@ function initBase(argument) {
 		$('.selectboxs').hide();
 	});
 
-	//选择品牌弹框
-	$(document).on('click', '.chooseBrand', function() {
+$(document).on('click', '.chooseBrand', function() {
 		$('#brandInput').val('');
-		printBrandHTMLbyCache();
-		Tr.popup('addBrand');
-	});
-	//关闭弹框
-	$('.wnd_Close_Icon').click(function() {
-		$(this).parents('.popWrapper').hide();
-		$('html').removeClass('overflow-hidden');
-	});
-	//选择品牌
-	$(document).on('hover', '.brandList ul li', function() {
-		$(this).find('.tip').toggle();
-	});
-	$(document).on('click', '.brandList ul li>span', function() {
-		var brands = $('.brandList ul li>span');
-		if (brands > 1) {
-			$('.brandList ul li>span').removeClass('active');
+		$('#brandList ul').empty();
+		// 先查缓存	
+		if (CDT.brandSearchCache && CDT.brandSearchCache.length > 0) {
+			$.each(CDT.brandSearchCache, function(index, obj) {
+				$('#brandList ul').append("<li class='cateitem' data-id='" + obj.id + "'>" + obj.name + "</li>");
+			});
+		} else {
+			Tr.get('/dpl/brand/all', {}, function(data) {
+				if (data.code != 200 || !data.results || data.results.length <= 0) return;
+				CDT.brandSearchCache = data.results;
+				$.each(data.results, function(index, obj) {
+					$('#brandList ul').append("<li class='cateitem' data-id='" + obj.id + "'>" + obj.name + "</li>");
+				});
+			}, {
+				loadingMask: false
+			});
 		}
+		Tr.popup('addCate');
+	});
+	//选择类目
+	$(document).on('click', '.brandList ul li', function() {
+		$('.brandList ul li').removeClass('active');
 		$(this).toggleClass('active');
 	});
-	//显示品牌
-	$('#btnConfirm').on('click', function() {
-		$('.brandList ul li>span').each(function(index, obj) {
+	//显示类目
+	$('#btnCatefirm').on('click', function() {
+		$('.brandList ul li').each(function(index, obj) {
 			if ($(obj).hasClass('active')) {
 				var text = $(obj).text();
-				var id = $(obj).parent().attr('data-id');
+				var id = $(obj).attr('data-id');
 				$('#brandTxt').val(id).removeAttr('aria-required').removeAttr('aria-invalid').removeAttr('aria-describedby').removeClass('error');
 				$('div[name="valbrand"]').children('span').remove();
 				// $('#formComm').valid();
@@ -128,26 +133,41 @@ function initBase(argument) {
 				$('#showBrand').show().prev().hide();
 				$(this).parents('.popWrapper').hide();
 				$('html').removeClass('overflow-hidden');
-				$('.brandList ul li>span').removeClass('active');
-
+				$('.cateList ul li').removeClass('active');
 			}
 		});
 	});
-	//删除品牌
+	//删除类目
 	$('#delBrand').on('click', function() {
 		$(this).parent().hide();
 		$(this).prev().text('');
 		$('#brandTxt').val('');
 		$(this).parent().prev().show();
 	});
-	//查询品牌
-	$('#searchBrandBtn').on('click', function() {
-		printBrandHTMLbyCache();
-	});
-	$('#brandInput').on('keypress', function(e) {
-		if (e.keyCode == 13) {
-			printBrandHTMLbyCache();
-		}
+	//查询类目
+	$('#brandInput').on('click', function() {
+		$(this).val('');
+		var $container = $('#brandList');
+		if (!$container.length) return true;
+		$items = $container.find('li'),
+			$item = $(),
+			itemsIndexed = [];
+		$items.each(function() {
+			itemsIndexed.push($(this).text().replace(/\s{2,}/g, ' ').toLowerCase());
+		});
+		$items.show();
+		$(this).on('keyup', function(e) {
+			var searchVal = $.trim($(this).val()).toLowerCase();
+			if (searchVal.length) {
+				for (var i in itemsIndexed) {
+					$item = $items.eq(i);
+					if (itemsIndexed[i].indexOf(searchVal) != -1)
+						$item.show();
+					else
+						$item.hide();
+				}
+			} else $items.show();
+		});
 	});
 
 
@@ -228,36 +248,6 @@ function initBase(argument) {
 			} else $items.show();
 		});
 	});
-	// 宝贝产地模糊查询
-	$('#placePro').on('keyup', function() {
-		var kw = $(this).val();
-		if (!kw || kw.length < 1) {
-			$('#placeList').hide();
-			return;
-		}
-		// 先查缓存	
-		if (CDT.placeSearchCache[kw] && CDT.placeSearchCache[kw].length > 0) {
-			printPlaceHTMLbyCache(kw, true);
-		} else {
-			Tr.get('/dpl/origin/search', {
-				'keyWord': kw
-			}, function(data) {
-				if (data.code != 200 || !data.results || data.results.length <= 0) return;
-				CDT.placeSearchCache[kw] = data.results;
-				printPlaceHTMLbyCache(kw, true);
-			}, {
-				loadingMask: false
-			});
-		}
-	});
-
-	$(document).on('click', '.selectboxs li', function() {
-		var text = $(this).text();
-		var id = $(this).attr('data-id');
-		$('#cateTxt').val(id);
-		$(this).parent().parent().prev().val(text);
-		$('.selectboxs').hide();
-	});
 
 	// 增加规格条件描述项
 	$(document).on('click', '#addSpec', function(event) {
@@ -321,16 +311,7 @@ function initBase(argument) {
 		}
 	});
 }
-// 输出产地内容
-function printPlaceHTMLbyCache(key, trimEmpty) {
-	if (trimEmpty && trimEmpty == true) {
-		$('#placeList ul').empty();
-	}
-	$.each(CDT.placeSearchCache[key], function(index, obj) {
-		$('#placeList ul').append("<li data-id='" + obj.id + "'>" + obj.name + "</li>");
-	});
-	$('#placeList').show();
-}
+
 // 输出品牌内容
 function printBrandHTMLbyCache() {
 	var kw = $('#brandInput').val();
@@ -361,10 +342,12 @@ $(function() {
 	});
 
 	CDT.ue.addListener('ready', function(editor) {
-		$('#edui346_state').unbind();
-		$('#edui346_body').unbind().find('.edui-box').html('');
-		loadUpToken_u('edui346_body');
+		$('#edui139_state').unbind();
+		$('#edui139_body').unbind().find('.edui-box').html('');
+		loadUpToken_u('edui139_body');
 	});
+
+	
 	// 初始化数据
 	initBase();
 	loadUpToken();
@@ -373,7 +356,9 @@ $(function() {
 	$('#btnSubmit').click(function() {
 		// PC详情设置
 		$('#itemDetail').val(CDT.ue.getContent());
+
 		var validator = $('#formComm').validate(ValidateOpts());
+
 		if (!validator.form()) {
 			var height = $('span.error').eq(0).offset().top;
 			$(window).scrollTop(height-30);
@@ -396,7 +381,6 @@ $(function() {
 				$('#formComm').append("<input type='hide' name='item.skus[" + index + "].quantity' value='" + quantity + "'/>");
 			}
 		});
-
 		$(window).unbind('beforeunload');
 		$('#formComm').submit();
 	});
