@@ -146,7 +146,7 @@ public class RetailerController extends BaseController {
     public static void cartAdd(@Required @Valid Cart cart) {
         handleWrongInput(true);
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
-        cart.retailerId = (int) user.id;
+        cart.retailerId = (int) user.id;       
         if(Cart.save(cart)){
             renderSuccessJson();
         }
@@ -160,7 +160,7 @@ public class RetailerController extends BaseController {
        List<Cart> catList= (List<Cart>)JSONArray.toList(JSONArray.fromObject(carts), Cart.class);
        
         for(Cart cart : catList) {
-            cart.updateCount(cart.cartCount, cart.id);
+            cart.update(cart);
         }
         
         renderSuccessJson();
