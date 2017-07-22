@@ -41,6 +41,7 @@ import play.data.validation.Required;
 import play.data.validation.URL;
 import play.mvc.With;
 import utils.SmsUtil;
+import vos.CartVo;
 import vos.ItemVo;
 
 /**
@@ -272,8 +273,10 @@ public class UserCenter extends BaseController {
                 cartList.add(cart);
             }
         }
+        
+        List<CartVo> cartVos = CartVo.valueOfcartList(cartList);
             
-        renderArgs.put("cartList", cartList);
+        renderArgs.put("cartList", cartVos);
         //2、支付方式
             
         //3、物流方式
