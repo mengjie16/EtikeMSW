@@ -110,6 +110,11 @@ public class Cart implements Serializable {
         }
         
     }
+    
+    
+    public  String sku(){
+        return this.skuColor + this.skuQuantity;
+    }
 
   
     
