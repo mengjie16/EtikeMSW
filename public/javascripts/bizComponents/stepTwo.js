@@ -128,7 +128,7 @@ function printSendLocationTempHtml() {
 	});
 }
 function FreightAmountTotal(obj) {
-	var price = parseInt(obj.siblings('.Validform_checktip').text());
+	var price = parseInt($(obj).siblings('.Validform_checktip').text());
 	$('#express_fee').text(price);
 	$('#order_amount').text(price+parseInt($('#goods_amount').text()));
 	$('#txtFee').val(price+parseInt($('#goods_amount').text()));
