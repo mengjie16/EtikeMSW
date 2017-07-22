@@ -30,7 +30,6 @@
 			num,
 			origin,
 			out_no,
-			deliver_type,
 			retail_price,
 			supply_price,
 			net_weight,
@@ -64,7 +63,7 @@
 			#{num},
 			#{origin},
 			#{outNo},
-			#{deliverType},
+			
 			#{retailPrice},
 			#{supplyPrice},
 			#{netWeight},
@@ -119,9 +118,7 @@
 			<if test="outNo != null">
 				out_no = #{outNo},
 			</if>
-			<if test="deliverType != null">
-				deliver_type = #{deliverType},
-			</if>
+			
 			<if test="retailPrice != 0">
 				retail_price = #{retailPrice},
 			</if>

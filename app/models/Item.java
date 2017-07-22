@@ -90,8 +90,7 @@ public class Item implements Serializable {
     /** 商家自己的编码，货号 */
     public String outNo;
     /** 发货方式 */
-    @Required
-    public DeliverType deliverType;
+    
     /** 计量单位，如瓶、罐、袋 */
     public String unit;
     /** 建议零售价 */
