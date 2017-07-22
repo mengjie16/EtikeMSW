@@ -28,7 +28,7 @@ time, mark, audio, video {
 ol, ul { list-style: none; }
 ul, li { list-style: none outside none; }
 
-input {margin:0px; padding:0px; font-size:0px; line-height:0px; width:13px; height:13px; border:0px; vertical-align:top;}
+input {margin:0px; padding:0px; font-size:0px; line-height:0px; width:13px; height:13px;  vertical-align:top;}
 input.text {width:117px;height:19px; border:1px solid #d7d7d7;  top:0px; font-size:12px; line-height:19px;}
 
 hr { }

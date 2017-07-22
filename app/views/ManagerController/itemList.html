@@ -17,32 +17,22 @@
 				<form id="searchForm">
 					<div class="area_l">
 						<span class="txt_type01">货号</span>
-						<input type="text" class="text" style="width:150px;" value="" id="itemNum" name="itemNum" />
-						
+						<input type="text" class="text" style="width:140px;" value="" id="itemNum" name="itemNum" />
 					</div>
 					<div class="area_l">
 						<span class="txt_type01">标题</span>
-						<input type="text" class="text" style="width:150px;" value="" id="itemTitle" name="itemTitle" />
-						
+						<input type="text" class="text" style="width:140px;" value="" id="itemTitle" name="itemTitle" />
 					</div>
 					<div class="area_l">
 						<span class="txt_type01">状态</span>
-						<select class="text" style="width:150px;margin-top:1px;height: 22px" id="itemStatus">
+						<select class="text" style="width:140px;margin-top:1px;height: 22px" id="itemStatus">
 							<option value="ONLINE" selected="true">--在架--</option>
 							<option value="HIDE">--下架--</option>
 						</select>
 					</div>
 					<div class="area_l">
-						<span class="txt_type01">供应商</span>
-						<input type="text" class="text" style="width:150px;" value="" id="supplierKey" />
-					</div>
-					<div class="area_l">
-						<span class="txt_type01">品牌</span>
-						<input type="text" class="text" style="width:150px;" value="" id="brandKey" />
-					</div>
-					<div class="area_l">
 						<span class="txt_type01">商品ID</span>
-						<input type="text" class="text" style="width:150px;" value="" id="titleId" />
+						<input type="text" class="text" style="width:140px;" value="" id="titleId" />
 					</div>
 					<div class="area_r">
 						<div class="fl">
@@ -55,7 +45,8 @@
 		<!-- ListInfo -->
 		<div class="ListInfo">
 		#{authenticityToken/}
-			<div class="btn">
+			<div class="btns">
+				<a href="/supplier/item/edit" class="floatRight btnStd btnMedium mr6" id="addBtn">发布商品</a>
 				<a href="javascript:;" class="floatRight btnStd btnMedium mr6" id="deleteBtn">删除</a>
 			</div>
 		</div>
@@ -65,7 +56,7 @@
 					<thead>
 						<tr>
 							<th class="col" style="width:60px;">
-								<div class="thcell" style="text-align: left;padding:6px 0px 3px 6px"><input type="checkbox" id="choolseAll" /><span class="ml10">全选</span></div>
+								<div class="thcell" style="text-align: left;"><input type="checkbox" id="choolseAll" /><span class="ml10">全选</span></div>
 							</th>
 							<th scope="col">
 								<div class="thcell">商品ID</div>
