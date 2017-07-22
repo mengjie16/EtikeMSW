@@ -69,7 +69,7 @@ $(function() {
                     $(this).next()[0].value--;
                     var num = $('.text-amount').val();
                     var price = $(this).parents('.check').prev('.per-price').find('.price-rmb').text();
-                    $(this).parents('.check').next('.total-price').find('.price-rmbs').text(num * price);
+                    $(this).parents('.check').next('.cart-price').find('.price-rmbs').text(num * price);
                     if (parseInt($(this).next()[0].value) === 1) {
                         $(this).addClass('no-minus');
                     }
@@ -88,7 +88,7 @@ $(function() {
                     $(this).prev()[0].value++;
                     var num = $('.text-amount').val();
                     var price = $(this).parents('.check').prev('.per-price').find('.price-rmb').text();
-                    $(this).parents('.check').next('.total-price').find('.price-rmbs').text(num * price);
+                    $(this).parents('.check').next('.cart-price').find('.price-rmbs').text(num * price);
                     if (parseInt($(this).prev()[0].value) === storeNumber) {
                         $(this).addClass('no-plus');
                     }
@@ -140,8 +140,11 @@ $(function() {
                 var cart = {};
                 var $id = $(ele)[0].id;
                 var $cartCount = $(ele).find('.cartCount').val();
+                var $cartPrice = $(ele).find('.price-rmbs').text();
                 cart["cartCount"] = $cartCount;
                 cart["id"] = $id;
+                cart["cartPrice"] = $cartPrice;
+
                 carts.push(cart);
 
             });
@@ -254,11 +257,11 @@ function printCartHtml() {
             var title = obj.title;
             var color = obj.skuColor;
             var quantity = obj.skuQuantity;
-            var perTotalPrice = cartCount * retailPrice;
+            var cartPrice = cartCount * retailPrice;
             var $titledt = $("<td class='ring-in'><div class='cart-goods-checkbox'><input data-cart='" + id + "' class='J_CheckBoxShop' type='checkbox' name='select-goods'  value='true'></div><div><a target='_blank' href='/item/" + itemId + "' class='at-in'><img src='" + picUrl + "' class='img-responsive' alt=''></a><div class='sed'><p class='detailCart><span class='brand'>" + brandName + "</span><span class='title'>" + title + "</span><span class='color'>" + color + "</span></p></div></div><div class='clearfix'></div></td>");
             var $basedd = $("<td class='per-price'><div class='check_price'>¥<span class='price-rmb'>" + retailPrice + "</span></div></td>");
             var $skudd = $("<td class='check'><div class='amount-wrapper'><div class='item-amount '><a class='J_Minus minus no-minus updateVal'>-</a><input type='text' data-id='" + itemId + "' value='" + cartCount + "' class='cartCount text text-amount J_ItemAmount' data-max='" + quantity + "' data-now='2' autocomplete='off'><a class='updateVal J_Plus plus'>+</a></div><div class='amount-msg J_AmountMsg'></div></div></td>");
-            var $totaldd = $("<td class='total-price'><div class='check_price allrmb'>¥<span class='price-rmbs'>" + perTotalPrice + "</span></div></td>");
+            var $totaldd = $("<td class='cart-price'><div class='check_price allrmb'>¥<span class='price-rmbs'>" + cartPrice + "</span></div></td>");
             var $fundd = $("<td data-id='" + id + "' class='check-goodsdelete delete'>删除</td>");
             var $itemdl = $("<tr class='lineCart' id='" + id + "'></tr>");
             $itemdl.append($titledt);

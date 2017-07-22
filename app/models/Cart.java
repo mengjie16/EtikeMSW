@@ -27,7 +27,6 @@ public class Cart implements Serializable {
     public long brandId;
     
     /* 购物车价格 */
-    @Transient
     public int cartPrice;
  
     /* 商品规格 */
@@ -44,14 +43,16 @@ public class Cart implements Serializable {
     public String title;    
     
     public String picUrl;
-          
+    
     public static boolean save(Cart cart) {
         SqlSession ss = SessionFactory.getSqlSession();
         try {
             CartMapper mapper = ss.getMapper(CartMapper.class);
             Cart existCart= mapper.selectByItemIdAndColor(cart.itemId, cart.skuColor);
             if(existCart != null){
-                mapper.updateCount(cart.cartCount+existCart.cartCount, existCart.id);
+                existCart.cartCount = cart.cartCount + existCart.cartCount;
+                existCart.cartPrice = existCart.cartCount * existCart.retailPrice;
+                mapper.updateById(existCart);
             }else{
                 mapper.insert(cart);
             }
@@ -97,12 +98,12 @@ public class Cart implements Serializable {
     }
     
     
-    public static boolean updateCount(int count, long id) {
+    public static boolean update(Cart cart) {
         SqlSession ss = SessionFactory.getSqlSession();
         try {
             CartMapper mapper = ss.getMapper(CartMapper.class);
             
-            mapper.updateCount(count, id);
+            mapper.updateById(cart);
             return true;
         }  finally {
             ss.close();
@@ -110,18 +111,7 @@ public class Cart implements Serializable {
         
     }
 
-    
-    public int getCartPrice() {
-        return cartPrice;
-    }
-
-    
-    public void setCartPrice(int cartPrice) {
-        this.cartPrice = cartPrice;
-    }
-    
-    
-    
+  
     
     
     

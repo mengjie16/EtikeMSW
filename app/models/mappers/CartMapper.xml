@@ -16,7 +16,8 @@
 			cart_count,
 			retail_price,
 			title,
-			pic_url
+			pic_url,
+			cart_price
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			#{retailerId},
@@ -27,9 +28,23 @@
 			#{cartCount},
 			#{retailPrice},
 			#{title},
-			#{picUrl}
+			#{picUrl},
+			#{cartPrice}
 		</trim>
 	</insert>
-	
-	
+
+	<update id="updateById" parameterType="models.Cart">
+		update cart
+		<set>
+			<if test="cartCount != 0">
+				cart_count = #{cartCount},
+			</if>
+			
+			<if test="cartPrice != 0">
+				cart_price = #{cartPrice},
+			</if>
+			
+		</set>
+		where id = #{id}
+	</update>
 </mapper>

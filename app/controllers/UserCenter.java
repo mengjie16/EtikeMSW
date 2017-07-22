@@ -254,6 +254,8 @@ public class UserCenter extends BaseController {
         globalCartIds = cartIdsString;
         renderSuccessJson();
     }
+    
+    
     @UserLogonSupport
     public static void stepTwo() {
         handleWrongInput(true);
@@ -265,18 +267,23 @@ public class UserCenter extends BaseController {
         RetailerAddress retailerAddress = RetailerAddress.findByDefaultAddress((int)user.id);
         renderArgs.put("addr", retailerAddress);
         
+        long totalCartPrice=0;
+        
         List<Cart> cartList = new ArrayList<Cart>();
         Cart cart = null ;
         for(String s : globalCartIds){
             cart = Cart.findById(Long.parseLong(s), user.id);
             if(cart!=null){
                 cartList.add(cart);
+                totalCartPrice += cart.cartPrice;
             }
         }
         
         List<CartVo> cartVos = CartVo.valueOfcartList(cartList);
             
         renderArgs.put("cartList", cartVos);
+        renderArgs.put("totalCartPrice", totalCartPrice);
+        
         //2、支付方式
             
         //3、物流方式

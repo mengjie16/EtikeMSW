@@ -20,8 +20,7 @@ public interface CartMapper {
   
     int insert(Cart cart);
     
-    @Update("update " + Cart.TABLE_NAME + " set cart_count = #{cartCount} where id = #{id}")
-    void updateCount(@Param("cartCount") int cartCount, @Param("id")long id);
+    void updateById(Cart cart);
     
     
     @Delete("delete from "+ Cart.TABLE_NAME +" where id = #{id}")
