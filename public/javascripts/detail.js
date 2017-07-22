@@ -47,8 +47,8 @@ function initBase() {
         }
     });
     $('.J_Plus').on('click', function(e) {
-        //var storeNumber = $('.kucun').text();
-        var storeNumber = 100;
+        var storeNumber = $('.kucun').text();
+        //var storeNumber = 100;
         $(this).prev().prev().removeClass('no-minus');
         if ($(this).prev()[0].value < storeNumber) {
             $(this).prev()[0].value++;
