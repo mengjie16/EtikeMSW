@@ -13,8 +13,9 @@ $(function(){
 	// 		};
 	// 		printCartHtml();
 	// },{loadingMask:false});
-
+ 
 	$('.otherAdd').on('click',function () {
+		
 		Tr.get('/retailer/address/addressList', {}, function(data) {
 			if (data.code != 200 || !data.results) return;
 			CART.sendLoactionTempCache = data.results;
@@ -25,7 +26,11 @@ $(function(){
 	});
 	$(document).on('click', '#btnSubmitAdd .btnSave', function() {
 		var $option = $('#addressSelects').find('option:selected');
-    var id = $option.attr('value');
+	    var id = $option.attr('value');
+	    if(id==='others'){
+	    	alert('未选择地址');
+	    	return;
+	    }
 		$.ajax({
         url: "/retailer/address/get",
         data: {
@@ -40,7 +45,10 @@ $(function(){
             $('.city').text(obj.city);
             $('.dist').text(obj.region);
             $('.street').text(obj.address);
-           
+           $("#btnSubmitAdd .closePopUp").click();
+            
+
+            
         },
         error: function(ex) {
             console.log('can not get the address');
@@ -133,3 +141,15 @@ function FreightAmountTotal(obj) {
 	$('#order_amount').text(price+parseInt($('#goods_amount').text()));
 	$('#txtFee').val(price+parseInt($('#goods_amount').text()));
 } 
+function openModal(){
+	$('#doc-modal-1').modal({  
+/*        onConfirm: function() {  
+            var username=document.getElementById("username").value;  
+            var password=document.getElementById("password").value;  
+            alert("用户点击了提交，输入了用户名："+username+"，密码："+password+"，接下去一般是ajax提交表单");  
+        },  */
+        onCancel: function() {  
+            alert("用户点击了关闭按钮");  
+        }  
+    });  
+}
