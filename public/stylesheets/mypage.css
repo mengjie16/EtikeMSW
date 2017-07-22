@@ -260,7 +260,7 @@ table td .tdcell label{display:inline-block;margin:3px 3px 0;vertical-align:top}
 a.order_number{font-family:'Hiragino Sans GB','microsoft yahei',arial,sans-serif;}
 a.order_number:hover{color:#666;text-decoration:underline}
 
-.container_contents .ListInfo{clear:both;position:relative;height:23px;padding-top:7px;margin:12px 0 0px;font-size:12px;line-height:1px;color:#666}
+.container_contents .ListInfo{clear:both;position:relative;height:23px;padding-top:7px;margin:0px 0 12px;font-size:12px;line-height:1px;color:#666}
 .container_contents .ListInfo .btn{position:absolute;bottom:0px;right:0}
 /*.container_contents .ListInfo .btn a{overflow:hidden;display:inline-block;height:20px;vertical-align:top;margin-right: 6px;}*/
 .container_contents .ListInfo span{font-size:12px;color:#666}

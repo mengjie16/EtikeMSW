@@ -538,7 +538,7 @@
 	left: 1px;
 	width: 100%;
 	background-color: #666;
-	display: none;
+	/*display: none;*/
 }
 .useBtn,.controlbtns {
 	width: 100%;
