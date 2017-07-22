@@ -14,7 +14,7 @@
 			<div class="error_panel" style="padding-left: 198px;color: #f00;line-height: 33px">
 				${flash?.error}
 			</div>
-			<form action="/supplier/item/save" id="formComm" method="post">
+			<form action="/sys/item/save" id="formComm" method="post">
 				#{authenticityToken/}
 				<input class="inputText" type="hidden" value="${item?.id}" name="item.id"/>
 				<div class="form_line">

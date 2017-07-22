@@ -176,7 +176,7 @@ public class ItemVo implements java.io.Serializable {
         item.num = this.num;
         item.origin = this.origin;
         item.outNo = this.outNo;
-        item.deliverType = this.deliverType;
+       
         item.unit = this.unit;
         item.skus = this.skus;
         item.soldQuantity = this.soldQuantity;
@@ -266,7 +266,7 @@ public class ItemVo implements java.io.Serializable {
             iv.supplierName = item.supplierName;
             iv.origin = item.origin;
             iv.outNo = item.outNo;
-            iv.deliverType = item.deliverType;
+           
             iv.unit = item.unit;
             iv.priceRanges = item.priceRanges;
             iv.skus = item.skus;
