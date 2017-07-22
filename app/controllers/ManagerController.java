@@ -415,9 +415,9 @@ public class ManagerController extends BaseController {
             redirect(redirectUrl);
         }
         Item itemObj = item.parseToItem();
-        if (Item.findById(itemObj.id) == null) { // 直接400
+/*        if (Item.findById(itemObj.id) == null) { // 直接400
             renderFailedJson(ReturnCode.WRONG_INPUT, "商品不存在");
-        }
+        }*/
         // 用户地址检查
         if (!itemObj.checkItemLocationRepeat()) {
             flash.error("保存商品失败,商品发货地址重复！！");
@@ -425,7 +425,7 @@ public class ManagerController extends BaseController {
         }
         // 商品保存\并保存地址信息
         if (itemObj.saveWithItemLocation()) {
-            redirect("/item/" + item.id);
+            redirect("/sys/item/list");
         }
         redirect(redirectUrl);
     }
