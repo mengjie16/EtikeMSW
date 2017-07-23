@@ -61,6 +61,18 @@
 		</set>
 		where id = #{id}
 	</update>
+	<update id="updateFeeAndStatus" parameterType="models.Trade">
+		update trade
+		<set>
+			total_fee = #{totalFee},
+			discount_fee = #{discountFee},
+			payment = #{payment},
+			cargo_fee = #{cargoFee},
+			shipping_fee = #{shippingFee},
+			status = #{status}
+		</set>
+		where id = #{id}
+	</update>
 	<select id="selectList" resultMap="BaseResultMap">
 		select * from trade t
 		order by

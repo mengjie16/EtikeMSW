@@ -58,8 +58,6 @@ public class UserCenter extends BaseController {
 
     private static final Logger log = LoggerFactory.getLogger(UserCenter.class);
     
-    private static String[] globalCartIds = null;
-
     /**
      * 
      * 个人中心页面

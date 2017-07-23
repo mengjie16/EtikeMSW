@@ -159,6 +159,19 @@ public class Order implements java.io.Serializable {
         }
     }
     
+   
+    public static boolean deleteByTradeId(long id){
+        SqlSession ss = SessionFactory.getSqlSession();
+        try {
+            OrderMapper mapper = ss.getMapper(OrderMapper.class);
+           return mapper.deleteByTradeId(id) > 0;
+        } finally {
+            ss.close();
+        }
+    }
+    
+    
+    
     /**
      * 更新订单基本信息
      *

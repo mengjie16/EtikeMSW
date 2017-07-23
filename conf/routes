@@ -221,6 +221,8 @@ POST	/retailer/order/upload                  RetailerController.parseOrderFromEx
 POST	/retailer/ordervo/parse                 RetailerController.parseOrderVo
 POST	/retailer/ordervo/generate              RetailerController.generateOrderVo
 POST	/retailer/order/generate                RetailerController.generateOrder
+POST	/retailer/order/update					RetailerController.orderUpdate
+POST	/retailer/order/delete					RetailerController.orderDelete
 GET	 	/retailer/trade/query                   RetailerController.queryTradeByVo
 POST	/retailer/trade/cancel                  RetailerController.cancelTrade
 GET	 	/retailer/order/excel                   RetailerController.exportOrderExcel

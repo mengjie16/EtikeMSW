@@ -15,7 +15,8 @@ public enum OrderStatus {
     ORDER_CONSIGN_BEEN("ORDER_CONSIGN_BEEN", "已发货"),
     ORDER_SUCCESS("ORDER_SUCCESS","订单成功") ,
     ORDER_REFUNDING("ORDER_REFUNDING","退货退款") ,
-    ORDER_REFUNDING_FINISH("ORDER_REFUNDING_FINISH","退货完成");
+    ORDER_REFUNDING_FINISH("ORDER_REFUNDING_FINISH","退货完成"),
+    TRADE_UNPAIED("TRADE_UNPAIED","待付款");
     
     public String code;
     public String text;

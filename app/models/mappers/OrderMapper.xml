@@ -98,7 +98,10 @@
 				total_fee = #{totalFee},
 			</if>
 			<if test="createTime !=null">
-				create_time = #{createTime}
+				create_time = #{createTime},
+			</if>
+			<if test="status !=null">
+				status = #{status},
 			</if>
 		</set>
 		where id = #{id}

@@ -38,6 +38,7 @@ import controllers.base.BaseController;
 import controllers.base.secure.Secure;
 import enums.AliPayTradeStatus;
 import enums.ItemStatus;
+import enums.OrderStatus;
 import enums.TradeStatus;
 import enums.constants.CacheType;
 import models.RetailerAddress;
@@ -718,17 +719,17 @@ public class RetailerController extends BaseController {
     @UserLogonSupport(value = "RETAILER")
     public static void queryTradeByVoAndTradeStatus(@Required TradeSearchVo vo ,@Required String status) {
         TradeStatus tradeStatus = null;
-        switch(status){
-            case "TRADE_UNPAIED":
-                tradeStatus = TradeStatus.TRADE_UNPAIED;
-                break;
-            case "TRADE_UNSEND":
-                tradeStatus = TradeStatus.TRADE_UNSEND;
-                break;
-            case "TRADE_UNRECIIVED":
-                tradeStatus = TradeStatus.TRADE_UNRECIIVED;
-                break;            
-        }
+//        switch(status){
+//            case "TRADE_UNPAIED":
+//                tradeStatus = TradeStatus.TRADE_UNPAIED;
+//                break;
+//            case "TRADE_UNSEND":
+//                tradeStatus = TradeStatus.TRADE_UNSEND;
+//                break;
+//            case "TRADE_UNRECIIVED":
+//                tradeStatus = TradeStatus.TRADE_UNRECIIVED;
+//                break;            
+////        }
         
         if (validation.hasErrors()) {
             renderFailedJson(ReturnCode.FAIL, "查询失败！");
@@ -919,5 +920,61 @@ public class RetailerController extends BaseController {
         user.removeOrderAboutData();
         renderSuccessJson();
     }
+    
+    /**
+     * 保存交易订单(添加或更新)
+     *
+     * 
+     */
+    public static void orderUpdate(@Required OrderVo orderVo) {
+        handleWrongInput(true);
+        Trade trade = Trade.findById(orderVo.tradeId);
+        if (trade == null) {
+            renderFailedJson(ReturnCode.FAIL, "保存失败,交易不存在");
+        }
+        List<Order> parseOrders = Order.findListByTradeId(orderVo.tradeId);
+      
+        // 重置交易金额
+        trade.resetFee();
+        // 保存交易
+        Iterator<Order> orderIterator = parseOrders.iterator();
+        while (orderIterator.hasNext()) {
+            Order order = orderIterator.next();
+            order.status = OrderStatus.TRADE_UNPAIED;
+            // 货款
+            trade.cargoFee += order.cargoFee;
+            // 物流
+            trade.shippingFee += order.shippingFee;
+            // 实际支付
+            trade.payment += order.totalFee;
+        }
+        
+        trade.status = TradeStatus.TRADE_UNPAIED;
+        // 确认生成交易
+        boolean result = trade.calcFee().updateWithOrders(parseOrders);
+        
+        if (result) {
+            renderSuccessJson();
+        }
+        renderFailedJson(ReturnCode.FAIL, "订单保存失败");
+    }
+    
+    
+    public static void orderDelete(@Required long tradeId){
+        handleWrongInput(true);
+        Trade trade = Trade.findById(tradeId);
+        if (trade == null) {
+            renderFailedJson(ReturnCode.FAIL, "删除失败,交易不存在");
+        }
+       
+        boolean result =  trade.deleteWithOrders(tradeId);
+        
+        if (result) {
+            renderSuccessJson();
+        }
+        renderFailedJson(ReturnCode.FAIL, "订单保存失败");
+    }
+    
+
 
 }
