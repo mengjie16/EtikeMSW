@@ -13,8 +13,8 @@
         <ul id="CategoryList" class="menu-drop">
             #{list items:search_result.cates, as : 'cate'}
             <li class="item1">
-                <input type="checkbox" name="CategoryCD" value="${cate.id}" ${search_result?.cates.size()==1&&vo?.cateId>0?'checked':''} />
-                <a href="#">${cate.name}
+                <!-- <input type="checkbox" name="CategoryCD" value="${cate.id}" ${search_result?.cates.size()==1&&vo?.cateId>0?'checked':''} /> -->
+                <a name="CategoryCD" value="${cate.id}" class="${search_result?.cates.size()==1&&vo?.cateId>0?'active':''}">${cate.name}
 	                #{if search_result?.totalCount>0}
 	                (${cate.count})
 	                #{/if}
@@ -23,7 +23,19 @@
             #{/list}
         </ul>
         #{/if}
-			</div>	
+			</div>
+      <div class=" rsidebar span_1_of_left">
+        <h3 class="cate">品牌</h3>
+        <ul id="BrandList" class="menu-drop">
+          #{list items:search_result?.brands,as : 'brand'}
+            <li class="item1">
+              <a name="BrdCD" value="${brand.id}" class="${search_result?.brands.size()==1&&vo?.brandId>0?'active':''}">
+                ${brand.name}
+              </a>
+            </li>
+          #{/list}
+        </ul>
+      </div>
 		</div>
 
 		<div class="col-md-10">
@@ -36,9 +48,13 @@
                       <img class="img-responsive lazyImg" src="public/images/grey.gif"  data-original="${item?.picUrl+'?imageView2/2/h/183/q/100'}" border="0" alt="${item.title}" title="${item.title}" style="width: 193px;height: 193px;" />
                   </a>
                   <div class="price">
-                          <h5 class="item_price">¥${item.retailPrice/100} <span class="price-e">${item?.cny2eur}€</span></h5>
-                          <span class="glyphicon glyphicon-star-empty item_collect"></span>
-                          <a href="#" class="item_add"><img src="/public/images/cart.png" alt="" style="width: 20px;height: 20px;" /></a>
+                          <h5 class="item_price">
+                            <span class="new">
+                              ¥ <span>${item.retailPrice/100}</span>
+                            </span>
+                            <span class="price-e old"><span>${item?.cny2eur}</span>€</span></h5>
+                          <!-- <span class="glyphicon glyphicon-star-empty item_collect"></span>
+                          <a href="#" class="item_add"><img src="/public/images/cart.png" alt="" style="width: 20px;height: 20px;" /></a> -->
                    </div>
                   <h3><a href="/item/${item?.id}">${item?.title}</a></h3>
               </div>

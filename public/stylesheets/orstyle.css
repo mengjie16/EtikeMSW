@@ -134,7 +134,7 @@ ul.td-changeorder {width:20%}
 .order-right .td-amount{font-size: 12px;}
 .order-right .td-amount p{display:block;}
 .order-right .td-status p.Mystatus{position:static;width:100% ;color: #000;}
-.order-right .td-status p.order-info{height:16px; line-height:16px;border: none;padding:0px 0px ;}
+.order-right .td-status p.order-info{height:16px; line-height:16px;border: none;padding:0px 0px ;text-align: center;}
 .move-right{float: none;}
 
 /*退换货管理*/

@@ -598,9 +598,6 @@
 .homecontent_look .addBanner,.homecontent_look .addRighttop,.homecontent_look .addBrand,.homecontent_look .addactivity {
 	display: none;
 }
-.brandList {
-	margin:10px 30px;
-}
 .brandList .branditem {
 	display: inline-block;
 	width:130px;

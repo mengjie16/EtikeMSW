@@ -27,7 +27,7 @@ function ValidateOpts() {
 		rules: {
 			'item.title': {
 				required: true,
-				maxwords: 20,
+				maxwords: 40,
 				minwords: 5
 			},
 			'item.cate': {
@@ -93,7 +93,11 @@ function initBase(argument) {
 		}
 		$('.selectboxs').hide();
 	});
-
+//关闭弹框
+	$('.wnd_Close_Icon').click(function() {
+		$(this).parents('.popWrapper').hide();
+		$('html').removeClass('overflow-hidden');
+	});
 $(document).on('click', '.chooseBrand', function() {
 		$('#brandInput').val('');
 		$('#brandList ul').empty();
@@ -113,15 +117,15 @@ $(document).on('click', '.chooseBrand', function() {
 				loadingMask: false
 			});
 		}
-		Tr.popup('addCate');
+		Tr.popup('addBrand');
 	});
-	//选择类目
+//品牌
 	$(document).on('click', '.brandList ul li', function() {
 		$('.brandList ul li').removeClass('active');
 		$(this).toggleClass('active');
 	});
-	//显示类目
-	$('#btnCatefirm').on('click', function() {
+
+	$('#btnConfirm').on('click', function() {
 		$('.brandList ul li').each(function(index, obj) {
 			if ($(obj).hasClass('active')) {
 				var text = $(obj).text();
@@ -137,14 +141,14 @@ $(document).on('click', '.chooseBrand', function() {
 			}
 		});
 	});
-	//删除类目
+
 	$('#delBrand').on('click', function() {
 		$(this).parent().hide();
 		$(this).prev().text('');
 		$('#brandTxt').val('');
 		$(this).parent().prev().show();
 	});
-	//查询类目
+
 	$('#brandInput').on('click', function() {
 		$(this).val('');
 		var $container = $('#brandList');

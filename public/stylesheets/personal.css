@@ -234,7 +234,9 @@ color: #F5F5F2;font-size: 14px;cursor:pointer;}
 
 /*固定框架*/
 .center{max-width:1000px; margin:0px auto;min-height: 1px;margin-top:15px ;}
-
+.item-amount {
+	color: #333;
+}
 /*表单布局*/
 .am-form-label{width:100px;float: left;}
 .am-form-content{margin-left:85px;}
@@ -247,12 +249,12 @@ aside ul li{text-align: center;}
 aside ul li a.active,aside ul li.active a {color:#52D0C4;font-weight: 600;}
 li.person{border-bottom:1px solid #F5F8FA ;padding-bottom:10px;padding-top: 10px;}
 li.person:first-child{border-bottom: 3px solid #52D0C4;position: relative;}
-li.person:first-child a{font-size: 16px;line-height: 32px;font-weight: 700;}
+li.person:first-child a{font-size: 16px;line-height: 32px;font-weight: 700;text-align: center;}
 li.person:first-child a i{position: absolute;left:10px;font-size: 15px;}
-li.person p{position: relative;height: 28px;line-height:28px ;font-size: 14px;}
+li.person p{position: relative;height: 28px;line-height:28px ;font-size: 14px;text-align: center;}
 li.person p i{position: absolute;left:0px;font-size: 15px;color:#52D0C4 ;width: 28px;}
 .person ul{padding-left:6px; border:none; padding-top:0px; padding-bottom:0px; margin:0px auto;font-size:12px;}
-.person ul li a{color: #999;font-size: 12px;}
+.person ul li a{color: #999;font-size: 12px;text-align: center;}
 /*主题*/
 .col-main {float:left;width:100%;min-height: 1px;background: none;padding-bottom: 0px;}
 .main-wrap {position: relative; margin-left:150px;overflow: hidden;min-height:330px;background-color:#fff;}
