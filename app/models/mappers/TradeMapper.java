@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import enums.TradeStatus;
+import models.Order;
 import models.Trade;
 import vos.TradeSearchVo;
 
@@ -30,11 +31,16 @@ public interface TradeMapper {
     @Select("select * from " + Trade.TABLE_NAME + " where ${field}=#{value} limit 1")
     Trade selectByField(@Param("field") String field, @Param("value") Object value);
     
+    @Delete("delete from " + Trade.TABLE_NAME + " where id=#{id} limit 1")
+    int deleteById(@Param("id") long value);   
+    
     int insert(Trade trade);
     
     int updateById(Trade trade);
-    
+   
     int updateFee(Trade trade);
+    
+    int updateFeeAndStatus(Trade trade);
     
     @Update("update " + Trade.TABLE_NAME + " set status='TRADE_USER_CANCELLED',close_time=now() where id = ${id}")
     int userCancel(@Param("id") long id);

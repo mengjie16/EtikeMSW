@@ -180,7 +180,7 @@ public class Trade implements java.io.Serializable {
         try {
             TradeMapper mapper = ss.getMapper(TradeMapper.class);
             // 生成唯一交易id
-            int row = mapper.updateFee(this);
+            int row = mapper.updateFeeAndStatus(this);
             ss.commit();
             if (row > 0 && MixHelper.isNotEmpty(orders)) {
                 Iterator<Order> orderIterator = orders.iterator();
@@ -190,6 +190,29 @@ public class Trade implements java.io.Serializable {
                         ss.rollback();
                         return false;
                     }
+                }
+            }
+            return true;
+        } catch (Exception ex) {
+            ss.rollback();
+            log.error("error={}", ex);
+            return false;
+        } finally {
+            ss.close();
+        }
+    }
+    
+    public boolean deleteWithOrders(long tradeId) {
+        SqlSession ss = SessionFactory.getSqlSessionWithoutAutoCommit();
+        try {
+            TradeMapper mapper = ss.getMapper(TradeMapper.class);
+            // 生成唯一交易id
+            int row = mapper.deleteById(tradeId);
+            ss.commit();
+            if (row > 0 ) {
+                if (Order.deleteByTradeId(tradeId)) {
+                    ss.rollback();
+                    return false;
                 }
             }
             return true;
