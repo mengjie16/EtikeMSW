@@ -719,17 +719,17 @@ public class RetailerController extends BaseController {
     @UserLogonSupport(value = "RETAILER")
     public static void queryTradeByVoAndTradeStatus(@Required TradeSearchVo vo ,@Required String status) {
         TradeStatus tradeStatus = null;
-//        switch(status){
-//            case "TRADE_UNPAIED":
-//                tradeStatus = TradeStatus.TRADE_UNPAIED;
-//                break;
-//            case "TRADE_UNSEND":
-//                tradeStatus = TradeStatus.TRADE_UNSEND;
-//                break;
-//            case "TRADE_UNRECIIVED":
-//                tradeStatus = TradeStatus.TRADE_UNRECIIVED;
-//                break;            
-////        }
+        switch(status){
+            case "TRADE_UNPAIED":
+                tradeStatus = TradeStatus.TRADE_UNPAIED;
+                break;
+            case "TRADE_UNSEND":
+                tradeStatus = TradeStatus.TRADE_SETTLEMENT_BEEN;
+                break;
+            case "TRADE_UNRECIIVED":
+                tradeStatus = TradeStatus.TRADE_UNRECIIVED;
+                break;            
+        }
         
         if (validation.hasErrors()) {
             renderFailedJson(ReturnCode.FAIL, "查询失败！");

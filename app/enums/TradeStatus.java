@@ -18,7 +18,8 @@ public enum TradeStatus {
     TRADE_USER_CANCELLED("TRADE_USER_CANCELLED", "交易已取消"),
     //TRADE_SYSTEM_CANCELLED("TRADE_SYSTEM_CANCELLED", "系统已取消");
     
-    TRADE_UNPAIED("TRADE_UNPAIED","待付款");
+    TRADE_UNPAIED("TRADE_UNPAIED","待付款"),
+    TRADE_UNRECIIVED("TRADE_UNRECIIVED","待收货");
     
 
     private TradeStatus(String _code, String _text) {
