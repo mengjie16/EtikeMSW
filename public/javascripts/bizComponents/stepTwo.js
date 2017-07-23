@@ -24,6 +24,20 @@ $(function() {
             loadingMask: false
         });
     });
+    $('.goBack').on('click', function() {
+    	var param ={
+    		'tradeId':$('#tradeId').text();
+    	};
+    	Tr.post('/retailer/order/delete', param, function(data) {
+            if (data.code != 200) {
+                alert('返回购物车失败!');
+                return;
+            } else {
+                 window.location.href='/user/cart';
+            }
+
+        });        
+    });
     $(document).on('click', '#btnSubmitAdd .btnSave', function() {
         var $option = $('#addressSelects').find('option:selected');
         var id = $option.attr('value');
