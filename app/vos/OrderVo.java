@@ -1051,7 +1051,6 @@ public class OrderVo implements java.io.Serializable {
             vo.address = retailerAddress.address;
             vo.provinceId = retailerAddress.provinceId;
             vo.createTime = DateTime.now().toDate();
-            
             // 关键信息解析
             vo.md5ProductNameSkuStr();
             // 解析地址
@@ -1089,27 +1088,5 @@ public class OrderVo implements java.io.Serializable {
         CacheUtils.set(pkey, results, CacheType.RETAILER_ORDER_PRODUCT_DATA.expiredTime);
         // 解析成功
     }
-
-   public void parseToOrder(List<OrderVo> vos){
-       List<Order> orders = Lists.newArrayList();
-       Order o = new Order();
-       for(OrderVo vo : vos){
-           BuyerInfo bi = new BuyerInfo(vo.buyerName,vo.contact, vo.province, vo.city, vo.region, vo.address, vo.provinceId);
-           o.buyerInfo = bi;
-           o.caption = vo.caption;
-           o.cargoFee = vo.cargoFee;
-           o.consignTime = vo.consignTime;
-           o.createTime = vo.createTime;
-           o.expNo = vo.expNo;
-           o.note = vo.note;
-           o.num = vo.num;
-           o.outOrderNo = vo.outOrderNo;
-           o.payTime = vo.payTime;
-//           ProductInfo p = new ProductInfo(vo.itemId, vo.sku, vo.itemPrice);
-//           o.productInfo =
-//           o.
-           
-       }
-       
-   }
+   
 }

@@ -604,14 +604,14 @@ public class RetailerController extends BaseController {
      * @created 2016年9月11日 上午9:40:05
      */
     @UserLogonSupport(value = "RETAILER")
-    public static void generateOrder(@Required @As(",") @MinSize(1) List<Integer> confirmOrder) {
-        if (MixHelper.isEmpty(confirmOrder)) {
+    public static void generateOrder(@Required @As(",") @MinSize(1) List<Integer> confirmOrderIds) {
+        if (MixHelper.isEmpty(confirmOrderIds)) {
             log.info("提交了空的订单");
             renderFailedJson(ReturnCode.FAIL, "提交了空的订单");
         }
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
        
-        OrderVo.parseOrderVo(confirmOrder, user.id);
+        OrderVo.parseOrderVo(confirmOrderIds, user.id);
         
         // 缓存当前解析成功的商品信息
         String pkey = CacheType.RETAILER_ORDER_VO_DATA.getKey((int)user.id);
@@ -679,7 +679,7 @@ public class RetailerController extends BaseController {
 //        redirect(redirectUrl);
         
         
-        renderJson("{'tradeId': trade.id, 'conformOrderIds' : confirmOrder }");
+        renderJson(trade.id);
     }
 
  
