@@ -163,7 +163,7 @@
 </div>
 <textarea class="muban" id="orderTemp" style="display:none">
 	{{#results}}
-	<div class="order-status5">
+	<div class="order-status5" data-order="{{id}}">
 		<input value="{{id}}"  type="hidden" name="tradeId" />
 		<div class="order-title">
 			<div class="dd-num">订单编号：<a href="javascript:;">{{id}}</a></div>
@@ -182,7 +182,7 @@
 						<div class="item-info">
 							<div class="item-basic-info">
 								<a href="#">
-									<p>{{brandName+'['+title+']'}}</p>
+									<p>{{brandName}} {{title}}</p>
 									<p class="info-little">分类：{{color}}</p>
 								</a>
 							</div>
@@ -190,6 +190,7 @@
 					</li>
 					<li class="td td-price">
 						<div class="item-price">
+
 							{{retailPrice}}
 						</div>
 					</li>
@@ -200,7 +201,46 @@
 					</li>
 					<li class="td td-operation">
 						<div class="item-operation">
-							
+						    #{if ( status==TRADE_UNPAIED) }
+						    %{
+								orderOperation='cancelOrder'
+								orderOperationStr ='取消订单'
+
+						    }%						    
+                            #{/if}
+                            #{elseif ( status==TRADE_UNSEND) }
+						    %{
+						    	moneyBack = 'drawback'	
+						    	moneyBackStr = '退款'							
+						    }%	
+                            #{/elseif}
+                            #{elseif ( status==TRADE_UNRECIIVED)}
+                            %{
+                            	moneyBack = 'drawback'
+                            	moneyBackStr ='退款'
+                            	expressage = 'expressage'
+                            	expressageStr ='查看物流'
+								orderOperation='Receiving'
+								orderOperationStr ='确认收货'
+
+						    }%
+                            #{/elseif}
+                            #{elseif ( status==TRADE_CLOSE)}
+                            %{
+								orderOperation='deleteOrder'
+								orderOperationStr ='删除订单'
+
+						    }%
+                            #{/elseif}
+                            #{elseif ( status==TRADE_USER_CANCELLED)}
+                            %{
+								orderOperation='deleteOrder'
+								orderOperationStr ='删除订单'
+
+						    }%
+                            #{/elseif}
+
+						<span data-id="{{id}}" class="${moneyBack}">${moneyBackStr}<span>						
 						</div>
 					</li>
 				</ul>
@@ -216,14 +256,13 @@
 				<div class="move-right">
 					<li class="td td-status">
 						<div class="item-status">
-							<p class="Mystatus">交易成功</p>
-							<p class="order-info"><a href="/retailer/order/info">订单详情</a></p>
-							<p class="order-info"><a href="/retailer/logistics">查看物流</a></p>
+							<p class="Mystatus">{{statusStr}}</p>
+							<p class="order-info"><a href="/retailer/logistics" class="${expressage}">${expressageStr}</a></p>
 						</div>
 					</li>
 					<li class="td td-change">
-						<div class="am-btn am-btn-danger anniu">
-							删除订单</div>
+						<div data-id="{{id}}" class="am-btn am-btn-danger anniu ${orderOperation}">
+							${orderOperationStr}</div>
 					</li>
 				</div>
 			</div>
