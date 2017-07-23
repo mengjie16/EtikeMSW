@@ -678,7 +678,8 @@ public class RetailerController extends BaseController {
 //        String redirectUrl = "/user/cart/stepTwo"+(trade.id > 0 ? "?tradeId=" + trade.id : "");
 //        redirect(redirectUrl);
         
-        renderJson(trade.id);
+        
+        renderJson("{'tradeId': trade.id, 'conformOrderIds' : confirmOrder }");
     }
 
  
