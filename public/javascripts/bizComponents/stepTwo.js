@@ -26,7 +26,7 @@ $(function() {
     });
     $('.goBack').on('click', function() {
     	var param ={
-    		'tradeId':$('#tradeId').text();
+    		'tradeId':$('#tradeId').text()
     	};
     	Tr.post('/retailer/order/delete', param, function(data) {
             if (data.code != 200) {
