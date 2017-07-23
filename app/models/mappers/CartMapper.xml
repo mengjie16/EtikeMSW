@@ -43,6 +43,10 @@
 			<if test="cartPrice != 0">
 				cart_price = #{cartPrice},
 			</if>
+			<if test="skuQuantity != 0">
+				sku_quantity = #{skuQuantity},
+			</if>
+			
 			
 		</set>
 		where id = #{id}
