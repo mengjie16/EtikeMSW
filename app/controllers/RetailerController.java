@@ -13,7 +13,7 @@ import javax.validation.Valid;
 
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.map.ObjectMapper;
-
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -419,147 +419,79 @@ public class RetailerController extends BaseController {
      * @author Calm
      * @created 2016年9月8日 下午2:30:46
      */
-    @UserLogonSupport(value = "RETAILER")
-    public static void parseOrderVo(@Required Map<String, Integer> orderMapper) {
-        // 用户信息获取
-        User user = renderArgs.get(Secure.FIELD_USER, User.class);
+    public static void parseOrderVo(List<Integer> confirmOrder, long id) {
         // 获取读取解析过的数据
-        String key = CacheType.RETAILER_ORDER_TABLE_DATA.getKey(user.id);
-        Table orderData = CacheUtils.get(key);
-        if (orderData == null) {
-            log.error("文件未上传，或数据已丢失！");
-            renderFailedJson(ReturnCode.FAIL, "无法获取excel文件数据，请检查是否已上传文件！");
-        }
-        // 未连线检查
-        if (validation.hasErrors()) {
-            renderFailedJson(ReturnCode.FAIL, "订单解析失败,请检查是否完成连线！");
-        }
-        List<OrderVo> listOrderVo = Lists.newArrayList();
-        // 订单解析错误消息集合
+//        if (MixHelper.isEmpty(confirmOrder)) {
+//            log.info("提交了空的订单");
+//        }
+        RetailerAddress retailerAddress = RetailerAddress.findByDefaultAddress((int)id);
+        
+        List<OrderVo> orderVoList = Lists.newArrayList();
+        
+        // 过滤已删除订单 //
+        log.info("开始生成订单....");
+        // 订单生成错误消息集合
         List<String> messages = Lists.newArrayList();
-        try {
-            // 查看映射的内容（从第二行解析）
-            for (int i = 1; i < orderData.rowMap().size(); i++) {
-                // excel行号
-                int rowNum = i + 1;
-                // 当前行
-                Map<Integer, String> mis = orderData.row(i);
-                // 当前行是否为空
-                boolean match = mis.values().stream().anyMatch(s -> !Strings.isNullOrEmpty(s));
-                if (!match) {
-                    // 空行过滤
-                    continue;
-                }
-                OrderVo vo = new OrderVo();
-                String checkMess = "";
-                // 数据检查
-                int contact = orderMapper.getOrDefault("contact", -1);
-                int buyerName = orderMapper.getOrDefault("buyerName", -1);
-                int province = orderMapper.getOrDefault("province", -1);
-                int city = orderMapper.getOrDefault("city", -1);
-                int region = orderMapper.getOrDefault("region", -1);
-                int address = orderMapper.getOrDefault("address", -1);
-                int address_detail_pcra = orderMapper.getOrDefault("address_detail_pcra", -1);
-                int productNum = orderMapper.getOrDefault("num", -1);
-                if (contact == -1) {
-                    checkMess += "联系号码，";
-                }
-                if (buyerName == -1) {
-                    checkMess += "顾客名称，";
-                }
-                // 带省份详细地址未匹配，那么省，市，区，地址都要匹配
-                if (address_detail_pcra == -1) {
-                    if (province == -1) {
-                        checkMess += "顾客所在省，";
-                    }
-                    if (city == -1) {
-                        checkMess += "顾客所在市，";
-                    }
-                    if (region == -1) {
-                        checkMess += "顾客所在区，";
-                    }
-                    if (address == -1) {
-                        checkMess += "顾客详细地址(不包含省市区)，";
-                    }
-                }
-                if (productNum == -1) {
-                    checkMess += "商品数量，";
-                }
-                if (!Strings.isNullOrEmpty(checkMess)) {
-                    log.warn("excel表头连线匹配不完整： {}", checkMess);
-                    renderFailedJson(ReturnCode.FAIL,
-                        "excel表头连线匹配不完整： " + checkMess.substring(0, checkMess.length() - 1) + "未连线匹配");
-                }
-                vo.buyerName = mis.getOrDefault(buyerName, "");
-                vo.skuStr = mis.getOrDefault(orderMapper.getOrDefault("sku_str", -1), "");
-                vo.outOrderNo = mis.getOrDefault(orderMapper.getOrDefault("outOrderNo", -1), "");
-                vo.contact = mis.getOrDefault(contact, "");
-                vo.productName = mis.getOrDefault(orderMapper.getOrDefault("productName", -1), "");
-                if (Strings.isNullOrEmpty(vo.productName)) {
-                    vo.productName = "订单商品:" + i;
-                }
-                vo.province = mis.getOrDefault(province, "");
-                vo.city = mis.getOrDefault(city, "");
-                vo.region = mis.getOrDefault(region, "");
-                vo.address = mis.getOrDefault(address, "");
-                vo.address_detail_pcra = mis.getOrDefault(address_detail_pcra, "");
-                vo.note = mis.getOrDefault(orderMapper.getOrDefault("note", -1), "");
-                String timeStr = mis.getOrDefault(orderMapper.getOrDefault("createTime", -1), "");
-                if (!Strings.isNullOrEmpty(timeStr)) {
-                    try {
-                        vo.createTime = DateUtils.parse(timeStr);
-                    } catch (Exception ex) {
-                        log.warn("parse date error, timeStr={}", timeStr);
-                    }
-                }
-                String num = mis.getOrDefault(productNum, "0");
-                try {
-                    if (StringUtils.isNumeric(num)) {
-                        vo.num = Ints.tryParse(num);
-                    }
-                } catch (Exception ex) {
-                    log.warn("parse num error, num={}", num);
-                }
-                // 关键信息解析
-                vo.md5ProductNameSkuStr();
-                // 解析地址
-                vo.parseAddress();
-                // === 订单数据解析后检查
-                String checkResult = vo.checkValid();
-                if (!Strings.isNullOrEmpty(checkResult)) {
-                    String message = "<span class='row_num'>行号:" + rowNum + "</span>" + "<p class='error_desc'>"
-                        + checkResult.substring(0, checkResult.length() - 1) + "</p>";
-                    log.warn(message);
-                    messages.add(message);
-                    continue;
-                }
-                // 订单添加
-                listOrderVo.add(vo);
+        for (int i = 0; i < confirmOrder.size(); i++) {
+            OrderVo vo = null;
+            // 提交的行列
+            int oindex = confirmOrder.get(i);
+           
+            Cart cart = Cart.findById(oindex, id);
+            if(cart ==null){
+                 log.info("无订单文件解析数据，或已丢失");
             }
-        } catch (Exception ex) {
-            log.error("订单数据从excel解析出错！{}", ex);
-            renderFailedJson(ReturnCode.FAIL, "订单数据从excel解析出错,可以尝试检查文件是否正确！");
+            
+            vo.buyerName = retailerAddress.name;
+            vo.skuStr = cart.sku();
+            vo.contact = retailerAddress.phone;
+            vo.productName = cart.title;
+            if (Strings.isNullOrEmpty(vo.productName)) {
+                vo.productName = "订单商品:" + i;
+            }
+            vo.province = retailerAddress.province;
+            vo.city = retailerAddress.city;
+            vo.region = retailerAddress.region;
+            vo.address = retailerAddress.address;
+            vo.num = cart.cartCount;
+            vo.provinceId = retailerAddress.provinceId;
+            
+            // 关键信息解析
+            vo.md5ProductNameSkuStr();
+            // 解析地址
+            vo.parseAddress();
+            // === 订单数据解析后检查
+            String checkResult = vo.checkValid();
+            if (!Strings.isNullOrEmpty(checkResult)) {
+                String message = "<span class='row_num'>行号:" + i + "</span>" + "<p class='error_desc'>"
+                    + checkResult.substring(0, checkResult.length() - 1) + "</p>";
+                log.warn(message);
+                messages.add(message);
+                continue;
+            }
+            // 订单添加
+            orderVoList.add(vo);
         }
+        
         if (MixHelper.isNotEmpty(messages)) {
-            renderJson(ReturnCode.BIZ_LIMIT, messages);
+            log.error(""+ ReturnCode.BIZ_LIMIT);
         }
         // 缓存订单视图
-        String ordervoKey = CacheType.RETAILER_ORDER_VO_DATA.getKey(user.id);
-        CacheUtils.set(ordervoKey, listOrderVo, CacheType.RETAILER_ORDER_VO_DATA.expiredTime);
+        String ordervoKey = CacheType.RETAILER_ORDER_VO_DATA.getKey(id);
+        CacheUtils.set(ordervoKey, orderVoList, CacheType.RETAILER_ORDER_VO_DATA.expiredTime);
 
         // 订单信息商品归组
-        Map<String, List<Map<String, String>>> productMap = listOrderVo.stream().collect(Collectors.groupingBy(
+        Map<String, List<Map<String, String>>> productMap = orderVoList.stream().collect(Collectors.groupingBy(
             OrderVo::getMd5ProductName, Collectors.mapping(OrderVo::getProductSkuMap, Collectors.toList())));
         // 映射成商品信息结果集
         List<OrderProductResult> results = OrderVo.parseToOrderProductResult(productMap);
         if (MixHelper.isEmpty(results)) {
-            renderFailedJson(ReturnCode.FAIL, "订单解析失败,商品信息解析，匹配失败！");
+            log.error("订单解析失败,商品信息解析，匹配失败！");
         }
         // 缓存当前解析成功的商品信息
-        String pkey = CacheType.RETAILER_ORDER_PRODUCT_DATA.getKey(user.id);
+        String pkey = CacheType.RETAILER_ORDER_PRODUCT_DATA.getKey(id);
         CacheUtils.set(pkey, results, CacheType.RETAILER_ORDER_PRODUCT_DATA.expiredTime);
         // 解析成功
-        renderSuccessJson();
     }
 
     /**
@@ -672,53 +604,59 @@ public class RetailerController extends BaseController {
      * @created 2016年9月11日 上午9:40:05
      */
     @UserLogonSupport(value = "RETAILER")
-    public static void generateOrder(@Required @As(",") @MinSize(1) List<Integer> confirmOrder) {
-        if (MixHelper.isEmpty(confirmOrder)) {
+    public static void generateOrder(@Required @As(",") @MinSize(1) List<Integer> confirmOrderIds) {
+        if (MixHelper.isEmpty(confirmOrderIds)) {
             log.info("提交了空的订单");
             renderFailedJson(ReturnCode.FAIL, "提交了空的订单");
         }
-        // 用户信息获取
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
+       
+        OrderVo.parseOrderVo(confirmOrderIds, user.id);
+        
         // 缓存当前解析成功的商品信息
-        String pkey = CacheType.RETAILER_ORDER_VO_ALL.getKey(user.id);
+        String pkey = CacheType.RETAILER_ORDER_VO_DATA.getKey((int)user.id);
         List<OrderVo> orderVoList = CacheUtils.get(pkey);
         if (MixHelper.isEmpty(orderVoList)) {
-            log.info("无订单excel文件解析数据，或已丢失");
-            renderFailedJson(ReturnCode.FAIL, "无订单excel文件解析数据，或已丢失");
+            log.info("无订单解析数据");
+            renderFailedJson(ReturnCode.FAIL, "无订单解析数据");
         }
-        List<Order> orders = Lists.newArrayList();
-        // 过滤已删除订单 //
         log.info("开始生成订单....");
+        List<Order> parseOrders = Lists.newArrayList();
         // 订单生成错误消息集合
         List<String> messages = Lists.newArrayList();
-        for (int i = 0; i < confirmOrder.size(); i++) {
-            OrderVo vo = null;
-            // 提交的行列
-            int oindex = confirmOrder.get(i);
+        for (int i = 0; i < orderVoList.size(); i++) {
+            OrderVo vo = orderVoList.get(i);
             // 非法数据提交
-            if (oindex >= orderVoList.size() || (vo = orderVoList.get(oindex)) == null) {
+            if (vo == null) {
                 log.error("参数提交错误。。");
-                renderFailedJson(ReturnCode.FAIL, "订单提交失败!");
-                break;
+                continue;
             }
-            // 创建订单
-            Order order = new Order((int) user.id);
-            // 从视图中转换订单
-            String message = vo.parseToOrder(order);
+            // 检查订单数据完整性
+            String message = vo.checkValid();
             if (!Strings.isNullOrEmpty(message)) {
                 message = "<span class='row_num'>行号:" + (i + 1) + "</span>" + "<p class='error_desc'>" + message
                     + "</p>";
                 messages.add(message);
                 continue;
             }
-            orders.add(order);
+            // 创建订单
+            Order order = new Order((int) user.id);
+            // 从视图中转换订单
+            message = vo.parseToOrder(order);
+            if (!Strings.isNullOrEmpty(message)) {
+                message = "<span class='row_num'>行号:" + (i + 1) + "</span>" + "<p class='error_desc'>" + message
+                    + "</p>";
+                messages.add(message);
+                continue;
+            }
+            parseOrders.add(order);
         }
         if (MixHelper.isNotEmpty(messages)) {
             renderJson(ReturnCode.BIZ_LIMIT, messages);
         }
         // 生成交易
         Trade trade = new Trade((int) user.id).tradeAuiting();
-        Iterator<Order> orderIterator = orders.iterator();
+        Iterator<Order> orderIterator = parseOrders.iterator();
         while (orderIterator.hasNext()) {
             Order order = orderIterator.next();
             // 货款
@@ -729,16 +667,22 @@ public class RetailerController extends BaseController {
             trade.payment += order.totalFee;
         }
         // 确认生成交易
-        Trade createTrade = trade.calcFee().createWithOrders(orders);
+        Trade createTrade = trade.calcFee().createWithOrders(parseOrders);
         if (createTrade == null) {
             log.error("交易创建失败..");
             renderFailedJson(ReturnCode.FAIL, "订单提交失败！");
         }
         // -------------- 清除excel订单相关数据缓存
         user.removeOrderAboutData();
-        renderSuccessJson();
+        
+//        String redirectUrl = "/user/cart/stepTwo"+(trade.id > 0 ? "?tradeId=" + trade.id : "");
+//        redirect(redirectUrl);
+        
+        
+        renderJson(trade.id);
     }
 
+ 
     /**
      * 零售商根据条件检索交易记录
      *
