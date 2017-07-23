@@ -164,7 +164,8 @@ public class Order implements java.io.Serializable {
         SqlSession ss = SessionFactory.getSqlSession();
         try {
             OrderMapper mapper = ss.getMapper(OrderMapper.class);
-           return mapper.deleteByTradeId(id) > 0;
+            mapper.deleteByTradeId(id);
+            return true;
         } finally {
             ss.close();
         }
