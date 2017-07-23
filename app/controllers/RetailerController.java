@@ -617,8 +617,8 @@ public class RetailerController extends BaseController {
         String pkey = CacheType.RETAILER_ORDER_VO_DATA.getKey((int)user.id);
         List<OrderVo> orderVoList = CacheUtils.get(pkey);
         if (MixHelper.isEmpty(orderVoList)) {
-            log.info("无订单excel文件解析数据，或已丢失");
-            renderFailedJson(ReturnCode.FAIL, "无订单excel文件解析数据，或已丢失");
+            log.info("无订单解析数据");
+            renderFailedJson(ReturnCode.FAIL, "无订单解析数据");
         }
         log.info("开始生成订单....");
         List<Order> parseOrders = Lists.newArrayList();

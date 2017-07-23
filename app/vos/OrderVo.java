@@ -258,15 +258,12 @@ public class OrderVo implements java.io.Serializable {
             return result;
         }
         // ------ 商品信息构建
-        order.productInfo = new ProductInfo();
-        order.productInfo.itemId = this.itemId;
-        order.productInfo.sku = this.skuStr;
-        order.productInfo.itemPrice = item.itemLastFee(order.num);
+        order.productInfo =  this.productInfo;
 
         // 计算商品价格
-        order.cargoFee = order.productInfo.itemPrice * order.num;
+        order.cargoFee = this.cargoFee;
         // 计算商品邮费
-    // Map<Integer, Integer> shippFee =Maps.newHashMap();
+        // Map<Integer, Integer> shippFee =Maps.newHashMap();
      
        // Map<Integer, Integer> shippFee = item.calculateFreightTempFee(order.num);
         int orderShippFee = 12;
@@ -1036,10 +1033,16 @@ public class OrderVo implements java.io.Serializable {
                  log.info("无订单文件解析数据，或已丢失");
             }
             
+            vo.cargoFee = cart.cartPrice;
             vo.itemId = cart.itemId;
+            vo.productInfo = new ProductInfo();
+            vo.productInfo.itemId = cart.itemId;
+            vo.productInfo.itemPrice = cart.retailPrice;
+            vo.productInfo.sku = cart.sku();
             vo.skuStr = cart.sku();
             vo.productName = cart.title;
             vo.num = cart.cartCount;
+            vo.outOrderNo  = Long.toString(cart.id);
             vo.buyerName = retailerAddress.name;
             vo.contact = retailerAddress.phone;
             if (Strings.isNullOrEmpty(vo.productName)) {
@@ -1081,7 +1084,7 @@ public class OrderVo implements java.io.Serializable {
         // 映射成商品信息结果集
         List<OrderProductResult> results = OrderVo.parseToOrderProductResult(productMap);
         if (MixHelper.isEmpty(results)) {
-            log.error("订单解析失败,商品信息解析，匹配失败！");
+            log.error("订单解析失败,商品信息解析匹配失败！");
         }
         // 缓存当前解析成功的商品信息
         String pkey = CacheType.RETAILER_ORDER_PRODUCT_DATA.getKey(id);
