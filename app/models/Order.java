@@ -309,4 +309,16 @@ public class Order implements java.io.Serializable {
         }
         return id;
     }
+    
+    
+    public static List<Order> findListByTradeId(long tradeId){
+        
+        SqlSession ss = SessionFactory.getSqlSession();
+        try {
+            OrderMapper mapper = ss.getMapper(OrderMapper.class);
+            return mapper.selectByTradeId(tradeId);
+        } finally {
+            ss.close();
+        }
+    }
 }

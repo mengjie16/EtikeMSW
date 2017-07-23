@@ -18,4 +18,13 @@ public class ProductInfo {
 
     public ProductInfo() {
     }
+
+    public ProductInfo(long itemId, String sku, int itemPrice) {
+        super();
+        this.itemId = itemId;
+        this.sku = sku;
+        this.itemPrice = itemPrice;
+    }
+    
+    
 }

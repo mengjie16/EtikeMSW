@@ -33,6 +33,7 @@ import models.Item;
 import models.RetailerAddress;
 import models.User;
 import net.sf.json.JSONArray;
+import play.data.binding.As;
 import play.data.validation.Email;
 import play.data.validation.Match;
 import play.data.validation.MaxSize;
@@ -239,8 +240,9 @@ public class UserCenter extends BaseController {
      * @created 2015-4-9 下午3:22:12
      * 
      */
+    
     @UserLogonSupport
-    public static void confirmOrder(@Required String cartIds) {
+    public static void stepTwo(@Required long tradeId, @Required @As(",") @MinSize(1) List<Integer> confirmOrderIds) {
         handleWrongInput(true);
         
         // 0.用户信息获取
@@ -248,31 +250,13 @@ public class UserCenter extends BaseController {
         
         //1、收货信息
         RetailerAddress retailerAddress = RetailerAddress.findByDefaultAddress((int)user.id);
-        renderArgs.put("addr", retailerAddress);
-        
-        String[] cartIdsString= cartIds.split(",", -1);
-        globalCartIds = cartIdsString;
-        renderSuccessJson();
-    }
-    
-    
-    @UserLogonSupport
-    public static void stepTwo() {
-        handleWrongInput(true);
-        
-        // 0.用户信息获取
-        User user = renderArgs.get(Secure.FIELD_USER, User.class);
-        
-        //1、收货信息
-        RetailerAddress retailerAddress = RetailerAddress.findByDefaultAddress((int)user.id);
-        renderArgs.put("addr", retailerAddress);
         
         long totalCartPrice=0;
         
         List<Cart> cartList = new ArrayList<Cart>();
         Cart cart = null ;
-        for(String s : globalCartIds){
-            cart = Cart.findById(Long.parseLong(s), user.id);
+        for(Integer s : confirmOrderIds){
+            cart = Cart.findById(s, user.id);
             if(cart!=null){
                 cartList.add(cart);
                 totalCartPrice += cart.cartPrice;
@@ -280,9 +264,12 @@ public class UserCenter extends BaseController {
         }
         
         List<CartVo> cartVos = CartVo.valueOfcartList(cartList);
-            
+        
+        renderArgs.put("addr", retailerAddress);    
         renderArgs.put("cartList", cartVos);
         renderArgs.put("totalCartPrice", totalCartPrice);
+        renderArgs.put("tradeId", tradeId);
+        renderArgs.put("confirmOrderIds", confirmOrderIds);
         
         //2、支付方式
             

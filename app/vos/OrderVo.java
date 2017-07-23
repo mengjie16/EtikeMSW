@@ -9,9 +9,12 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.http.impl.cookie.DateUtils;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aton.config.ReturnCode;
+import com.aton.util.CacheUtils;
 import com.aton.util.MixHelper;
 import com.aton.util.RegexUtils;
 import com.aton.util.StringUtils;
@@ -20,14 +23,20 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import controllers.base.secure.Secure;
 import enums.OrderStatus;
+import enums.constants.CacheType;
 import enums.constants.ErrorCode;
 import models.BuyerInfo;
+import models.Cart;
 import models.Item;
 import models.Location;
 import models.Order;
 import models.ProductInfo;
 import models.Region;
+import models.RetailerAddress;
+import models.User;
+import play.data.validation.MinSize;
 import play.libs.Codec;
 
 /**
@@ -249,15 +258,12 @@ public class OrderVo implements java.io.Serializable {
             return result;
         }
         // ------ 商品信息构建
-        order.productInfo = new ProductInfo();
-        order.productInfo.itemId = this.itemId;
-        order.productInfo.sku = this.skuStr;
-        order.productInfo.itemPrice = item.itemLastFee(order.num);
+        order.productInfo =  this.productInfo;
 
         // 计算商品价格
-        order.cargoFee = order.productInfo.itemPrice * order.num;
+        order.cargoFee = this.cargoFee;
         // 计算商品邮费
-    // Map<Integer, Integer> shippFee =Maps.newHashMap();
+        // Map<Integer, Integer> shippFee =Maps.newHashMap();
      
        // Map<Integer, Integer> shippFee = item.calculateFreightTempFee(order.num);
         int orderShippFee = 12;
@@ -1002,4 +1008,88 @@ public class OrderVo implements java.io.Serializable {
         }
         return results;
     }
+    
+    
+    public static void parseOrderVo(List<Integer> confirmOrder, long id) {
+        // 获取读取解析过的数据
+//        if (MixHelper.isEmpty(confirmOrder)) {
+//            log.info("提交了空的订单");
+//        }
+        RetailerAddress retailerAddress = RetailerAddress.findByDefaultAddress((int)id);
+        
+        List<OrderVo> orderVoList = Lists.newArrayList();
+        
+        // 过滤已删除订单 //
+        log.info("开始生成订单....");
+        // 订单生成错误消息集合
+        List<String> messages = Lists.newArrayList();
+        for (int i = 0; i < confirmOrder.size(); i++) {
+            OrderVo vo = new OrderVo();
+            // 提交的行列
+            int oindex = confirmOrder.get(i);
+           
+            Cart cart = Cart.findById(oindex, id);
+            if(cart == null){
+                 log.info("无订单文件解析数据，或已丢失");
+            }
+            
+            vo.cargoFee = cart.cartPrice;
+            vo.itemId = cart.itemId;
+            vo.productInfo = new ProductInfo();
+            vo.productInfo.itemId = cart.itemId;
+            vo.productInfo.itemPrice = cart.retailPrice;
+            vo.productInfo.sku = cart.sku();
+            vo.skuStr = cart.sku();
+            vo.productName = cart.title;
+            vo.num = cart.cartCount;
+            vo.outOrderNo  = Long.toString(cart.id);
+            vo.buyerName = retailerAddress.name;
+            vo.contact = retailerAddress.phone;
+            if (Strings.isNullOrEmpty(vo.productName)) {
+                vo.productName = "订单商品:" + i;
+            }
+            vo.province = retailerAddress.province;
+            vo.city = retailerAddress.city;
+            vo.region = retailerAddress.region;
+            vo.address = retailerAddress.address;
+            vo.provinceId = retailerAddress.provinceId;
+            vo.createTime = DateTime.now().toDate();
+            // 关键信息解析
+            vo.md5ProductNameSkuStr();
+            // 解析地址
+            vo.parseAddress();
+            // === 订单数据解析后检查
+            String checkResult = vo.checkValid();
+            if (!Strings.isNullOrEmpty(checkResult)) {
+                String message = "<span class='row_num'>行号:" + i + "</span>" + "<p class='error_desc'>"
+                    + checkResult.substring(0, checkResult.length() - 1) + "</p>";
+                log.warn(message);
+                messages.add(message);
+                continue;
+            }
+            // 订单添加
+            orderVoList.add(vo);
+        }
+        
+        if (MixHelper.isNotEmpty(messages)) {
+            log.error(""+ ReturnCode.BIZ_LIMIT);
+        }
+        // 缓存订单视图
+        String ordervoKey = CacheType.RETAILER_ORDER_VO_DATA.getKey(id);
+        CacheUtils.set(ordervoKey, orderVoList, CacheType.RETAILER_ORDER_VO_DATA.expiredTime);
+
+        // 订单信息商品归组
+        Map<String, List<Map<String, String>>> productMap = orderVoList.stream().collect(Collectors.groupingBy(
+            OrderVo::getMd5ProductName, Collectors.mapping(OrderVo::getProductSkuMap, Collectors.toList())));
+        // 映射成商品信息结果集
+        List<OrderProductResult> results = OrderVo.parseToOrderProductResult(productMap);
+        if (MixHelper.isEmpty(results)) {
+            log.error("订单解析失败,商品信息解析匹配失败！");
+        }
+        // 缓存当前解析成功的商品信息
+        String pkey = CacheType.RETAILER_ORDER_PRODUCT_DATA.getKey(id);
+        CacheUtils.set(pkey, results, CacheType.RETAILER_ORDER_PRODUCT_DATA.expiredTime);
+        // 解析成功
+    }
+   
 }

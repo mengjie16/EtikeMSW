@@ -47,7 +47,7 @@ function initBase() {
         }
     });
     $('.J_Plus').on('click', function(e) {
-        var storeNumber = $('.kucun').text();
+        var storeNumber = parseInt($('.kucun').text());
         //var storeNumber = 100;
         $(this).prev().prev().removeClass('no-minus');
         if ($(this).prev()[0].value < storeNumber) {
@@ -103,7 +103,7 @@ function initBase() {
 
     $(document).on('click', '.item_add', function() {
         var itemId = $('#single .container').attr('mid');
-        var $getColor = $('#single .container').find('li.skuColor a.active').eq(0);
+        var $getColor = $('#single .container').find('li.skuColor a.active').eq(0).text();
         var cnt =$('#single .container input[name="cartAccount"]').val();
         var totalPriceRMB = parseInt($('#single .container #detailRmb').text().substring(1))*cnt;
         var totalPriceEUR = parseInt($('#single .container #detailEur').text().substring(1))*cnt;
@@ -111,9 +111,13 @@ function initBase() {
         if(!purl){
             purl = 'http://img0.imgtn.bdimg.com/it/u=2517962916,2542239999&fm=214&gp=0.jpg';
         }
+        if(!$getColor){
+            alert('请选择分类');
+            return;
+        }
         var params = {
             "cart.itemId": itemId,
-            "cart.skuColor":$getColor.text(),
+            "cart.skuColor":$getColor,
             "cart.picUrl" : purl,
             "cart.cartCount" : $('#single .container input[name="cartAccount"]').val(),
             "cart.retailPrice" : parseInt($('#single .container #detailRmb').text().substring(1)),
