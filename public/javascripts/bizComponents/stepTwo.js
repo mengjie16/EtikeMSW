@@ -5,96 +5,111 @@ CART = {
     totalPrice: 0,
     totalCount: 0
 };
-$(function(){
-	// Tr.get('', {},
-	// 	function(data) {
-	// 		if (data.code == 200) {
-	// 			CART.cartCache = data.results;s
-	// 		};
-	// 		printCartHtml();
-	// },{loadingMask:false});
- 
-	$('.otherAdd').on('click',function () {
-		
-		Tr.get('/retailer/address/addressList', {}, function(data) {
-			if (data.code != 200 || !data.results) return;
-			CART.sendLoactionTempCache = data.results;
-			printSendLocationTempHtml(CART.sendLoactionTempCache);
-		}, {
-			loadingMask: false
-		});
-	});
-	$(document).on('click', '#btnSubmitAdd .btnSave', function() {
-		var $option = $('#addressSelects').find('option:selected');
-	    var id = $option.attr('value');
-	    if(id==='others'){
-	    	alert('未选择地址');
-	    	return;
-	    }
-		$.ajax({
-        url: "/retailer/address/get",
-        data: {
-            id: id
-        },
-        success: function(result) {
-            var obj = result.results;
-            $('.order-addresslist').attr('id',id);
-            $('#user-name').text(obj.name);
-            $('#user-phone').text(obj.phone);
-            $('.province').text(obj.province);
-            $('.city').text(obj.city);
-            $('.dist').text(obj.region);
-            $('.street').text(obj.address);
-            $("#btnSubmitAdd .closePopUp").click();
-            
+$(function() {
+    // Tr.get('', {},
+    // 	function(data) {
+    // 		if (data.code == 200) {
+    // 			CART.cartCache = data.results;s
+    // 		};
+    // 		printCartHtml();
+    // },{loadingMask:false});
 
-            
-        },
-        error: function(ex) {
-            console.log('can not get the address');
+    $('.otherAdd').on('click', function() {
+
+        Tr.get('/retailer/address/addressList', {}, function(data) {
+            if (data.code != 200 || !data.results) return;
+            CART.sendLoactionTempCache = data.results;
+            printSendLocationTempHtml(CART.sendLoactionTempCache);
+        }, {
+            loadingMask: false
+        });
+    });
+    $(document).on('click', '#btnSubmitAdd .btnSave', function() {
+        var $option = $('#addressSelects').find('option:selected');
+        var id = $option.attr('value');
+        if (id === 'others') {
+            alert('未选择地址');
+            return;
         }
+        $.ajax({
+            url: "/retailer/address/get",
+            data: {
+                id: id
+            },
+            success: function(result) {
+                var obj = result.results;
+                $('.order-addresslist').attr('id', id);
+                $('#user-name').text(obj.name);
+                $('#user-phone').text(obj.phone);
+                $('.province').text(obj.province);
+                $('.city').text(obj.city);
+                $('.dist').text(obj.region);
+                $('.street').text(obj.address);
+                $("#btnSubmitAdd .closePopUp").click();
+
+
+
+            },
+            error: function(ex) {
+                console.log('can not get the address');
+            }
+        });
     });
-	});
-	// 提交支付
-	$(document).on('click', '#btnSubmit', function() {
-		var boxes = $('input[name="express_id"]:checked').length;
-		if (boxes <= 0) {
-			alert("请至少选择一种物流方式");
-			return false;
-		}
-		var expressid = $('input[name="express_id"]:checked').attr('id');
-		var itemVos = [];
-    $('#stepContainer tr').each(function(index, obj) {
-        var itemVo = {
-            "sku": {}
+    // 提交支付
+    $(document).on('click', '#btnSubmit', function() {
+        var boxes = $('input[name="express_id"]:checked').length;
+        if (boxes <= 0) {
+            alert("请至少选择一种物流方式");
+            return false;
+        }
+        var expressid = $('input[name="express_id"]:checked').attr('id');
+        /*var itemVos = [];
+        $('#stepContainer tr').each(function(index, obj) {
+            var itemVo = {
+                "sku": {}
+            };
+            var $id = $(obj)[0].id;
+            var $cartCount = $(obj).find('.cartCount').val();
+            var $color = $($(obj).find('.cartColor')[0]).text();
+            itemVo["sku"]["color"] = $color;
+            itemVo["cartCount"] = $cartCount;
+            itemVo["id"] = $id;
+            itemVos.push(itemVo);
+
+        });*/
+    	var obj = {
+    		//addressID: $('.order-addresslist').attr('id'),
+            //itemVos: JSON.stringify(itemVos),
+            provinceId:$('.provinceId').text(),
+            buyerName:$('#user-name').text(),
+            contact:$('#user-phone').text(),
+            province:$('.province').text(),
+            city:$('.city').text(),
+            region:$('.dist').text(),
+            address:$('.address').text(),
+            expNo: expressid,
+            express: '韵达',
+            shippingFee: $('#express_fee').text(),
+            totalFee: $('#order_amount').text(),
+            note: $('#comment').val(),
+            tradeId:$('#tradeId').text()
+    	}
+    	var obj1 = JSON.stringify(obj);
+        var param = {
+            "authenticityToken": $('input[name=authenticityToken]').val(),
+            "orderVo":obj1
         };
-        var $id = $(obj)[0].id;
-        var $cartCount = $(obj).find('.cartCount').val();
-        var $color = $($(obj).find('.cartColor')[0]).text();
-        itemVo["sku"]["color"] = $color;
-        itemVo["cartCount"] = $cartCount;
-        itemVo["id"] = $id;
-        itemVos.push(itemVo);
+
+        Tr.post('/retailer/order/update', param, function(data) {
+            if (data.code != 200) {
+                alert('提交失败!');
+                return;
+            }
+            $('#payForm #txtFee').val(obj.totalPrice);
+            $('#payForm').submit();
+        });
 
     });
-		var param = {
-				"authenticityToken": $('input[name=authenticityToken]').val(),
-        addressID: $('.order-addresslist').attr('id'),
-        itemVos: JSON.stringify(itemVos),
-        expressID: expressid,
-        express: $('#express_fee').text(),
-        totalPrice: $('#order_amount').text(),
-        comment: $('#comment').val(),
-    };
-    Tr.post('/retailer/order/post', param, function(data) {
-			if (data.code != 200){
-				alert('提交失败!');
-				return;
-			}
-			$('#payForm').submit();
-		});
-		
-	});
 });
 // function printCartHtml() {
 // 	if(CART.cartCache.length>0){
@@ -124,32 +139,34 @@ $(function(){
 // }
 // 输出其他地址
 function printSendLocationTempHtml() {
-	var $loactions = $('#addressSelects');
-	$loactions.find('option').slice(1).remove();
-	$.each(CART.sendLoactionTempCache, function(index, location) {
-		var locatintxt = location.name +' '+location.phone+' '+location.country +
-			location.province +
-			location.city +
-			location.region +
-			location.address;
-		$loactions.append("<option value='" + location.id + "'>" + locatintxt + "</option>");
-	});
+    var $loactions = $('#addressSelects');
+    $loactions.find('option').slice(1).remove();
+    $.each(CART.sendLoactionTempCache, function(index, location) {
+        var locatintxt = location.name + ' ' + location.phone + ' ' + location.country +
+            location.province +
+            location.city +
+            location.region +
+            location.address;
+        $loactions.append("<option value='" + location.id + "'>" + locatintxt + "</option>");
+    });
 }
+
 function FreightAmountTotal(obj) {
-	var price = parseInt($(obj).siblings('.Validform_checktip').text());
-	$('#express_fee').text(price);
-	$('#order_amount').text(price+parseInt($('#goods_amount').text()));
-	$('#txtFee').val(price+parseInt($('#goods_amount').text()));
-} 
-function openModal(){
-	$('#doc-modal-1').modal({  
-/*        onConfirm: function() {  
-            var username=document.getElementById("username").value;  
-            var password=document.getElementById("password").value;  
-            alert("用户点击了提交，输入了用户名："+username+"，密码："+password+"，接下去一般是ajax提交表单");  
-        },  */
-        onCancel: function() {  
-            alert("用户点击了关闭按钮");  
-        }  
-    });  
+    var price = parseInt($(obj).siblings('.Validform_checktip').text());
+    $('#express_fee').text(price);
+    $('#order_amount').text(price + parseInt($('#goods_amount').text()));
+    $('#txtFee').val(price + parseInt($('#goods_amount').text()));
+}
+
+function openModal() {
+    $('#doc-modal-1').modal({
+        /*        onConfirm: function() {  
+                    var username=document.getElementById("username").value;  
+                    var password=document.getElementById("password").value;  
+                    alert("用户点击了提交，输入了用户名："+username+"，密码："+password+"，接下去一般是ajax提交表单");  
+                },  */
+        onCancel: function() {
+            alert("用户点击了关闭按钮");
+        }
+    });
 }
