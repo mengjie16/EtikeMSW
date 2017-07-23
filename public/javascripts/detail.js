@@ -118,6 +118,7 @@ function initBase() {
         var params = {
             "cart.itemId": itemId,
             "cart.skuColor":$getColor,
+            "cart.skuQuantity":$('.kucun').text(),
             "cart.picUrl" : purl,
             "cart.cartCount" : $('#single .container input[name="cartAccount"]').val(),
             "cart.retailPrice" : parseInt($('#single .container #detailRmb').text().substring(1)),
