@@ -77,6 +77,7 @@ $(function() {
             itemVos.push(itemVo);
 
         });*/
+		var express = $('input.expressText:checked').next().text();//物流方式
     	var obj = {
     		//addressID: $('.order-addresslist').attr('id'),
             //itemVos: JSON.stringify(itemVos),
@@ -86,9 +87,11 @@ $(function() {
             province:$('.province').text(),
             city:$('.city').text(),
             region:$('.dist').text(),
-            address:$('.address').text(),
+            address:$('.street').text(),
             expNo: expressid,
-            express: '韵达',
+            express: express,
+            statusCode:'TRADE_UNPAIED',
+            statusText:'待付款',
             shippingFee: $('#express_fee').text(),
             totalFee: $('#order_amount').text(),
             note: $('#comment').val(),
