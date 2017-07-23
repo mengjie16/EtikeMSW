@@ -84,7 +84,7 @@
                     </tr>
                 </thead>
                 <tbody id="stepContainer">
-                    #{list items:orderList, as : 'cart'}
+                    #{list items:cartList, as : 'cart'}
                
                     <tr mid="${cart.id}">
                         <td>
@@ -95,7 +95,7 @@
                         <td><a target="_blank" href="single.html" class="cartTitle">${cart.brand.name+'['+cart.title+']'}</a>
                         </td>
                         <td align="center" class="cartColor">
-                            ${cart.skuColor}
+                            ${cart?.skuColor}
                         </td>
                         <td align="center">￥
                             <span class="cartPrice">${cart.retailPrice}</span>

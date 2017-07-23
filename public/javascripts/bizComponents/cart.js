@@ -285,15 +285,17 @@ function checkedToPay(cartIds) {
     var dtd = $.Deferred();
     var cartIdArr = cartIds;
     var params = {
-        "confirmOrder": cartIdArr.join(',')
+        "confirmOrderIds": cartIdArr.join(',')
     };
     Tr.post('/retailer/order/generate', params, function(data) {
         if (data.code != 200) {
             dtd.reject();
         } else {
             var tradeId = data.results;
+
+          
             if(tradeId){
-               window.location.href="/user/cart/stepTwo?tradeId="+tradeId;  
+               window.location.href="/user/cart/stepTwo?tradeId="+tradeId+'&confirmOrderIds='+params.confirmOrderIds;  
             }
             
             dtd.resolve();
