@@ -77,36 +77,36 @@ $(function() {
             itemVos.push(itemVo);
 
         });*/
-		var express = $('input.expressText:checked').next().text();//物流方式
-    	var param = {    	
+        var express = $('input.expressText:checked').next().text(); //物流方式
+        var param = {
             "authenticityToken": $('input[name=authenticityToken]').val(),
-            "orderVo.provinceId":$('.provinceId').text(),
-            "orderVo.buyerName":$('#user-name').text(),
-            "orderVo.contact":$('#user-phone').text(),
-            "orderVo.province":$('.province').text(),
-            "orderVo.city":$('.city').text(),
-            "orderVo.region":$('.dist').text(),
-            "orderVo.address":$('.street').text(),
+            "orderVo.provinceId": $('.provinceId').text(),
+            "orderVo.buyerName": $('#user-name').text(),
+            "orderVo.contact": $('#user-phone').text(),
+            "orderVo.province": $('.province').text(),
+            "orderVo.city": $('.city').text(),
+            "orderVo.region": $('.dist').text(),
+            "orderVo.address": $('.street').text(),
             "orderVo.expNo": expressid,
             "orderVo.express": express,
-            "orderVo.statusCode":'TRADE_UNPAIED',
-            "orderVo.statusText":'待付款',
+            "orderVo.statusCode": 'TRADE_UNPAIED',
+            "orderVo.statusText": '待付款',
             "orderVo.shippingFee": $('#express_fee').text(),
             "orderVo.totalFee": $('#order_amount').text(),
             "orderVo.note": $('#comment').val(),
-            "orderVo.tradeId":$('#tradeId').text()
-    	};
+            "orderVo.tradeId": $('#tradeId').text()
+        };
 
 
         Tr.post('/retailer/order/update', param, function(data) {
             if (data.code != 200) {
                 alert('提交失败!');
                 return;
-            }else{
+            } else {
                 $('#payForm #txtFee').val(param["orderVo.totalFee"]);
                 $('#payForm').submit();
             }
-           
+
         });
 
     });
