@@ -32,7 +32,7 @@ public interface OrderMapper {
     int deleteById(@Param("id") long value);
     
     @Delete("delete from " + Order.TABLE_NAME + " where trade_id=#{tradeId} ")
-    int deleteByTradeId(@Param("tradeId") long tradeId);
+    void deleteByTradeId(@Param("tradeId") long tradeId);
     
     Order selectById(long id);
     

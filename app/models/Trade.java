@@ -210,7 +210,7 @@ public class Trade implements java.io.Serializable {
             int row = mapper.deleteById(tradeId);
             ss.commit();
             if (row > 0 ) {
-                if (Order.deleteByTradeId(tradeId)) {
+                if (!Order.deleteByTradeId(tradeId)) {
                     ss.rollback();
                     return false;
                 }
