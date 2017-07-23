@@ -46,12 +46,12 @@
                         <span style="color:#52D0C4;font-size:18px" id="detailBrand">
 							${item?.brand?.getMainSubName()?'['+item?.brand?.getMainSubName()+']':''}
 						</span>
-						<span id="detailTitle">${item?.title}</span></h1>
-                    <div  class="productPrice"><span id="detailRmb">¥${item?.retailPrice/100}</span>
-                        <span id="detailEur" class="price-e">€${item?.cny2eur}</span>
+						<span id="detailTitle" style="font-size: 14px;">${item?.title}</span></h1>
+                        <div  class="productPrice item_price"><span id="detailRmb" class="new">¥<span>${item?.retailPrice/100}</span></span>
+                        <span id="detailEur" class="price-e old"><span>${item?.cny2eur}</span>€</span>
                     </div>
                     <div class="tag">
-                        <h3 class="cate">分类:</h3>
+                        <h3 class="cate" style="line-height: 28px;">分类:</h3>
                         <div class="tags">
                             <ul>
                             	#{list items:item.skus,as:'sku'}
@@ -61,7 +61,7 @@
                         </div>
                     </div>
                     <div class="numberBlock">
-                        <span class="transPrice">数量:</span>
+                        <span class="transPrice" style="line-height: 26px;">数量:</span>
                         <div class="detail-amount-wrapper ">
                             <div class="detail-amount "><a href="javascript:void(0)" class="J_Minus minus no-minus">-</a>
                                 <input type="text" name="cartAccount" value="1" class="text text-amount J_ItemAmount" data-max="50" data-now="2" autocomplete="off"><a href="javascript:void(0)" class="J_Plus plus">+</a></div>
@@ -77,7 +77,7 @@
                                 }%
                               #{/list} 
 
-                        <span>库存(<em class="kucun">${productCount}</em>)</span>                       
+                        <span style="line-height: 26px;margin-left: 10px;">库存(<span class="kucun">${productCount}</span>)</span>                       
                         <p>
                         <a href="#" class="cart item_add">加入购物车</a>
                         <a href="#" class="cart item_collection">加入收藏夹</a>

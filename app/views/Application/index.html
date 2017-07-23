@@ -1,11 +1,7 @@
 #{extends 'main.html' /}
 #{set title:'主页' /}
 #{set 'moreStyles'}
-<style>
-	body {
-		background-color: #f6f6f6;
-	}
-</style>
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/index.css'}" media="all" />
 #{/set}
 *{ 主页轮播大海报 }*
 <div class="banner">
@@ -44,11 +40,45 @@
 <div class="clearfix"> </div>
 <div class="titleBlock">
   <div class="linemiddle fl"></div>
-  <div class="titleText fl">专题版块</div>
+  <div class="titleText fl">品牌版块</div>
   <div class="linemiddle fr"></div>
 </div>
 <div class="clearfix"> </div>
-<div class="active1">
+<div class="main_brand_btn">
+<div class="main_brand_list">
+  <div>
+    #{if homeSet?.brandSettings}
+    <ul>
+      #{list items:homeSet.brandSettings, as : 'brandSetting'}
+      <li>
+        <a href="/search?brandId=${brandSetting.bid}&pageNo=1" target="_blank">
+          <img class="lazy grayscale" src="${brandSetting.imgUrl}" alt="${brandSetting.title}" title="${brandSetting.title}" />
+        </a>
+        <p>${brandSetting.title}"</p>
+      </li>
+      #{/list}
+    </ul>
+    #{/if}
+    #{else}
+    <ul>
+      <li>
+        <a href="#" target="_self">
+          <img class="lazy" src="/public/images/03.jpg" alt=""/>
+        </a>
+        <p>111111</p>
+      </li>
+      <li>
+        <a href="#" target="_self">
+          <img class="lazy" src="/public/images/04.jpg" alt=""/>
+        </a>
+        <p>2222222</p>
+      </li>
+    </ul>
+    #{/else}
+  </div>
+</div>
+</div>
+<!-- <div class="active1">
         <div class="col-sm-6">
             <div class="halfside">
                 <img src="/public/images/03.jpg"/ style="height: 100%">
@@ -251,7 +281,7 @@
             </div>
         </div>
     </div>
-    <div class="clearfix"> </div>
+    <div class="clearfix"> </div> -->
 #{doLayout /}
 #{set 'moreScripts'}
 <script type="text/javascript" src="/public/javascripts/responsiveslides.min.js"></script>

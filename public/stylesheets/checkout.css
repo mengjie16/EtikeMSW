@@ -50,7 +50,10 @@ a.at-in {
     float: left;
     width: 20%;
 }
-
+a.at-in img {
+    width: 100px;
+    height: 100px;
+}
 .sed {
     float: right;
     width: 74%;
@@ -68,7 +71,7 @@ a.at-in {
     color: #666;
     font-size: 0.8em;
     line-height: 1.8em;
-    padding: 1em 0 0;
+    padding: 15px 0 0;
 }
 
 .check input[type="text"] {
@@ -82,9 +85,11 @@ a.at-in {
 }
 
 .check {
-    width: 100px;
+    width: 140px;
 }
-
+.amount-wrapper {
+    width: 80px;
+}
 .ring-in {
     width: 48%;
     width: 527px\9;
@@ -96,11 +101,13 @@ a.at-in {
 }
 
 .check-out h1 {
-    font-size: 18px;
+    font-size: 16px;
     color: #52D0C4;
     font-family: 'OleoScript-Regular';
     margin: 0 10px 1em;
     text-align: left;
+    overflow: hidden;
+    line-height: 34px;
 }
 
 a.to-buy {
@@ -116,7 +123,7 @@ a.to-buy {
 }
 
 a.to-buy:hover {
-    background: #52bfd0;
+    background: #000;
 }
 
 a.go-shopping {
@@ -134,7 +141,6 @@ a#editCount {
     padding: 0.3em 0.7em;
     color: #FFF;
     background: #52D0C4;
-    margin: 0.5em 1em 0;
     font-size: 13px;
     display: inline-block;
     line-height: 1.6em;
@@ -143,7 +149,7 @@ a#editCount {
     float: right;
 }
 a#editCount:hover {
-    background: #52bfd0;
+    background: #000;
 }
 a#editCount.doneEdit{
     background: orange;
@@ -174,7 +180,7 @@ a#editCount.doneEdit{
 }
 
 a.go-shopping:hover {
-    background: #52bfd0;
+    background: #000;
 }
 
 .check-foot {
@@ -184,6 +190,7 @@ a.go-shopping:hover {
 .item-amount {
     position: relative;
     z-index: 2;
+    margin-top: 5px;
 }
 
 .item-amount a {
@@ -227,12 +234,6 @@ a.go-shopping:hover {
 
 .check_price {
     width: 100%;
-    color: #52D0C4;
-}
-
-.check-out table tr td.per-price {
-    width: 100px;
-    line-height: 4em;
 }
 
 .check-out table tr td.total-price {
@@ -243,21 +244,16 @@ a.go-shopping:hover {
 
 .check-out table tr td.check-goodsdelete{
     line-height: 4em;
-    padding-top: 0;
+    padding-top: 10px;
 }
 
 .check-out table tr th.total-price {
     padding-left: 2%;
 }
 
-.check-out table tr td.per-price {
-    width: 100px;
-}
-
-.check-out table tr td.per-price,
-.check-out table tr td.check,
-.check-out table tr td.total-price ，.check-out table tr td.check-goodsdelete {
-    padding-top: 0
+.check-out table tr td.per-price,.check-out table tr td.cart-price {
+    width: 140px;
+    line-height: 4em;
 }
 
 .check-out table tr td {

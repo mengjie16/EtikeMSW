@@ -319,7 +319,7 @@
 	position: relative;
 	left:-25px;
 }
-.cateList .cateitem {
+.cateList .cateitem,.brandList .cateitem {
 	display: inline-block;
 	width:124px;
 	height: 28px;
@@ -335,10 +335,10 @@
   text-overflow: ellipsis;
   padding:0 3px;
 }
-.cateList .cateitem:hover {
+.cateList .cateitem:hover,.brandList .cateitem:hover {
 	border:1px solid #ffa200;
 }
-.cateList .cateitem.active {
+.cateList .cateitem.active,.brandList .cateitem.active {
 	background-color: #ffa200;
 	color: #fff;
 }

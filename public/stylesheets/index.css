@@ -37,11 +37,27 @@ p.visual_page span.total_num{margin-left:1px; color:#4a4c4e;}
 .main_brand h3{float:left; width:117px; margin-right:14px; padding-top:14px;font-size: 15px;color: #444;line-height: 15px;}
 .main_brand .main_brand_btn{float:left; width:954px;}
 
-.main_brand_list{float:left; width:890px;}
+.main_brand_list{width:1100px;margin:10px auto;}
 .main_brand_list ul{overflow:hidden; width:100%;}
-.main_brand_list ul li{float:left; min-width:126px; height:40px;line-height: 38px; padding: 0 15px; border-left:1px solid #dbdbdb; text-align:center;}
+.main_brand_list ul li{float:left; min-width:126px; padding: 0 15px; text-align:center;margin:5px;}
 .main_brand_list ul li a {
 	display: inline-block;
+	width: 230px;
+}
+.main_brand_list ul li a img {
+	width: 100%;
+}
+.main_brand_list ul li p {
+	text-align: center;
+	margin:10px 0;
+	font-weight: bold;
+	font-size: 14px;
+}
+.main_brand_list ul li:hover img {
+	opacity: 0.8
+}
+.main_brand_list ul li:hover p {
+	color: #52D0C4;
 }
 .main_brand_list ul li .grayscale {
 	vertical-align: middle;
@@ -293,8 +309,8 @@ ul.age_best_tap li a:hover {
 
 .index-outlet .layout,.mod-col-1-7 .layout,.mod-qhh .layout,.mod-qqcm .layout{margin-top:20px}
 .price{font-family:'Hiragino Sans GB','microsoft yahei',arial,sans-serif;}
-.price .new{color:#ffa200}
-.price .old{text-decoration:line-through;color:#999}
+.price .new{color:#52D0C4}
+.price .old{/*text-decoration:line-through;*/color:#999}
 .gds-img img{width:100%}
 .gds-img img:hover{opacity:.88;filter:alpha(opacity=88)}
 body{font:14px/1.5 'Hiragino Sans GB','microsoft yahei',arial,sans-serif;}
@@ -302,14 +318,14 @@ body{font:14px/1.5 'Hiragino Sans GB','microsoft yahei',arial,sans-serif;}
 .mod-h3{font-size:24px;color:#222}
 .mod-h3 span{margin-left:18px;vertical-align:-1px;font-weight:400;font-size:18px;color:#999}
 .layout>a {float:left;margin-right:-1px;width:219px;border:1px solid #e5e5e5;background-color:#fff;margin-top:-1px}
-.index-outlet .rank .tit a:hover  {color:#ffa200}
+.index-outlet .rank .tit a:hover  {color:#52D0C4}
 .index-outlet{margin-top:25px}
 .index-outlet .block{*zoom:1;margin-bottom:15px;padding:6px 0;border:1px solid #e5e5e5;background-color:#fff}
 .index-outlet .block:after,.index-outlet .block:before{content:"";display:table}
 .index-outlet .block:after{clear:both;overflow:hidden}
 .index-outlet .bigban{position:relative;float:left;margin-left:6px;width:750px;height:350px;overflow:hidden;background:#f0f0f0}
 .index-outlet .bigban i{position:absolute;top:14px;right:0;width:0;height:0;border-top:10px solid transparent;border-right:12px solid #fff;border-bottom:10px solid transparent}
-.index-outlet .rank{float:right;padding:0 18px;width:306px;height:350px;overflow:hidden}
+.index-outlet .rank{float:right;padding:0 18px;width:336px;height:350px;overflow:hidden}
 .index-outlet .rank .itemblock{*zoom:1;display:block;margin-top:-1px;padding:18px 15px;overflow: hidden;border-top:1px dashed #c4c4c4;}
 .index-outlet .rank>a:after,.index-outlet .rank>a:before{content:"";display:table}
 .index-outlet .rank>a:after{clear:both;overflow:hidden}
@@ -320,10 +336,10 @@ body{font:14px/1.5 'Hiragino Sans GB','microsoft yahei',arial,sans-serif;}
 .index-outlet .rank .l i.r3{background-position:0 -40px}
 .index-outlet .rank .r{float:none;display:block;overflow:hidden;font-size:13px}
 .index-outlet .rank .tit{margin-top:5px;height:38px; line-height:18px;overflow:hidden}
-.index-outlet .rank .price{margin-top:15px;line-height:18px}
-.index-outlet .rank .price .new{margin-right:5px;font-size:14px;vertical-align: bottom;}
-.index-outlet .rank .price .new em{font-size:18px;color:#ffa200}
-.index-outlet .rank .price .old{font-size:12px}
+.index-outlet .rank .price,.item_price{margin-top:15px;line-height:18px}
+.index-outlet .rank .price .new,.item_price .new{margin-right:5px;font-size:14px;vertical-align: bottom;}
+.index-outlet .rank .price .new span,.item_price .new span{font-size:18px;color:#52D0C4}
+.index-outlet .rank .price .old,.item_price .old{font-size:12px}
 
 #icontent { background-color: #f9f9f9; }
 #icontent .index-outlet { width: 1100px; margin: 0 auto 40px auto; padding: 40px 0; }

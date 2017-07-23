@@ -52,6 +52,7 @@ a:hover {
 .search a {
     margin-right: 4%;
     color: #52d0c4;
+    font-size: 13px;
 }
 
 .search .login{
@@ -522,10 +523,11 @@ ul.callbacks_tabs.callbacks1_tabs {
 }
 
 .footer-bottom-cate h6 {
-    font-size: 1em;
+    font-size: 14px;
     color: #000;
     margin: 0 0 0.5em;
     font-family: 'OleoScript-Regular', '微软雅黑';
+    font-weight: normal;
 }
 
 .footer-bottom-cate ul {
@@ -550,7 +552,7 @@ ul.callbacks_tabs.callbacks1_tabs {
 }
 
 .cate-bottom ul li {
-    font-size: 1em;
+    font-size: 13px;
     color: #000;
 }
 
@@ -560,7 +562,7 @@ ul.callbacks_tabs.callbacks1_tabs {
 }
 
 p.footer-class {
-    font-size: 1em;
+    font-size: 13px;
     color: #B2B2B2;
     margin: 2em 0 0;
     text-align: center;
@@ -1140,6 +1142,7 @@ ul.kid-menu {
     font-size: 0.9em;
     text-decoration: none;
     font-family: "微软雅黑";
+    cursor: pointer;
 }
 .item1 {
     height: 28px;
@@ -1147,7 +1150,7 @@ ul.kid-menu {
 .item1 input[type="checkbox"] {
     margin-top:-2px;
 }
-.menu-drop > li > a:hover {
+.menu-drop > li > a:hover,.menu-drop > li > a.active {
     color: #52D0C4;
 }
 
@@ -1292,7 +1295,8 @@ span.price-in1 {
 }
 
 .contentDetails h4 {
-    font-weight: bold
+    font-weight: bold;
+    font-size: 16px;
 }
 
 .contentDetails .goodsTitle {
@@ -2451,3 +2455,10 @@ ul.nav.nav-pills {
 .btnSendPhoneCaptcha.active {
     background-color: #999;
 }
+.item_price .new {
+    color: #52D0C4;
+}
+.item_price{margin-top:15px;line-height:18px}
+.item_price .new{margin-right:5px;font-size:14px;vertical-align: bottom;}
+.item_price .new span{font-size:18px;color:#52D0C4}
+.item_price .old{font-size:12px}

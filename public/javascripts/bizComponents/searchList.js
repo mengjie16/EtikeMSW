@@ -33,6 +33,7 @@ function pageNoUrl(pageNo) {
 }
 // 初始化
 $(function() {
+	$(".memenu").memenu();
 	// 图片懒加载
 	$("img.lazyImg").lazyload({
 	      effect : "fadeIn",
@@ -48,6 +49,18 @@ $(function() {
 				$(obj).prop('checked', false);
 			}
 		});
+		defaultUrlSearch();
+	});
+	$(document).on('click', '#CategoryList a,#BrandList a', function() {
+		// 查找当前父元素下所有同类别元素(ul)
+		var $me = $(this);
+		var $a = $(this).parent().parent().find('a');
+		$.each($a, function(index, obj) {
+			if ($(obj).attr('value') != $me.attr('value')) {
+				$(obj).removeClass('active');
+			}
+		});
+		$me.addClass('active');
 		defaultUrlSearch();
 	});
 	initPaginator();
@@ -99,9 +112,9 @@ function defaultUrlSearch() {
 
 function urlParse(url) {
 	// 类目条件
-	var cateId = $('#CategoryList input[name=CategoryCD]:checked').eq(0).val();
+	var cateId = $('#CategoryList a.active').eq(0).attr('value');
 	// 品牌条件
-	var brandId = $('#BrandList input[name=BrdCD]:checked').eq(0).val();
+	var brandId = $('#BrandList a.active').eq(0).attr('value');
 	// 价格条件1
 	var dp_use = $('#FreeDelivery').prop('checked');
 	var pr_use = $('#SalePst').prop('checked');

@@ -89,7 +89,7 @@
               </div>
               <div class="col-sm-3 search">
                   <a class="shoppingcart" href="/user/cart">
-                      <img src="/public/images/cart.png" alt="" />
+                      <i class="iconfont" style="font-size: 18px;color: #777;display: inline-block;margin-top: -3px">&#xe610;</i>
                   </a>
                   #{if !user}
                   <a href="/login" target="_blank" class="login">
@@ -97,7 +97,7 @@
                   </a>
                   #{/if}
                   #{else}
-                  <a class="play-icon" href="/user/home" class="mr4"><i class="glyphicon glyphicon-user"></i>${user.name}</a>
+                  <a class="play-icon" href="/user/home" class="mr4">${user.name}</a>
                   <a href="/user/login/out" class="leave">退出</a>
                   #{/else}
               </div>

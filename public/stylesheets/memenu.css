@@ -25,7 +25,7 @@ ul.memenu.skyblue {text-align: left;}
 }
 .logo a {
   color: #52D0C4;
-  font-size: 2em;
+  font-size: 32px;
   font-family: 'OleoScript-Regular';
   text-decoration: none;
 }
@@ -223,6 +223,7 @@ ul.memenu.skyblue {text-align: left;}
 .price-e {
 	font-size: 13px;
 	color: #888;
+	vertical-align: bottom;
 }
 .productInfor .item_add {
 	color: #FFF;
