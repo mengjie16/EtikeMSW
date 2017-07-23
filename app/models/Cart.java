@@ -52,8 +52,10 @@ public class Cart implements Serializable {
             if(existCart != null){
                 existCart.cartCount = cart.cartCount + existCart.cartCount;
                 existCart.cartPrice = existCart.cartCount * existCart.retailPrice;
+                existCart.skuQuantity -= cart.cartCount;
                 mapper.updateById(existCart);
             }else{
+                cart.skuQuantity -= cart.cartCount;
                 mapper.insert(cart);
             }
             return true;

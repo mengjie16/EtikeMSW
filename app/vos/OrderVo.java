@@ -1033,12 +1033,19 @@ public class OrderVo implements java.io.Serializable {
                  log.info("无订单文件解析数据，或已丢失");
             }
             
-            vo.cargoFee = cart.cartPrice;
-            vo.itemId = cart.itemId;
+            
+            CartVo cartVo = CartVo.valueOfCart(cart);
+            
+            vo.cargoFee = cartVo.cartPrice;
+            vo.itemId = cartVo.itemId;
             vo.productInfo = new ProductInfo();
-            vo.productInfo.itemId = cart.itemId;
-            vo.productInfo.itemPrice = cart.retailPrice;
-            vo.productInfo.sku = cart.sku();
+            vo.productInfo.itemId = cartVo.itemId;
+            vo.productInfo.itemPrice = cartVo.retailPrice;
+            vo.productInfo.picUrl = cartVo.picUrl;
+            vo.productInfo.brandName = cartVo.brand.name;
+            vo.productInfo.color = cartVo.skuColor;
+            vo.productInfo.title = cartVo.title;
+            vo.productInfo.retailPrice = cartVo.retailPrice;
             vo.skuStr = cart.sku();
             vo.productName = cart.title;
             vo.num = cart.cartCount;

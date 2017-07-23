@@ -141,7 +141,7 @@ public class TradeVo implements java.io.Serializable {
             vo.statusColor = "red";
         }
         // 状态按钮
-        if (trade.status == TradeStatus.TRADE_AUDITING || trade.status == TradeStatus.TRADE_FAIL_AUDITING) {
+        if (trade.status == TradeStatus.TRADE_AUDITING || trade.status == TradeStatus.TRADE_FAIL_AUDITING || trade.status == TradeStatus.TRADE_UNPAIED) {
             vo.cancelBtn = true;
         }
         // if (trade.status != TradeStatus.TRADE_USER_CANCELLED || trade.status !=
@@ -162,21 +162,14 @@ public class TradeVo implements java.io.Serializable {
                 // 商品数量统计
                 vo.itemNum += order.num;
             }
-            List<Long> itemIds = Lists.newArrayList();
+            vo.itemVos = Lists.newArrayList();
+            
             for (ProductInfo product : products) {
                 if (product == null) {
                     continue;
                 }
-                if (!itemIds.contains(product.itemId) && itemIds.size() < 10) {
-                    itemIds.add(product.itemId);
-                }
-            }
-            vo.itemVos = Lists.newArrayList();
-            for (Long itemId : itemIds) {
-                Item item = Item.findBaseInfoById(itemId);
-                if (item != null) {
-                    vo.itemVos.add(new TradeItemVo(item.id, item.picUrl));
-                }
+                
+                vo.itemVos.add(new TradeItemVo(product.itemId, product.picUrl, product.title, product.color, product.brandName, product.retailPrice));
             }
         }
         return vo;
