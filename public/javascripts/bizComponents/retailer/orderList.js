@@ -117,6 +117,70 @@ function loadList(pageNo) {
                     return this.discountFee / 100;
                 }
                 return 0;
+            },
+            orderOperation: function() {
+                if (this.status == "TRADE_UNPAIED") {//待付款
+                    return 'cancelOrder';
+                } else if (this.status == "TRADE_USER_CANCELLED" || this.status == "TRADE_CLOSE") {//交易取消，交易成功
+                    return 'deleteOrder';
+                } else if (this.status == "TRADE_UNRECIIVED") {//待收货
+                    return 'Receiving';
+                } else {
+                    return 'hideOperation';
+                }
+            },
+            orderOperationStr: function() {
+                if (this.status == "TRADE_UNPAIED") {
+                    return '取消订单'
+                } else if (this.status == "TRADE_USER_CANCELLED" ||  this.status == "TRADE_CLOSE") {
+                    return '删除订单'
+                } else if (this.status == "TRADE_UNRECIIVED") {
+                    return '确认收货';
+                } else {
+                    return ''
+                }
+            },
+            moneyBack: function() {
+                if (this.status == "TRADE_UNSEND" ||this.status == "TRADE_UNRECIIVED") {//待发货 待收货
+                    return 'drawback';
+                }else {
+                    return 'hideDrawback';
+                }
+            },
+            moneyBackStr: function() {
+                if (this.status == "TRADE_UNSEND" ||this.status == "TRADE_UNRECIIVED") {//待发货 待收货
+                    return '退款';
+                }else {
+                    return '';
+                }
+            },
+            expressage: function() {
+                if (this.status == "TRADE_UNRECIIVED") {//待收货
+                    return 'expressage';
+                }else {
+                    return 'hideExpressage';
+                }
+            },
+            expressageStr: function() {
+                if (this.status == "TRADE_UNRECIIVED") {//待收货
+                    return '查看物流';
+                }else {
+                    return '';
+                }
+            },
+            payToAli: function() {
+                if (this.status == "TRADE_UNPAIED") {//待收货
+                    return 'paytoali';
+                }else {
+                    return 'hidepaytoali';
+                }
+            },
+            payToAliStr:function(){
+                if (this.status == "TRADE_UNPAIED") {//待收货
+                    return '付款';
+                }else {
+                    return '';
+                }
             }
         }));
         $('#listContainer1').html(output);
@@ -169,73 +233,73 @@ function initRestList(e) {
 
 function renderRestList(pageNo, tradeStatus, tabindex) {
 
-    var obj = {
-        'vo.id': $('#orderNo').val(),
-        'vo.pageNo': pageNo,
-        'vo.pageSize': CDT.pageSize,
-        'vo.createTimeStart': $('#startTime').val(),
-        'vo.createTimeEnd': $('#endTime').val(),
-        'status': tradeStatus
-    };
-    Tr.get('/retailer/trade/queryByTradeStatus', obj, function(data) {
-        /*		if (data.code != 200||!data.results) return;
-        		// 保存到缓存
-        		CDT.loadedListCache = data.results;*/
-        var output = Mustache.render(CDT.orderTemp, $.extend(data, {
-            'paymentStr': function() {
-                if (this.cargoFee) {
-                    return this.cargoFee / 100;
+        var obj = {
+            'vo.id': $('#orderNo').val(),
+            'vo.pageNo': pageNo,
+            'vo.pageSize': CDT.pageSize,
+            'vo.createTimeStart': $('#startTime').val(),
+            'vo.createTimeEnd': $('#endTime').val(),
+            'status': tradeStatus
+        };
+        Tr.get('/retailer/trade/queryByTradeStatus', obj, function(data) {
+            /*      if (data.code != 200||!data.results) return;
+                    // 保存到缓存
+                    CDT.loadedListCache = data.results;*/
+            var output = Mustache.render(CDT.orderTemp, $.extend(data, {
+                'paymentStr': function() {
+                    if (this.cargoFee) {
+                        return this.cargoFee / 100;
+                    }
+                    return 0;
+                },
+                'shippingFeeStr': function() {
+                    if (this.shippingFee) {
+                        return this.shippingFee / 100;
+                    }
+                    return 0;
+                },
+                'totalAmountStr': function() {
+                    if (this.totalFee) {
+                        return this.totalFee / 100;
+                    }
+                    return 0;
+                },
+                'realityPaymentStr': function() {
+                    if (this.payment) {
+                        return this.payment / 100;
+                    }
+                    return 0;
+                },
+                'discountStr': function() {
+                    if (this.discountFee) {
+                        return this.discountFee / 100;
+                    }
+                    return 0;
                 }
-                return 0;
-            },
-            'shippingFeeStr': function() {
-                if (this.shippingFee) {
-                    return this.shippingFee / 100;
-                }
-                return 0;
-            },
-            'totalAmountStr': function() {
-                if (this.totalFee) {
-                    return this.totalFee / 100;
-                }
-                return 0;
-            },
-            'realityPaymentStr': function() {
-                if (this.payment) {
-                    return this.payment / 100;
-                }
-                return 0;
-            },
-            'discountStr': function() {
-                if (this.discountFee) {
-                    return this.discountFee / 100;
-                }
-                return 0;
+            }));
+            $('#listContainer' + tabindex).html(output);
+            if (data.totalCount <= 0) {
+                $('.pagination').hide();
+                return;
             }
-        }));
-        $('#listContainer' + tabindex).html(output);
-        if (data.totalCount <= 0) {
-            $('.pagination').hide();
-            return;
-        }
-        $('.pagination').show();
-        $('.pagination').pagination(data.totalCount, {
-            items_per_page: CDT.pageSize,
-            num_display_entries: 5,
-            current_page: pageNo,
-            num_edge_entries: 5,
-            callback: loadListCallBack,
-            callback_run: false,
-            prev_text: ' '
+            $('.pagination').show();
+            $('.pagination').pagination(data.totalCount, {
+                items_per_page: CDT.pageSize,
+                num_display_entries: 5,
+                current_page: pageNo,
+                num_edge_entries: 5,
+                callback: loadListCallBack,
+                callback_run: false,
+                prev_text: ' '
+            });
+            CDT.currPageNo = pageNo;
+        }, {
+            loadingMask: true
         });
-        CDT.currPageNo = pageNo;
-    }, {
-        loadingMask: true
-    });
-}
-//取消订单
-function cancelOrder(){
-	var tradeId = $(this).data('id');
+    }
+    //取消订单
+function cancelOrder() {
+        var tradeId = $(this).data('id');
         var param = {
             'tradeId': tradeId
         };
@@ -249,12 +313,12 @@ function cancelOrder(){
                 window.location.reload();
             }
 
-    });
+        });
 
-}
-//删除订单
-function deleteOrder(){
-	var that = this;
+    }
+    //删除订单
+function deleteOrder() {
+        var that = this;
         var tradeId = $(this).data('id');
         var param = {
             'tradeId': tradeId
@@ -266,30 +330,30 @@ function deleteOrder(){
             } else {
 
                 //alert('删除订单成功');
-               window.location.reload();
+                window.location.reload();
             }
 
         });
-}
-//确认收货
-function Receiving(){
-	var tradeId = $(this).data('id');
-        var param = {
-            "orderVo.tradeId": tradeId,
-            "orderVo.statusCode": 'TRADE_CLOSE',
-            "orderVo.statusText": '交易关闭'
-        };
-        Tr.post('/retailer/order/update', param, function(data) {
-            if (data.code != 200) {
-                alert('确认收货失败');
-                return;
-            } else {
+    }
+    //确认收货
+function Receiving() {
+    var tradeId = $(this).data('id');
+    var param = {
+        "orderVo.tradeId": tradeId,
+        "orderVo.statusCode": 'TRADE_CLOSE',
+        "orderVo.statusText": '交易关闭'
+    };
+    Tr.post('/retailer/order/update', param, function(data) {
+        if (data.code != 200) {
+            alert('确认收货失败');
+            return;
+        } else {
 
 
-               window.location.reload();
-            }
+            window.location.reload();
+        }
 
-        });
+    });
 }
 $(function() {
     CDT.orderTemp = $('#orderTemp').remove().val();
@@ -302,4 +366,3 @@ $(function() {
     $(document).on('click', '.deleteOrder', deleteOrder);
     $(document).on('click', '.Receiving', Receiving);
 });
-

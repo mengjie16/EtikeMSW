@@ -201,46 +201,9 @@
 					</li>
 					<li class="td td-operation">
 						<div class="item-operation">
-						    #{if ( status==TRADE_UNPAIED) }
-						    %{
-								orderOperation='cancelOrder'
-								orderOperationStr ='取消订单'
+						    
 
-						    }%						    
-                            #{/if}
-                            #{elseif ( status==TRADE_UNSEND) }
-						    %{
-						    	moneyBack = 'drawback'	
-						    	moneyBackStr = '退款'							
-						    }%	
-                            #{/elseif}
-                            #{elseif ( status==TRADE_UNRECIIVED)}
-                            %{
-                            	moneyBack = 'drawback'
-                            	moneyBackStr ='退款'
-                            	expressage = 'expressage'
-                            	expressageStr ='查看物流'
-								orderOperation='Receiving'
-								orderOperationStr ='确认收货'
-
-						    }%
-                            #{/elseif}
-                            #{elseif ( status==TRADE_CLOSE)}
-                            %{
-								orderOperation='deleteOrder'
-								orderOperationStr ='删除订单'
-
-						    }%
-                            #{/elseif}
-                            #{elseif ( status==TRADE_USER_CANCELLED)}
-                            %{
-								orderOperation='deleteOrder'
-								orderOperationStr ='删除订单'
-
-						    }%
-                            #{/elseif}
-
-						<span data-id="{{id}}" class="${moneyBack}">${moneyBackStr}<span>						
+						<span data-id="{{id}}" class="{{moneyBack}}">{{moneyBackStr}}<span>						
 						</div>
 					</li>
 				</ul>
@@ -257,12 +220,15 @@
 					<li class="td td-status">
 						<div class="item-status">
 							<p class="Mystatus">{{statusStr}}</p>
-							<p class="order-info"><a href="/retailer/logistics" class="${expressage}">${expressageStr}</a></p>
+							<p class="order-info"><a href="/retailer/logistics" class="{{expressage}}">{{expressageStr}}</a></p>
 						</div>
 					</li>
 					<li class="td td-change">
-						<div data-id="{{id}}" class="am-btn am-btn-danger anniu ${orderOperation}">
-							${orderOperationStr}</div>
+						<div data-id="{{id}}" class="am-btn am-btn-danger anniu {{orderOperation}}">
+							{{orderOperationStr}}</div>
+
+						<div data-id="{{id}}" class="am-btn am-btn-danger anniu {{payToAli}}">
+							{{payToAliStr}}</div>
 					</li>
 				</div>
 			</div>
