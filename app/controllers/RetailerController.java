@@ -926,6 +926,7 @@ public class RetailerController extends BaseController {
      *
      * 
      */
+    @UserLogonSupport(value = "RETAILER")
     public static void orderUpdate(@Required OrderVo orderVo) {
         handleWrongInput(true);
         Trade trade = Trade.findById(orderVo.tradeId);
@@ -960,6 +961,7 @@ public class RetailerController extends BaseController {
     }
     
     
+    @UserLogonSupport(value = "RETAILER")
     public static void orderDelete(@Required long tradeId){
         handleWrongInput(true);
         Trade trade = Trade.findById(tradeId);
