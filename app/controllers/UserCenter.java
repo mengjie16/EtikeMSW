@@ -148,12 +148,13 @@ public class UserCenter extends BaseController {
     
     public static void hasSetFavorite(@Required @Valid long itemId){
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
-        if ( Favorite.findById(itemId,user.id) > 0) {
+        if ( user != null &&  Favorite.findById(itemId,user.id) > 0) {
             renderSuccessJson();
         }
         renderFailedJson(ReturnCode.FAIL);
     }
     
+    @UserLogonSupport
     public static void setFavorite(@Required @Valid Favorite favorite){
         handleWrongInput(true);
         
@@ -165,6 +166,7 @@ public class UserCenter extends BaseController {
         renderFailedJson(ReturnCode.FAIL, "收藏失败");
     }
     
+    @UserLogonSupport
     public static void deleteFavorite(@Required @Min(1) long id){
         
         if ( Favorite.delete(id)) {
