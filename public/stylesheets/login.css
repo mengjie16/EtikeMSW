@@ -20,13 +20,11 @@
     height: 30px;
     width: 160px;
     padding-top: 9px;
-    border: 1px solid #dcdcdc;
-    border-bottom: 0px;
     float: left;
     margin-right: 2px;
     letter-spacing: -1px;
-    text-align: center;
-    color: #7d7d7d;
+    color: #333;
+    font-weight: bold;
 }
 .contentWrap .leftArea .loginContents {
     height: 164px;
@@ -36,7 +34,7 @@
     margin-right: 9px;
 }
 .contentWrap .leftArea .loginContents .loginInfo li {
-    width: 260px;
+   
     height: 24px;
     padding-left: 58px;
     margin-bottom: 8px;
@@ -52,7 +50,6 @@
 }
 .contentWrap .leftArea .loginContents .loginBtn {
     width: 135px;
-    float: left;
     margin-bottom: 21px;
 }
 .loginBottom input {
@@ -134,12 +131,10 @@
     
 }
 .body .contentWrap .leftArea .loginContents .loginInfo {
-    float: left;
-    width: 270px;
+    width: 400px;
     margin-right: 0;
 }
 .body .contentWrap .leftArea .loginContents .loginInfo li {
-    width: 242px;
     height: 33px;
     line-height: 33px;
     margin-bottom: 0;
@@ -155,29 +150,29 @@
 }
 .body .contentWrap .leftArea .loginContents .loginInfo li div input {
     border: 1px solid #bebebe;
-    width: 167px;
+    width: 240px;
     height: 15px;
     line-height: 15px;
     padding: 9px 4px;
     margin-left: 0;
     text-indent: 6px;
     height: 32px;
+    float: left;
 }
 .body .contentWrap .leftArea .loginContents .loginBtn {
-    float: left;
-    width: 102px;
-    margin-bottom: 0;
+    width: 200px;
 }
 .body .contentWrap .leftArea .loginContents .loginBtn .normalLogin{
     display:inline-block;
-    width:101px;
-    height:82px;
-    line-height:82px;
+    width:120px;
+    height:32px;
+    line-height:32px;
     text-align:center;
     color:#fff;
     background-color:#52d0c4;
     font-size:14px;
     text-decoration:none;
+    margin: 20px 0 0 60px;
 }
 .body .contentWrap .leftArea .loginContents .loginBtn .rightLogin {
     display:inline-block;
@@ -218,6 +213,7 @@
 }
 .body .contentWrap .leftArea .loginContents .login_bottom_r {
     float: right;
+    margin-right: 70px;
 }
 .body .contentWrap .leftArea .loginContents .login_bottom_r a {
     font-size: 12px;

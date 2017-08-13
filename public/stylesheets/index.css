@@ -43,9 +43,11 @@ p.visual_page span.total_num{margin-left:1px; color:#4a4c4e;}
 .main_brand_list ul li a {
 	display: inline-block;
 	width: 230px;
+	height: 70px;
 }
 .main_brand_list ul li a img {
 	width: 100%;
+	height: 100%;
 }
 .main_brand_list ul li p {
 	text-align: center;
@@ -341,5 +343,5 @@ body{font:14px/1.5 'Hiragino Sans GB','microsoft yahei',arial,sans-serif;}
 .index-outlet .rank .price .new span,.item_price .new span{font-size:18px;color:#52D0C4}
 .index-outlet .rank .price .old,.item_price .old{font-size:12px}
 
-#icontent { background-color: #f9f9f9; }
-#icontent .index-outlet { width: 1100px; margin: 0 auto 40px auto; padding: 40px 0; }
+#icontent { background-color: #f9f9f9; min-width: 1170px;}
+#icontent .index-outlet { width: 1170px; margin: 0 auto 40px auto; padding: 40px 0; }

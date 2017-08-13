@@ -54,7 +54,6 @@ a.i-trigger { cursor: pointer;position: relative; z-index: 2;display: block;colo
 .navCir li i{display: block;font-size: 18px;}
 .navCir li.active a{color:#F03726 ;}
 
-.footer{margin-bottom:60px ;}
 @media only screen and (min-width:640px) 
 {
 /*布局*/

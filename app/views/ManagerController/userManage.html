@@ -29,13 +29,7 @@
 							<span class="txt_type01">名称</span>
 							<input type="text" class="text" id="user_name" name="titleName" maxlength="20"/>
 						</div>
-						<div class="area_l">
-							<span class="txt_type01">注册时间</span>
-							<input type="text" class="text inputDate" style="width:80px;" value="" id="startTime"/>
-							-
-							<input type="text" class="text inputDate" style="width:80px;" value="" id="endTime"/>
-							<span class="errorDate" style="color:#e4393c;line-height: 20px"></span>
-						</div>
+						
 						<div class="area_r">
 							<div class="fl">
 								<a href="javascript:;" class="btnStd btnMedium mr6" id="searchBtn">查询</a>
@@ -44,11 +38,6 @@
 					</div>
 				</div>
 			</form>
-			<div class="clearFix pt20" style=" padding-bottom: 10px;height: 20px">
-				<a href="javascript:void(0)" class="floatRight mr6 btnStd btnMedium" id="simulate">模拟用户登录</a>
-				<a href="javascript:void(0)" class="floatRight mr10 btnStd btnMedium" id="registNew">添加用户</a>
-				<a href="javascript:void(0)" class="floatRight mr10 btnStd btnMedium" id="smsCodeHelper">验证码助手</a>
-			</div>
 			<table summary="" class="tbl_type01 tbHoverable">
 				<thead>
 					<tr>
@@ -57,15 +46,6 @@
 						</th>
 						<th>
 							<div class="thcell">手机号</div>
-						</th>
-						<th>
-							<div class="thcell">类型</div>
-						</th>
-						<th class="thcellId">
-							<div class="thcell">认证</div>
-						</th>
-						<th>
-							<div class="thcell">所属角色ID</div>
 						</th>
 						<th>
 							<div class="thcell">注册时间</div>
@@ -96,27 +76,10 @@
 			</div>
 		</td>
 		<td>
-			<div class="tdcell">{{userType}}</div>
-		</td>
-		{{#authShow}}
-		<td class="thcellId authHide">
-			<div class="tdcell">
-				{{#isAuth}} <i class="iconfont changeAuth" data-auth="{{isAuth}}" style="color: rgb(254, 207, 16);">&#xe620;</i>
-				{{/isAuth}}
-				{{^isAuth}} <i class="iconfont changeAuth" data-auth="{{isAuth}}">&#xe61f;</i>
-				{{/isAuth}}
-			</div>
-		</td>
-		{{/authShow}}
-		<td>
-			<div class="tdcell">{{userId}}</div>
-		</td>
-		<td>
 			<div class="tdcell">{{createTimeStr}}</div>
 		</td>
 		<td>
 			<div class="tdcell">
-				<a href="javascript:;" class="btnStd btnSmall editbtn" data-id="{{id}}">编辑</a>
 				<a href="javascript:;" class="btnStd btnSmall delbtn" data-id="{{id}}">删除</a>
 			</div>
 		</td>

@@ -2,6 +2,7 @@
 	box-shadow: 0px 2px 5px #ccc;
 	background-color: #fff;
 	height: 58px;
+	min-width: 1170px;
 }
 .memenu
 {margin:0;padding:0;width:100%;list-style:none;display:inline-block;position:relative;font-family:Calibri,Arial;font-size:15px}
@@ -69,15 +70,7 @@ ul.memenu.skyblue {text-align: left;}
 .mepanel .row .col4{width:65.95744680851064%}
 .mepanel .row .col5{width:82.97872340425532%}
 .mepanel .row .col6{width:100%}
-.memenu>li.showhide{
-	display:none;
-	width:100%;
-	height:44px;
-	cursor:pointer;
-	color:#555;
-	background:#52D0C4;
-	
-}
+
 .memenu>li.showhide span.title{margin:11px 0 0 25px;color: #fff;float:left}
 .memenu>li.showhide span.icon1:after{position:absolute;content:"";right:25px;top:12px;height:3px;width:25px;font-size:50px;border-top:3px solid #fff;border-bottom:3px solid #fff;z-index:1}
 .memenu>li.showhide span.icon2:after{position:absolute;content:"";right:25px;top:24px;height:3px;width:25px;font-size:50px;border-top:3px solid #fff;border-bottom:3px solid #fff;z-index:1}	
@@ -85,51 +78,7 @@ ul.memenu.skyblue {text-align: left;}
 .skyblue>li:hover>a,.skyblue>li.active>a,.skyblue .dropdown li:hover>a{color:#52d0c4}
 .skyblue .mepanel img:hover,.skyblue form.contact input[type="text"]:focus,.skyblue form.contact textarea:focus{border:solid 1px #0194be}
 .skyblue form.contact input[type="submit"]{background:#0194be}
-@media(max-width:768px){
-	.memenu>li{display:block;width:100%;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box}
-	.memenu>li:hover,.memenu>li.active{border-top:0}
-	.memenu>li>a{ padding: 0.7em 0;}
-	.memenu>li:hover>a,.memenu>li.active>a{padding: 0.7em 0;}
-	.memenu a{width:100%;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box}
-	.memenu .dropdown,.memenu .dropdown li .dropdown{width:100%;display:none;left:0;border-left:0;position:static;border:0;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box}
-	.memenu .dropdown li{background:#fff!important;border:0}
-	.memenu .dropdown>li>a{padding-left:40px!important}
-	.memenu>li>.mepanel {
-		position: static;
-		margin-top: 50px;
-		border: none;
-		width: 100%;
-		}
-	.me-one ul li {
-		text-align: center !important;
-	}
-	.mepanel .row{
-		margin:0;
-	}
-	.mepanel .row [class*="col"]{float:none;display:block;width:100%;margin-left:0;margin-top:15px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
-	.mepanel .row:first-child [class*="col"]:first-child{margin-top:0}
-	.mepanel .row{margin-top:0}.black{background:#222}
-	}
-@media(max-width:320px){
-.memenu>li.showhide {
-  	height: 37px;
-}
-.memenu>li.showhide span.title {
-  margin: 8px 0 0 15px;
-  color:#fff;
-}
-.memenu>li.showhide span.icon1:after {
-  right: 10px;
-  top: 9px;
-}
-.memenu>li.showhide span.icon2:after {
-  right: 10px;
-  top: 21px;
-}
-.memenu>li>a {
-  font-size: 1em;
-}
-}
+
 .halfside {
 	height: 450px;
 	background-color: #fff; 

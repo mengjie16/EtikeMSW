@@ -399,6 +399,8 @@ ul.callbacks_tabs.callbacks1_tabs {
     height: 46px;
     overflow: hidden;
     color: #000;
+    margin: 0 10px;
+    font-weight: normal;
 }
 
 .col-md1 h3 a {
@@ -433,21 +435,22 @@ ul.callbacks_tabs.callbacks1_tabs {
 .content-top1 {}
 
 .col-md1 .price {
-    margin: 10px 0;
+    margin: 10px;
     overflow: hidden;
 }
 
 .col-md1 {
     border: 1px solid transparent;
-    padding: 10px;
+    padding-top: 10px;
     border-bottom: 3px solid transparent;
     background-color: #fff;
-    margin-bottom: 15px;
+    margin: 15px;
     height: 360px;
 }
 
 .col-md3 .col-md1 {
     height: 310px;
+    text-align: center;
 }
 
 .col-md1:hover {
@@ -469,6 +472,17 @@ ul.callbacks_tabs.callbacks1_tabs {
     -ms-transition: 0.5s all;
 }
 
+.col-md-4 {
+    width: 340px;
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.col-md-8 {
+    width: 780px;
+    float: left;
+    padding-left: 15px;
+}
 
 /*--footer--*/
 
@@ -512,6 +526,7 @@ ul.callbacks_tabs.callbacks1_tabs {
 
 .footer {
     margin-top: 30px;
+    min-width: 1170px;
 }
 
 .footer-top {
@@ -582,7 +597,10 @@ p.footer-class a:hover {
     padding: 2em 0;
     border-top: 1px solid #BDBDBD;
 }
-
+.footer-bottom .container {
+    width: 1170px;
+    margin: 0 auto;
+}
 
 /*--//footer--*/
 
@@ -1110,8 +1128,18 @@ height: 100px
 .products {
     padding: 3em 0;
 }
-
-
+.products .container {
+    width: 1170px;
+    margin: 0 auto;
+}
+.col-md-2 {
+    width: 190px;
+    float: left;
+}
+.col-md-10 {
+    width: 980px;
+    float: left;
+}
 /*--menu-drop--*/
 
 h3.cate {
@@ -1257,9 +1285,7 @@ span.price-in1 {
 
 /*--typo-single--*/
 
-.thumb-image {
-    width: 305px;
-}
+
 
 .thumb-image > img {
     width: 100%;
@@ -1396,7 +1422,10 @@ a.cart:hover {
 .single {
     padding: 2em 0;
 }
-
+.single .container {
+    width: 1170px;
+    margin: 0 auto;
+}
 .available h6 {
     color: #52D0C4;
     font-size: 1.4em;
@@ -1496,9 +1525,15 @@ a.cart:hover {
     right: 0;
 }
 
+.main_brand_btn {
+    width: 1170px;
+    margin: 0 auto;
+}
 
-
-
+.col-md-3,.col-sm-3 {
+    width: 25%;
+    float: left;
+}
 
 /*--typo--*/
 
@@ -1626,798 +1661,6 @@ ul.nav.nav-pills {
     }
 }
 
-@media(max-width:768px) {
-    .col-md2 {
-        width: 50%;
-        float: left;
-        margin-bottom: 2em;
-    }
-    p.log {
-        width: 55%;
-        font-size: 0.85em;
-    }
-    .number span {
-        color: #000;
-        font-size: 0.82em;
-        margin-top: 1.5em;
-        display: block;
-    }
-    .search {
-        margin-top: 3%;
-    }
-    .banner-mat img {
-        height: 186px;
-    }
-    .content-top1 {
-        padding: 0em 0;
-    }
-    .content-top h1 {
-        margin: 0 0 1em;
-    }
-    .content-top {
-        padding: 3em 0 1em;
-    }
-    .top-footer1 {
-        margin: 2em 0 0;
-    }
-    .top-footer1 input[type="text"] {
-        width: 40%;
-    }
-    .top-footer1 input[type="submit"] {
-        width: 16%;
-    }
-    .world,
-    .logo,
-    .header-left {
-        width: 33.33%;
-        float: left;
-    }
-    .number,
-    .search {
-        width: 16.66%;
-        float: left;
-    }
-    .h_menu4 {
-        float: left;
-        width: 66.66%;
-    }
-    .logo img {
-        width: 100%;
-    }
-    .banner-mat {
-        width: 25%;
-        float: left;
-    }
-    .matter-banner {
-        width: 50%;
-        float: left;
-    }
-    .footer-bottom-cate {
-        float: left;
-        width: 25%;
-    }
-    .number {
-        margin-top: 0%;
-        padding: 0;
-    }
-    /*--products--*/
-    .col-md3 {
-        float: left;
-        width: 33.33%;
-        margin: 0 0 2em;
-    }
-    .fashion-grid1 {
-        width: 85%;
-    }
-    .fashion-grid {
-        width: 9%;
-    }
-    .tags li a {
-        font-size: 0.9em;
-    }
-    /*--single--*/
-    .grid {
-        width: 50%;
-        float: left;
-    }
-    .thumb-image {
-        width: 305px;
-    }
-    .single-top-in {
-        width: 50%;
-        float: left;
-    }
-    .single {
-        padding: 3em 0;
-    }
-    /*--contact--*/
-    .in-contact {
-        margin: 1em 0 0;
-    }
-    .contact h1 {
-        margin: 0 0px 0.3em;
-    }
-    .address-grid i {
-        font-size: 3em;
-        margin: 0 5% 0 0;
-    }
-    .address1 p {
-        font-size: 1.4em;
-        line-height: 1.7em;
-    }
-    .address-grid {
-        margin: 0 0 1em;
-    }
-    /*--account--*/
-    .account h1,
-    .register h1 {
-        margin: 0;
-    }
-    /*--checkout--*/
-    .sed p {
-        padding: 0.5em 0 0;
-    }
-    .check-out {
-        padding: 3em 0em;
-    }
-    /*--typo--*/
-    h1.grid2 {
-        font-size: 2.3em;
-    }
-}
-
-@media (max-width: 736px) {
-    p.log {
-        width: 60%;
-    }
-    .number span {
-        font-size: 0.75em;
-    }
-}
-
-@media (max-width: 667px) {
-    p.log {
-        font-size: 0.77em;
-    }
-}
-
-@media(max-width:640px) {
-    .world {
-        width: 26%;
-        padding: 0;
-    }
-    select.in-drop,
-    select.in-drop1 {
-        font-size: 0.8em;
-    }
-    .box_1 h3 {
-        font-size: 0.85em;
-    }
-    .header-left {
-        width: 33%;
-        padding: 0;
-    }
-    .logo {
-        width: 41%;
-    }
-    .logo img {
-        width: 80%;
-        margin: 0 auto;
-    }
-    .number {
-        padding: 0;
-        width: 20%;
-    }
-    .h_menu4 {
-        width: 63%;
-    }
-    .search {
-        padding: 0;
-    }
-    .banner-mat img {
-        height: 152px;
-    }
-    .content-top h1 {
-        font-size: 2em;
-    }
-    .cate-bottom ul li {
-        font-size: 0.9em;
-    }
-    /*--product--*/
-    .col-md1 {
-        padding: 0.5em;
-    }
-    .price h5 {
-        font-size: 1.1em;
-    }
-    .price a {
-        padding: 0.3em 0.5em;
-    }
-    /*--single--*/
-    .single-top-in {
-        width: 100%;
-        float: left;
-        margin: 0 0 2em;
-    }
-    .grid {
-        width: 53%;
-    }
-    .thumb-image {
-        width: 257px;
-    }
-    /*--contact--*/
-    .contact {
-        padding: 2em 0;
-    }
-    /*--account--*/
-    .account,
-    .register {
-        padding: 2em 0;
-    }
-    /*--checkout--*/
-    th,
-    td {
-        padding: 10px 4px;
-    }
-    /*--typo--*/
-    button.btn.btn-lg {
-        font-size: 1.1em;
-    }
-    h1.grid2 {
-        font-size: 2em;
-    }
-    h2.grid2 {
-        font-size: 1.9em;
-    }
-    h3.typo1 {
-        font-size: 2.5em;
-    }
-    .page {
-        margin: 2em 0;
-    }
-}
-
-@media (max-width: 600px) {
-    select.in-drop,
-    select.in-drop1 {
-        font-size: 0.7em;
-    }
-}
-
-@media (max-width:568px) {
-    .world {
-        width: 28%;
-        padding: 0;
-    }
-    .logo {
-        width: 39%;
-    }
-}
-
-@media(max-width:480px) {
-    .matter-banner,
-    .banner-mat {
-        width: 100%;
-        padding: 0;
-    }
-    .banner-mat img {
-        display: none;
-    }
-    .world {
-        display: none;
-    }
-    .logo {
-        width: 100%;
-        padding: 0;
-        text-align: center;
-    }
-    .header-left {
-        width: 100%;
-    }
-    .logo img {
-        width: 29%;
-    }
-    .search {
-        width: 11%;
-    }
-    .h_menu4 {
-        width: 67%;
-    }
-    .number {
-        width: 22%;
-    }
-    .content-top {
-        padding: 2em 0 1em;
-    }
-    .price h5 {
-        font-size: 1em;
-        margin-top: 6px;
-    }
-    .footer-top {
-        padding: 2em 0;
-    }
-    .top-footer iframe {
-        min-height: 150px;
-    }
-    .top-footer1 {
-        margin: 1em 0 0;
-    }
-    .top-footer1 h2 {
-        font-size: 1.5em;
-    }
-    .top-footer1 input[type="text"] {
-        width: 46%;
-    }
-    .top-footer1 input[type="submit"] {
-        width: 23%;
-    }
-    .footer-bottom-cate {
-        width: 50%;
-        margin: 0 0 1em;
-    }
-    .footer-bottom {
-        padding: 2em 0 0em;
-    }
-    /*--products--*/
-    .products {
-        padding: 2em 0;
-    }
-    .products h1 {
-        font-size: 2em;
-        margin: 0 0 0.5em;
-    }
-    .col-md3 {
-        padding: 0 3px;
-        margin: 0 0 1em;
-    }
-    .price a {
-        font-size: 0.8em;
-    }
-    .col-md-9 {
-        padding: 0;
-    }
-    .fashion-grid {
-        width: 20%;
-    }
-    .fashion-grid1 {
-        width: 76%;
-    }
-    .product-bottom {
-        padding: 0;
-    }
-    .product-go {
-        padding: 0.5em 0;
-    }
-    .tag {
-        padding: 1em 0;
-    }
-    .tags {
-        padding: 1em 0 0;
-    }
-    .grid {
-        width: 67%;
-    }
-    /*--contact--*/
-    .contact h1 {
-        font-size: 2em;
-    }
-    .address-more h2 {
-        font-size: 1.7em;
-    }
-    .address-grid i {
-        font-size: 2.5em;
-    }
-    .address1 p {
-        font-size: 1.2em;
-    }
-    .address {
-        padding: 2em 0 0;
-    }
-    /*--account--*/
-    .account h1,
-    .register h1 {
-        font-size: 2em;
-    }
-    /*--checkout--*/
-    .check-out h1 {
-        font-size: 14px;
-        margin: 0 0 0.4em;
-    }
-    .check-out {
-        padding: 2em 0em;
-    }
-    .sed {
-        float: right;
-        width: 0;
-        display: none;
-    }
-    a.at-in {
-        float: left;
-        width: 76%;
-    }
-    .ring-in {
-        width: 20%;
-    }
-    th,
-    td {
-        padding: 7px 0px;
-    }
-    th {
-        font-size: 1em;
-    }
-    td {
-        font-size: 0.8em;
-    }
-    a.to-buy {
-        margin: 0;
-        font-size: 0.8em;
-    }
-    .single {
-        padding: 2em 0;
-    }
-    /*--typo--*/
-    .page-header h3 {
-        font-size: 2em;
-    }
-    button.btn.btn-lg {
-        font-size: 1em;
-        padding: 7px;
-    }
-    button.btn.btn-1 {
-        font-size: 0.9em;
-        padding: 8px;
-    }
-    button.btn.btn-sm {
-        font-size: 0.8em;
-        padding: 9px;
-    }
-    h1#h1-bootstrap-heading {
-        font-size: 2.2em;
-    }
-    h2#h2-bootstrap-heading {
-        font-size: 2em;
-    }
-    h1.grid2 {
-        font-size: 1.45em;
-    }
-    h2.grid2 {
-        font-size: 1.35em;
-    }
-    h3.grid2 {
-        font-size: 1.3em;
-    }
-    h4.grid2 {
-        font-size: 1.2em;
-    }
-    h3.typo1 {
-        font-size: 2em;
-    }
-    .page {
-        margin: 2em 0;
-    }
-    h1.typo1 {
-        font-size: 2em;
-        margin: 0 0 0.8em;
-    }
-}
-
-@media (max-width:414px) {
-    .h_menu4 {
-        width: 60%;
-    }
-    .number {
-        width: 29%;
-    }
-}
-
-@media(max-width:320px) {
-    .logo {
-        width: 100%;
-    }
-    .header-left {
-        width: 100%;
-    }
-    .logo img {
-        width: 46%;
-    }
-    .logo {
-        width: 100%;
-        text-align: center;
-    }
-    .header-left {
-        width: 100%;
-    }
-    .box_1 h3 {
-        font-size: 0.8em;
-    }
-    p.log {
-        margin-top: 7%;
-        font-size: 0.9em;
-    }
-    .header-left {
-        margin-top: 1%;
-    }
-    .number {
-        width: 32%;
-    }
-    .number span {
-        font-size: 0.8em;
-    }
-    .search {
-        width: 6%;
-    }
-    .h_menu4 {
-        width: 62%;
-    }
-    .number {
-        margin-top: 0%;
-    }
-    .search {
-        margin-top: 6%;
-    }
-    .head-top {
-        padding: 0.4em 0 0;
-    }
-    .content-top h1 {
-        font-size: 1.5em;
-        margin: 0 0 0.7em;
-    }
-    .content-top {
-        padding: 1.5em 0 0.5em;
-    }
-    .col-md2 {
-        padding: 0 5px;
-        margin-bottom: 1em;
-    }
-    .col-md1 h3 {
-        font-size: 1.1em;
-    }
-    .price a {
-        font-size: 0.7em;
-        display: inline-block;
-        float: none;
-        padding: 0.3em 0.6em;
-    }
-    .col-md1 {
-        padding: 0.3em;
-    }
-    .price h5 {
-        font-size: 1em;
-        margin: 0.4em 0;
-        float: none;
-    }
-    .price {
-        text-align: center;
-    }
-    .footer-top {
-        padding: 1.5em 0;
-    }
-    .top-footer {
-        padding: 0;
-    }
-    .top-footer1 {
-        padding: 0;
-    }
-    .top-footer1 h2 {
-        font-size: 1.3em;
-    }
-    .top-footer1 input[type="text"] {
-        width: 65%;
-        padding: 0.4em;
-    }
-    .top-footer1 input[type="submit"] {
-        font-size: 0.85em;
-        padding: 0.6em 0em;
-        width: 33%;
-    }
-    .footer-bottom-cate {
-        padding: 0;
-    }
-    p.footer-class {
-        font-size: 0.9em;
-        margin: 0em 0 1em;
-        line-height: 1.5em;
-    }
-    ul.callbacks_tabs.callbacks1_tabs {
-        left: 40%;
-    }
-    .callbacks_tabs a:after {
-        height: 10px;
-        width: 10px;
-    }
-    /*--product--*/
-    .products h1 {
-        font-size: 1.8em;
-    }
-    .products {
-        padding: 1.5em 0;
-    }
-    h3.cate {
-        font-size: 1.2em;
-    }
-    .contact h1 {
-        font-size: 1.7em;
-        margin: 0;
-    }
-    .in-contact {
-        padding: 0;
-        margin: 0.5em 0 0;
-    }
-    .contact-bottom input[type="text"] {
-        padding: 0.5em;
-    }
-    .contact-bottom-top {
-        margin: 0.5em 0 0;
-    }
-    .contact-bottom-top textarea {
-        min-height: 120px;
-    }
-    .contact-form input[type="submit"] {
-        margin: 0.5em 0px 0;
-        padding: 0.3em 0.5em;
-        font-size: 1em;
-    }
-    .address {
-        padding: 1em 0 0;
-    }
-    .address-more h2 {
-        font-size: 1.5em;
-        margin: 0 0 0.5em;
-    }
-    .address-grid {
-        padding: 0;
-    }
-    .address-grid i {
-        font-size: 2em;
-    }
-    .address1 p {
-        font-size: 1em;
-    }
-    .address1 {
-        margin-top: 0;
-    }
-    .contact {
-        padding: 1.5em 0 0.5em;
-    }
-    .product-bottom {
-        padding: 0;
-    }
-    .single {
-        padding: 1.5em 0 0.5em;
-    }
-    /*--account--*/
-    .account,
-    .register {
-        padding: 1.5em 0;
-    }
-    .account h1,
-    .register h1 {
-        font-size: 1.7em;
-    }
-    .login-right,
-    .login-left,
-    .register-top-grid,
-    .register-bottom-grid {
-        padding: 0;
-    }
-    .login-left p {
-        width: 100%;
-    }
-    .login-right span {
-        padding-bottom: 0em;
-    }
-    .register-but {
-        margin-top: 0em;
-    }
-    .mation {
-        padding: 0 0 0.5em;
-    }
-    td {
-        font-size: 0.75em;
-    }
-    table {
-        margin: 0em 0 1em;
-    }
-    .check-out h1 {
-        font-size: 14px;
-        margin: 0 0 0.4em;
-    }
-    .check-out {
-        padding: 1.5em 0em;
-    }
-    .check-out th {
-        text-align: center;
-    }
-    /*--single--*/
-    .thumb-image {
-        width: 260px;
-    }
-    .grid {
-        width: 100%;
-    }
-    .single-top-in {
-        padding: 0;
-        margin: 0 0 1em;
-    }
-    .single-para h1 {
-        font-size: 1.2em;
-    }
-    .star-on a {
-        font-size: 0.8em;
-    }
-    .available {
-        padding: 1em 0 1em;
-    }
-    label.add-to {
-        font-size: 1.5em;
-    }
-    a.cart {
-        padding: 0.2em 0.5em;
-        margin: 0.5em 0 0;
-    }
-    .h_nav h4 {
-        font-size: 1.1em;
-    }
-    /*--typo--*/
-    h1#h1-bootstrap-heading {
-        font-size: 1.5em;
-    }
-    h2#h2-bootstrap-heading {
-        font-size: 1.4em;
-    }
-    h3#h3-bootstrap-heading {
-        font-size: 1.3em;
-    }
-    button.btn.btn-lg {
-        font-size: 0.9em;
-        margin: 0 0 0.5em 0px;
-        padding: 9px;
-    }
-    .grid1 {
-        margin: 0.7em 0 0;
-    }
-    button.btn.btn-1 {
-        font-size: 0.8em;
-        margin: 0 0 0.5em;
-    }
-    button.btn.btn-sm {
-        font-size: 0.7em;
-        padding: 5px;
-        margin: 0 0 0.5em;
-    }
-    button.btn.btn-xs {
-        font-size: 0.7em;
-    }
-    ul.nav.nav-pills a {
-        padding: 0.5em;
-        font-size: 0.9em;
-    }
-    span.label {
-        margin: 0 0 0.5em;
-        display: inline-block;
-    }
-    .page {
-        padding: 0em;
-        margin: 1.7em 0;
-    }
-    .page-header {
-        margin: 16px 0 9px;
-    }
-    .grid2 {
-        margin: 0.4em 0 0;
-    }
-    h3.typo1 {
-        font-size: 1.7em;
-    }
-    .page-header h3 {
-        font-size: 1.8em;
-    }
-    h1.typo1 {
-        font-size: 1.7em;
-        margin: 0 0 0.5em;
-    }
-    
-}
 .searchBlock {
     height: 28px;
     line-height: 28px;

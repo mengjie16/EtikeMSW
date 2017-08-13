@@ -30,22 +30,20 @@
                         <ul class="loginInfo">
                             <li>
                                 <div style="width:60px;" class="f14">手机号</div>
-                                <div style="width:180px;">
+                                <div style="width:340px;">
                                     <input id="txtPhone" name="phone" type="text" class="inputText trControl" maxlength="11" placeholder="登录手机号" tr-param="phone"/>
                                     <div for="txtPhone" class="validateLine clearfix"></div>
                                 </div>
                             </li>
                             <li>
                                 <div style="width:60px;" class="f14">密码</div>
-                                <div style="width:180px;">
+                                <div style="width:340px;">
                                     <input id="txtPassword" name="password" type="password" class="inputText trControl" maxlength="20" placeholder="密码"  tr-param="password"/>
                                     <div for="txtPassword" class="validateLine clearfix"></div>
                                 </div>
                             </li>
                         </ul>
-                        <div class="loginBtn" id="btnLogin">
-                            <a href="javascript:;" class="normalLogin trSubmit">登 录</a>
-                        </div>
+                        
                     </div>
                     <div class="loginBottom mt10">
                         <div class="login_bottom_l">
@@ -55,6 +53,9 @@
                         <div class="login_bottom_r">
                             <a href="/pwd/retrieve/check" target="_self">忘记密码?</a>
                         </div>
+                    </div>
+                    <div class="loginBtn" id="btnLogin">
+                        <a href="javascript:;" class="normalLogin trSubmit">登 录</a>
                     </div>
                 </form>
                 #{/else}
