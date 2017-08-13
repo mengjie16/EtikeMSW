@@ -8,7 +8,6 @@
   <meta charset="utf-8" />
   <meta name="keyword" content="好孩子推车,费雪,乐高,小泰克,TAKATA高田,Aprica阿普丽佳,Kiddy奇蒂,Cybex,迪士尼,一件代发" />
   <meta name="description" content="艾泰客,关注这个时代最好的母婴产品，婴儿推车，安全座椅，童车，儿童三轮车，提篮，婴儿床，一件代发" />
-  <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/common/bootstrap.css'}" />
   <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/common/widget.1.1.css'}" />
   <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/common/reset.css'}" />
   <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/style.css'}"  />
@@ -19,12 +18,12 @@
 </head>
 <body>
   <div class="header"> 
-      <div class="container">
+      <div class="container" style="width: 1170px;margin: 0 auto">
           <div class="head-top">
-              <div class="col-sm-2 logo">
+              <div class="logo" style="width: 190px;float: left;">
                   <a href="index.html">EITAK</a>
               </div>
-              <div class="col-sm-4 h_menu4">
+              <div class="h_menu4" style="width: 380px;float: left;">
                   <ul class="memenu skyblue">
                       <li class="grid"><a href="/">首页</a></li>
                       <li><a href="/search">全部商品</a>
@@ -79,7 +78,7 @@
                       </li>
                   </ul>
               </div>
-              <div class="col-sm-3">
+              <div class="" style="width: 285px;float: left;">
                 <form action="/search" method="get">
                   <div class="searchBlock">
                     <input id="searchTxt" name="kw" value="${vo?.kw?.raw()}" type="text" style="ime-mode:active;"/>
@@ -87,9 +86,9 @@
                   </div>
                 </form>
               </div>
-              <div class="col-sm-3 search">
+              <div class="search" style="width: 315px;float: left;">
                   <a class="shoppingcart" href="/user/cart">
-                      <i class="iconfont" style="font-size: 18px;color: #777;display: inline-block;margin-top: -3px">&#xe610;</i>
+                      <i class="iconfont" style="font-size: 18px;color: #777;display: inline-block;">&#xe610;</i>
                   </a>
                   #{if !user}
                   <a href="/login" target="_blank" class="login">

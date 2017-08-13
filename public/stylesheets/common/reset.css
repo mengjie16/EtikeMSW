@@ -42,3 +42,6 @@ del { text-decoration: line-through; }
 /* tables still need 'cellspacing="0"' in the markup */
 table { border-collapse: collapse; border-spacing: 0; }
 @font-face{font-family:'iconfont';src:url('/public/images/font/iconfont.eot');src:url('/public/images/font/iconfont.eot?#iefix') format('embedded-opentype'),url('/public/images/font/iconfont.woff') format('woff'),url('/public/images/font/iconfont.ttf') format('truetype')}.iconfont{font-family:"iconfont";font-size:16px;font-style:normal;-webkit-font-smoothing: antialiased;-webkit-text-stroke-width: 0.2px;}
+a,a:hover {
+	text-decoration: none;
+}

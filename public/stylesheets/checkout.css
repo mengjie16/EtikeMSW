@@ -9,6 +9,8 @@ body,html,table{
 }
 .check-out {
     padding: 2em 0em;
+    width: 1170px;
+    margin: 0 auto;
 }
 
 table {
@@ -81,7 +83,8 @@ a.at-in img {
     outline: none;
     text-align: center;
     border: 1px solid #e5e5e5;
-    height: 26px
+    height: 28px;
+    box-sizing: border-box;
 }
 
 .check {
@@ -120,6 +123,7 @@ a.to-buy {
     line-height: 1.6em;
     text-align: center;
     text-decoration: none;
+    cursor: pointer;
 }
 
 a.to-buy:hover {
@@ -147,6 +151,7 @@ a#editCount {
     text-align: center;
     text-decoration: none;
     float: right;
+    font-weight: 400;
 }
 a#editCount:hover {
     background: #000;

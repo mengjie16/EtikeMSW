@@ -329,7 +329,7 @@ b.line{display: block;width:100%;height:2px ;border-bottom:2px solid #d2364c;}
 li.person:first-child a i{position: absolute;left:20px;}
 li.person p i{position: absolute;left:12px;}   	
 /*分类*/
-.nav-table,.footer{max-width:1200px;}
+
 .long-title {width:180px;}
 .nav-cont {padding-left: 180px;}
 /*固定框架*/
