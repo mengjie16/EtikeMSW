@@ -23,6 +23,7 @@ import com.aton.db.handler.JsonArrayTypeHandler;
 import com.aton.util.CacheUtils;
 import com.aton.util.DateUtils;
 import com.aton.util.MixHelper;
+import com.aton.util.RegexUtils;
 import com.aton.vo.AjaxResult;
 import com.aton.vo.Page;
 import com.google.common.base.Objects;
@@ -41,6 +42,7 @@ import enums.ItemStatus;
 import enums.OrderStatus;
 import enums.TradeStatus;
 import enums.constants.CacheType;
+import enums.constants.ErrorCode;
 import models.RetailerAddress;
 import models.AliPayTrade;
 import models.Cart;
@@ -243,6 +245,11 @@ public class RetailerController extends BaseController {
     public static void addressSave(@Required @Valid RetailerAddress address) {
         handleWrongInput(true);
         
+        String message = checkValid(address);
+        if (Strings.isNullOrEmpty(message)) {
+        	renderFailedJson(ReturnCode.FAIL,message);
+        }
+        
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
         // 检查模板地址是否重复
         List<RetailerAddress> lsst = RetailerAddress.findListByRetailerId((int) user.id);
@@ -258,13 +265,34 @@ public class RetailerController extends BaseController {
             address.defaultAddress = true;
         }
         
-        address.retailerId = (int) user.id;
-              
+        address.retailerId = (int) user.id;          
+        
+       
         boolean ret = RetailerAddress.save(address);
         if (ret) {
             renderSuccessJson();
         }
         renderFailedJson(ReturnCode.FAIL, "添加失败");
+    }
+
+    public static  String checkValid(RetailerAddress address) {
+        StringBuilder sb = new StringBuilder("");
+        // 联系人，
+        if (Strings.isNullOrEmpty(address.name)) {
+            sb.append(ErrorCode.RETAILERADDRESS_NAME_EMPTY.description + "，");
+        }
+        // 联系人号码为空
+        if (Strings.isNullOrEmpty(address.phone)) {
+            sb.append(ErrorCode.RETAILERADDRESS_PHONE_EMPTY.description + "，");
+        } else {
+            // 4-8位数字，以校验电话号码，不能确定常规填写
+            boolean match = RegexUtils.isMatch(address.phone, "\\d{4,8}");
+            if (!match) {
+                sb.append(ErrorCode.RETAILERADDRESS_PHONE_INVALID.description + "，");
+            }
+        }
+       
+        return sb.toString();
     }
 
     
@@ -610,9 +638,15 @@ public class RetailerController extends BaseController {
             log.info("提交了空的订单");
             renderFailedJson(ReturnCode.FAIL, "提交了空的订单");
         }
-        User user = renderArgs.get(Secure.FIELD_USER, User.class);
-       
-        OrderVo.parseOrderVo(confirmOrderIds, user.id);
+        User user = renderArgs.get(Secure.FIELD_USER, User.class);       
+        
+        RetailerAddress retailerAddress = RetailerAddress.findByDefaultAddress((int)user.id);        
+        
+        if ( retailerAddress == null) {        
+        	renderFailedJson(ReturnCode.FAIL, "默认地址不存在，请添加默认地址");
+        }
+        
+        OrderVo.parseOrderVo(confirmOrderIds, retailerAddress, user.id);
         
         // 缓存当前解析成功的商品信息
         String pkey = CacheType.RETAILER_ORDER_VO_DATA.getKey((int)user.id);
