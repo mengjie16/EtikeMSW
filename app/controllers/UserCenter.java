@@ -339,8 +339,8 @@ public class UserCenter extends BaseController {
      * @created 2016年7月29日 下午3:07:29
      */
     @UserLogonSupport
-    public static void modifyPass(@Required @Match(RegexConstants.PASSWORD) String pass,
-        @Required @Match(RegexConstants.DIGITS6) String captcha) {
+    public static void modifyPass(@Required @Match(RegexConstants.PASSWORD) String pass
+       ) {
         handleWrongInput(true);
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
         // 校验验证码正确性
