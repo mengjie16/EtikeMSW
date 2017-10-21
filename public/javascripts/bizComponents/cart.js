@@ -183,8 +183,11 @@ $(function() {
                 if (hasCheckedBoxes.length > 0) {
                     $.when(checkedToPay(hasCheckedBoxes)).done(function() {
                         /*$(that).attr('href', '/user/cart/stepTwo');*/
-                    }).fail(function() {
-                        alert("跳转失败");
+                    }).fail(function(ex) {
+                        if(ex!==555){
+                            alert("跳转失败");
+                        }
+                        
                         $(that).attr('href', 'javascript:void(0);');
                         return;
                     });
@@ -289,7 +292,13 @@ function checkedToPay(cartIds) {
     };
     Tr.post('/retailer/order/generate', params, function(data) {
         if (data.code != 200) {
-            dtd.reject();
+            if(data.code == 555){
+                alert("请先添加默认地址然后下单");
+                dtd.reject(555);
+            }else{
+                dtd.reject();
+            }
+            
         } else {
             var tradeId = data.results;
 
