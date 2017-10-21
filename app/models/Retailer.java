@@ -127,7 +127,7 @@ public class Retailer implements java.io.Serializable {
 
             user.userId = id;
             user.role = "RETAILER";
-            user.name = "小吐司_" + user.phone;
+            user.name = "eitak_" + user.phone;
 
             // 保存用户信息
             user.save();
