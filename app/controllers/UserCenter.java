@@ -228,7 +228,22 @@ public class UserCenter extends BaseController {
      */
     @UserLogonSupport
     public static void cart() {
-        render();
+    	 // 用户信息获取
+        User user = renderArgs.get(Secure.FIELD_USER, User.class);
+        List<Cart> cartItems = Cart.findList(user.id);
+        
+        //hide offline item.
+        List<Cart> res = new ArrayList<Cart>();
+        for(Cart cart : cartItems){
+            Item item = Item.findBaseInfoById(cart.itemId);
+            if(item.status == ItemStatus.ONLINE){
+                res.add(cart);
+            }
+        }
+        
+        List<CartVo> cartVos = CartVo.valueOfcartList(res);
+        
+        renderJson(cartVos);
     }
 
     /**
