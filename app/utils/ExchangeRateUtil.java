@@ -36,7 +36,9 @@ public class ExchangeRateUtil {
     public static final int DEF_READ_TIMEOUT = 30000;
     public static String userAgent = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.66 Safari/537.36";
 
-public static final String fileName = "conf\\exchangeRate.properties";
+    public static final String fileName = "conf\\exchangeRate.properties";
+    
+    public static Float lastExchagneRate = 0.1282f;
     
     // 外汇汇率
     public static Float getExchangeRate() {
@@ -61,18 +63,19 @@ public static final String fileName = "conf\\exchangeRate.properties";
          
         } catch (Exception  ex) {
          ex.printStackTrace();
-         return readByBufferedReader();
+         return lastExchagneRate;
         } finally { 
          if(in != null) 
             try {
                 in.close();                
             } catch (IOException e) {
                 e.printStackTrace();
-                return readByBufferedReader();
+                return lastExchagneRate;
             }         
         }
+        System.out.println("==" + lastExchagneRate);
        
-        writeByBufferedReader(rtn);
+        lastExchagneRate = Float.valueOf(rtn);
         return Float.valueOf(rtn);
     }
     
