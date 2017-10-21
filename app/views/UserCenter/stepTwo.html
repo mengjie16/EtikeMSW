@@ -1,7 +1,13 @@
 #{extends 'main.html' /} #{set title:'确认订单' /} #{set 'moreStyles'}
 <link href="@{'/public/stylesheets/orstyle.css'}" rel="stylesheet" type="text/css">
-<link href="@{'/public/stylesheets/common/amazeui.css'}" rel="stylesheet" type="text/css">#{/set}
-<div class="container">
+<link href="@{'/public/stylesheets/common/amazeui.css'}" rel="stylesheet" type="text/css">
+<style>
+    td,th{
+        padding: 5px 10px;
+    }
+</style>
+#{/set}
+<div class="container" style="width: 970px;margin:0 auto">
     <div class="col-sm-1"></div>
     <div class="col-sm-10 cart_box">
         <div class="main_tit">
@@ -51,14 +57,7 @@
             <ul class="item_box">
                 <li>
                     <label>
-                        <input name="express_id" type="radio" onclick="FreightAmountTotal(this);"  class="expressText" value="1"><span>拼箱</span>
-                        <span>费用：￥</span>
-                        <span class="Validform_checktip">20</span>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input name="express_id" type="radio" onclick="FreightAmountTotal(this);" class="expressText" value="2" datatype="*" sucmsg=" "><span>postnl</span>
+                        <input name="express_id" type="radio" onclick="FreightAmountTotal(this);" class="expressText" value="2" datatype="*" sucmsg=" "><span>易优</span>
                         <span>费用：￥</span>
                         <span class="Validform_checktip">14</span>
                     </label>
@@ -76,9 +75,9 @@
             <table border="0" align="center" cellpadding="8" cellspacing="0" class="cart_table">
                 <thead>
                     <tr>
-                        <th width="64"></th>
+                        <th width="64">图片</th>
                         <th align="left">商品名称</th>
-                        <th width="110" align="center">分类</th>
+                        <th width="210" align="center">分类</th>
                         <th width="80" align="center">单价</th>
                         <th width="80" align="center">数量</th>
                         <th width="100" align="center">金额小计</th>
@@ -122,7 +121,8 @@
                 </div>
                 <div class="right" style="text-align:right;line-height:40px;">
                     商品件数：
-                    <font color="#FF0000" id="cartNum">${totalCount}</font>件 商品金额：
+                    <font color="#FF0000" id="cartNum">${totalCount}</font>件 
+                    商品金额：
                     <font color="#FF0000">￥
                         <label id="goods_amount">${totalCartPrice}</label>
                     </font>+ 运费：
