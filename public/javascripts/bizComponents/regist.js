@@ -21,6 +21,11 @@ function ValidateRetAddOpts() {
 			'user.password': {
 				required: true,
 				password: true
+			},
+			"user.password2":{
+				required: true,
+				password: true,
+				equalTo: '#txtPassword_ret'
 			}
 		},
 		messages: {
@@ -35,6 +40,11 @@ function ValidateRetAddOpts() {
 			'user.password': {
 				required: Tr.error('请填写密码'),
 				password: Tr.error('密码格式不正确')
+			},
+			'user.password2': {
+				required: Tr.error('请再次输入密码'),
+				password: Tr.error('密码格式不正确'),
+				equalTo: Tr.error('两次密码不一致')
 			}
 		},
 		success: function(label, element) {}
