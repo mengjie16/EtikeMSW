@@ -115,6 +115,7 @@ function initBase() {
             alert('请选择分类');
             return;
         }
+        var cny2eur =$('#single .container #detailEur').text()
         var params = {
             "cart.itemId": itemId,
             "cart.skuColor":$getColor,
@@ -122,7 +123,7 @@ function initBase() {
             "cart.picUrl" : purl,
             "cart.cartCount" : $('#single .container input[name="cartAccount"]').val(),
             "cart.retailPrice" : parseInt($('#single .container #detailRmb').text().substring(1)),
-            "cart.cny2eur":parseInt($('#single .container #detailEur').text().substring(1)),
+            "cart.cny2eur":parseInt(cny2eur.substring(0,cny2eur.length-1)),
             "cart.cartPrice" : totalPriceRMB,
             "cart.title" : $('#single .container #detailTitle').text(),
             "cart.brandId":$('#single .container #brandId').val()
