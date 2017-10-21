@@ -100,31 +100,31 @@ function loadList(pageNo) {
 		var output = Mustache.render(CDT.orderTemp, $.extend(data, {
 			'paymentStr':function(){
 				if(this.cargoFee){
-					return this.cargoFee/100;
+					return this.cargoFee;
 				}
 				return 0;
 			},
 			'shippingFeeStr':function(){
 				if(this.shippingFee){
-					return this.shippingFee/100;
+					return this.shippingFee;
 				}
 				return 0;
 			},
 			'totalAmountStr':function(){
 				if(this.totalFee){
-					return this.totalFee/100;
+					return this.totalFee;
 				}
 				return 0;
 			},
 			'realityPaymentStr':function(){
 				if(this.payment){
-					return this.payment/100;
+					return this.payment;
 				}
 				return 0;
 			},
 			'discountStr':function(){
 				if(this.discountFee){
-					return this.discountFee/100;
+					return this.discountFee;
 				}
 				return 0;
 			}
