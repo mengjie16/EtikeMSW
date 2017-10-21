@@ -5,84 +5,68 @@
 <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/common/list.pagination.css'}"  />
 #{/set}
 <div class="products">
-	<div class="container">
-		<div class="col-md-2 product-bottom">
-			<div class=" rsidebar span_1_of_left">
+  <div class="container">
+    <div class="col-md-2 product-bottom">
+      <div class=" rsidebar span_1_of_left">
         #{if search_result?.cates}
         <h3 class="cate">类别</h3>
         <ul id="CategoryList" class="menu-drop">
             #{list items:search_result.cates, as : 'cate'}
             <li class="item1">
-                <!-- <input type="checkbox" name="CategoryCD" value="${cate.id}" ${search_result?.cates.size()==1&&vo?.cateId>0?'checked':''} /> -->
-                <a name="CategoryCD" value="${cate.id}" class="${search_result?.cates.size()==1&&vo?.cateId>0?'active':''}">${cate.name}
-	                #{if search_result?.totalCount>0}
-	                (${cate.count})
-	                #{/if}
-	              </a>
+                <input type="checkbox" name="CategoryCD" value="${cate.id}" ${search_result?.cates.size()==1&&vo?.cateId>0?'checked':''} />
+                <a href="#">${cate.name}
+                  #{if search_result?.totalCount>0}
+                  (${cate.count})
+                  #{/if}
+                </a>
             </li>
             #{/list}
         </ul>
         #{/if}
-			</div>
-      <div class=" rsidebar span_1_of_left">
-        <h3 class="cate">品牌</h3>
-        <ul id="BrandList" class="menu-drop">
-          #{list items:search_result?.brands,as : 'brand'}
-            <li class="item1">
-              <a name="BrdCD" value="${brand.id}" class="${search_result?.brands.size()==1&&vo?.brandId>0?'active':''}">
-                ${brand.name}
-              </a>
-            </li>
-          #{/list}
-        </ul>
-      </div>
-		</div>
+      </div>  
+    </div>
 
-		<div class="col-md-10">
-			<div class="content-top1">
+    <div class="col-md-10">
+      <div class="content-top1">
           #{if search_result?.items}
           #{list items:search_result.items,as : 'item'}
           <div class="col-md-3 col-md3" style="padding-left: 0;">
               <div class="col-md1 simpleCart_shelfItem">
                   <a href="/item/${item?.id}" target="_blank">
-                      <img class="img-responsive lazyImg" src="/public/images/grey.gif"  data-original="${item?.picUrl+'?imageView2/2/h/183/q/100'}" border="0" alt="${item.title}" title="${item.title}" style="width: 193px;height: 193px;" />
+                      <img class="img-responsive lazyImg" src="public/images/grey.gif"  data-original="${item?.picUrl+'?imageView2/2/h/183/q/100'}" border="0" alt="${item.title}" title="${item.title}" style="width: 193px;height: 193px;" />
                   </a>
                   <div class="price">
-                          <h5 class="item_price">
-                            <span class="new">
-                              ¥ <span>${item.retailPrice/100}</span>
-                            </span>
-                            <span class="price-e old"><span>${item?.cny2eur}</span>€</span></h5>
-                          <!-- <span class="glyphicon glyphicon-star-empty item_collect"></span>
-                          <a href="#" class="item_add"><img src="/public/images/cart.png" alt="" style="width: 20px;height: 20px;" /></a> -->
+                          <h5 class="item_price">¥${item.retailPrice/100} <span class="price-e">${item?.cny2eur}€</span></h5>
+                          <span class="glyphicon glyphicon-star-empty item_collect"></span>
+                          <a href="#" class="item_add"><img src="/public/images/cart.png" alt="" style="width: 20px;height: 20px;" /></a>
                    </div>
                   <h3><a href="/item/${item?.id}">${item?.title}</a></h3>
               </div>
           </div>  
           #{/list}
-          #{/if}	
-			  <div class="clearfix"> </div>
-			</div>	
-		</div>
-		<div class="clearfix"> </div>
-	</div>
+          #{/if}  
+        <div class="clearfix"> </div>
+      </div>  
+    </div>
+    <div class="clearfix"> </div>
+  </div>
 </div>
-		<div class="pagin-btm clearFix">
-			<div class="pagination"></div>
-		</div>
+    <div class="pagin-btm clearFix">
+      <div class="pagination"></div>
+    </div>
 
 #{set 'moreScripts'}
 <script type="text/javascript"  src="@{'/public/javascripts/paginator.js'}"></script>
 <script type="text/javascript"  src="@{'/public/javascripts/bizComponents/searchList.js'}"></script>
 <script type="text/javascript"  src="@{'/public/javascripts/src/jquery.lazyload.min.js'}"></script>
 <script type="text/javascript">
-	CDT.currPageNo = ${vo?.pageNo};
-	CDT.pageSize = ${vo?.pageSize};
-	CDT.totalCount = ${search_result?.totalCount};
-	CDT.keyWord ='${vo?.kw}';
-	CDT.brandId = ${vo?.brandId};
-	CDT.cateId = ${vo?.cateId};
-	CDT.dp_use = ${vo?.dp_use};
-	CDT.pr_use = ${vo?.pr_use};
+  CDT.currPageNo = ${vo?.pageNo};
+  CDT.pageSize = ${vo?.pageSize};
+  CDT.totalCount = ${search_result?.totalCount};
+  CDT.keyWord ='${vo?.kw}';
+  CDT.brandId = ${vo?.brandId};
+  CDT.cateId = ${vo?.cateId};
+  CDT.dp_use = ${vo?.dp_use};
+  CDT.pr_use = ${vo?.pr_use};
 </script>
 #{/set}
