@@ -19,12 +19,12 @@
 				<div class="formLine">
 					<label class="f14">登录手机号</label>
 					<input id="txtLoginPhone_ret" name="user.phone" type="text" class="inputText middle registerPhone" placeholder="手机号码" tabindex="1" maxlength="11" value="${flash?.phone}" />
-					<a href="javascript:;" id="ret_btnSendPhone" class="ml4 btnSendPhoneCaptcha" style="">获取动态验证码</a>
+					<!-- <a href="javascript:;" id="ret_btnSendPhone" class="ml4 btnSendPhoneCaptcha" style="">获取动态验证码</a> -->
 					<div for="txtLoginPhone_ret" class="validateLine clearfix"></div>
 				</div>
-				<div class="formLine">
+				<div class="formLine" style="display: none">
 					<label class="f14">填写验证码</label>
-					<input id="txtPhoneCaptcha_ret" name="captcha" type="text" class="inputText middle" placeholder="手机上收到的验证码" tabindex="2" maxlength="6" />
+					<input id="txtPhoneCaptcha_ret" name="captcha" type="text" value="123456" class="inputText middle" placeholder="手机上收到的验证码" tabindex="2" maxlength="6" />
 					<div for="txtPhoneCaptcha_ret" class="validateLine clearfix"></div>
 				</div>
 				
@@ -32,6 +32,11 @@
 					<label class="f14">密 码</label>
 					<input id="txtPassword_ret" name="user.password" onfocus="this.type='password'" autocomplete="off" type="text" class="inputText long" placeholder="输入密码" tabindex="3" maxlength="20" minlength="6" />
 					<div for="txtPassword_ret" class="validateLine clearfix"></div>
+				</div>
+				<div class="formLine">
+					<label class="f14">确 认 密 码</label>
+					<input id="txtPassword_ret2" name="user.password2"  onfocus="this.type='password'" autocomplete="off" type="text" class="inputText long" placeholder="输入密码" tabindex="4" maxlength="20" minlength="6" />
+					<div for="txtPassword_ret2" class="validateLine clearfix"></div>
 				</div>
 				<input type="hidden" name="retailer.channel" value="1"/>
 				<input value="1" name="channel" type="hidden"/>
