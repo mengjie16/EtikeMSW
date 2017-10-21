@@ -130,7 +130,12 @@ function initBase() {
         Tr.post('/retailer/cart/add', params, function(data) {
 
             if (data.code != 200) {
-                alert('加入购物车失败');
+                if(data.code ==561){
+                    alert('尚未登录');
+                }else{
+                    alert('加入购物车失败');
+                }
+                
                 return;
             }
             alert('加入购物车成功');
