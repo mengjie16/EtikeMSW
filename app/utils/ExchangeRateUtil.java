@@ -15,11 +15,13 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.SocketException;
+
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeoutException;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -51,6 +53,7 @@ public class ExchangeRateUtil {
         try {
          MyURL = new URL(url);
          con = MyURL.openConnection();   
+         con.setConnectTimeout(6000);
          ins = new InputStreamReader(con.getInputStream(),"UTF-8");
          in = new BufferedReader(ins);
          result = in.readLine();
@@ -61,17 +64,17 @@ public class ExchangeRateUtil {
              String[] res = result.split(",");
              rtn = res[1];
          
-        } catch (Exception  ex) {
+        }catch (Exception  ex) {
          ex.printStackTrace();
          return lastExchangeRate;
         } finally { 
          if(in != null){ 
             try {
                 in.close();                
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 return lastExchangeRate;
-            } 
+            }
          }else{
              return lastExchangeRate;
          }
