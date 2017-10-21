@@ -36,7 +36,7 @@ public class ExchangeRateUtil {
     public static final int DEF_READ_TIMEOUT = 30000;
     public static String userAgent = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.66 Safari/537.36";
 
-    public static final String fileName = "conf\\exchangeRate.properties";
+    //public static final String fileName = "conf\\exchangeRate.properties";
     
     public static Float lastExchagneRate = 0.1282f;
     
@@ -73,15 +73,13 @@ public class ExchangeRateUtil {
                 return lastExchagneRate;
             }         
         }
-        System.out.println("==" + lastExchagneRate);
-       
-        lastExchagneRate = Float.valueOf(rtn);
+        
         return Float.valueOf(rtn);
     }
     
     
    
-    public static Float readByBufferedReader() { 
+   /* public static Float readByBufferedReader() { 
     	Float rate = null; 
         try {  
             File file = new File(fileName);  
@@ -100,9 +98,7 @@ public class ExchangeRateUtil {
         }  
         return rate;
     }  
-    /**
-     * @param content
-     */
+    
     public static void writeByBufferedReader(String content) {  
         try {            
             File file = new File(fileName);  
@@ -120,6 +116,7 @@ public class ExchangeRateUtil {
             e.printStackTrace();  
         }  
     }  
+    */
   
     public static void main(String[] args) {
         System.out.println(getExchangeRate());
