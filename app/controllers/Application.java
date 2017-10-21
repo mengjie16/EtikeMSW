@@ -163,7 +163,7 @@ public class Application extends BaseController {
      * @author tr0j4n
      * @created 2016年11月8日 下午6:33:42
      */
-    public static void doRegist(@Required @Valid Retailer retailer, @Required User user, @Required String captcha) {
+    public static void doRegist(@Required @Valid Retailer retailer, @Required User user) {
         // 输入验证
         if (validation.hasErrors()) {
             flash.error("注册失败,参数填写错误");
@@ -229,7 +229,6 @@ public class Application extends BaseController {
      * @created 2016年11月16日 下午2:21:20
      */
     public static void doRetrievePass(@Required @MinSize(64) String utm,
-        @Required @Match(RegexConstants.DIGITS6) String smdCode,
         @Required @Match(RegexConstants.PASSWORD) String password) {
 
         handleWrongInput(true);
@@ -353,7 +352,7 @@ public class Application extends BaseController {
      * @author Calm
      * @created 2016年5月27日 下午2:21:30
      */
-    public static void checkSms(@Required @Match(RegexConstants.DIGITS6) String smsCode,
+    public static void checkSms(
         @Required @Match(RegexConstants.PHONE) String phone) {
         handleWrongInput(true);
         
