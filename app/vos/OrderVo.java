@@ -1010,12 +1010,11 @@ public class OrderVo implements java.io.Serializable {
     }
     
     
-    public static void parseOrderVo(List<Integer> confirmOrder, long id) {
+    public static void parseOrderVo(List<Integer> confirmOrder, RetailerAddress retailerAddress, long id) {
         // 获取读取解析过的数据
 //        if (MixHelper.isEmpty(confirmOrder)) {
 //            log.info("提交了空的订单");
-//        }
-        RetailerAddress retailerAddress = RetailerAddress.findByDefaultAddress((int)id);
+//        }       
         
         List<OrderVo> orderVoList = Lists.newArrayList();
         
