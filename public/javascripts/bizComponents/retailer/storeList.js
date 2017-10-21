@@ -19,6 +19,10 @@ function initBase(argument) {
 
 
     });
+    $("img.lazyImg").lazyload({
+          effect : "fadeIn",
+            threshold : 200
+      });
 }
 
 $(function() {
