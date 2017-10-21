@@ -48,7 +48,8 @@ public class Cart implements Serializable {
         SqlSession ss = SessionFactory.getSqlSession();
         try {
             CartMapper mapper = ss.getMapper(CartMapper.class);
-            Cart existCart= mapper.selectByItemIdAndColor(cart.itemId, cart.skuColor);
+            Cart existCart= mapper.selectByItemIdAndColor(cart.retailerId,
+                cart.itemId, cart.skuColor);
             if(existCart != null){
                 existCart.cartCount = cart.cartCount + existCart.cartCount;
                 existCart.cartPrice = existCart.cartCount * existCart.retailPrice;

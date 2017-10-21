@@ -29,9 +29,10 @@ public interface CartMapper {
     @Select("select * from "+ Cart.TABLE_NAME +" where retailer_id = #{retailerId}")
     List<Cart> selectListByRetailer(@Param("retailerId") long retailerId);
 
-    @Select("select * from "+ Cart.TABLE_NAME+" where item_id = #{itemId} and sku_color = #{skuColor}")
-    Cart selectByItemIdAndColor(@Param("itemId") long itemId, @Param("skuColor") String skuColor);
+    @Select("select * from "+ Cart.TABLE_NAME+" where retailer_id = #{retailerId} and item_id = #{itemId} and sku_color = #{skuColor}")
+    Cart selectByItemIdAndColor(@Param("retailerId") long retailerId,@Param("itemId") long itemId, @Param("skuColor") String skuColor);
     
+
     
     
 }
