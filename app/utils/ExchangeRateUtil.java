@@ -38,7 +38,7 @@ public class ExchangeRateUtil {
 
     //public static final String fileName = "conf\\exchangeRate.properties";
     
-    public static Float lastExchagneRate = 0.1282f;
+    public static Float lastExchangeRate = 0.1282f;
     
     // 外汇汇率
     public static Float getExchangeRate() {
@@ -63,17 +63,19 @@ public class ExchangeRateUtil {
          
         } catch (Exception  ex) {
          ex.printStackTrace();
-         return lastExchagneRate;
+         return lastExchangeRate;
         } finally { 
-         if(in != null) 
+         if(in != null){ 
             try {
                 in.close();                
             } catch (IOException e) {
                 e.printStackTrace();
-                return lastExchagneRate;
-            }         
+                return lastExchangeRate;
+            } 
+         }else{
+             return lastExchangeRate;
+         }
         }
-        
         return Float.valueOf(rtn);
     }
     
