@@ -1,7 +1,14 @@
 package utils;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -29,7 +36,7 @@ public class ExchangeRateUtil {
     public static final int DEF_READ_TIMEOUT = 30000;
     public static String userAgent = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.66 Safari/537.36";
 
-
+public static final String fileName = "conf\\exchangeRate.properties";
     
     // 外汇汇率
     public static Float getExchangeRate() {
@@ -52,25 +59,67 @@ public class ExchangeRateUtil {
              String[] res = result.split(",");
              rtn = res[1];
          
-        } catch (SocketException ex) {
+        } catch (Exception  ex) {
          ex.printStackTrace();
-        } catch (Exception ex) {
-         ex.printStackTrace();
+         return readByBufferedReader();
         } finally { 
-         if(in != null)
+         if(in != null) 
             try {
-                in.close();
+                in.close();                
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+                return readByBufferedReader();
+            }         
         }
        
-        
+        writeByBufferedReader(rtn);
         return Float.valueOf(rtn);
     }
-
+    
+    
+   
+    public static Float readByBufferedReader() { 
+    	Float rate = null; 
+        try {  
+            File file = new File(fileName);  
+            // 读取文件，并且以utf-8的形式写出去  
+            BufferedReader bufread;  
+            String read;  
+            bufread = new BufferedReader(new FileReader(file));  
+            while ((read = bufread.readLine()) != null) {  
+               rate = Float.valueOf(read);
+            }  
+            bufread.close();  
+        } catch (FileNotFoundException ex) {  
+            ex.printStackTrace();  
+        } catch (IOException ex) {  
+            ex.printStackTrace();  
+        }  
+        return rate;
+    }  
+    /**
+     * @param content
+     */
+    public static void writeByBufferedReader(String content) {  
+        try {            
+            File file = new File(fileName);  
+            if (!file.exists()) {  
+                file.createNewFile();  
+            }  
+               
+            FileWriter fw = new FileWriter(file, false);  
+            BufferedWriter bw = new BufferedWriter(fw);             
+            bw.write(content);  
+            bw.flush();  
+            bw.close();  
+  
+        } catch (IOException e) {  
+            e.printStackTrace();  
+        }  
+    }  
+  
     public static void main(String[] args) {
-        System.out.println(getExchangeRate());        
+        System.out.println(getExchangeRate());
     }
     
 
