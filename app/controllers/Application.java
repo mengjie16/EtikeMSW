@@ -176,12 +176,13 @@ public class Application extends BaseController {
             redirect("/regist");
         }
         // 验证码验证
-        boolean smsCodematched = SmsUtil.checkSmsCode(user.phone, captcha);
+       /* boolean smsCodematched = SmsUtil.checkSmsCode(user.phone, captcha);
 
-        if (!smsCodematched) {
+       if (!smsCodematched) {
             flash.error("验证码不正确");
             redirect("/regist");
         }
+        */
         boolean ret = retailer.addWithUser(user);
         if (ret) {
             redirect("/regist/success");
@@ -237,9 +238,10 @@ public class Application extends BaseController {
             renderJson(ReturnCode.INVALID_PRIVILEGE, "iv参数错误");
         }
 
-        if (!SmsUtil.checkSmsCode(phone, smdCode)) {
+       /* if (!SmsUtil.checkSmsCode(phone, smdCode)) {
             renderJson(ReturnCode.API_CALL_LIMIT, "验证码不正确");
         }
+        */
 
         User user = User.findByPhone(phone);
         user.password = password;
@@ -355,11 +357,12 @@ public class Application extends BaseController {
         @Required @Match(RegexConstants.PHONE) String phone) {
         handleWrongInput(true);
         
-        boolean matched = SmsUtil.checkSmsCode(phone, smsCode);
+       /* boolean matched = SmsUtil.checkSmsCode(phone, smsCode);
         // 验证码是否匹配
         if (!matched) {
             renderFailedJson(ErrorCode.SMS_CODE_ERROR.code, ErrorCode.SMS_CODE_ERROR.description);
         }
+        */
         renderSuccessJson();
     }
 

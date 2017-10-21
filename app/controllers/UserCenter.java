@@ -344,10 +344,11 @@ public class UserCenter extends BaseController {
         handleWrongInput(true);
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
         // 校验验证码正确性
-        boolean matched = SmsUtil.checkSmsCode(user.phone, captcha);
+       /* boolean matched = SmsUtil.checkSmsCode(user.phone, captcha);
         if (!matched) {
             renderFailedJson(ReturnCode.FAIL, "验证码错误");
         }
+        */
         user.password = pass;
         if (user.savePassword()) {
             log.info("User id={} changed password to {} just now", user.id, pass);
