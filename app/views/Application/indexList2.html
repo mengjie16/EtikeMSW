@@ -41,7 +41,7 @@
                       </span>
                       <span class="old">
 
-                        <span>10</span>€
+                        <span>${new java.text.DecimalFormat("0.00").format(itemSetting.price/800)}</span>€
                       </span>
                     </div>
                   </div>
@@ -122,12 +122,12 @@
     </div>
   </div>
 </div>
-<div class="titleBlock">
+<!-- <div class="titleBlock">
     <div class="linemiddle fl"></div>
     <div class="titleText fl">新品推荐</div>
     <div class="linemiddle fr"></div>
-</div>
-<div class="content-top">
+</div> -->
+<!-- <div class="content-top">
   <div class="content-top1">
     #{if search_result?.items}
     #{list items:search_result.items,as : 'item'}
@@ -144,10 +144,10 @@
                   <span class="old">
                     <span>${item?.cny2eur}</span>€
                   </span>
-                </h5>
+                </h5> -->
               <!-- <span class="glyphicon glyphicon-star-empty item_collect"></span>
               <a href="#" class="item_add"><img src="/public/images/cart.png" alt="" style="width: 20px;height: 20px;" /></a> -->
-              <div class="clearfix"> </div>
+              <!-- <div class="clearfix"> </div>
             </div>
             <h3 style="margin:0 30px;"><a href="/item/${item?.id}">${item?.title}</a></h3>
         </div>
@@ -156,7 +156,7 @@
     #{/if}
     <div class="clearfix"> </div>
   </div>
-</div>
+</div> -->
 #{set 'moreScripts'}
 <script type="text/javascript" src="/public/javascripts/plupload/plupload.full.min.js"></script>
 <script type="text/javascript" src="/public/javascripts/libs/qiniu.min.js"></script>
