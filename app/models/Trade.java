@@ -370,13 +370,6 @@ public class Trade implements java.io.Serializable {
     }
     
     public static List<Trade> selectListWithOrderTradeStatusByVo(TradeSearchVo vo, TradeStatus status) {
-        if(!Strings.isNullOrEmpty(vo.phone)){
-            User usr = User.findByPhone(vo.phone);
-            if(usr!=null){
-                vo.retailerId = usr.userId;
-            }
-        }
-       
        SqlSession ss = SessionFactory.getSqlSession();
        try {
            TradeMapper mapper = ss.getMapper(TradeMapper.class);
