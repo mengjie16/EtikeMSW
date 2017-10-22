@@ -3,6 +3,14 @@
 #{set 'moreSubStyles'}
 <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/common/jquery.pagination.css'}" />
 <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/orstyle.css'}" />
+<style>
+	.order-info {
+		text-align: center;
+		color: #e4393c;
+		cursor: pointer;
+		margin-bottom: 5px
+	}
+</style>
 #{/set}
 <!--标题 -->
 <div class="user-order">
@@ -201,9 +209,7 @@
 					</li>
 					<li class="td td-operation">
 						<div class="item-operation">
-						    
-
-						<span data-id="{{id}}" class="{{moneyBack}}">{{moneyBackStr}}<span>						
+							<span data-id="{{id}}" class="{{moneyBack}}">{{moneyBackStr}}</span>						
 						</div>
 					</li>
 				</ul>
@@ -224,10 +230,10 @@
 						</div>
 					</li>
 					<li class="td td-change">
-						<div data-id="{{id}}" class="am-btn am-btn-danger anniu {{orderOperation}}">
+						<div data-id="{{id}}" class="order-info anniu {{orderOperation}}">
 							{{orderOperationStr}}</div>
 
-						<div data-id="{{id}}" class="am-btn am-btn-danger anniu {{payToAli}}">
+						<div data-id="{{id}}" class="am-btn am-btn-success anniu {{payToAli}}">
 							{{payToAliStr}}</div>
 					</li>
 				</div>

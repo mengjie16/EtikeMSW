@@ -1148,6 +1148,7 @@ h3.cate {
     font-family: 'OleoScript-Regular', '微软雅黑';
     display: inline-block;
     width: 50px;
+    font-weight: 400;
 }
 
 ul.kid-menu {
@@ -1166,8 +1167,8 @@ ul.kid-menu {
     width: 100%;
     margin: 0.3em 0;
     position: relative;
-    color: #999;
-    font-size: 0.9em;
+    color: #aaa;
+    font-size: 1em;
     text-decoration: none;
     font-family: "微软雅黑";
     cursor: pointer;
