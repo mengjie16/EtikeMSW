@@ -94,11 +94,8 @@
 	</select>
 	<select id="selectListWithOrderTradeStatusByVo" resultMap="TradeOrdersMap">
 		select * from trade t
-		<where>			
-			<if test="tradeStatus!=null">
-				and t.status = #{tradeStatus}
-			</if>
-		</where>
+				
+		where t.retailer_id = #{vo.retailerId} and t.status = #{tradeStatus}
 		order by t.create_time desc
 		limit #{vo.startIndex},
 		#{vo.pageSize}
