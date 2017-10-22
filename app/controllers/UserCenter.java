@@ -229,7 +229,8 @@ public class UserCenter extends BaseController {
     @UserLogonSupport
     public static void cart() {
     	 // 用户信息获取
-        User user = renderArgs.get(Secure.FIELD_USER, User.class);
+        render();
+       /* User user = renderArgs.get(Secure.FIELD_USER, User.class);
         List<Cart> cartItems = Cart.findList(user.id);
         
         //hide offline item.
@@ -243,7 +244,7 @@ public class UserCenter extends BaseController {
         
         List<CartVo> cartVos = CartVo.valueOfcartList(res);
         
-        renderJson(cartVos);
+        renderJson(cartVos);*/
     }
 
     /**
