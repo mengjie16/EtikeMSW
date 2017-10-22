@@ -979,7 +979,7 @@ public class RetailerController extends BaseController {
             // 货款
             trade.cargoFee += order.cargoFee;
             // 物流
-            trade.shippingFee += order.shippingFee;
+            trade.shippingFee += orderVo.shippingFee;
             // 实际支付
             trade.payment += order.totalFee;
         }

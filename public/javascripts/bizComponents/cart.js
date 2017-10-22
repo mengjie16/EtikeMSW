@@ -203,6 +203,7 @@ $(function() {
         //删除购物车里的条目
         $(document).on('click', '.delete', function() {
             var id = $(this).data('id');
+            var tr = $(this).parent();
             if (!id) {
                 return;
             }
@@ -212,6 +213,7 @@ $(function() {
             }, function(data) {
                 if (data.code != 200) return;
                 CART.cartCache = new Array();
+                tr.remove();
                 loadCartData();
             }, {
                 loadingMask: false

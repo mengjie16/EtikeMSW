@@ -275,6 +275,70 @@ function renderRestList(pageNo, tradeStatus, tabindex) {
                         return this.discountFee / 100;
                     }
                     return 0;
+                },
+                orderOperation: function() {
+                    if (this.status == "TRADE_UNPAIED") {//待付款
+                        return 'cancelOrder';
+                    } else if (this.status == "TRADE_USER_CANCELLED" || this.status == "TRADE_CLOSE") {//交易取消，交易成功
+                        return 'deleteOrder';
+                    } else if (this.status == "TRADE_UNRECIIVED") {//待收货
+                        return 'Receiving';
+                    } else {
+                        return 'hideOperation';
+                    }
+                },
+                orderOperationStr: function() {
+                    if (this.status == "TRADE_UNPAIED") {
+                        return '取消订单'
+                    } else if (this.status == "TRADE_USER_CANCELLED" ||  this.status == "TRADE_CLOSE") {
+                        return '删除订单'
+                    } else if (this.status == "TRADE_UNRECIIVED") {
+                        return '确认收货';
+                    } else {
+                        return ''
+                    }
+                },
+                moneyBack: function() {
+                    if (this.status == "TRADE_UNSEND" ||this.status == "TRADE_UNRECIIVED") {//待发货 待收货
+                        return 'drawback';
+                    }else {
+                        return 'hideDrawback';
+                    }
+                },
+                moneyBackStr: function() {
+                    if (this.status == "TRADE_UNSEND" ||this.status == "TRADE_UNRECIIVED") {//待发货 待收货
+                        return '退款';
+                    }else {
+                        return '';
+                    }
+                },
+                expressage: function() {
+                    if (this.status == "TRADE_UNRECIIVED") {//待收货
+                        return 'expressage';
+                    }else {
+                        return 'hideExpressage';
+                    }
+                },
+                expressageStr: function() {
+                    if (this.status == "TRADE_UNRECIIVED") {//待收货
+                        return '查看物流';
+                    }else {
+                        return '';
+                    }
+                },
+                payToAli: function() {
+                    if (this.status == "TRADE_UNPAIED") {//待收货
+                        return 'paytoali';
+                    }else {
+                        return 'hidepaytoali';
+                    }
+                },
+                payToAliStr:function(){
+                    if (this.status == "TRADE_UNPAIED") {//待收货
+                        return '付款';
+                    }else {
+                        return '';
+                    }
                 }
             }));
             $('#listContainer' + tabindex).html(output);

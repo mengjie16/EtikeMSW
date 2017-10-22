@@ -27,7 +27,7 @@ public class HelpController extends BaseController {
      */
     public static void index(@Min(0) int id) {
         // 默认文章
-        id = id == 0 ? 5 : id;
+        id = id == 0 ? 1 : id;
         Article currentArticle = Article.findByIdWichCache(id);
         if (currentArticle == null || !currentArticle.isPublic) {
             notFound();
