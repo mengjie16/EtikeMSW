@@ -246,7 +246,7 @@ public class RetailerController extends BaseController {
         handleWrongInput(true);
         
         String message = checkValid(address);
-        if (Strings.isNullOrEmpty(message)) {
+        if (StringUtils.isNotEmpty(message)) {
         	renderFailedJson(ReturnCode.FAIL,message);
         }
         
