@@ -96,7 +96,9 @@ $(function() {
                 'address.city': $('#doc-modal-1 #selCity').val(),
                 'address.region': $('#doc-modal-1 #selRegion').val(),
                 'address.address': $('#doc-modal-1 #txtAddress').val(),
-                'address.phone': $('#doc-modal-1 input[name="address.phone"]').val()
+                'address.phone': $('#doc-modal-1 input[name="address.phone"]').val(),
+                'address.gender': $('#doc-modal-1 input[name="address.gender"]').val(),
+                'address.IDcard': $('#doc-modal-1 input[name="address.IDIdentification"]').val()
             };
             Tr.post('/retailer/address/save', param, function(data) {
                 if (data.code != 200) {
@@ -122,7 +124,9 @@ $(function() {
                 'retailerAddress.city': $('#doc-modal-2 #selCity1').val(),
                 'retailerAddress.region': $('#doc-modal-2 #selRegion1').val(),
                 'retailerAddress.address': $('#doc-modal-2 #txtAddress1').val(),
-                'retailerAddress.phone': $('#doc-modal-2 #user-phone1').val()
+                'retailerAddress.phone': $('#doc-modal-2 #user-phone1').val(),
+                'retailerAddress.gender': $('#doc-modal-2 input[name="address.gender"]').val(),
+                'retailerAddress.IDcard': $('#doc-modal-2 input[name="address.IDcard"]').val()
             };
             Tr.post('/retailer/address/update', param, function(data) {
                 if (data.code != 200) {
@@ -168,6 +172,13 @@ $(function() {
                 var obj = result.results;
                 $('#doc-modal-2 #user-name1').val(obj.name);
                 $('#doc-modal-2 #user-phone1').val(obj.phone);
+                $('#doc-modal-2 #user-IDcard1').val(obj.IDcard);
+                if(obj.gender=== "male"){
+                    $('#doc-modal-2 #user-gender1').attr("checked",true);
+                }else{
+                    $('#doc-modal-2 #user-gender12').attr("checked",true);
+                }
+                
                 $('#doc-modal-2 #address_id').val(obj.id);
             },
             error: function(ex) {
