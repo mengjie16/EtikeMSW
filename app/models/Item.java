@@ -1,6 +1,7 @@
 package models;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
@@ -28,7 +29,6 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import enums.DeliverType;
 import enums.ItemStatus;
 import enums.constants.CacheType;
 import models.mappers.ItemMapper;
@@ -90,14 +90,14 @@ public class Item implements Serializable {
     /** 商家自己的编码，货号 */
     public String outNo;
     /** 发货方式 */
-    
+
     /** 计量单位，如瓶、罐、袋 */
     public String unit;
     /** 建议零售价 */
     @Min(0)
-    public int retailPrice;
+    public double retailPrice;
     /** 供货价 */
-    public int supplyPrice;
+    public double supplyPrice;
     /** 净重量 单位：千克 */
     public double netWeight;
     /** 毛重量 单位：千克 */
@@ -117,7 +117,7 @@ public class Item implements Serializable {
     /** 商品的各项SKU属性，风格，承重类似 */
     public List<ItemPropertieVo> properties;
     /** 分销价，一件代发价 */
-    public int distPrice;
+    public double distPrice;
     /** 详情，最大25000个字节 */
     @MaxSize(25000)
     public String detail;
@@ -151,19 +151,18 @@ public class Item implements Serializable {
     public Date createTime;
     /** 商品更新时间 */
     public Date updateTime;
-    
+
     @Transient
-    public int cny2eur;
-    
-   
-    public int getCny2eur() {
+    public double cny2eur;
+
+    public double getCny2eur() {
         return cny2eur;
     }
 
-    
-    public void setCny2eur(int cny2eur) {
-        
-        this.cny2eur = (int)(retailPrice * ExchangeRateUtil.getExchangeRate()/100) ;
+    public void setCny2eur(double cny2eur) {
+        double d = (retailPrice * ExchangeRateUtil.getExchangeRate() / 100);
+        BigDecimal bd = new BigDecimal(d);
+        this.cny2eur = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 
     /**
@@ -622,8 +621,9 @@ public class Item implements Serializable {
     /**
      * 
      * 格式化打印，便于调试
+     * 
      * @see java.lang.Object#toString()
-     * @since  v1.0
+     * @since v1.0
      * @author tr0j4n
      * @created 2015-4-20 上午7:59:53
      * @formatter:off
@@ -632,7 +632,7 @@ public class Item implements Serializable {
     public String toString() {
         return ToStringBuilder.reflectionToString(this).toString();
     }
-    //@formatter:on
+    // @formatter:on
 
     /**
      * 校验宝贝地址是否重复
@@ -780,7 +780,8 @@ public class Item implements Serializable {
     /**
      * 根据关键字查询商品信息（商品名称，品牌名称）
      *
-     * @param ItemSearchVo vo
+     * @param ItemSearchVo
+     *            vo
      * @return
      * @since v1.0
      * @author Calm
@@ -834,14 +835,14 @@ public class Item implements Serializable {
                 List<Item> fyItems = mapper.selectListVoByIds(vo);
                 // 转换视图
                 List<ItemVo> vos = fyItems.stream().map(i -> ItemVo.valueOfItem(i, true)).collect(Collectors.toList());
-                             
+
                 results.items = vos;
             }
             // 品牌分组 --------[在未分页前数据集中归类,并且当前有查询结果]
             if (!results.is_brand && results.totalCount > 0) {
                 Map<Long, List<String>> brandMap = items.stream().map(v -> Brand.findBrandWithCacheMap(v.brandId))
-                    .filter(b -> b != null).collect(Collectors.groupingBy(Brand::getId,
-                        Collectors.mapping(Brand::getMainSubName, Collectors.toList())));
+                        .filter(b -> b != null).collect(Collectors.groupingBy(Brand::getId,
+                                Collectors.mapping(Brand::getMainSubName, Collectors.toList())));
                 if (brandMap != null) {
                     results.brands = Lists.newArrayList();
                     Iterator it = brandMap.entrySet().iterator();
@@ -858,14 +859,15 @@ public class Item implements Serializable {
             Map<Long, List<String>> cateMap = Maps.newConcurrentMap();
             if (results.totalCount > 0) { // 有结果集
                 cateMap = items.stream().map(i -> ItemCate.findByIdMap(i.cateId)).filter(c -> c != null).collect(
-                    Collectors.groupingBy(ItemCate::getId, Collectors.mapping(ItemCate::getName, Collectors.toList())));
+                        Collectors.groupingBy(ItemCate::getId,
+                                Collectors.mapping(ItemCate::getName, Collectors.toList())));
             } else {// 没有结果集
                 results.result_empty_desc = vo.getEmptyResultDesc();
                 List<Item> allItems = allItemListOnlineCache();
                 if (MixHelper.isNotEmpty(allItems)) {
                     cateMap = allItems.stream().map(i -> ItemCate.findByIdMap(i.cateId)).filter(c -> c != null)
-                        .collect(Collectors.groupingBy(ItemCate::getId,
-                            Collectors.mapping(ItemCate::getName, Collectors.toList())));
+                            .collect(Collectors.groupingBy(ItemCate::getId,
+                                    Collectors.mapping(ItemCate::getName, Collectors.toList())));
                 }
             }
             if (cateMap != null) {
@@ -883,8 +885,6 @@ public class Item implements Serializable {
         }
         return results;
     }
-     
-
 
     /**
      * 计算单个商品运费
@@ -901,7 +901,8 @@ public class Item implements Serializable {
     /**
      * 计算商品运费
      *
-     * @param count 商品数量
+     * @param count
+     *            商品数量
      * @return
      * @since v1.0
      * @author Calm
@@ -919,10 +920,10 @@ public class Item implements Serializable {
      * @author Calm
      * @created 2016年9月11日 下午2:49:45
      */
-    public int itemLastFee(int num) {
+    public double itemLastFee(int num) {
         // 暂时不按照数量确定价格，按照批发最小价格计算
         num = num > 0 ? num : 1;
-        int price = 0;
+        double price = 0;
         // 查看是否有经销价格,并且已应用
         if (this.priceRangeUse && MixHelper.isNotEmpty(this.priceRanges)) {
             price = this.priceRanges.stream().map(p -> p.price).min((r1, r2) -> {
@@ -959,8 +960,8 @@ public class Item implements Serializable {
      * @author Calm
      * @created 2016年10月8日 下午6:53:58
      */
-    public int itemLastFee() {
-        int price = 0;
+    public double itemLastFee() {
+        double price = 0;
         // 查看是否有经销价格,并且已应用
         if (this.priceRangeUse && MixHelper.isNotEmpty(this.priceRanges)) {
             price = this.priceRanges.stream().map(p -> p.price).min((r1, r2) -> {
@@ -975,14 +976,14 @@ public class Item implements Serializable {
     }
 
     public static ItemSearchResult selectListAllByCreateTime() {
-    	
+
         ItemSearchResult results = ItemSearchResult.newInstance(0, 0, 0);
         SqlSession ss = SessionFactory.getSqlSession();
         try {
             ItemMapper mapper = ss.getMapper(ItemMapper.class);
             // 匹配的商品集合
             List<Item> items = Lists.newArrayList();
-        
+
             items = mapper.selectListAllByCreateTime();
             results.totalCount = items != null ? items.size() : 0;
             if (items != null) {
@@ -995,14 +996,14 @@ public class Item implements Serializable {
         return results;
     }
 
-	public static ItemSearchResult selectListAllRandom() {
-		ItemSearchResult results = ItemSearchResult.newInstance(0, 0, 0);
+    public static ItemSearchResult selectListAllRandom() {
+        ItemSearchResult results = ItemSearchResult.newInstance(0, 0, 0);
         SqlSession ss = SessionFactory.getSqlSession();
         try {
             ItemMapper mapper = ss.getMapper(ItemMapper.class);
             // 匹配的商品集合
             List<Item> items = Lists.newArrayList();
-        
+
             items = mapper.selectListAllRandom();
             results.totalCount = items != null ? items.size() : 0;
             if (items != null) {
@@ -1013,5 +1014,5 @@ public class Item implements Serializable {
             ss.close();
         }
         return results;
-	}
+    }
 }

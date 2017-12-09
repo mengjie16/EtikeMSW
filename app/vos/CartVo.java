@@ -2,7 +2,6 @@ package vos;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.persistence.Transient;
 import javax.validation.constraints.Min;
@@ -16,38 +15,37 @@ import models.Cart;
 
 public class CartVo {
     public long id;
-    
+
     public int retailerId;
 
     public long cartId;
-    
+
     /* 品牌信息 */
     public Brand brand;
-    
+
     /* 购物车价格 */
     @Transient
-    public int cartPrice;
- 
+    public double cartPrice;
+
     /* 商品规格 */
     public String skuColor;
-    
+
     public int skuQuantity;
-    
+
     /* 购物车数量(购物车功能会用到) */
     public int cartCount;
-    
-    @Min(0)
-    public int retailPrice;
 
-    public String title;    
-    
+    @Min(0)
+    public double retailPrice;
+
+    public String title;
+
     public String picUrl;
-    
+
     public long brandId;
-    
+
     public long itemId;
-    
-    
+
     public Cart parseTocart() {
         Cart cart = new Cart();
         cart.id = this.id;
@@ -62,11 +60,10 @@ public class CartVo {
         cart.cartPrice = this.cartPrice;
         cart.retailPrice = this.retailPrice;
         // 价格处理(小数保留2位，并转换为分)
-        cart.retailPrice = new BigDecimal(this.retailPrice).setScale(2, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100)).intValue();
+        cart.retailPrice = new BigDecimal(this.retailPrice).setScale(2, BigDecimal.ROUND_HALF_UP)
+                .multiply(new BigDecimal(100)).intValue();
         return cart;
     }
-
-
 
     /**
      * 转换vo

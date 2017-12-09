@@ -1,42 +1,22 @@
 package vos;
 
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import javax.persistence.Transient;
 
-import org.apache.commons.lang3.RandomUtils;
-import org.apache.ibatis.session.SqlSession;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aton.db.SessionFactory;
 import com.aton.util.DateUtils;
 import com.aton.util.MixHelper;
-import com.aton.util.NumberUtils;
-import com.aton.util.Pandora;
-import com.aton.vo.Page;
-import com.google.common.base.Function;
 import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.primitives.Longs;
 
 import enums.TradeStatus;
-import models.Item;
 import models.Order;
 import models.ProductInfo;
 import models.Trade;
-import models.mappers.OrderMapper;
-import models.mappers.TradeMapper;
-import play.data.binding.As;
-import vos.TradeSearchVo;
 
 /**
  * 交易数据视图
@@ -54,17 +34,17 @@ public class TradeVo implements java.io.Serializable {
     // 交易标题
     public String caption;
     // 交易总金额
-    public int totalFee;
+    public double totalFee;
     // 优惠金额
-    public int discountFee;
+    public double discountFee;
     // 货款总金额(交易总金额)单位：分
-    public int cargoFee;
+    public double cargoFee;
     // 实际支付金额(结款实际金额) 单位：分
-    public int payment;
+    public double payment;
     // 优惠内容
     // public Promotion promotion_details;
     // 物流费用 单位：分
-    public int shippingFee;
+    public double shippingFee;
     // 预计发货时间
     public String expectConsignTime;
     // 发货时间
@@ -141,7 +121,8 @@ public class TradeVo implements java.io.Serializable {
             vo.statusColor = "red";
         }
         // 状态按钮
-        if (trade.status == TradeStatus.TRADE_AUDITING || trade.status == TradeStatus.TRADE_FAIL_AUDITING || trade.status == TradeStatus.TRADE_UNPAIED) {
+        if (trade.status == TradeStatus.TRADE_AUDITING || trade.status == TradeStatus.TRADE_FAIL_AUDITING
+                || trade.status == TradeStatus.TRADE_UNPAIED) {
             vo.cancelBtn = true;
         }
         // if (trade.status != TradeStatus.TRADE_USER_CANCELLED || trade.status !=
@@ -163,13 +144,14 @@ public class TradeVo implements java.io.Serializable {
                 vo.itemNum += order.num;
             }
             vo.itemVos = Lists.newArrayList();
-            
+
             for (ProductInfo product : products) {
                 if (product == null) {
                     continue;
                 }
-                
-                vo.itemVos.add(new TradeItemVo(product.itemId, product.picUrl, product.title, product.color, product.brandName, product.retailPrice));
+
+                vo.itemVos.add(new TradeItemVo(product.itemId, product.picUrl, product.title, product.color,
+                        product.brandName, product.retailPrice));
             }
         }
         return vo;

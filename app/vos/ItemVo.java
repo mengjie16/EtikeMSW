@@ -6,32 +6,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 
+import com.aton.util.MixHelper;
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
+
+import enums.DeliverType;
+import enums.ItemStatus;
 import models.Brand;
 import models.Item;
 import models.ItemCate;
 import models.ItemLocation;
 import models.ItemSku;
 import models.KeyValue;
-import models.Item.PriceRangeCheck;
-import play.data.binding.As;
-import play.data.validation.CheckWith;
-import play.data.validation.Match;
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
 import utils.ExchangeRateUtil;
-import utils.SearchEndDateBinder;
-
-import com.aton.util.MixHelper;
-import com.aton.util.StringUtils;
-import com.aton.vo.Page;
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
-
-import enums.DeliverType;
-import enums.ItemStatus;
 
 /**
  * 商品信息 vo
@@ -47,7 +38,7 @@ public class ItemVo implements java.io.Serializable {
     /* 分类信息 */
     public ItemCate cate;
     /* 购物车最终价格 */
-    public int cartPrice;
+    public double cartPrice;
     /* 商品规格 */
     public ItemSku sku;
     /* 购物车数量(购物车功能会用到) */
@@ -59,7 +50,7 @@ public class ItemVo implements java.io.Serializable {
     // 当前商品运费模版数据
     Map<Integer, Integer> itemFreightTemp;
     /** 供货价 */
-    public int supplyPrice;
+    public double supplyPrice;
     public double d_supplyPrice;
 
     /** 净重量 单位：千克 */
@@ -101,7 +92,7 @@ public class ItemVo implements java.io.Serializable {
     public String unit;
     /** 建议零售价 */
     @Min(0)
-    public int retailPrice;
+    public double retailPrice;
 
     public double d_retailPrice;
 
@@ -116,7 +107,7 @@ public class ItemVo implements java.io.Serializable {
     /** 商品的各项SKU属性，风格，承重类似 */
     public List<ItemPropertieVo> properties;
     /** 分销价，一件代发价 */
-    public int distPrice;
+    public double distPrice;
 
     public double d_distPrice;
 
@@ -144,19 +135,18 @@ public class ItemVo implements java.io.Serializable {
     /** 商品备注 */
     public String note;
 
-    public int cny2eur;
-    
-    
-    public int getCny2eur() {
+    public double cny2eur;
+
+    public double getCny2eur() {
         return cny2eur;
     }
 
-    
-    public void setCny2eur(int cny2eur) {
-        
-        this.cny2eur = (int)(this.retailPrice * ExchangeRateUtil.getExchangeRate()/100) ;
+    public void setCny2eur(double cny2eur) {
+        double d = (retailPrice * ExchangeRateUtil.getExchangeRate() / 100);
+        BigDecimal bd = new BigDecimal(d);
+        this.cny2eur = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
-    
+
     /**
      * 转换商品视图至实体
      *
@@ -176,7 +166,7 @@ public class ItemVo implements java.io.Serializable {
         item.num = this.num;
         item.origin = this.origin;
         item.outNo = this.outNo;
-       
+
         item.unit = this.unit;
         item.skus = this.skus;
         item.soldQuantity = this.soldQuantity;
@@ -195,9 +185,12 @@ public class ItemVo implements java.io.Serializable {
         item.grossWeight = this.grossWeight;
         item.quality = this.quality;
         // 价格处理(小数保留2位，并转换为分)
-        item.retailPrice = new BigDecimal(this.d_retailPrice).setScale(2, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100)).intValue();
-        item.supplyPrice = new BigDecimal(this.d_supplyPrice).setScale(2, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100)).intValue();
-        item.distPrice = new BigDecimal(this.d_distPrice).setScale(2, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100)).intValue();
+        item.retailPrice = new BigDecimal(this.d_retailPrice).setScale(2, BigDecimal.ROUND_HALF_UP)
+                .multiply(new BigDecimal(100)).intValue();
+        item.supplyPrice = new BigDecimal(this.d_supplyPrice).setScale(2, BigDecimal.ROUND_HALF_UP)
+                .multiply(new BigDecimal(100)).intValue();
+        item.distPrice = new BigDecimal(this.d_distPrice).setScale(2, BigDecimal.ROUND_HALF_UP)
+                .multiply(new BigDecimal(100)).intValue();
         if (MixHelper.isNotEmpty(this.priceRanges)) {
             item.priceRanges = this.priceRanges.stream().map(p -> p.parseToPoint()).collect(Collectors.toList());
         }
@@ -266,7 +259,7 @@ public class ItemVo implements java.io.Serializable {
             iv.supplierName = item.supplierName;
             iv.origin = item.origin;
             iv.outNo = item.outNo;
-           
+
             iv.unit = item.unit;
             iv.priceRanges = item.priceRanges;
             iv.skus = item.skus;

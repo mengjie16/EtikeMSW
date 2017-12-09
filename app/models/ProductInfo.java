@@ -14,14 +14,14 @@ public class ProductInfo {
     /** 规格 */
     public String sku;
     /** 订单下单，商品价格快照 */
-    public int itemPrice;
-    
-    public String picUrl;    
+    public double itemPrice;
+
+    public String picUrl;
     public String title;
     public String color;
     public String brandName;
-    public int retailPrice;
-    
+    public double retailPrice;
+
     public ProductInfo() {
     }
 
@@ -31,6 +31,5 @@ public class ProductInfo {
         this.sku = sku;
         this.itemPrice = itemPrice;
     }
-    
-    
+
 }

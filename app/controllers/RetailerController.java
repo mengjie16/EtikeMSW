@@ -2,7 +2,6 @@ package controllers;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -12,16 +11,11 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.apache.commons.lang.StringUtils;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 import com.aton.config.ReturnCode;
-import com.aton.db.handler.JsonArrayTypeHandler;
 import com.aton.util.CacheUtils;
-import com.aton.util.DateUtils;
 import com.aton.util.MixHelper;
 import com.aton.util.RegexUtils;
 import com.aton.vo.AjaxResult;
@@ -31,8 +25,6 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Table;
 import com.google.common.primitives.Doubles;
-import com.google.common.primitives.Ints;
-
 
 import controllers.annotations.UserLogonSupport;
 import controllers.base.BaseController;
@@ -43,18 +35,14 @@ import enums.OrderStatus;
 import enums.TradeStatus;
 import enums.constants.CacheType;
 import enums.constants.ErrorCode;
-import models.RetailerAddress;
 import models.AliPayTrade;
 import models.Cart;
-import models.Favorite;
 import models.Item;
 import models.Order;
 import models.Retailer;
-import models.Supplier;
-import models.SupplierSendLocationTemp;
+import models.RetailerAddress;
 import models.Trade;
 import models.User;
-import models.mappers.RetailerAddressMapper;
 import net.sf.json.JSONArray;
 import play.data.binding.As;
 import play.data.validation.Min;
@@ -62,9 +50,7 @@ import play.data.validation.MinSize;
 import play.data.validation.Required;
 import play.mvc.With;
 import utils.TSFileUtil;
-import vos.AddressVo;
 import vos.CartVo;
-import vos.ItemVo;
 import vos.OrderProductResult;
 import vos.OrderVo;
 import vos.TradeSearchVo;
@@ -112,26 +98,28 @@ public class RetailerController extends BaseController {
         // 用户信息获取
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
         List<Cart> cartItems = Cart.findList(user.id);
-        
-        //hide offline item.
+
+        // hide offline item.
         List<Cart> res = new ArrayList<Cart>();
-        for(Cart cart : cartItems){
+        for (Cart cart : cartItems) {
             Item item = Item.findBaseInfoById(cart.itemId);
-            if(item.status == ItemStatus.ONLINE){
+            if (item.status == ItemStatus.ONLINE) {
                 res.add(cart);
             }
         }
-        
+
         List<CartVo> cartVos = CartVo.valueOfcartList(res);
-        
+
         renderJson(cartVos);
     }
 
     /**
      * 删除购物车商品
      *
-     * @param itemId 商品ID
-     * @param count 删除数量
+     * @param itemId
+     *            商品ID
+     * @param count
+     *            删除数量
      * @since v1.0
      * @author Calm
      * @created 2016年7月14日 下午3:06:46
@@ -144,32 +132,30 @@ public class RetailerController extends BaseController {
         }
         renderFailedJson(ReturnCode.FAIL, "删除购物车失败");
     }
-    
+
     @UserLogonSupport(value = "RETAILER")
     public static void cartAdd(@Required @Valid Cart cart) {
         handleWrongInput(true);
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
-        cart.retailerId = (int) user.id;       
-        if(Cart.save(cart)){
+        cart.retailerId = (int) user.id;
+        if (Cart.save(cart)) {
             renderSuccessJson();
         }
         renderFailedJson(ReturnCode.FAIL, "添加购物车失败");
     }
-    
+
     @UserLogonSupport(value = "RETAILER")
     public static void cartUpdateBatchCount(@Required @Valid String carts) {
-       handleWrongInput(true);
-      
-       List<Cart> catList= (List<Cart>)JSONArray.toList(JSONArray.fromObject(carts), Cart.class);
-       
-        for(Cart cart : catList) {
+        handleWrongInput(true);
+
+        List<Cart> catList = JSONArray.toList(JSONArray.fromObject(carts), Cart.class);
+
+        for (Cart cart : catList) {
             cart.update(cart);
         }
-        
+
         renderSuccessJson();
     }
-
-
 
     /**
      * 付款页面
@@ -182,6 +168,7 @@ public class RetailerController extends BaseController {
     public static void payFor() {
         render();
     }
+
     /**
      * 退款页面
      *
@@ -232,24 +219,23 @@ public class RetailerController extends BaseController {
         renderArgs.put("addressList", list);
         render();
     }
-    
+
     @UserLogonSupport(value = "RETAILER")
     public static void addressList() {
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
         List<RetailerAddress> list = RetailerAddress.findListByRetailerId((int) user.id);
         renderJson(list);
     }
-    
-    
+
     @UserLogonSupport(value = "RETAILER")
     public static void addressSave(@Required @Valid RetailerAddress address) {
         handleWrongInput(true);
-        
+
         String message = checkValid(address);
         if (StringUtils.isNotEmpty(message)) {
-        	renderFailedJson(ReturnCode.FAIL,message);
+            renderFailedJson(ReturnCode.FAIL, message);
         }
-        
+
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
         // 检查模板地址是否重复
         List<RetailerAddress> lsst = RetailerAddress.findListByRetailerId((int) user.id);
@@ -261,13 +247,12 @@ public class RetailerController extends BaseController {
                     break;
                 }
             }
-        }else{
+        } else {
             address.defaultAddress = true;
         }
-        
-        address.retailerId = (int) user.id;          
-        
-       
+
+        address.retailerId = (int) user.id;
+
         boolean ret = RetailerAddress.save(address);
         if (ret) {
             renderSuccessJson();
@@ -275,7 +260,7 @@ public class RetailerController extends BaseController {
         renderFailedJson(ReturnCode.FAIL, "添加失败");
     }
 
-    public static  String checkValid(RetailerAddress address) {
+    public static String checkValid(RetailerAddress address) {
         StringBuilder sb = new StringBuilder("");
         // 联系人，
         if (Strings.isNullOrEmpty(address.name)) {
@@ -291,57 +276,52 @@ public class RetailerController extends BaseController {
                 sb.append(ErrorCode.RETAILERADDRESS_PHONE_INVALID.description + "，");
             }
         }
-       
+
         return sb.toString();
     }
 
-    
-    
     @UserLogonSupport(value = "RETAILER")
     public static void addressUpdate(@Required @Valid RetailerAddress retailerAddress) {
         handleWrongInput(true);
-       
-        if ( RetailerAddress.update(retailerAddress) ) {
+
+        if (RetailerAddress.update(retailerAddress)) {
             renderSuccessJson();
         }
         renderFailedJson(ReturnCode.FAIL, "更新失败");
     }
-    
+
     @UserLogonSupport(value = "RETAILER")
     public static void addressGet(@Required @Valid long id) {
         handleWrongInput(true);
-       RetailerAddress retailAddress = null;
-       retailAddress = RetailerAddress.findById(id);
-        if ( retailAddress != null) {
-        	renderArgs.put("retailAddress", retailAddress);
+        RetailerAddress retailAddress = null;
+        retailAddress = RetailerAddress.findById(id);
+        if (retailAddress != null) {
+            renderArgs.put("retailAddress", retailAddress);
             renderJson(ReturnCode.OK, retailAddress);
         }
         renderFailedJson(ReturnCode.FAIL, "该地址不存在");
     }
 
-    
     @UserLogonSupport(value = "RETAILER")
     public static void addressDelete(@Required @Valid long id) {
         handleWrongInput(true);
-       
-        if ( RetailerAddress.deleteById(id) ) {
+
+        if (RetailerAddress.deleteById(id)) {
             renderSuccessJson();
         }
         renderFailedJson(ReturnCode.FAIL, "删除失败");
     }
-    
-    
+
     @UserLogonSupport(value = "RETAILER")
     public static void addressUpdateDefault(@Required @Valid long id) {
         handleWrongInput(true);
-        
+
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
-        if ( RetailerAddress.updateDefaultAddress((int)user.id, id)  ) {
+        if (RetailerAddress.updateDefaultAddress((int) user.id, id)) {
             renderSuccessJson();
         }
         renderFailedJson(ReturnCode.FAIL, "更新默认地址失败");
     }
-
 
     /**
      * 我的订单页面
@@ -420,12 +400,12 @@ public class RetailerController extends BaseController {
             // 删除文件
             orderFile.delete();
             CacheUtils.set(CacheType.RETAILER_ORDER_TABLE_DATA.getKey(user.id), orderData,
-                CacheType.RETAILER_ORDER_TABLE_DATA.expiredTime);
+                    CacheType.RETAILER_ORDER_TABLE_DATA.expiredTime);
             // 首行
             Map<Integer, String> rowData = orderData.row(0);
             // 检查是否包含正常列头信息
             List<String> columns = rowData.values().stream().filter(s -> !Strings.isNullOrEmpty(s))
-                .collect(Collectors.toList());
+                    .collect(Collectors.toList());
             if (MixHelper.isEmpty(columns)) {
                 renderHtml(new AjaxResult(ReturnCode.FAIL, "excel文件未包含列头信息(如：订单编号...)！").toJson());
             }
@@ -450,13 +430,13 @@ public class RetailerController extends BaseController {
      */
     public static void parseOrderVo(List<Integer> confirmOrder, long id) {
         // 获取读取解析过的数据
-//        if (MixHelper.isEmpty(confirmOrder)) {
-//            log.info("提交了空的订单");
-//        }
-        RetailerAddress retailerAddress = RetailerAddress.findByDefaultAddress((int)id);
-        
+        // if (MixHelper.isEmpty(confirmOrder)) {
+        // log.info("提交了空的订单");
+        // }
+        RetailerAddress retailerAddress = RetailerAddress.findByDefaultAddress((int) id);
+
         List<OrderVo> orderVoList = Lists.newArrayList();
-        
+
         // 过滤已删除订单 //
         log.info("开始生成订单....");
         // 订单生成错误消息集合
@@ -465,12 +445,12 @@ public class RetailerController extends BaseController {
             OrderVo vo = null;
             // 提交的行列
             int oindex = confirmOrder.get(i);
-           
+
             Cart cart = Cart.findById(oindex, id);
-            if(cart ==null){
-                 log.info("无订单文件解析数据，或已丢失");
+            if (cart == null) {
+                log.info("无订单文件解析数据，或已丢失");
             }
-            
+
             vo.buyerName = retailerAddress.name;
             vo.skuStr = cart.sku();
             vo.contact = retailerAddress.phone;
@@ -484,7 +464,7 @@ public class RetailerController extends BaseController {
             vo.address = retailerAddress.address;
             vo.num = cart.cartCount;
             vo.provinceId = retailerAddress.provinceId;
-            
+
             // 关键信息解析
             vo.md5ProductNameSkuStr();
             // 解析地址
@@ -493,7 +473,7 @@ public class RetailerController extends BaseController {
             String checkResult = vo.checkValid();
             if (!Strings.isNullOrEmpty(checkResult)) {
                 String message = "<span class='row_num'>行号:" + i + "</span>" + "<p class='error_desc'>"
-                    + checkResult.substring(0, checkResult.length() - 1) + "</p>";
+                        + checkResult.substring(0, checkResult.length() - 1) + "</p>";
                 log.warn(message);
                 messages.add(message);
                 continue;
@@ -501,9 +481,9 @@ public class RetailerController extends BaseController {
             // 订单添加
             orderVoList.add(vo);
         }
-        
+
         if (MixHelper.isNotEmpty(messages)) {
-            log.error(""+ ReturnCode.BIZ_LIMIT);
+            log.error("" + ReturnCode.BIZ_LIMIT);
         }
         // 缓存订单视图
         String ordervoKey = CacheType.RETAILER_ORDER_VO_DATA.getKey(id);
@@ -511,7 +491,7 @@ public class RetailerController extends BaseController {
 
         // 订单信息商品归组
         Map<String, List<Map<String, String>>> productMap = orderVoList.stream().collect(Collectors.groupingBy(
-            OrderVo::getMd5ProductName, Collectors.mapping(OrderVo::getProductSkuMap, Collectors.toList())));
+                OrderVo::getMd5ProductName, Collectors.mapping(OrderVo::getProductSkuMap, Collectors.toList())));
         // 映射成商品信息结果集
         List<OrderProductResult> results = OrderVo.parseToOrderProductResult(productMap);
         if (MixHelper.isEmpty(results)) {
@@ -638,18 +618,18 @@ public class RetailerController extends BaseController {
             log.info("提交了空的订单");
             renderFailedJson(ReturnCode.FAIL, "提交了空的订单");
         }
-        User user = renderArgs.get(Secure.FIELD_USER, User.class);       
-        
-        RetailerAddress retailerAddress = RetailerAddress.findByDefaultAddress((int)user.id);        
-        
-        if ( retailerAddress == null) {        
-        	renderFailedJson(ReturnCode.FAIL, "默认地址不存在，请添加默认地址");
+        User user = renderArgs.get(Secure.FIELD_USER, User.class);
+
+        RetailerAddress retailerAddress = RetailerAddress.findByDefaultAddress((int) user.id);
+
+        if (retailerAddress == null) {
+            renderFailedJson(ReturnCode.FAIL, "默认地址不存在，请添加默认地址");
         }
-        
+
         OrderVo.parseOrderVo(confirmOrderIds, retailerAddress, user.id);
-        
+
         // 缓存当前解析成功的商品信息
-        String pkey = CacheType.RETAILER_ORDER_VO_DATA.getKey((int)user.id);
+        String pkey = CacheType.RETAILER_ORDER_VO_DATA.getKey((int) user.id);
         List<OrderVo> orderVoList = CacheUtils.get(pkey);
         if (MixHelper.isEmpty(orderVoList)) {
             log.info("无订单解析数据");
@@ -670,7 +650,7 @@ public class RetailerController extends BaseController {
             String message = vo.checkValid();
             if (!Strings.isNullOrEmpty(message)) {
                 message = "<span class='row_num'>行号:" + (i + 1) + "</span>" + "<p class='error_desc'>" + message
-                    + "</p>";
+                        + "</p>";
                 messages.add(message);
                 continue;
             }
@@ -680,7 +660,7 @@ public class RetailerController extends BaseController {
             message = vo.parseToOrder(order);
             if (!Strings.isNullOrEmpty(message)) {
                 message = "<span class='row_num'>行号:" + (i + 1) + "</span>" + "<p class='error_desc'>" + message
-                    + "</p>";
+                        + "</p>";
                 messages.add(message);
                 continue;
             }
@@ -695,11 +675,11 @@ public class RetailerController extends BaseController {
         while (orderIterator.hasNext()) {
             Order order = orderIterator.next();
             // 货款
-            trade.cargoFee += order.cargoFee;
+            trade.cargoFee = trade.cargoFee + order.cargoFee;
             // 物流
-            trade.shippingFee += order.shippingFee;
+            trade.shippingFee = trade.shippingFee + order.shippingFee;
             // 实际支付
-            trade.payment += order.totalFee;
+            trade.payment = trade.payment + order.totalFee;
         }
         // 确认生成交易
         Trade createTrade = trade.calcFee().createWithOrders(parseOrders);
@@ -709,15 +689,13 @@ public class RetailerController extends BaseController {
         }
         // -------------- 清除excel订单相关数据缓存
         user.removeOrderAboutData();
-        
-//        String redirectUrl = "/user/cart/stepTwo"+(trade.id > 0 ? "?tradeId=" + trade.id : "");
-//        redirect(redirectUrl);
-        
-        
+
+        // String redirectUrl = "/user/cart/stepTwo"+(trade.id > 0 ? "?tradeId=" + trade.id : "");
+        // redirect(redirectUrl);
+
         renderJson(trade.id);
     }
 
- 
     /**
      * 零售商根据条件检索交易记录
      *
@@ -741,30 +719,29 @@ public class RetailerController extends BaseController {
         }
         // 转换为交易视图
         List<TradeVo> vos = trades.stream().map(t -> TradeVo.valueOfTrade(t)).filter(v -> v != null)
-            .collect(Collectors.toList());
+                .collect(Collectors.toList());
         if (MixHelper.isNotEmpty(vos)) {
             page = Page.newInstance(vo.pageNo, vo.pageSize, vos.size());
             page.items = vos;
         }
         renderPageJson(page.items, page.totalCount);
     }
-    
-    
+
     @UserLogonSupport(value = "RETAILER")
-    public static void queryTradeByVoAndTradeStatus(@Required TradeSearchVo vo ,@Required String status) {
+    public static void queryTradeByVoAndTradeStatus(@Required TradeSearchVo vo, @Required String status) {
         TradeStatus tradeStatus = null;
-        switch(status){
-            case "TRADE_UNPAIED":
-                tradeStatus = TradeStatus.TRADE_UNPAIED;
-                break;
-            case "TRADE_UNSEND":
-                tradeStatus = TradeStatus.TRADE_SETTLEMENT_BEEN;
-                break;
-            case "TRADE_UNRECIIVED":
-                tradeStatus = TradeStatus.TRADE_UNRECIIVED;
-                break;            
+        switch (status) {
+        case "TRADE_UNPAIED":
+            tradeStatus = TradeStatus.TRADE_UNPAIED;
+            break;
+        case "TRADE_UNSEND":
+            tradeStatus = TradeStatus.TRADE_SETTLEMENT_BEEN;
+            break;
+        case "TRADE_UNRECIIVED":
+            tradeStatus = TradeStatus.TRADE_UNRECIIVED;
+            break;
         }
-        
+
         if (validation.hasErrors()) {
             renderFailedJson(ReturnCode.FAIL, "查询失败！");
         }
@@ -778,7 +755,7 @@ public class RetailerController extends BaseController {
         }
         // 转换为交易视图
         List<TradeVo> vos = trades.stream().map(t -> TradeVo.valueOfTrade(t)).filter(v -> v != null)
-            .collect(Collectors.toList());
+                .collect(Collectors.toList());
         if (MixHelper.isNotEmpty(vos)) {
             page = Page.newInstance(vo.pageNo, vo.pageSize, vos.size());
             page.items = vos;
@@ -801,7 +778,7 @@ public class RetailerController extends BaseController {
             renderArgs.put("tradeId", tradeId);
             if (MixHelper.isNotEmpty(trade.orders)) {
                 List<OrderVo> vos = trade.orders.stream().map(o -> OrderVo.valueOfOrderParseFee(o))
-                    .filter(v -> v != null).collect(Collectors.toList());
+                        .filter(v -> v != null).collect(Collectors.toList());
                 renderArgs.put("orders", vos);
             }
         }
@@ -828,14 +805,14 @@ public class RetailerController extends BaseController {
                 renderText("交易ID:" + tradeId + ",未选择任何excel文档表头，如(订单ID，商品ID...)");
             }
             List<Map<Integer, Object>> orderDatas = OrderVo.orderVosToExcelData(trade.orders, columns).stream()
-                .filter(m -> m != null).collect(Collectors.toList());
+                    .filter(m -> m != null).collect(Collectors.toList());
             MixHelper.print(orderDatas);
             try {
                 ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
                 if (TSFileUtil.exportExcel(byteOut, cnHead, orderDatas, "订单列表")) {
                     response.setContentTypeIfNotSet("application/msexcel;");
                     response.setHeader("Content-Disposition",
-                        new String(("attachment;filename=" + tradeId + ".xls").getBytes("GB2312"), "UTF-8"));
+                            new String(("attachment;filename=" + tradeId + ".xls").getBytes("GB2312"), "UTF-8"));
                     response.out.write(byteOut.toByteArray());
                 } else {
                     renderText("交易ID:" + tradeId + ",导出订单Excel失败");
@@ -853,7 +830,8 @@ public class RetailerController extends BaseController {
     /**
      * 取消交易
      *
-     * @param note 取消原因，取消备注
+     * @param note
+     *            取消原因，取消备注
      * @since v1.0
      * @author Calm
      * @created 2016年9月17日 下午1:01:00
@@ -913,7 +891,7 @@ public class RetailerController extends BaseController {
             String message = vo.checkValid();
             if (!Strings.isNullOrEmpty(message)) {
                 message = "<span class='row_num'>行号:" + (i + 1) + "</span>" + "<p class='error_desc'>" + message
-                    + "</p>";
+                        + "</p>";
                 messages.add(message);
                 continue;
             }
@@ -923,7 +901,7 @@ public class RetailerController extends BaseController {
             message = vo.parseToOrder(order);
             if (!Strings.isNullOrEmpty(message)) {
                 message = "<span class='row_num'>行号:" + (i + 1) + "</span>" + "<p class='error_desc'>" + message
-                    + "</p>";
+                        + "</p>";
                 messages.add(message);
                 continue;
             }
@@ -954,7 +932,7 @@ public class RetailerController extends BaseController {
         user.removeOrderAboutData();
         renderSuccessJson();
     }
-    
+
     /**
      * 保存交易订单(添加或更新)
      *
@@ -968,7 +946,7 @@ public class RetailerController extends BaseController {
             renderFailedJson(ReturnCode.FAIL, "保存失败,交易不存在");
         }
         List<Order> parseOrders = Order.findListByTradeId(orderVo.tradeId);
-      
+
         // 重置交易金额
         trade.resetFee();
         // 保存交易
@@ -983,34 +961,31 @@ public class RetailerController extends BaseController {
             // 实际支付
             trade.payment += order.totalFee;
         }
-        
+
         trade.status = TradeStatus.TRADE_UNPAIED;
         // 确认生成交易
         boolean result = trade.calcFee().updateWithOrders(parseOrders);
-        
+
         if (result) {
             renderSuccessJson();
         }
         renderFailedJson(ReturnCode.FAIL, "订单保存失败");
     }
-    
-    
+
     @UserLogonSupport(value = "RETAILER")
-    public static void orderDelete(@Required long tradeId){
+    public static void orderDelete(@Required long tradeId) {
         handleWrongInput(true);
         Trade trade = Trade.findById(tradeId);
         if (trade == null) {
             renderFailedJson(ReturnCode.FAIL, "删除失败,交易不存在");
         }
-       
-        boolean result =  trade.deleteWithOrders(tradeId);
-        
+
+        boolean result = trade.deleteWithOrders(tradeId);
+
         if (result) {
             renderSuccessJson();
         }
         renderFailedJson(ReturnCode.FAIL, "订单保存失败");
     }
-    
-
 
 }

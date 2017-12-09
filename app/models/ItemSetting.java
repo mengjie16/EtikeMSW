@@ -1,28 +1,8 @@
 package models;
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
-import models.mappers.ArticleMapper;
-import models.mappers.ItemMapper;
-
-import org.apache.ibatis.session.SqlSession;
-import org.apache.thrift.Option;
-import org.joda.time.DateTime;
-
-import com.aton.db.SessionFactory;
-import com.aton.util.ReflectionUtils;
-import com.aton.vo.Page;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
-
-import play.data.validation.MaxSize;
-import play.data.validation.MinSize;
-import vos.ArticleSearchVo;
-import vos.ItemSearchVo;
 
 /**
  * 活动列表配置
@@ -37,7 +17,7 @@ public class ItemSetting {
     // 活动商品(单位：分)
     public int price;
     // --- 只是展示使用
-    public int currentPrice;
+    public double currentPrice;
 
     public String img;
     public String title;

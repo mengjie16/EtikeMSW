@@ -3,7 +3,6 @@ package models;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.persistence.Transient;
@@ -15,22 +14,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aton.db.SessionFactory;
-import com.aton.util.DateUtils;
 import com.aton.util.MixHelper;
-import com.aton.util.NumberUtils;
 import com.aton.util.Pandora;
-import com.aton.vo.Page;
-import com.google.common.base.Function;
 import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.primitives.Longs;
 
 import enums.TradeStatus;
 import models.mappers.OrderMapper;
 import models.mappers.TradeMapper;
-import play.data.binding.As;
 import vos.TradeSearchVo;
 
 /**
@@ -53,17 +45,17 @@ public class Trade implements java.io.Serializable {
     // 订单标题
     public String caption;
     // 交易总金额
-    public int totalFee;
+    public double totalFee;
     // 优惠金额
-    public int discountFee;
+    public double discountFee;
     // 货款总金额(交易总金额)单位：分
-    public int cargoFee;
+    public double cargoFee;
     // 实际支付金额(结款实际金额) 单位：分
-    public int payment;
+    public double payment;
     // 优惠内容
     // public Promotion promotion_details;
     // 物流费用 单位：分
-    public int shippingFee;
+    public double shippingFee;
     // 预计发货时间
     public Date expectConsignTime;
     // 发货时间
@@ -101,11 +93,11 @@ public class Trade implements java.io.Serializable {
     }
 
     public Trade resetFee() {
-        this.cargoFee = 0;
-        this.shippingFee = 0;
-        this.discountFee = 0;
-        this.totalFee = 0;
-        this.payment = 0;
+        this.cargoFee = 0.00;
+        this.shippingFee = 0.00;
+        this.discountFee = 0.00;
+        this.totalFee = 0.00;
+        this.payment = 0.00;
         return this;
     }
 
@@ -201,7 +193,7 @@ public class Trade implements java.io.Serializable {
             ss.close();
         }
     }
-    
+
     public boolean deleteWithOrders(long tradeId) {
         SqlSession ss = SessionFactory.getSqlSessionWithoutAutoCommit();
         try {
@@ -209,7 +201,7 @@ public class Trade implements java.io.Serializable {
             // 生成唯一交易id
             int row = mapper.deleteById(tradeId);
             ss.commit();
-            if (row > 0 ) {
+            if (row > 0) {
                 if (!Order.deleteByTradeId(tradeId)) {
                     ss.rollback();
                     return false;
@@ -242,12 +234,12 @@ public class Trade implements java.io.Serializable {
             ss.close();
         }
     }
-    
+
     /**
      * 更新交易金额
      *
      * @return
-     * @since  v1.0
+     * @since v1.0
      * @author Calm
      * @created 2016年10月14日 下午2:00:09
      */
@@ -352,13 +344,13 @@ public class Trade implements java.io.Serializable {
      * @created 2016年9月12日 下午12:56:01
      */
     public static List<Trade> findListWithOrdersByVo(TradeSearchVo vo) {
-         if(!Strings.isNullOrEmpty(vo.phone)){
-             User usr = User.findByPhone(vo.phone);
-             if(usr!=null){
-                 vo.retailerId = usr.userId;
-             }
-         }
-        
+        if (!Strings.isNullOrEmpty(vo.phone)) {
+            User usr = User.findByPhone(vo.phone);
+            if (usr != null) {
+                vo.retailerId = usr.userId;
+            }
+        }
+
         SqlSession ss = SessionFactory.getSqlSession();
         try {
             TradeMapper mapper = ss.getMapper(TradeMapper.class);
@@ -368,17 +360,17 @@ public class Trade implements java.io.Serializable {
             ss.close();
         }
     }
-    
+
     public static List<Trade> selectListWithOrderTradeStatusByVo(TradeSearchVo vo, TradeStatus status) {
-       SqlSession ss = SessionFactory.getSqlSession();
-       try {
-           TradeMapper mapper = ss.getMapper(TradeMapper.class);
-           List<Trade> trades = mapper.selectListWithOrderTradeStatusByVo(vo,status);
-           return trades;
-       } finally {
-           ss.close();
-       }
-   }
+        SqlSession ss = SessionFactory.getSqlSession();
+        try {
+            TradeMapper mapper = ss.getMapper(TradeMapper.class);
+            List<Trade> trades = mapper.selectListWithOrderTradeStatusByVo(vo, status);
+            return trades;
+        } finally {
+            ss.close();
+        }
+    }
 
     /**
      * 生成唯一交易id
