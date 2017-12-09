@@ -35,13 +35,13 @@ $(function() {
 	// 登录
 	// $(document).on('click', '#btnLogin', function() {
 	// 	var validator = $('#frmLogin').validate(validateOpts());
-	// 	if (!validator.form()) {
+	// 	if (!validator.fcartorm()) {
 	// 		return;
 	// 	}
 		
 	// });
 	var validator = $('#frmLogin').validate(validateOpts());
-	$('#frmLogin').trForm({
+	/*$('#frmLogin').trForm({
 		before: function() {
 			$('.error_panel').html('');
 			return validator.form();
@@ -65,7 +65,47 @@ $(function() {
 			
 			//window.location.href = '/'+$('input[name="rUrl"]').val()?$('input[name="rUrl"]').val():'user/home';
 		}
+	});*/
+	$("#frmLogin").on('click', function(){		
+		var params ={
+			savePass: function(){
+				return $('#secure_connection1').is(':checked');
+			},
+			rUrl:$('input[name="rUrl"]').val(),
+			'authenticityToken': $('input[name=authenticityToken]').val(),
+			name:$('input[name="name"]').val(),
+			password:$('input[name="password"]').val()
+		}
+		var tr_url;
+		if (validator.form()) {
+			$('.error_panel').html('');
+			if(!/^admin/i.test(params.name)){
+				tr_url = "/doLogin";
+			}else{
+				tr_url ="/sys/doLogin";
+			}
+			$.ajax({
+		        type: "post",
+		        url: tr_url,
+		        data: params,
+		        success: function(data) {
+		        	if(tr_url === "/doLogin"){
+			        	if (data.code != 200) {
+			                return;
+			            } else if (data.code === 200){		            	
+			            		window.location.href = '/user/home';
+			            }
+		        	}else{
+		        		window.location.href = '/sys/user/manage';
+		        	}
+
+
+		        }
+
+		    });
+		}
 	});
+	
 	 //回车提交事件
 	$("body").keydown(function(event) {
 	    if (event.keyCode == "13") {//keyCode=13是回车键
