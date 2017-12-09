@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import com.alibaba.fastjson.JSONObject;
 import com.aton.config.ReturnCode;
 import com.aton.util.CacheUtils;
-import com.aton.util.MixHelper;
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
@@ -31,7 +30,6 @@ import play.data.validation.MaxSize;
 import play.data.validation.MinSize;
 import play.data.validation.Required;
 import play.data.validation.Valid;
-import play.data.validation.Validation;
 import play.libs.Images;
 import play.mvc.Util;
 import play.mvc.With;
@@ -129,9 +127,9 @@ public class Application extends BaseController {
      * @author Calm
      * @created 2016年7月15日 上午1:28:07
      */
-    public static void indexList2() {    	
-    	ItemSearchResult search_result = Item.selectListAllByCreateTime();
-    	ItemSearchResult search_result_random = Item.selectListAllRandom();
+    public static void indexList2() {
+        ItemSearchResult search_result = Item.selectListAllByCreateTime();
+        ItemSearchResult search_result_random = Item.selectListAllRandom();
         renderArgs.put("search_result", search_result);
         renderArgs.put("search_result_random", search_result_random);
         render();
@@ -170,19 +168,26 @@ public class Application extends BaseController {
             redirect("/regist");
         }
         // 再次校验手机号是否重复
-        User retailerUser = User.findByPhone(user.phone);
-        if (retailerUser != null) {
-            flash.error("注册失败,该手机号已注册");
-            redirect("/regist");
-        }
+        // User retailerUser = User.findByPhone(user.phone);
+        // if (retailerUser != null) {
+        // flash.error("注册失败,该手机号已注册");
+        // redirect("/regist");
+        // }
         // 验证码验证
-       /* boolean smsCodematched = SmsUtil.checkSmsCode(user.phone, captcha);
+        /*
+         * boolean smsCodematched = SmsUtil.checkSmsCode(user.phone, captcha);
+         * 
+         * if (!smsCodematched) {
+         * flash.error("验证码不正确");
+         * redirect("/regist");
+         * }
+         */
 
-       if (!smsCodematched) {
-            flash.error("验证码不正确");
+        User retailerUser = User.findByField("name", user.name);
+        if (retailerUser != null) {
+            flash.error("注册失败,该用户名已注册");
             redirect("/regist");
         }
-        */
         boolean ret = retailer.addWithUser(user);
         if (ret) {
             redirect("/regist/success");
@@ -229,7 +234,7 @@ public class Application extends BaseController {
      * @created 2016年11月16日 下午2:21:20
      */
     public static void doRetrievePass(@Required @MinSize(64) String utm,
-        @Required @Match(RegexConstants.PASSWORD) String password) {
+            @Required @Match(RegexConstants.PASSWORD) String password) {
 
         handleWrongInput(true);
         String phone = deMask(utm);
@@ -237,10 +242,11 @@ public class Application extends BaseController {
             renderJson(ReturnCode.INVALID_PRIVILEGE, "iv参数错误");
         }
 
-       /* if (!SmsUtil.checkSmsCode(phone, smdCode)) {
-            renderJson(ReturnCode.API_CALL_LIMIT, "验证码不正确");
-        }
-        */
+        /*
+         * if (!SmsUtil.checkSmsCode(phone, smdCode)) {
+         * renderJson(ReturnCode.API_CALL_LIMIT, "验证码不正确");
+         * }
+         */
 
         User user = User.findByPhone(phone);
         user.password = password;
@@ -261,7 +267,7 @@ public class Application extends BaseController {
      * @created 2016年5月27日 下午4:38:12
      */
     public static void sendUserValidSms(@Required @Match(RegexConstants.PHONE) String phone,
-        @Required @MaxSize(4) String imgCaptcha) {
+            @Required @MaxSize(4) String imgCaptcha) {
         handleWrongInput(true);
 
         String sysCaptchaCode = session.get("captcha");
@@ -315,13 +321,14 @@ public class Application extends BaseController {
      *
      * @param phone
      * @param imgCaptcha
-     * @param garen 管理员才会发这个参数
+     * @param garen
+     *            管理员才会发这个参数
      * @since v1.0
      * @author tr0j4n
      * @created 2016年4月29日 上午12:15:27
      */
     public static void sendRegistSms(@Required @Match(RegexConstants.PHONE) String phone,
-        @Required @MaxSize(4) String imgCaptcha, String garen) {
+            @Required @MaxSize(4) String imgCaptcha, String garen) {
         handleWrongInput(true);
 
         String sysCaptchaCode = session.get("captcha");
@@ -353,15 +360,16 @@ public class Application extends BaseController {
      * @created 2016年5月27日 下午2:21:30
      */
     public static void checkSms(
-        @Required @Match(RegexConstants.PHONE) String phone) {
+            @Required @Match(RegexConstants.PHONE) String phone) {
         handleWrongInput(true);
-        
-       /* boolean matched = SmsUtil.checkSmsCode(phone, smsCode);
-        // 验证码是否匹配
-        if (!matched) {
-            renderFailedJson(ErrorCode.SMS_CODE_ERROR.code, ErrorCode.SMS_CODE_ERROR.description);
-        }
-        */
+
+        /*
+         * boolean matched = SmsUtil.checkSmsCode(phone, smsCode);
+         * // 验证码是否匹配
+         * if (!matched) {
+         * renderFailedJson(ErrorCode.SMS_CODE_ERROR.code, ErrorCode.SMS_CODE_ERROR.description);
+         * }
+         */
         renderSuccessJson();
     }
 
