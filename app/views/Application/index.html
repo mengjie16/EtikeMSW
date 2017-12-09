@@ -5,7 +5,31 @@
 #{/set}
 *{ 主页轮播大海报 }*
 <div class="banner">
-	<div class="col-sm-12 matter-banner">
+    <div class="col-sm-2">
+        <div class="sidebar-title">TOP热销品牌</div>
+        #{if homeSet?.brandSettings}
+        <ul class="sidebar-navigation">
+          #{list items:homeSet.brandSettings, as : 'brandSetting'}
+          <li>
+            <a href="/search?brandId=${brandSetting.bid}&pageNo=1" target="_blank">
+                <p>${brandSetting.title}</p>
+            </a>
+          </li>
+          #{/list}
+        </ul>
+        #{/if}
+        #{else}
+        <ul>
+          <li>
+            <p>111111</p>
+          </li>
+          <li>
+            <p>2222222</p>
+          </li>
+        </ul>
+        #{/else}
+    </div>
+	<div class="col-sm-10 matter-banner">
   	<div class="slider">
   		<div id="main_visual" class="callbacks_container">
         #{if homeSet?.big_BannerSettings}
@@ -38,250 +62,8 @@
   </div>
 </div>
 <div class="clearfix"> </div>
-<div class="titleBlock">
-  <div class="linemiddle fl"></div>
-  <div class="titleText fl">品牌版块</div>
-  <div class="linemiddle fr"></div>
-</div>
-<div class="clearfix"> </div>
-<div class="main_brand_btn">
-<div class="main_brand_list">
-  <div>
-    #{if homeSet?.brandSettings}
-    <ul>
-      #{list items:homeSet.brandSettings, as : 'brandSetting'}
-      <li>
-        <a href="/search?brandId=${brandSetting.bid}&pageNo=1" target="_blank">
-          <img class="lazy grayscale" src="${brandSetting.imgUrl}" alt="${brandSetting.title}" title="${brandSetting.title}" />
-        </a>
-        <p>${brandSetting.title}</p>
-      </li>
-      #{/list}
-    </ul>
-    #{/if}
-    #{else}
-    <ul>
-      <li>
-        <a href="#" target="_self">
-          <img class="lazy" src="/public/images/03.jpg" alt=""/>
-        </a>
-        <p>111111</p>
-      </li>
-      <li>
-        <a href="#" target="_self">
-          <img class="lazy" src="/public/images/04.jpg" alt=""/>
-        </a>
-        <p>2222222</p>
-      </li>
-    </ul>
-    #{/else}
-  </div>
-</div>
-</div>
-<!-- <div class="active1">
-        <div class="col-sm-6">
-            <div class="halfside">
-                <img src="/public/images/03.jpg"/ style="height: 100%">
-                <div class="imgmask"></div>
-                <div class="maskContent">
-                    <p>母婴用品</p>
-                    <p><a href="#" class="more">MORE+</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="halfside">
-                <div class="floorList" style="border-bottom: 1px solid #ebebeb">
-                    <div class="productImg">
-                        <a href="">
-                            <img src="/public/images/04.jpg"/>
-                        </a>
-                    </div>
-                    <div class="productInfor">
-                        <div class="productTitle">
-                            <a href=""> 保税区直发 新西兰A2 Platinum酪蛋白婴儿奶粉1段(0-6个月宝宝) 900g</a>
-                        </div>
-                        <div class="productPrice">
-                            ¥123
-                            <span class="price-e">20€</span>
-                            <a href="#" class="item_add">Add To Cart</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="floorList">
-                    <div class="productImg">
-                        <a href="">
-                            <img src="/public/images/05.jpg"/>
-                        </a>
-                    </div>
-                    <div class="productInfor">
-                        <div class="productTitle">
-                            <a href="">  保税区直发 澳大利亚Soulful 成人奶粉 50岁以上 900g【1袋起发】</a>
-                        </div>
-                        <div class="productPrice">
-                            ¥180
-                            <span class="price-e">30€</span>
-                            <a href="#" class="item_add">Add To Cart</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="clearfix"> </div>
-    <div class="active2">
-        <div class="col-sm-6">
-            <div class="halfside">
-                <div class="floorList" style="border-bottom: 1px solid #ebebeb">
-                    <div class="productImg">
-                        <a href="">
-                            <img src="/public/images/04.jpg"/>
-                        </a>
-                    </div>
-                    <div class="productInfor">
-                        <div class="productTitle">
-                            <a href=""> 保税区直发 新西兰A2 Platinum酪蛋白婴儿奶粉1段(0-6个月宝宝) 900g</a>
-                        </div>
-                        <div class="productPrice">
-                            ¥123
-                            <span class="price-e">20€</span>
-                            <a href="#" class="item_add">Add To Cart</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="floorList">
-                    <div class="productImg">
-                        <a href="">
-                            <img src="/public/images/05.jpg"/>
-                        </a>
-                    </div>
-                    <div class="productInfor">
-                        <div class="productTitle">
-                            <a href="">  保税区直发 澳大利亚Soulful 成人奶粉 50岁以上 900g【1袋起发】</a>
-                        </div>
-                        <div class="productPrice">
-                            ¥180
-                            <span class="price-e">30€</span>
-                            <a href="#" class="item_add">Add To Cart</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="halfside rightside">
-                <img src="/public/images/06.jpg"/ style="height: 100%">
-                <div class="imgmask"></div>
-                <div class="maskContent">
-                    <p>食品保键</p>
-                    <p><a href="#" class="more">MORE+</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="clearfix"> </div>
-    <div class="active1">
-        <div class="col-sm-6">
-            <div class="halfside">
-                <img src="/public/images/07.jpg"/ style="height: 100%">
-                <div class="imgmask"></div>
-                <div class="maskContent">
-                    <p>美妆个护</p>
-                    <p><a href="#" class="more">MORE+</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="halfside">
-                <div class="floorList" style="border-bottom: 1px solid #ebebeb">
-                    <div class="productImg">
-                        <a href="">
-                            <img src="/public/images/04.jpg"/>
-                        </a>
-                    </div>
-                    <div class="productInfor">
-                        <div class="productTitle">
-                            <a href=""> 保税区直发 新西兰A2 Platinum酪蛋白婴儿奶粉1段(0-6个月宝宝) 900g</a>
-                        </div>
-                        <div class="productPrice">
-                            ¥123
-                            <span class="price-e">20€</span>
-                            <a href="#" class="item_add">Add To Cart</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="floorList">
-                    <div class="productImg">
-                        <a href="">
-                            <img src="/public/images/05.jpg"/>
-                        </a>
-                    </div>
-                    <div class="productInfor">
-                        <div class="productTitle">
-                            <a href="">  保税区直发 澳大利亚Soulful 成人奶粉 50岁以上 900g【1袋起发】</a>
-                        </div>
-                        <div class="productPrice">
-                            ¥180
-                            <span class="price-e">30€</span>
-                            <a href="#" class="item_add">Add To Cart</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="clearfix"> </div>
-    <div class="active2">
-        <div class="col-sm-6">
-            <div class="halfside">
-                <div class="floorList" style="border-bottom: 1px solid #ebebeb">
-                    <div class="productImg">
-                        <a href="">
-                            <img src="/public/images/04.jpg"/>
-                        </a>
-                    </div>
-                    <div class="productInfor">
-                        <div class="productTitle">
-                            <a href=""> 保税区直发 新西兰A2 Platinum酪蛋白婴儿奶粉1段(0-6个月宝宝) 900g</a>
-                        </div>
-                        <div class="productPrice">
-                            ¥123
-                            <span class="price-e">20€</span>
-                            <a href="#" class="item_add">Add To Cart</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="floorList">
-                    <div class="productImg">
-                        <a href="">
-                            <img src="/public/images/05.jpg"/>
-                        </a>
-                    </div>
-                    <div class="productInfor">
-                        <div class="productTitle">
-                            <a href="">  保税区直发 澳大利亚Soulful 成人奶粉 50岁以上 900g【1袋起发】</a>
-                        </div>
-                        <div class="productPrice">
-                            ¥180
-                            <span class="price-e">30€</span>
-                            <a href="#" class="item_add">Add To Cart</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="halfside rightside">
-                <img src="/public/images/08.jpg"/ style="height: 100%">
-                <div class="imgmask"></div>
-                <div class="maskContent">
-                    <p>生活用品</p>
-                    <p><a href="#" class="more">MORE+</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="clearfix"> </div> -->
+
+
 #{doLayout /}
 #{set 'moreScripts'}
 <script type="text/javascript" src="/public/javascripts/responsiveslides.min.js"></script>
@@ -292,7 +74,8 @@ $(document).ready(function() {
         auto: true,
         speed: 500,
         namespace: "callbacks",
-        pager: true,
+        pager: false,
+        nav: true
     });
 });
 </script>

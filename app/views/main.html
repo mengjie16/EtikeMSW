@@ -8,8 +8,9 @@
   <meta charset="utf-8" />
   <meta name="keyword" content="好孩子推车,费雪,乐高,小泰克,TAKATA高田,Aprica阿普丽佳,Kiddy奇蒂,Cybex,迪士尼,一件代发" />
   <meta name="description" content="艾泰客,关注这个时代最好的母婴产品，婴儿推车，安全座椅，童车，儿童三轮车，提篮，婴儿床，一件代发" />
-  <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/common/widget.1.1.css'}" />
   <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/common/reset.css'}" />
+  <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/common/bootstrap.css'}" />
+  <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/common/widget.1.1.css'}" />
   <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/style.css'}"  />
   <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/flexslider.css'}"  />
   <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/memenu.css'}"  />
@@ -23,7 +24,7 @@
               <div class="logo" style="width: 190px;float: left;">
                   <a href="index.html">EITAK</a>
               </div>
-              <div class="h_menu4" style="width: 380px;float: left;">
+              <div class="h_menu4" style="width: 280px;float: left;">
                   <ul class="memenu skyblue">
                       <li class="grid"><a href="/">首页</a></li>
                       <li><a href="/search">全部商品</a>
@@ -39,14 +40,15 @@
                   </div>
                 </form>
               </div>
-              <div class="search" style="width: 315px;float: left;">
+              <div class="search" style="width: 375px;float: left;">
                   <a class="shoppingcart" href="/user/cart">
-                      <i class="iconfont" style="font-size: 18px;color: #777;display: inline-block;">&#xe610;</i>
+                      <i class="iconfont" style="font-size: 18px;color: #52d0c4;display: inline-block;line-height: 22px;margin-right: 3px;">&#xe610;</i>购物车
                   </a>
                   #{if !user}
-                  <a href="/login" target="_blank" class="login">
+                  <a href="/login" class="login">
                     登录
                   </a>
+                  <a href="/regist" class="login">免费注册</a>
                   #{/if}
                   #{else}
                   <a class="play-icon" href="/user/home" class="mr4">${user.name}</a>
@@ -63,22 +65,23 @@
       <div class="footer-bottom">
           <div class="container">
               <div class="col-sm-3 footer-bottom-cate">
-                  <h6>帮助中心</h6>
-                  <ul>
-                      <li><a href="/help">FAQ</a></li>
-                  </ul>
+                 
               </div>
               <div class="col-sm-3 footer-bottom-cate">
-                  <h6>极速物流</h6>
+                  <!-- <h6>极速物流</h6>
                   <ul>
                       <li><a href="#">易优</a></li>
-                  </ul>
+                  </ul> -->
               </div>
               <div class="col-sm-3 footer-bottom-cate">
-                  <h6>合作品牌</h6>
+                  <!-- <h6>合作品牌</h6>
                   <ul>
                       <li><a href="#">HIPP</a></li>
                       <li><a href="#">NUK</a></li>
+                  </ul> -->
+                  <h6>帮助中心</h6>
+                  <ul>
+                      <li><a href="/help">FAQ</a></li>
                   </ul>
               </div>
               <div class="col-sm-3 footer-bottom-cate cate-bottom">
@@ -90,7 +93,7 @@
                   </ul>
               </div>
               <div class="clearfix"> </div>
-              <p class="footer-class">Copyright &copy; 2017.Company name All rights reserved.<a target="_blank" href="http://www.aitaike.com/">艾泰客</a></p>
+              <p class="footer-class">Copyright &copy; 2017.Company name All rights reserved.<a href="http://www.aitaike.com/">艾泰客</a></p>
           </div>
       </div>
   </div>
