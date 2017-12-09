@@ -281,7 +281,7 @@
 		end as name,id from brand b) as results where results.name!=''
 	</select>
 	<select id="selectIdsInAllIdsOrBids" resultMap="BaseResultMap">
-		select i.pic_url,i.id,i.title,i.cate_id, i.brand_id,i.retail_price,i.update_time from item i
+		select i.pic_url,i.id,i.title,i.cate_id, i.brand_id,i.retail_price,i.update_time,i.supply_price from item i
 		<where>
 			<if test="keyWords!=null and keyWords.size()>0">			
 				<foreach collection="keyWords" item="keyWord"  open="" close="" separator="OR">
@@ -323,7 +323,7 @@
 		</where>
 	</select>
 	<select id="selectListVoByIds" resultMap="BaseResultMap">
-		select i.pic_url,i.id,i.title,i.cate_id, i.brand_id,i.retail_price,i.update_time from item i
+		select i.pic_url,i.id,i.title,i.cate_id, i.brand_id,i.retail_price,i.update_time,i.supply_price from item i
 		<where>			
 			i.id in 	
 			<foreach collection="itemIds" item="itemId"  open="(" close=")" separator=",">
