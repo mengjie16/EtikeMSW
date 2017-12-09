@@ -542,12 +542,12 @@ function initBase(argument) {
 		$.each(orderList,function(index,obj){
 			params['orders['+index+'].isDelete'] = $(obj).data('isDelete')?$(obj).data('isDelete'):false;
 			params['orders['+index+'].id'] = $(obj).find('div[name=id]').text();
-			params['orders['+index+'].outOrderNo'] = $(obj).find('div[name=outOrderNo]').text();
+			// params['orders['+index+'].outOrderNo'] = $(obj).find('div[name=outOrderNo]').text();
 			params['orders['+index+'].totalFee'] = $(obj).find('div[name=totalFee]').text();
-			params['orders['+index+'].shippingFee'] = $(obj).find('div[name=shippingFee]').text();
+			// params['orders['+index+'].shippingFee'] = $(obj).find('div[name=shippingFee]').text();
 			params['orders['+index+'].express'] = $(obj).find('div[name=express]').attr('express');
 			params['orders['+index+'].expNo'] = $(obj).find('div[name=expNo]').text();
-			params['orders['+index+'].itemId'] = $(obj).find('div[name=itemId]').text();
+			// params['orders['+index+'].itemId'] = $(obj).find('div[name=itemId]').text();
 			params['orders['+index+'].skuStr'] = $(obj).find('div[name=sku]').text();
 			params['orders['+index+'].num'] = $(obj).find('div[name=num]').text();
 			params['orders['+index+'].buyerName'] = $(obj).find('div[name=name]').text();

@@ -74,11 +74,11 @@ $(function() {
     });
     // 提交支付
     $(document).on('click', '#btnSubmit', function() {
-        var boxes = $('input[name="express_id"]:checked').length;
-        if (boxes <= 0) {
-            alert("请至少选择一种物流方式");
-            return false;
-        }
+        // var boxes = $('input[name="express_id"]:checked').length;
+        // if (boxes <= 0) {
+        //     alert("请至少选择一种物流方式");
+        //     return false;
+        // }
         var expressid = $('input[name="express_id"]:checked').attr('id');
         /*var itemVos = [];
         $('#stepContainer tr').each(function(index, obj) {

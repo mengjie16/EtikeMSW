@@ -65,20 +65,20 @@ function initBase(){
 		}	
 	});
 	//校验用户号码input
-	$(document).on('change','#userPhone',function(){
-		var reg = /^[1-9]\d*$/;
-		var $me = $(this),
-				id = $me.val();
-		if(!reg.test(id)){
-			if(!id){
-				$me.next().text('');
-				return;
-			}
-			$me.next().text('格式不正确');
-		}else{
-			$me.next().text('');
-		}	
-	});
+	// $(document).on('change','#userPhone',function(){
+	// 	var reg = /^[1-9]\d*$/;
+	// 	var $me = $(this),
+	// 			id = $me.val();
+	// 	if(!reg.test(id)){
+	// 		if(!id){
+	// 			$me.next().text('');
+	// 			return;
+	// 		}
+	// 		$me.next().text('格式不正确');
+	// 	}else{
+	// 		$me.next().text('');
+	// 	}	
+	// });
 }
 
 
@@ -86,12 +86,11 @@ function initBase(){
 function loadList(pageNo) {
 	var obj = {
 		'vo.id':$('#orderNo').val(),
-		'vo.phone':$('#userPhone').val(),
+		'vo.name':$('#userName').val(),
 		'vo.pageNo': pageNo,
 		'vo.pageSize': CDT.pageSize,
 		'vo.createTimeStart': $('#startTime').val(),
-		'vo.createTimeEnd': $('#endTime').val(),
-		'vo.phone': $('#userPhone').val()
+		'vo.createTimeEnd': $('#endTime').val()
 	};
 	Tr.get('/sys/trade/query', obj, function(data) {
 		if (data.code != 200||!data.results) return;
