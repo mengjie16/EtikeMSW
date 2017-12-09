@@ -36,8 +36,6 @@ function initBase() {
 	});
 	// 关键字查询商品
 	$(document).on('click', '#listSearchBtn', function() {
-		var itemNum = $('#itemNum').val();
-		if(itemNum!=''&&!/^[0-9a-zA-Z_-]+$/.test(itemNum)||Tr.countWords(itemNum)>8) return;
 		var itemTitle = $('#itemTitle').val();
 		if(Tr.countWords(itemTitle)>10) return;
 		loadList(1);
@@ -143,35 +141,40 @@ function loadList(pageNo) {
 	var searchVo = {
 		'vo.pageNo':pageNo,
 		'vo.pageSize':CDT.pageSize,
-		'vo.outNo': $('#itemNum').val(),
-		'vo.id': $('#titleId').val(),
+		'vo.aboutCate': $('#itemCate').val(),
 		'vo.title': $('#itemTitle').val(),
 		'vo.status': $('#itemStatus').val(),
-		'vo.aboutSupplier': $('#supplierKey').val(),
 		'vo.aboutBrand': $('#brandKey').val()
 	};
 	Tr.get('/sys/item/query', searchVo, function(data) {
 		if (data.code != 200 || !data.results) return;
 		// 保存到缓存
 		CDT.loadedListCache = data.results;
+		console.log(CDT.loadedListCache)
 		var output = Mustache.render(CDT.itemTemp, $.extend(data, {
-			formatTimer: function() {
-				if (this.updateTime) {
-					return new Date(this.updateTime).Format('yyyy-MM-dd hh:mm:ss');
-				}
-				return '----';
+			retailPriceFormat:function() {
+				return this.retailPrice/100;
 			},
-			formatPrice: function() {
-				var iprice=0;
-				if(this.distPriceUse&&this.distPrice>0){
-						iprice = this.distPrice;
-					}else if(this.priceRangeUse&&this.priceRanges&&this.priceRanges.length>0){
-						iprice = this.priceRanges[0].price
-					}else{
-						iprice = this.retailPrice;
-					}
-				return iprice/100;
+			supplyPriceFormat:function() {
+				return this.supplyPrice/100;
 			}
+			// formatTimer: function() {
+			// 	if (this.updateTime) {
+			// 		return new Date(this.updateTime).Format('yyyy-MM-dd hh:mm:ss');
+			// 	}
+			// 	return '----';
+			// },
+			// formatPrice: function() {
+			// 	var iprice=0;
+			// 	if(this.distPriceUse&&this.distPrice>0){
+			// 			iprice = this.distPrice;
+			// 		}else if(this.priceRangeUse&&this.priceRanges&&this.priceRanges.length>0){
+			// 			iprice = this.priceRanges[0].price
+			// 		}else{
+			// 			iprice = this.retailPrice;
+			// 		}
+			// 	return iprice/100;
+			// }
 		}));
 		$('#listContainer tbody').html(output);
 		if (data.totalCount <= 0) {

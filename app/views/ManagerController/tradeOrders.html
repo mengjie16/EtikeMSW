@@ -60,9 +60,9 @@
 					<a class="btnStd btnMedium fr" id="exportExcelbtn"> <i class="iconfont mr4">&#xe603;</i>
 						导出订单
 					</a>
-					<a class="btnStd btnMedium fr" id="Createbtn" style="margin-right:10px;"> <i class="iconfont mr4">&#xe60b;</i>
+					<!-- <a class="btnStd btnMedium fr" id="Createbtn" style="margin-right:10px;"> <i class="iconfont mr4">&#xe60b;</i>
 						添加订单
-					</a>
+					</a> -->
 				</h3>
 				<input type="hidden" name="trade" value="${tradeId}"/>
 			</div>
@@ -70,12 +70,12 @@
 		<div class="tbl_wrap_type02">
 			#{authenticityToken/}
 			<div class="form_line">
-				<div class="searchDiv">
+				<!-- <div class="searchDiv">
 					<span>输入搜索关键词</span>
 					<input type="text" class="inputText" name="" id="orderSearch"/>
 					<a class="btnStd btnSmall" id="orderSearchBtn">搜索</a>
-				</div>
-				<div class="totalPay">
+				</div> -->
+				<!-- <div class="totalPay">
 					<p class="feetitle">
 						<span class="totalPrices">订单总额</span><span class="sign"></span><span class="discountPrice">折扣</span><span class="sign"></span><span class="toPay">应付款</span>
 					</p>
@@ -83,13 +83,13 @@
 						<span class="totalPrices" id="totalPrice"><em class="price">${totalFee?totalFee/100:0}</em></span><span class="sign">-</span><span class="discountPrice" style="position: relative;"><input type="text" id="discountPrice" class="inputText" value="0" /></span><span class="sign">=</span><span class="toPay" id="toPay"><em class="price">${payment?payment/100:0}</em></span>
 						<a class="btnStd btnSmall" id="savebtn" style="float:none">保存</a>
 					</p>
-				</div>
-				<div class="orderStatus">
+				</div> -->
+				<!-- <div class="orderStatus">
 					<span class="square mr4"></span>
 					<span class="mr20">普通状态</span>
 					<span class="square mr4 orange"></span>
 					<span>已发物流</span>
-				</div>
+				</div> -->
 				<div class="orderList">
 					<table class="tbl">
 						<thead>
@@ -97,15 +97,15 @@
 								<th>
 									<div>订单号</div>
 								</th>
-								<th>
+								<!-- <th>
 									<div>外部订单号</div>
-								</th>
+								</th> -->
 								<th>
-									<div>订单总金额(元)</div>
+									<div>订单金额(元)</div>
 								</th>
-								<th>
+								<!-- <th>
 									<div>物流费(元)</div>
-								</th>
+								</th> -->
 								<th>
 									<div>快递公司</div>
 								</th>
@@ -115,9 +115,9 @@
 								<th>
 									<div>订单状态</div>
 								</th>
-								<th>
+								<!-- <th>
 									<div>商品ID</div>
-								</th>
+								</th> -->
 								<th>
 									<div>商品规格</div>
 								</th>
@@ -126,6 +126,12 @@
 								</th>
 								<th>
 									<div>客户姓名</div>
+								</th>
+								<th>
+									<div>性别</div>
+								</th>
+								<th>
+									<div>身份证号码</div>
 								</th>
 								<th>
 									<div>电话号码</div>
@@ -158,13 +164,13 @@
 							#{list items:orders, as : 'orderVo'}
 							<tr class="${orderVo.expNo!=null&&orderVo.expNo!=''?'consigned':''}" data-order-no="${orderVo_index-1}">
 								<td><div name="id">${orderVo.id}</div></td>
-								<td><div class="changeItem changenum" name="outOrderNo">${orderVo.outOrderNo}</div></td>
+								<!-- <td><div class="changeItem changenum" name="outOrderNo">${orderVo.outOrderNo}</div></td> -->
 								<td>
-									<div class="changeItem changeTotalfee" name="totalFee">${orderVo.totalFee/100}</div>
+									<div class="changeItem changeTotalfee" name="totalFee">${orderVo.cargoFee}</div>
 								</td>
-								<td>
+								<!-- <td>
 									<div class="changeItem changefee" name="shippingFee">${orderVo.shippingFee/100}</div>
-								</td>
+								</td> -->
 								<td>
 									<div class="changeItem changeExpress" name="express">${orderVo.express}</div>
 								</td>
@@ -174,17 +180,23 @@
 								<td>
 									<div class="${orderVo.statusColor}">${orderVo.statusText}</div>
 								</td>
-								<td>
+								<!-- <td>
 									<div class="changeItem changeId" name="itemId">${orderVo?.productInfo?.itemId}</div>
-								</td>
+								</td> -->
 								<td>
-									<div class="changeItem changeSku" name="sku">${orderVo?.productInfo?.sku}</div>
+									<div class="changeItem changeSku" name="sku">${orderVo?.productInfo?.color}</div>
 								</td>
 								<td>
 									<div class="changeItem changenum" name="num">${orderVo.num}</div>
 								</td>
 								<td>
 									<div class="changeItem changetxt" name="name">${orderVo?.buyerInfo?.name}</div>
+								</td>
+								<td>
+									<div class="changeItem changetxt" name="name"></div>
+								</td>
+								<td>
+									<div class="changeItem changetxt" name="name"></div>
 								</td>
 								<td>
 									<div class="changeItem changephone" name="contact">${orderVo?.buyerInfo?.contact}</div>
@@ -250,19 +262,19 @@
 									<input type="checkbox" id="orderNos" value="id" name="excel_item" />
 									<label for="orderNos">订单ID</label>
 								</li>
-								<li class="mt4">
+								<!-- <li class="mt4">
 									<input type="checkbox" id="outOrderNos" value="outOrderNo" name="excel_item" />
 									<label for="outOrderNos">外部订单号</label>
-								</li>
-								<li class="mt4">
+								</li> -->
+								<!-- <li class="mt4">
 									<input type="checkbox" id="totalAmounts" value="totalAmount" name="excel_item" />
 									<label for="totalAmounts">总金额</label>
-								</li>
+								</li> -->
 								<li class="mt4">
 									<input type="checkbox" id="goodsFees" value="goodsFee" name="excel_item" />
 									<label for="goodsFees">商品总金额</label>
 								</li>
-								<li class="mt4">
+								<!-- <li class="mt4">
 									<input type="checkbox" id="shippingFees" value="shippingFee" name="excel_item" />
 									<label for="shippingFees">邮费</label>
 								</li>
@@ -273,7 +285,7 @@
 								<li class="mt4">
 									<input type="checkbox" id="itemIds" value="itemId" name="excel_item" />
 									<label for="itemIds">商品ID</label>
-								</li>
+								</li> -->
 								<li class="mt4">
 									<input type="checkbox" id="nums" value="num" name="excel_item" />
 									<label for="nums">商品数量</label>
@@ -298,6 +310,14 @@
 								<li class="mt4">
 									<input type="checkbox" id="names" value="name" name="excel_item" />
 									<label for="names">客户名称</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="gender" value="gender" name="excel_item" />
+									<label for="names">性别</label>
+								</li>
+								<li class="mt4">
+									<input type="checkbox" id="Idcard" value="Idcard" name="excel_item" />
+									<label for="names">身份证号码</label>
 								</li>
 								<li class="mt4">
 									<input type="checkbox" id="contacts" value="contact" name="excel_item" />

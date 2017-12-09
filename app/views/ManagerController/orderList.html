@@ -21,8 +21,8 @@
 			<div class="search_area">
 				<div class="search_box">
 					<div class="area_l">
-						<span class="txt_type01">用户手机号</span>
-						<input type="text" class="text" id="userPhone" name="userPhone" maxlength="18" style="width:160px;"/>
+						<span class="txt_type01">用户名</span>
+						<input type="text" class="text" id="userName" name="userName" maxlength="18" style="width:160px;"/>
 						<span class="error" style="color:#e4393c;line-height:21px"></span>
 					</div>
 					<div class="area_l">
@@ -103,12 +103,6 @@
 			<div class="totalPrice">
 				<p class="amount">总额</p>
 				<p class="price">{{totalAmountStr}}</p>
-				<p>
-					-
-					<span class="price">{{discountStr}}</span>
-				</p>
-				<p class="actualPrice">实际金额</p>
-				<p class="price">{{realityPaymentStr}}</p>
 			</div>
 			<div class="operate">
 				<a href="/sys/trade/order?tradeId={{id}}" target="_blank" class="btnStd btnMedium fr">编辑</a>

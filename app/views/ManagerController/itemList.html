@@ -16,8 +16,12 @@
 				<div class="search_box">
 				<form id="searchForm">
 					<div class="area_l">
-						<span class="txt_type01">货号</span>
-						<input type="text" class="text" style="width:140px;" value="" id="itemNum" name="itemNum" />
+						<span class="txt_type01">种类</span>
+						<input type="text" class="text" style="width:140px;" value="" id="itemCate" name="itemCate" />
+					</div>
+					<div class="area_l">
+						<span class="txt_type01">品牌</span>
+						<input type="text" class="text" style="width:150px;" value="" id="brandKey" />
 					</div>
 					<div class="area_l">
 						<span class="txt_type01">标题</span>
@@ -30,10 +34,7 @@
 							<option value="HIDE">--下架--</option>
 						</select>
 					</div>
-					<div class="area_l">
-						<span class="txt_type01">商品ID</span>
-						<input type="text" class="text" style="width:140px;" value="" id="titleId" />
-					</div>
+					
 					<div class="area_r">
 						<div class="fl">
 							<a href="javascript:;" class="btnStd btnMedium mr6" id="listSearchBtn">查询</a>
@@ -59,7 +60,10 @@
 								<div class="thcell" style="text-align: left;"><input type="checkbox" id="choolseAll" /><span class="ml10">全选</span></div>
 							</th>
 							<th scope="col">
-								<div class="thcell">商品ID</div>
+								<div class="thcell">种类</div>
+							</th>
+							<th scope="col">
+								<div class="thcell">品牌</div>
 							</th>
 							<th scope="col">
 								<div class="thcell">货号</div>
@@ -71,10 +75,10 @@
 								<div class="thcell">产品名称</div>
 							</th>
 							<th scope="col">
-								<div class="thcell">单价</div>
+								<div class="thcell">原价</div>
 							</th>
 							<th scope="col">
-								<div class="thcell">发布时间</div>
+								<div class="thcell">现价</div>
 							</th>
 							<th scope="col">
 								<div class="thcell">操作</div>
@@ -105,7 +109,12 @@
 			</div>
 		</td>
 		<td>
-			<div class="tdcell">{{id}}</div>
+			<div class="tdcell">
+				{{cateId}}
+			</div>
+		</td>
+		<td>
+			<div class="tdcell">{{brandId}}</div>
 		</td>
 		<td>
 			<div class="tdcell">{{outNo}}</div>
@@ -116,16 +125,15 @@
 			</div>
 		</td>
 		<td>
-			<div class="tdcell">{{title}}</div>
+			<div class="tdcell"><a href="/item/{{id}}" target="_blank">{{title}}</a></div>
 		</td>
 		<td>
-			<div class="tdcell">{{formatPrice}}元</div>
+			<div class="tdcell">{{supplyPriceFormat}}元</div>
 		</td>
 		<td>
-			<div class="tdcell">
-				{{formatTimer}}
-			</div>
+			<div class="tdcell">{{retailPriceFormat}}元</div>
 		</td>
+		
 		<td>
 			<div class="tdcell">
 				<a href="/sys/item/edit?id={{id}}" target="_blank" class="btnStd btnSmall evaluate">编辑</a>
