@@ -20,7 +20,9 @@
 			address,
 			create_time,
 			update_time,
-			default_address
+			default_address,
+			IDcard,
+			gender
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			#{retailerId},
@@ -35,7 +37,9 @@
 			#{address},
 			#{createTime},
 			#{updateTime},
-			#{defaultAddress}
+			#{defaultAddress},
+			#{IDcard},
+            #{gender}
 		</trim>
 	</insert>
 	<update id="update" parameterType="models.RetailerAddress">
@@ -65,6 +69,12 @@
 			<if test="region!=null and region !=''">
 				region = #{region},
 			</if>
+			<if test="IDcard !=null and IDcard !=''">
+                IDcard = #{IDcard},
+            </if>
+            <if test="gender !=null and gender !=''">
+                gender = #{gender},
+            </if>
 			address = #{address},
 			update_time = #{updateTime}			
 		</set>
@@ -100,6 +110,12 @@
 			<if test="address !=null and address!=''">
 				address = #{address},
 			</if>
+			<if test="IDcard !=null and IDcard !=''">
+                IDcard = #{IDcard},
+            </if>
+            <if test="gender !=null and gender !=''">
+                gender = #{gender},
+            </if>
 			update_time = now()
 		</set>
 		where id = #{id}
