@@ -20,7 +20,7 @@
             </p>
             <div class="new-mu_l2a new-p-re">
                 <p class="new-mu_l2cw">
-                    <span class="title">地址：</span>
+                    <span class="title">收货地址：</span>
                     <span class="countries" style="display: none" id="country${addr.id}">${addr.country}</span>
                     <span class="countries" style="display: none" id="countryId${addr.id}">${addr.country}</span>
                     <span class="provinces" id="provinces${addr.id}">${addr.province}</span>省
@@ -62,6 +62,21 @@
                         <div for="user-name" class="validateLine clearfix"></div>
                     </div>
                     <div class="am-form-group">
+                        <label for="user-gender" class="am-form-label">性别</label>
+                        <div class="am-form-content">
+                            <label class="inputGender"><input id="user-gender"  name="address.gender" type="radio" class="gender">男</label>
+                            <label class="inputGender"><input id="user-gender2" name="address.gender" type="radio" class="gender">女</label>
+                        </div>
+                        <div for="user-gender" class="validateLine clearfix"></div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="user-IDIdentification" class="am-form-label">身份证号</label>
+                        <div class="am-form-content">
+                            <input id="user-IDIdentification" placeholder="身份证号" name="address.IDIdentification" type="phone" class="inputText">
+                        </div>
+                        <div for="user-phone" class="validateLine clearfix"></div>
+                    </div>
+                    <div class="am-form-group">
                         <label for="user-phone" class="am-form-label">手机号码</label>
                         <div class="am-form-content">
                             <input id="user-phone" placeholder="手机号码" name="address.phone" type="phone" class="inputText">
@@ -69,7 +84,7 @@
                         <div for="user-phone" class="validateLine clearfix"></div>
                     </div>
                     <div class="am-form-group">
-                        <label class="am-form-label">地址</label>
+                        <label class="am-form-label">收货地址</label>
                         <div class="am-form-content address">
                             <input id="selCountry_id" type="hidden" name="address.countryId" value="${supplier?.country}" />
                             <select id="selCountry" class="country" tabindex="8" data-val="${supplier?.countryId}" name="address.country">

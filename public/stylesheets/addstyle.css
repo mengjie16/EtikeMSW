@@ -29,8 +29,9 @@ a.new-abtn-type{display: block;padding: 8px; overflow:hidden; border-radius: 2px
     margin: 0px 0px !important;
     left: 25%;
     top: 100px;
-    height: 430px;}
+    height: 530px;}
 .am-form-content.address select{ float: left;width:32% ;margin-left:1% ;}
+.am-form-content .inputGender{margin-top: 7px;margin-right: 4px;}
 .am-selected {width: 32.3%;max-width: 200px;float: left;margin-left:1%;}
 .address li{font-size:12px ;}
 .am-close{width:auto ;line-height:1.2;opacity: .8;text-shadow:none;color:#fff !important ;}
@@ -71,6 +72,10 @@ a.new-abtn-type{display: block;padding: 8px; overflow:hidden; border-radius: 2px
 }
 .am-form-group {
 	position: relative;
+
+}
+#btnSubmitSup{
+	text-align: center;
 }
 .validateLine {
 	  position: absolute;
