@@ -17,8 +17,8 @@
 				#{authenticityToken/}
 				<input name="registType" value="retailer" type="hidden" />
 				<div class="formLine">
-					<label class="f14">登录手机号</label>
-					<input id="txtLoginPhone_ret" name="user.phone" type="text" class="inputText middle registerPhone" placeholder="手机号码" tabindex="1" maxlength="11" value="${flash?.phone}" />
+					<label class="f14">用户名</label>
+					<input id="txtLoginPhone_ret" name="user.phone" type="text" class="inputText middle registerPhone" placeholder="用户名" tabindex="1" minlength="6" value="${flash?.phone}" />
 					<!-- <a href="javascript:;" id="ret_btnSendPhone" class="ml4 btnSendPhoneCaptcha" style="">获取动态验证码</a>
 					<div for="txtLoginPhone_ret" class="validateLine clearfix"></div> -->
 				</div>

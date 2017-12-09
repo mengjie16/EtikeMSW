@@ -24,7 +24,7 @@
         </ul>
         #{/if}
       </div>
-      <div class=" rsidebar span_1_of_left">
+      <!-- <div class=" rsidebar span_1_of_left">
         <h3 class="cate">品牌</h3>
         <ul id="BrandList" class="menu-drop">
           #{list items:search_result?.brands,as : 'brand'}
@@ -35,7 +35,7 @@
             </li>
           #{/list}
         </ul>
-      </div>
+      </div> -->
     </div>
 
     <div class="col-md-10">
@@ -44,13 +44,13 @@
           #{list items:search_result.items,as : 'item'}
           <div class="col-md-3 col-md3" style="padding-left: 0;">
               <div class="col-md1 simpleCart_shelfItem">
-                  <a href="/item/${item?.id}" target="_blank">
+                  <a href="/item/${item?.id}">
                       <img class="img-responsive lazyImg" src="/public/images/grey.gif"  data-original="${item?.picUrl+'?imageView2/2/h/183/q/100'}" border="0" alt="${item.title}" title="${item.title}" style="width: 193px;height: 193px;" />
                   </a>
                   <div class="price">
                           <h5 class="item_price">
                             <span class="new">
-                              ¥ <span>${item.retailPrice/100}</span>
+                              ¥ <span>${new java.text.DecimalFormat("0.00").format(item.retailPrice/100)}</span>
                             </span>
                             <!-- <span class="price-e old"><span>${item?.cny2eur}</span>€</span> -->
                           </h5>
@@ -66,6 +66,13 @@
       </div>  
     </div>
     <div class="clearfix"> </div>
+    #{if search_result?.totalCount==0}
+      <div id="results_empty" class="item_none">
+        <span style="color:#666">没有找到与</span>
+        "<span>${search_result?.result_empty_desc}</span>"
+        <span style="color:#666">相关的宝贝</span>
+      </div>
+      #{/if}
   </div>
 </div>
     <div class="pagin-btm clearFix">

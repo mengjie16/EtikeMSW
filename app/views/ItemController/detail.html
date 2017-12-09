@@ -47,8 +47,8 @@
 							${item?.brand?.getMainSubName()?'['+item?.brand?.getMainSubName()+']':''}
 						</span>
 						<span id="detailTitle" style="font-size: 14px;">${item?.title}</span></h1>
-                        <div  class="productPrice item_price"><span id="detailRmb" class="new">¥<span>${item?.retailPrice/100}</span></span>
-                        <span id="detailEur" class="price-e old"><span>${item?.cny2eur}</span>€</span>
+                        <div  class="productPrice item_price"><span id="detailRmb" class="new">¥<span>${new java.text.DecimalFormat("0.00").format(item?.retailPrice/100)}</span></span>
+                        <span id="detailEur" class="price-e old"><span>${new java.text.DecimalFormat("0.00").format(item?.cny2eur)}</span>€</span>
                     </div>
                     <div class="tag">
                         <h3 class="cate" style="line-height: 28px;">分类:</h3>

@@ -11,8 +11,7 @@ function ValidateRetAddOpts() {
 		onkeyup: false,
 		rules: {
 			'user.phone': {
-				required: true,
-				mobile: true
+				required: true
 			},
 			captcha: {
 				required: true,
@@ -30,8 +29,7 @@ function ValidateRetAddOpts() {
 		},
 		messages: {
 			'user.phone': {
-				required: Tr.error('请填写手机号码'),
-				mobile: Tr.error('手机号码格式不正确')
+				required: Tr.error('请填写用户名')
 			},
 			captcha: {
 				required: Tr.error('请填写验证码'),
