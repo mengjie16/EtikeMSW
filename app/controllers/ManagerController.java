@@ -12,7 +12,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +28,6 @@ import com.google.common.collect.Lists;
 import com.taobao.api.internal.util.WebUtils;
 
 import controllers.annotations.UploadSupport;
-import controllers.annotations.UserLogonSupport;
 import controllers.base.BaseController;
 import controllers.base.secure.Secure;
 import enums.ItemStatus;
@@ -118,8 +116,8 @@ public class ManagerController extends BaseController {
      * @author Calm
      * @created 2016年7月22日 下午6:05:09
      */
-    public static void doLogin(@Required String account, @Required @MinSize(6) @MaxSize(20) String password,
-        @MaxSize(128) String rUrl) {
+    public static void doLogin(@Required String name, @Required @MinSize(6) @MaxSize(20) String password,
+            @MaxSize(128) String rUrl) {
         String enterUrl = "/sys/enter";
         if (!Strings.isNullOrEmpty(rUrl)) {
             enterUrl += "?redirectUrl=".concat(WebUtils.encode(rUrl));
@@ -138,7 +136,7 @@ public class ManagerController extends BaseController {
             }
             redirect("/sys/user/manage");
         }
-        if (!"test".equals(account) || !"notest".equals(password)) {
+        if (!"test".equals(name) || !"notest".equals(password)) {
             flash.error("用户或密码不正确");
             redirect(enterUrl);
         }
@@ -162,10 +160,7 @@ public class ManagerController extends BaseController {
     public static void articleManage() {
         render();
     }
-    
 
-    
-    
     /**
      * 文章编辑
      *
@@ -385,19 +380,19 @@ public class ManagerController extends BaseController {
         ItemVo item = Item.itemDetailCacheById(id);
         if (item != null) {
             renderArgs.put("item", item);
-            List<ReferUrl> rerferList = ReferUrl.getDefaultList();           
+            List<ReferUrl> rerferList = ReferUrl.getDefaultList();
             renderArgs.put("rerferUrls", rerferList);
         }
-        
+
         // 供应商运费模版
-        /*List<FreightTemp> freightTemps = FreightTemp.findUserFreightTempAllInCache(item.supplierId);
-        if (freightTemps != null) {
-            renderArgs.put("supFreightTemps", freightTemps);
-        }*/
+        /*
+         * List<FreightTemp> freightTemps = FreightTemp.findUserFreightTempAllInCache(item.supplierId);
+         * if (freightTemps != null) {
+         * renderArgs.put("supFreightTemps", freightTemps);
+         * }
+         */
         render();
     }
-    
-    
 
     /**
      * 管理员保存商品
@@ -415,9 +410,11 @@ public class ManagerController extends BaseController {
             redirect(redirectUrl);
         }
         Item itemObj = item.parseToItem();
-/*        if (Item.findById(itemObj.id) == null) { // 直接400
-            renderFailedJson(ReturnCode.WRONG_INPUT, "商品不存在");
-        }*/
+        /*
+         * if (Item.findById(itemObj.id) == null) { // 直接400
+         * renderFailedJson(ReturnCode.WRONG_INPUT, "商品不存在");
+         * }
+         */
         // 用户地址检查
         if (!itemObj.checkItemLocationRepeat()) {
             flash.error("保存商品失败,商品发货地址重复！！");
@@ -1028,7 +1025,7 @@ public class ManagerController extends BaseController {
      * @created 2016年6月28日 下午1:01:20
      */
     public static void confirmHomePageSetting(@Required String moudle, @Required HomePageSetting homePageSet, int index,
-        @Required String modifyType) {
+            @Required String modifyType) {
         handleWrongInput(true);
         HomePageSetting homePageSetting = HomePageSetting.findById(homePageSet._id);
         if (homePageSetting == null) {
@@ -1038,26 +1035,26 @@ public class ManagerController extends BaseController {
         if (Objects.equal("bigBannerSetting", moudle)) {
             if (modifyType.equals("add")) {
                 result = HomePageSetting.pushValueToField(homePageSet._id, "big_BannerSettings",
-                    homePageSet.bigBannerSetting.toMap());
+                        homePageSet.bigBannerSetting.toMap());
             } else {
                 result = HomePageSetting.updateValueByFieldIndex(homePageSet._id, "big_BannerSettings", index,
-                    homePageSet.bigBannerSetting.toMap());
+                        homePageSet.bigBannerSetting.toMap());
             }
         } else if (Objects.equal("right_SmallBannerSetting", moudle)) {
             if (modifyType.equals("add")) {
                 result = HomePageSetting.pushValueToField(homePageSet._id, "right_SmallBannerSettings",
-                    homePageSet.right_SmallBannerSettig.toMap());
+                        homePageSet.right_SmallBannerSettig.toMap());
             } else {
                 result = HomePageSetting.updateValueByFieldIndex(homePageSet._id, "right_SmallBannerSettings", index,
-                    homePageSet.right_SmallBannerSettig.toMap());
+                        homePageSet.right_SmallBannerSettig.toMap());
             }
         } else if (Objects.equal("brandSetting", moudle)) {
             if (modifyType.equals("add")) {
                 result = HomePageSetting.pushValueToField(homePageSet._id, "brandSettings",
-                    homePageSet.brandSetting.toMap());
+                        homePageSet.brandSetting.toMap());
             } else {
                 result = HomePageSetting.updateValueByFieldIndex(homePageSet._id, "brandSettings", index,
-                    homePageSet.brandSetting.toMap());
+                        homePageSet.brandSetting.toMap());
             }
         } else if (Objects.equal("activitySetting", moudle)) {
             if (MixHelper.isNotEmpty(homePageSet.activitySetting.itemSettings)) {
@@ -1070,10 +1067,10 @@ public class ManagerController extends BaseController {
             }
             if (modifyType.equals("add")) {
                 result = HomePageSetting.pushValueToField(homePageSet._id, "activitySettings",
-                    homePageSet.activitySetting.toMap());
+                        homePageSet.activitySetting.toMap());
             } else {
                 result = HomePageSetting.updateValueByFieldIndex(homePageSet._id, "activitySettings", index,
-                    homePageSet.activitySetting.toMap());
+                        homePageSet.activitySetting.toMap());
             }
         }
         if (result) {
@@ -1188,7 +1185,7 @@ public class ManagerController extends BaseController {
         ActivityPageSetting activityPageSet = ActivityPageSetting.findById(id);
         if (MixHelper.isNotEmpty(activityPageSet.bottomItemIds)) {
             activityPageSet.bottomItems = activityPageSet.bottomItemIds.stream().map(i -> ItemVo.valueOfBase(i))
-                .filter(v -> v != null).collect(Collectors.toList());
+                    .filter(v -> v != null).collect(Collectors.toList());
         }
         renderJson(activityPageSet);
     }
@@ -1285,7 +1282,7 @@ public class ManagerController extends BaseController {
      * @created 2016年7月1日 下午1:37:13
      */
     public static void confirmActivitySetting(@Required String moudle, @Required ActivityPageSetting activityPageSet,
-        int index, @Required @Match("add|update") String modifyType) {
+            int index, @Required @Match("add|update") String modifyType) {
         handleWrongInput(true);
         ActivityPageSetting activityPageSetting = ActivityPageSetting.findById(activityPageSet._id);
         if (activityPageSetting == null) {
@@ -1294,25 +1291,25 @@ public class ManagerController extends BaseController {
         boolean result = false;
         if (Objects.equal("bannerImg", moudle)) {
             result = ActivityPageSetting.updateValueByField(activityPageSetting._id, "bannerImg",
-                activityPageSet.bannerImg);
+                    activityPageSet.bannerImg);
         } else if (Objects.equal("activityItems", moudle)) {
             if (modifyType.equals("add")) {
                 result = ActivityPageSetting.pushValueToField(activityPageSetting._id, "activityItems",
-                    activityPageSet.activityItem.toMap());
+                        activityPageSet.activityItem.toMap());
             } else {
                 result = ActivityPageSetting.updateValueByFieldIndex(activityPageSetting._id, "activityItems", index,
-                    activityPageSet.activityItem.toMap());
+                        activityPageSet.activityItem.toMap());
             }
         } else if (Objects.equal("middlePoster", moudle)) {
             result = ActivityPageSetting.updateValueByField(activityPageSetting._id, "middlePoster",
-                activityPageSet.middlePoster);
+                    activityPageSet.middlePoster);
         } else if (Objects.equal("bottomItemIds", moudle)) {
             Item item = Item.findById(activityPageSet.itemId);
             if (item == null) {
                 renderFailedJson(ReturnCode.FAIL);
             }
             result = ActivityPageSetting.pushValueToField(activityPageSetting._id, "bottomItemIds",
-                activityPageSet.itemId);
+                    activityPageSet.itemId);
             if (result) {
                 ItemVo iv = new ItemVo();
                 ReflectionUtils.copyBean(item, iv);
@@ -1327,7 +1324,8 @@ public class ManagerController extends BaseController {
     }
 
     public static void confirmH5ActivitySetting(@Required String moudle,
-        @Required H5ActivityPageSetting activityPageSet, int index, @Required @Match("add|update") String modifyType) {
+            @Required H5ActivityPageSetting activityPageSet, int index,
+            @Required @Match("add|update") String modifyType) {
         handleWrongInput(true);
         ActivityPageSetting activityPageSetting = ActivityPageSetting.findById(activityPageSet._id);
         if (activityPageSetting == null) {
@@ -1944,7 +1942,7 @@ public class ManagerController extends BaseController {
         }
         // 转换为交易视图
         List<TradeVo> vos = trades.stream().map(t -> TradeVo.valueOfTrade(t)).filter(v -> v != null)
-            .collect(Collectors.toList());
+                .collect(Collectors.toList());
         if (MixHelper.isNotEmpty(vos)) {
             page = Page.newInstance(vo.pageNo, vo.pageSize, vos.size());
             page.items = vos;
@@ -1955,7 +1953,8 @@ public class ManagerController extends BaseController {
     /**
      * 取消交易
      *
-     * @param note 取消原因，取消备注
+     * @param note
+     *            取消原因，取消备注
      * @since v1.0
      * @author Calm
      * @created 2016年9月17日 下午1:01:00
@@ -1995,7 +1994,7 @@ public class ManagerController extends BaseController {
         Page<FreightTemp> temps = FreightTemp.findFreightTempByVo(vo);
         if (temps != null && MixHelper.isNotEmpty(temps.items)) {
             List<FreightTempVo> vos = temps.items.stream().map(t -> FreightTempVo.valueOfItem(t, false))
-                .collect(Collectors.toList());
+                    .collect(Collectors.toList());
             renderPageJson(vos, vos.size());
         }
         renderPageJson(temps.items, temps.totalCount);
@@ -2032,14 +2031,14 @@ public class ManagerController extends BaseController {
                 renderText("交易ID:" + tradeId + ",未选择任何excel文档表头，如(订单ID，商品ID...)");
             }
             List<Map<Integer, Object>> orderDatas = OrderVo.orderVosToExcelData(trade.orders, columns).stream()
-                .filter(m -> m != null).collect(Collectors.toList());
+                    .filter(m -> m != null).collect(Collectors.toList());
             MixHelper.print(orderDatas);
             try {
                 ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
                 if (TSFileUtil.exportExcel(byteOut, cnHead, orderDatas, "订单列表")) {
                     response.setContentTypeIfNotSet("application/msexcel;");
                     response.setHeader("Content-Disposition",
-                        new String(("attachment;filename=" + tradeId + ".xls").getBytes("GB2312"), "UTF-8"));
+                            new String(("attachment;filename=" + tradeId + ".xls").getBytes("GB2312"), "UTF-8"));
                     response.out.write(byteOut.toByteArray());
                 } else {
                     renderText("交易ID:" + tradeId + ",导出订单Excel失败");
@@ -2070,7 +2069,7 @@ public class ManagerController extends BaseController {
             renderArgs.put("payment", trade.payment);
             if (MixHelper.isNotEmpty(trade.orders)) {
                 List<OrderVo> vos = trade.orders.stream().map(o -> OrderVo.valueOfOrderParseFee(o))
-                    .filter(v -> v != null).collect(Collectors.toList());
+                        .filter(v -> v != null).collect(Collectors.toList());
                 renderArgs.put("orders", vos);
             }
         }
@@ -2126,7 +2125,7 @@ public class ManagerController extends BaseController {
             }
             if (!Strings.isNullOrEmpty(checkResult)) {
                 checkResult = "<span class='row_num'>行号:" + i + 1 + "</span>" + "<p class='error_desc'>" + checkResult
-                    + "</p>";
+                        + "</p>";
                 messages.add(checkResult);
                 continue;
             }
@@ -2175,7 +2174,7 @@ public class ManagerController extends BaseController {
         }
         // 交易应付金额修改
         int trade_payment = new BigDecimal(payment).setScale(2, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100))
-            .intValue();
+                .intValue();
         if (payment > 0) {
             trade.payment = trade_payment;
             if (trade.calcFee().updateFee()) {

@@ -441,28 +441,12 @@ public class UserCenter extends BaseController {
             renderFailedJson(ReturnCode.INVALID_PRIVILEGE, "密码不正确");
         }
 
-        if (checkAdmin(name)) {
-            ManagerController mc = new ManagerController();
-            mc.doLogin(name, password, rUrl);
+        if (savePass) {
+            Secure.setUserToContainer(usr, "300d");
         } else {
-
-            if (savePass) {
-                Secure.setUserToContainer(usr, "300d");
-            } else {
-                Secure.setUserToContainer(usr);
-            }
-            renderJson(ImmutableMap.of("uid", usr.id, "name", usr.name));
+            Secure.setUserToContainer(usr);
         }
+        renderJson(ImmutableMap.of("uid", usr.id, "name", usr.name));
     }
 
-    /**
-     * 
-     */
-    private static boolean checkAdmin(String name) {
-        boolean isAdmin = false;
-        if (name.startsWith("admin")) {
-            isAdmin = true;
-        }
-        return isAdmin;
-    }
 }
