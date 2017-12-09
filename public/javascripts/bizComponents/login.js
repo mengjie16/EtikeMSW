@@ -57,11 +57,11 @@ $(function() {
 				$('.error_panel').html(data.msg);
 				return;
 			}
-			/*if($('input[name="rUrl"]').val()){
+			if($('input[name="rUrl"]').val()){
 				window.location.href = $('input[name="rUrl"]').val();
 			}else{
 				window.location.href = '/user/home';
-			}*/
+			}
 			
 			//window.location.href = '/'+$('input[name="rUrl"]').val()?$('input[name="rUrl"]').val():'user/home';
 		}
