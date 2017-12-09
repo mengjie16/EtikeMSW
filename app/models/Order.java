@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -17,7 +16,6 @@ import com.google.common.primitives.Longs;
 
 import domain.NormalToStringStyle;
 import enums.OrderStatus;
-import enums.Payment;
 import models.mappers.OrderMapper;
 
 /**
@@ -44,11 +42,11 @@ public class Order implements java.io.Serializable {
     /** 商品数量 */
     public int num;
     /** 商品总额 */
-    public int cargoFee;
+    public double cargoFee;
     /** 邮费 */
-    public int shippingFee;
+    public double shippingFee;
     /** 总金额，单位分 */
-    public int totalFee;
+    public double totalFee;
     /** 外部订单号 */
     public String outOrderNo;
     /** 快递公司 */
@@ -79,13 +77,14 @@ public class Order implements java.io.Serializable {
     // public String invoiceType;
 
     /** 状态 */
-     public OrderStatus status;
+    public OrderStatus status;
 
     /**
      * 
      * 格式化打印，便于调试
+     * 
      * @see java.lang.Object#toString()
-     * @since  v1.0
+     * @since v1.0
      * @author tr0j4n
      * @created 2015-4-20 上午7:59:53
      * @formatter:off
@@ -94,32 +93,32 @@ public class Order implements java.io.Serializable {
     public String toString() {
         return ToStringBuilder.reflectionToString(this, new NormalToStringStyle());
     }
-    
-    public Order(){
+
+    public Order() {
     }
-    
-    public Order(int userId){
+
+    public Order(int userId) {
         this.retailerId = userId;
     }
-    
-    public Order(int userId,long tradeId){
+
+    public Order(int userId, long tradeId) {
         this.retailerId = userId;
         this.tradeId = tradeId;
     }
-    
+
     /**
      * 创建或更新订单
      *
      * @return
-     * @since  v1.0
+     * @since v1.0
      * @author Calm
      * @created 2016年8月25日 下午5:03:52
      */
-    public boolean save(){
+    public boolean save() {
         SqlSession ss = SessionFactory.getSqlSession();
         try {
             OrderMapper mapper = ss.getMapper(OrderMapper.class);
-            if(this.id>0){
+            if (this.id > 0) {
                 return mapper.updateInfo(this) > 0;
             }
             this.createTime = DateTime.now().toDate();
@@ -129,38 +128,37 @@ public class Order implements java.io.Serializable {
             ss.close();
         }
     }
-    
-    public static int creates(List<Order> orders){
+
+    public static int creates(List<Order> orders) {
         SqlSession ss = SessionFactory.getSqlSession();
         try {
             OrderMapper mapper = ss.getMapper(OrderMapper.class);
-           return mapper.inserts(orders);
+            return mapper.inserts(orders);
         } finally {
             ss.close();
         }
     }
-    
+
     /**
      * 删除订单
      *
      * @param id
      * @return
-     * @since  v1.0
+     * @since v1.0
      * @author Calm
      * @created 2016年10月26日 下午3:49:38
      */
-    public static boolean deleteById(long id){
+    public static boolean deleteById(long id) {
         SqlSession ss = SessionFactory.getSqlSession();
         try {
             OrderMapper mapper = ss.getMapper(OrderMapper.class);
-           return mapper.deleteById(id) > 0;
+            return mapper.deleteById(id) > 0;
         } finally {
             ss.close();
         }
     }
-    
-   
-    public static boolean deleteByTradeId(long id){
+
+    public static boolean deleteByTradeId(long id) {
         SqlSession ss = SessionFactory.getSqlSession();
         try {
             OrderMapper mapper = ss.getMapper(OrderMapper.class);
@@ -170,18 +168,16 @@ public class Order implements java.io.Serializable {
             ss.close();
         }
     }
-    
-    
-    
+
     /**
      * 更新订单基本信息
      *
      * @return
-     * @since  v1.0
+     * @since v1.0
      * @author Calm
      * @created 2016年8月25日 下午5:17:12
      */
-    public boolean update(){
+    public boolean update() {
         SqlSession ss = SessionFactory.getSqlSession();
         try {
             OrderMapper mapper = ss.getMapper(OrderMapper.class);
@@ -190,16 +186,16 @@ public class Order implements java.io.Serializable {
             ss.close();
         }
     }
-    
+
     /**
      * 更新订单
      *
      * @return
-     * @since  v1.0
+     * @since v1.0
      * @author Calm
      * @created 2016年9月29日 下午4:28:34
      */
-    public boolean updateInfo(){
+    public boolean updateInfo() {
         SqlSession ss = SessionFactory.getSqlSession();
         try {
             OrderMapper mapper = ss.getMapper(OrderMapper.class);
@@ -208,18 +204,17 @@ public class Order implements java.io.Serializable {
             ss.close();
         }
     }
-    
-    
+
     /**
      * 查找记录
      *
      * @param id
      * @return
-     * @since  v1.0
+     * @since v1.0
      * @author Calm
      * @created 2016年8月25日 下午6:51:27
      */
-    public static Order findById(long id){
+    public static Order findById(long id) {
         SqlSession ss = SessionFactory.getSqlSession();
         try {
             OrderMapper mapper = ss.getMapper(OrderMapper.class);
@@ -228,56 +223,56 @@ public class Order implements java.io.Serializable {
             ss.close();
         }
     }
-    
+
     /**
      * 设置交易id
      *
      * @param tradeId
      * @return
-     * @since  v1.0
+     * @since v1.0
      * @author Calm
      * @created 2016年9月11日 上午11:01:13
      */
-    public Order tradeId(long tradeId){
-        if(this.tradeId > 0 ){
+    public Order tradeId(long tradeId) {
+        if (this.tradeId > 0) {
             return this;
         }
         this.tradeId = tradeId;
         return this;
     }
-    
+
     /**
      * 生成订单id
      *
      * @return
-     * @since  v1.0
+     * @since v1.0
      * @author Calm
      * @created 2016年9月11日 上午11:51:19
      */
-    public Order orderId(List<Long> exsitIds){
+    public Order orderId(List<Long> exsitIds) {
         this.id = this.makeAvaliableId(exsitIds);
         exsitIds.add(this.id);
         return this;
     }
-    
+
     /**
      * 生成订单id
      *
      * @return
-     * @since  v1.0
+     * @since v1.0
      * @author Calm
      * @created 2016年9月29日 下午4:14:46
      */
-    public Order makeId(){
+    public Order makeId() {
         this.id = this.makeAvaliableId();
         return this;
     }
-    
+
     /**
      * 生成唯一交易id
      *
      * @return
-     * @since  v1.0
+     * @since v1.0
      * @author Calm
      * @created 2016年9月11日 上午10:37:08
      */
@@ -297,13 +292,13 @@ public class Order implements java.io.Serializable {
         }
         return id;
     }
-    
+
     /**
      * 
      *
      * @param ids
      * @return
-     * @since  v1.0
+     * @since v1.0
      * @author Calm
      * @created 2016年9月12日 下午10:48:02
      */
@@ -314,7 +309,7 @@ public class Order implements java.io.Serializable {
         long id = Longs.tryParse(dtNow.toString("MMddHH") + rand10);
         while (true) {
             Order order = findById(id);
-            if (order == null && ids ==null || !ids.contains(id)) {
+            if (order == null && ids == null || !ids.contains(id)) {
                 // id可用，不重复
                 break;
             }
@@ -323,10 +318,9 @@ public class Order implements java.io.Serializable {
         }
         return id;
     }
-    
-    
-    public static List<Order> findListByTradeId(long tradeId){
-        
+
+    public static List<Order> findListByTradeId(long tradeId) {
+
         SqlSession ss = SessionFactory.getSqlSession();
         try {
             OrderMapper mapper = ss.getMapper(OrderMapper.class);

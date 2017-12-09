@@ -23,7 +23,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import controllers.base.secure.Secure;
 import enums.OrderStatus;
 import enums.constants.CacheType;
 import enums.constants.ErrorCode;
@@ -35,8 +34,6 @@ import models.Order;
 import models.ProductInfo;
 import models.Region;
 import models.RetailerAddress;
-import models.User;
-import play.data.validation.MinSize;
 import play.libs.Codec;
 
 /**
@@ -101,11 +98,11 @@ public class OrderVo implements java.io.Serializable {
     // 折扣 */
     public int discount;
     // 商品总额 */
-    public int cargoFee;
+    public double cargoFee;
     // 邮费 */
-    public int shippingFee;
+    public double shippingFee;
     // 总金额，单位分
-    public int totalFee;
+    public double totalFee;
     // 快递公司 */
     public String express;
     // 快递单号
@@ -180,7 +177,7 @@ public class OrderVo implements java.io.Serializable {
     public void parseAddress() {
         // 有省，市，区
         if (!(Strings.isNullOrEmpty(this.province) || Strings.isNullOrEmpty(this.city)
-            || Strings.isNullOrEmpty(this.region) || Strings.isNullOrEmpty(this.address))) {
+                || Strings.isNullOrEmpty(this.region) || Strings.isNullOrEmpty(this.address))) {
             this.province = StringUtils.trim(this.province);
             this.city = StringUtils.trim(this.city);
             this.region = StringUtils.trim(this.region);
@@ -258,17 +255,17 @@ public class OrderVo implements java.io.Serializable {
             return result;
         }
         // ------ 商品信息构建
-        order.productInfo =  this.productInfo;
+        order.productInfo = this.productInfo;
 
         // 计算商品价格
         order.cargoFee = this.cargoFee;
         // 计算商品邮费
         // Map<Integer, Integer> shippFee =Maps.newHashMap();
-     
-       // Map<Integer, Integer> shippFee = item.calculateFreightTempFee(order.num);
+
+        // Map<Integer, Integer> shippFee = item.calculateFreightTempFee(order.num);
         int orderShippFee = 12;
         // 运费模版出错或运费无法计算，当前订单将无法生成
-        if (orderShippFee  == -1) {
+        if (orderShippFee == -1) {
             String result = ErrorCode.ORDER_SHIPPINGFEE_ERROR.description;
             log.warn(result + ",商品ID{}", this.itemId);
             return result;
@@ -304,9 +301,9 @@ public class OrderVo implements java.io.Serializable {
         order.num = checkOrder.num;
         // ======= 价格处理(小数保留2位，并转换为分)
         this.totalFee = new BigDecimal(this.totalFee).setScale(2, BigDecimal.ROUND_HALF_UP)
-            .multiply(new BigDecimal(100)).intValue();
+                .multiply(new BigDecimal(100)).intValue();
         this.shippingFee = new BigDecimal(this.shippingFee).setScale(2, BigDecimal.ROUND_HALF_UP)
-            .multiply(new BigDecimal(100)).intValue();
+                .multiply(new BigDecimal(100)).intValue();
         // 状态检查
         if (checkOrder.status != OrderStatus.ORDER_CONSIGN_WAIT) {
             result = ErrorCode.ORDER_STATUS_CANNOT_CHANGE.description;
@@ -353,7 +350,7 @@ public class OrderVo implements java.io.Serializable {
         }
         // 省 发生变化
         if (this.provinceId > 0 && this.provinceId != checkOrder.buyerInfo.provinceId
-            && !Strings.isNullOrEmpty(this.province)) {
+                && !Strings.isNullOrEmpty(this.province)) {
             calcShippFee = true;
             order.buyerInfo.province = this.province;
             order.buyerInfo.provinceId = this.provinceId;
@@ -612,7 +609,8 @@ public class OrderVo implements java.io.Serializable {
      * 组合excel所需订单视图表
      *
      * @param orders
-     * @param keys 要导出的字段
+     * @param keys
+     *            要导出的字段
      * @return
      * @since v1.0
      * @author Calm
@@ -623,7 +621,7 @@ public class OrderVo implements java.io.Serializable {
             return Lists.newArrayList();
         }
         List<Map<Integer, Object>> vos = orders.stream().map(o -> OrderVo.valueOfOrderParseFee(o).toExcelMap(keys))
-            .collect(Collectors.toList());
+                .collect(Collectors.toList());
         return vos;
     }
 
@@ -638,7 +636,7 @@ public class OrderVo implements java.io.Serializable {
      * @created 2016年9月10日 下午9:18:04
      */
     public static List<OrderVo> parseVoList(List<OrderVo> voList, Map<String, String> skuMap,
-        Map<String, Long> productName) {
+            Map<String, Long> productName) {
 
         if (MixHelper.isEmpty(voList) || MixHelper.isEmpty(skuMap)) {
             return voList;
@@ -676,14 +674,14 @@ public class OrderVo implements java.io.Serializable {
             addressPcra = StringUtils.trim(addressPcra);
             // 省份过滤，替换所有不是中，英文，空格的字符
             addressPcra = org.apache.commons.lang3.StringUtils.replacePattern(addressPcra,
-                "[^\\da-zA-Z\u4e00-\u9fa5\\s]", ",");
+                    "[^\\da-zA-Z\u4e00-\u9fa5\\s]", ",");
             // ======= 重组详细地址
             String[] result = org.apache.commons.lang3.StringUtils.split(addressPcra, ",");
             if (result != null) {
                 List<String> lStrs = Lists.newArrayList(result);
                 // 去空，去重复
                 addressPcra = lStrs.stream().filter(s -> !Strings.isNullOrEmpty(s)).distinct().reduce("",
-                    (a, b) -> a + b);
+                        (a, b) -> a + b);
             }
             // 基本过滤
             addressPcra = org.apache.commons.lang3.StringUtils.replacePattern(addressPcra, "市辖区", "");
@@ -738,7 +736,7 @@ public class OrderVo implements java.io.Serializable {
                 if (index > 0) {
                     // 市地址信息删除关于省的信息
                     location.city = org.apache.commons.lang3.StringUtils.replacePattern(addressPcra.substring(0, index),
-                        needRemove, "");
+                            needRemove, "");
                     addressPcra = addressPcra.substring(index);
                 }
             }
@@ -794,7 +792,7 @@ public class OrderVo implements java.io.Serializable {
             address_deatail_pcra = StringUtils.trim(address_deatail_pcra);
             // 省份过滤，替换所有不是中，英文，空格的字符
             address_deatail_pcra = org.apache.commons.lang3.StringUtils.replacePattern(address_deatail_pcra,
-                "[^\\da-zA-Z\u4e00-\u9fa5\\s]", ",");
+                    "[^\\da-zA-Z\u4e00-\u9fa5\\s]", ",");
             String[] result = org.apache.commons.lang3.StringUtils.split(address_deatail_pcra, ",");
             String province = "", city = "", region = "", address = "";
             boolean parse = false;
@@ -1008,16 +1006,15 @@ public class OrderVo implements java.io.Serializable {
         }
         return results;
     }
-    
-    
+
     public static void parseOrderVo(List<Integer> confirmOrder, RetailerAddress retailerAddress, long id) {
         // 获取读取解析过的数据
-//        if (MixHelper.isEmpty(confirmOrder)) {
-//            log.info("提交了空的订单");
-//        }       
-        
+        // if (MixHelper.isEmpty(confirmOrder)) {
+        // log.info("提交了空的订单");
+        // }
+
         List<OrderVo> orderVoList = Lists.newArrayList();
-        
+
         // 过滤已删除订单 //
         log.info("开始生成订单....");
         // 订单生成错误消息集合
@@ -1026,15 +1023,14 @@ public class OrderVo implements java.io.Serializable {
             OrderVo vo = new OrderVo();
             // 提交的行列
             int oindex = confirmOrder.get(i);
-           
+
             Cart cart = Cart.findById(oindex, id);
-            if(cart == null){
-                 log.info("无订单文件解析数据，或已丢失");
+            if (cart == null) {
+                log.info("无订单文件解析数据，或已丢失");
             }
-            
-            
+
             CartVo cartVo = CartVo.valueOfCart(cart);
-            
+
             vo.cargoFee = cartVo.cartPrice;
             vo.itemId = cartVo.itemId;
             vo.productInfo = new ProductInfo();
@@ -1048,7 +1044,7 @@ public class OrderVo implements java.io.Serializable {
             vo.skuStr = cart.sku();
             vo.productName = cart.title;
             vo.num = cart.cartCount;
-            vo.outOrderNo  = Long.toString(cart.id);
+            vo.outOrderNo = Long.toString(cart.id);
             vo.buyerName = retailerAddress.name;
             vo.contact = retailerAddress.phone;
             if (Strings.isNullOrEmpty(vo.productName)) {
@@ -1068,7 +1064,7 @@ public class OrderVo implements java.io.Serializable {
             String checkResult = vo.checkValid();
             if (!Strings.isNullOrEmpty(checkResult)) {
                 String message = "<span class='row_num'>行号:" + i + "</span>" + "<p class='error_desc'>"
-                    + checkResult.substring(0, checkResult.length() - 1) + "</p>";
+                        + checkResult.substring(0, checkResult.length() - 1) + "</p>";
                 log.warn(message);
                 messages.add(message);
                 continue;
@@ -1076,9 +1072,9 @@ public class OrderVo implements java.io.Serializable {
             // 订单添加
             orderVoList.add(vo);
         }
-        
+
         if (MixHelper.isNotEmpty(messages)) {
-            log.error(""+ ReturnCode.BIZ_LIMIT);
+            log.error("" + ReturnCode.BIZ_LIMIT);
         }
         // 缓存订单视图
         String ordervoKey = CacheType.RETAILER_ORDER_VO_DATA.getKey(id);
@@ -1086,7 +1082,7 @@ public class OrderVo implements java.io.Serializable {
 
         // 订单信息商品归组
         Map<String, List<Map<String, String>>> productMap = orderVoList.stream().collect(Collectors.groupingBy(
-            OrderVo::getMd5ProductName, Collectors.mapping(OrderVo::getProductSkuMap, Collectors.toList())));
+                OrderVo::getMd5ProductName, Collectors.mapping(OrderVo::getProductSkuMap, Collectors.toList())));
         // 映射成商品信息结果集
         List<OrderProductResult> results = OrderVo.parseToOrderProductResult(productMap);
         if (MixHelper.isEmpty(results)) {
@@ -1097,5 +1093,5 @@ public class OrderVo implements java.io.Serializable {
         CacheUtils.set(pkey, results, CacheType.RETAILER_ORDER_PRODUCT_DATA.expiredTime);
         // 解析成功
     }
-   
+
 }

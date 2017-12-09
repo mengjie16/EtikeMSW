@@ -245,7 +245,7 @@ public class UserCenter extends BaseController {
         // 1、收货信息
         RetailerAddress retailerAddress = RetailerAddress.findByDefaultAddress((int) user.id);
 
-        long totalCartPrice = 0;
+        double totalCartPrice = 0;
 
         List<Cart> cartList = new ArrayList<Cart>();
         Cart cart = null;
@@ -253,7 +253,7 @@ public class UserCenter extends BaseController {
             cart = Cart.findById(s, user.id);
             if (cart != null) {
                 cartList.add(cart);
-                totalCartPrice += cart.cartPrice;
+                totalCartPrice = totalCartPrice + cart.cartPrice;
             }
         }
 

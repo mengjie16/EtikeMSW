@@ -1,18 +1,10 @@
 package models;
 
-import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 import org.joda.time.DateTime;
 
-import com.aton.util.MixHelper;
-import com.google.common.base.Function;
 import com.google.common.base.Objects;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 /**
  * 专辑商品
@@ -29,46 +21,46 @@ public class AlbumItem {
     // 商品规格（pc端用）
     public String sku;
     // 商品零售价（pc端用）
-    public int retailPrice;
+    public double retailPrice;
     // 商品供货价（pc端用）
-    public int supplyPrice;
+    public double supplyPrice;
     // 商品标题
     public String title;
     // 单位分
-    public int price;
+    public double price;
     // 商品主图
     public String picUrl;
     // 利润
-    public double profit; 
+    public double profit;
     // 更新时间
     public Date updateTime;
 
     public AlbumItem() {
     }
 
-    public AlbumItem(long itemId, int price) {
+    public AlbumItem(long itemId, double price) {
         this.itemId = itemId;
         this.price = price;
         this.updateTime = DateTime.now().toDate();
     }
 
-    public AlbumItem(long itemId, int price, String picUrl) {
+    public AlbumItem(long itemId, double price, String picUrl) {
         this.itemId = itemId;
         this.price = price;
         this.picUrl = picUrl;
         this.updateTime = DateTime.now().toDate();
     }
-    
+
     /**
      * 价格转换为分
      *
      * @return
-     * @since  v1.0
+     * @since v1.0
      * @author Calm
      * @created 2016年9月13日 下午12:00:44
      */
-    public AlbumItem parseFee(){
-        this.price*=100;
+    public AlbumItem parseFee() {
+        this.price *= 100;
         return this;
     }
 
