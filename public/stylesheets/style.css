@@ -419,7 +419,6 @@ ul.callbacks_tabs.callbacks1_tabs {
 }
 
 .price h5 {
-    float: left;
     color: #52D0C4;
     font-size: 20px;
     margin-top: 3px;
@@ -444,7 +443,7 @@ ul.callbacks_tabs.callbacks1_tabs {
 .content-top1 {}
 
 .col-md1 .price {
-    margin: 10px;
+    margin: 10px 0;
     overflow: hidden;
 }
 
@@ -1722,10 +1721,10 @@ ul.nav.nav-pills {
 .item_price .new {
     color: #52D0C4;
 }
-.item_price{margin-top:15px;line-height:18px}
-.item_price .new{margin-right:5px;font-size:14px;vertical-align: bottom;}
-.item_price .new span{font-size:18px;color:#52D0C4}
-.item_price .old{font-size:12px}
+.item_price{margin-top:15px;line-height:18px;overflow: hidden;}
+.item_price .new{margin-right:3px;font-size:14px;vertical-align: bottom;float: left;}
+.item_price .new span{font-size:18px;color:#52D0C4;font-weight: normal;}
+.item_price .old{font-size:12px;float: right;}
 .callbacks_nav {
   position: absolute;
   -webkit-tap-highlight-color: rgba(0,0,0,0);

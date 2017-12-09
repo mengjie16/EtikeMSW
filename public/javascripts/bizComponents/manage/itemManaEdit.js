@@ -36,14 +36,14 @@ function ValidateOpts() {
 			'item.picUrl': {
 				required: true
 			},
-			'item.netWeight': {
-				required: true,
-				number:'净重量'
-			},
-			'item.grossWeight': {
-				required: true,
-				number:'毛重量'
-			},
+			// 'item.netWeight': {
+			// 	required: true,
+			// 	number:'净重量'
+			// },
+			// 'item.grossWeight': {
+			// 	required: true,
+			// 	number:'毛重量'
+			// },
 			'item.unit': {
 				required: true,
 				maxlength: 5,
@@ -56,6 +56,10 @@ function ValidateOpts() {
 				required: true
 			},
 			'item.d_retailPrice': {
+				required: true,
+				number: '价格'
+			},
+			'item.d_supplyPrice': {
 				required: true,
 				number: '价格'
 			},

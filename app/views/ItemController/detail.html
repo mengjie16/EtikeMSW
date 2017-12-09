@@ -46,9 +46,14 @@
                         <span style="color:#52D0C4;font-size:18px" id="detailBrand">
 							${item?.brand?.getMainSubName()?'['+item?.brand?.getMainSubName()+']':''}
 						</span>
-						<span id="detailTitle" style="font-size: 14px;">${item?.title}</span></h1>
-                        <div  class="productPrice item_price"><span id="detailRmb" class="new">¥<span>${new java.text.DecimalFormat("0.00").format(item?.retailPrice/100)}</span></span>
-                        <span id="detailEur" class="price-e old"><span>${new java.text.DecimalFormat("0.00").format(item?.cny2eur)}</span>€</span>
+						<span id="detailTitle" style="font-size: 14px;">${item?.title}</span>
+                    </h1>
+                    <div  class="productPrice item_price">
+                        <span id="detailRmb" class="new">¥<span>${new java.text.DecimalFormat("0.00").format(item?.retailPrice/100)}</span></span>
+                        <span style="text-decoration: line-through;color: #ccc">${new java.text.DecimalFormat("0.00").format(item?.supplyPrice/100)}</span>
+                    </div>
+                    <div  class="productPrice item_price" style="margin-top: 5px;">
+                        <span id="detailEur" class="price-e" style="margin-left: 13px;"><span>折合${item?.cny2eur}</span>€</span>
                     </div>
                     <div class="tag">
                         <h3 class="cate" style="line-height: 28px;">分类:</h3>
@@ -60,10 +65,10 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="tag">
+                    <div class="">
                         <h3 class="cate" style="line-height: 28px;">已售:</h3>
-                        <div class="tags">
-                            ${soldQuantity}
+                        <div class="tags" style="line-height: 24px;">
+                            ${item?.initialQuantity}<span>${item?.unit?item.unit:'件'}</span>
                         </div>
                     </div>
                     <div class="numberBlock">
