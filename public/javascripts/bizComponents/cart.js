@@ -25,7 +25,7 @@ $(function() {
                 });
                 number = toDecimal2(number);
                 $('.check-trans-rmb').text(number);
-                $('.check-count').text($('.price-rmbs').length);
+                // $('.check-count').text($('.price-rmbs').length);
                 var arrCheckBox = $('input[name="select-goods"]:input');
                 hasCheckedBoxes = $.map(arrCheckBox, function(ele, index) {
                     return $(ele).data('cart');
@@ -34,7 +34,7 @@ $(function() {
                 $('input[name="select-goods"]:input').prop("checked", false);
                 /*$('input[name="select-goods"]:input').prop("checked", false);*/
                 $('.check-trans-rmb').text('0');
-                $('.check-count').text('0');
+                // $('.check-count').text('0');
                 hasCheckedBoxes = [];
             }
         });
@@ -58,7 +58,7 @@ $(function() {
                 }
                 num = toDecimal2(num);
                 $('.check-trans-rmb').text(num);
-                $('.check-count').text(number);
+                // $('.check-count').text(number);
             })
             // $('.check-goodsdelete').on('click', function(e) {
             //     $(this).parent().remove();
@@ -69,9 +69,15 @@ $(function() {
                 $(this).next().next().removeClass('no-plus');
                 if ($(this).next()[0].value > 1) {
                     $(this).next()[0].value--;
-                    var num = $('.text-amount').val();
+                    var num = $(this).next().val();
                     var price = $(this).parents('.check').prev('.per-price').find('.price-rmb').text();
+                    var ifcheck = $(this).parents('.lineCart').find('.J_CheckBoxShop');
+                    var total = $('.check-trans-rmb').text();
                     $(this).parents('.check').next('.cart-price').find('.price-rmbs').text(toDecimal2(num * price));
+                    if($(ifcheck).is(':checked')) {
+                        total -= price;
+                        $('.check-trans-rmb').text(toDecimal2(total));
+                    }
                     if (parseFloat($(this).next()[0].value) === 1) {
                         $(this).addClass('no-minus');
                     }
@@ -88,9 +94,15 @@ $(function() {
                 $(this).prev().prev().removeClass('no-minus');
                 if ($(this).prev()[0].value < storeNumber) {
                     $(this).prev()[0].value++;
-                    var num = $('.text-amount').val();
+                    var num = $(this).prev().val();
                     var price = $(this).parents('.check').prev('.per-price').find('.price-rmb').text();
+                    var ifcheck = $(this).parents('.lineCart').find('.J_CheckBoxShop');
+                    var total = parseFloat($('.check-trans-rmb').text());
                     $(this).parents('.check').next('.cart-price').find('.price-rmbs').text(toDecimal2(num * price));
+                    if($(ifcheck).is(':checked')) {
+                        total += parseFloat(price);
+                        $('.check-trans-rmb').text(toDecimal2(total));
+                    }
                     if (parseFloat($(this).prev()[0].value) === storeNumber) {
                         $(this).addClass('no-plus');
                     }
@@ -207,6 +219,9 @@ $(function() {
         $(document).on('click', '.delete', function() {
             var id = $(this).data('id');
             var tr = $(this).parent();
+            var ifcheck = $(this).parents('.lineCart').find('.J_CheckBoxShop');
+            var total = parseFloat($('.check-trans-rmb').text());
+            var price = $(this).parents('.lineCart').find('.price-rmbs').text();
             if (!id) {
                 return;
             }
@@ -218,6 +233,11 @@ $(function() {
                 CART.cartCache = new Array();
                 tr.remove();
                 loadCartData();
+                $("#J_SelectAllCbx1").prop("checked", false);
+                if($(ifcheck).is(':checked')) {
+                    total = total - price;
+                    $('.check-trans-rmb').text(toDecimal2(total));
+                }
             }, {
                 loadingMask: false
             });

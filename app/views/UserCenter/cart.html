@@ -3,7 +3,7 @@
 #{set 'moreStyles'}
 <link href="@{'/public/stylesheets/checkout.css'}" rel="stylesheet" type="text/css">
 #{/set}
-<div class="container"> 
+<div class="container" style="width: 1100px;"> 
 #{authenticityToken/}
     <div class="check-out">
         <h1>购物车<a href="javascript:void(0)" id="editCount" >编辑数量</a></h1>
@@ -35,7 +35,7 @@
             </table>
             <div class="check-total">
                 <ul>
-                    <li>已选商品<span class='check-count'>0</span>件</li>
+                    <!-- <li>已选商品<span class='check-count'>0</span>件</li> -->
                     <li>合计 ¥<span class='check-trans-rmb'>0</span></li>
                 </ul>
                 <div class="clearfix"> </div>
