@@ -91,7 +91,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="form_line">
+				<!-- <div class="form_line">
 					<label class="lbl">净重量</label>
 					<div class="controls">
 						<input class="inputText" id="txtNetWeight" type="text" value="${item?.netWeight}" name="item.netWeight" />
@@ -106,7 +106,7 @@
 						<span class="mt3">kg</span>
 					</div>
 					<div for="txtGrossWeight" class="validateLine clearfix"></div>
-				</div>
+				</div> -->
 				<div class="form_line">
 					<label class="lbl">商品单位</label>
 					<div class="controls">
@@ -136,12 +136,20 @@
 					<div for="txtOutNo" class="validateLine clearfix"></div>
 				</div>
 				<div class="form_line">
-					<label class="lbl">售价</label>
+					<label class="lbl">实际售价</label>
 					<div class="controls">
 						<input class="inputText" id="txtRetailPrice" type="text" value="${item?.retailPrice?item.retailPrice/100:0}" name="item.d_retailPrice" />
 						<span class="mt3">元</span>
 					</div>
 					<div for="txtRetailPrice" class="validateLine clearfix"></div>
+				</div>
+				<div class="form_line">
+					<label class="lbl">建议零售价</label>
+					<div class="controls">
+						<input class="inputText" id="txtSupplyPrice" type="text" value="${item?.supplyPrice?item.supplyPrice/100:0}" name="item.d_supplyPrice" />
+						<span class="mt3">元</span>
+					</div>
+					<div for="txtSupplyPrice" class="validateLine clearfix"></div>
 				</div>
 				<div class="form_line">
 					<label class="lbl">品牌</label>
