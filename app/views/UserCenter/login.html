@@ -26,6 +26,7 @@
                 #{else}
                 <form id="frmLogin" tr-url="/doLogin">
                     #{authenticityToken/}
+                    <input type="hidden" name="rUrl" value="${rUrl?.raw()}"/>
                     <div class="clearfix">
                         <ul class="loginInfo">
                             <li>
