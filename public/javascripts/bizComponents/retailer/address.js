@@ -98,7 +98,7 @@ $(function() {
                 'address.address': $('#doc-modal-1 #txtAddress').val(),
                 'address.phone': $('#doc-modal-1 input[name="address.phone"]').val(),
                 'address.gender': $('#doc-modal-1 input[name="address.gender"]').val(),
-                'address.IDcard': $('#doc-modal-1 input[name="address.IDIdentification"]').val()
+                'address.IDcard': $('#doc-modal-1 input[name="address.IDcard"]').val()
             };
             Tr.post('/retailer/address/save', param, function(data) {
                 if (data.code != 200) {
