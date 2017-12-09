@@ -10,7 +10,7 @@ function ValidateRetAddOpts() {
 	var options = {
 		onkeyup: false,
 		rules: {
-			'user.account': {
+			'user.name': {
 				required: true
 			},
 			captcha: {
@@ -28,7 +28,7 @@ function ValidateRetAddOpts() {
 			}
 		},
 		messages: {
-			'user.account': {
+			'user.name': {
 				required: Tr.error('请填写用户名')
 			},
 			captcha: {
