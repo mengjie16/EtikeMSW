@@ -29,9 +29,9 @@
                     <div class="clearfix">
                         <ul class="loginInfo">
                             <li>
-                                <div style="width:60px;" class="f14">手机号</div>
+                                <div style="width:60px;" class="f14">用户名</div>
                                 <div style="width:340px;">
-                                    <input id="txtPhone" name="phone" type="text" class="inputText trControl" maxlength="11" placeholder="登录手机号" tr-param="phone"/>
+                                    <input id="txtPhone" name="phone" type="text" class="inputText trControl" maxlength="11" placeholder="用户名" tr-param="phone"/>
                                     <div for="txtPhone" class="validateLine clearfix"></div>
                                 </div>
                             </li>
@@ -63,7 +63,7 @@
             </div>
         </div>
         <!-- third party login -->
-        <!-- <div class="rightArea">
+        <!-- 
             <form returnurl="" action="" id="ExternalLoginForm" method="post">
                 <input name="" type="hidden" value=""/>
                 <div class="">
@@ -82,17 +82,20 @@
                     <p class="sns_tit2">&nbsp;&nbsp;* 第三方可直接进行登录</p>
                 </div>
             </form>
-        </div> -->
-    </div>
-    <div class="join_area">
-        <div class="join_area_l">
-            <p class="txt1">还不是会员?</p>
-            <p class="txt2">立即成为会员，享受更多积分/优惠券等优惠活动!</p>
+         -->
+        <div class="rightArea">
+            <div class="join_area">
+                <div class="join_area_l">
+                    <p class="txt1">还不是会员?</p>
+                    <!-- <p class="txt2">立即成为会员，享受更多积分/优惠券等优惠活动!</p> -->
+                </div>
+                <div class="join_area_r">
+                    <a href="/regist"  style="display:inline-block;width:133px;height:48px;line-height:48px;text-align:center;color:#fff;background-color:#3B3B3B;font-size:15px;text-decoration:none">立即注册</a>
+                </div>
+            </div>
         </div>
-        <div class="join_area_r">
-            <a href="/regist"  style="display:inline-block;width:133px;height:48px;line-height:48px;text-align:center;color:#fff;background-color:#3B3B3B;font-size:15px;text-decoration:none">立即注册</a>
-        </div>
     </div>
+    
 </div>
 #{set 'moreScripts'}
 <script type="text/javascript" src="/public/javascripts/libs/jquery.validate.min.js"></script>

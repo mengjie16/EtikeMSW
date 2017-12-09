@@ -44,11 +44,11 @@
 			<classifier>sources</classifier>
 		</dependency>
 
-		<dependency>
+		<!--<dependency>
 			<groupId>com.taobao</groupId>
 			<artifactId>dayu</artifactId>
 			<version>1.0.0</version>
-		</dependency>
+		</dependency>-->
 
 		<dependency>
 			<groupId>org.apache.thrift</groupId>

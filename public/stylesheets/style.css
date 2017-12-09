@@ -52,12 +52,15 @@ a:hover {
 .search a {
     margin-right: 4%;
     color: #52d0c4;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .search .login{
-    color: #000;
+    color: #444;
     font-size: 14px;
+}
+.search .login:hover {
+    color: #52d0c4;
 }
 .glyphicon.glyphicon-user {
     color: #999;
@@ -210,7 +213,7 @@ p.log a:hover {
 }
 
 i.glyphicon.glyphicon-search {
-    color: #000;
+    color: #444;
     font-size: 1em;
 }
 
@@ -296,7 +299,6 @@ a.item_add {
     position: relative;
     list-style: none;
     overflow: hidden;
-    width: 1170px;
     padding: 0;
     margin: 0 auto;
     height: 450px;
@@ -361,6 +363,8 @@ ul.callbacks_tabs.callbacks1_tabs {
 
 .banner {
     padding: 1em 0 0 0;
+    width: 1170px;
+    margin:0 auto;
 }
 
 .banner-mat {
@@ -1706,3 +1710,41 @@ ul.nav.nav-pills {
 .item_price .new{margin-right:5px;font-size:14px;vertical-align: bottom;}
 .item_price .new span{font-size:18px;color:#52D0C4}
 .item_price .old{font-size:12px}
+.callbacks_nav {
+  position: absolute;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  top: 52%;
+  left: 0;
+  opacity: 0.4;
+  z-index: 3;
+  text-indent: -9999px;
+  overflow: hidden;
+  text-decoration: none;
+  height: 61px;
+  width: 38px;
+  background: transparent url("/public/images/themes.gif") no-repeat left top;
+  margin-top: -45px;
+  }
+
+.callbacks_nav:active {
+  opacity: 0.6;
+  }
+
+.callbacks_nav.next {
+  left: auto;
+  background-position: right top;
+  right: 0;
+  }
+.sidebar-title {
+    border-top: 1px solid #cccccc;
+    color: #52D0C4;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 10px;
+    padding: 4px 0;
+}
+.sidebar-navigation li {
+    line-height: 1.5;
+    margin: 0 0 5px;
+    padding: 0 0 0 15px;
+}

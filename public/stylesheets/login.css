@@ -281,7 +281,7 @@
     margin: 40px auto 0;
 }
 .join_area_l {
-    float: left;
+    /*float: left;*/
     padding-top: 23px;
 }
 .join_area_l .txt1 {
@@ -295,7 +295,7 @@
     color: #989898;
 }
 .join_area_r {
-    float: right;
+    /*float: right;*/
     padding-top: 14px;
 }
 .bottom_banner {
