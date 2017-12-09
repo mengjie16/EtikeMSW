@@ -263,10 +263,10 @@ function printCartHtml() {
             var color = obj.skuColor;
             var quantity = obj.skuQuantity;
             var cartPrice = cartCount * retailPrice;
-            var $titledt = $("<td class='ring-in'><div class='cart-goods-checkbox'><input data-cart='" + id + "' class='J_CheckBoxShop' type='checkbox' name='select-goods'  value='true'></div><div><a target='_blank' href='/item/" + itemId + "' class='at-in'><img src='" + picUrl + "' class='img-responsive' alt=''></a><div class='sed'><p class='detailCart><span class='brand'>" + brandName + "</span><span class='title'>" + title + "</span><span class='color'>" + color + "</span></p></div></div><div class='clearfix'></div></td>");
-            var $basedd = $("<td class='per-price'><div class='check_price'>¥<span class='price-rmb'>" + retailPrice + "</span></div></td>");
+            var $titledt = $("<td class='ring-in'><div class='cart-goods-checkbox'><input data-cart='" + id + "' class='J_CheckBoxShop' type='checkbox' name='select-goods'  value='true'></div><div><a href='/item/" + itemId + "' class='at-in'><img src='" + picUrl + "' class='img-responsive' alt=''></a><div class='sed'><p class='detailCart><span class='brand'>" + brandName + "</span><span class='title'>" + title + "</span><span class='color'>" + color + "</span></p></div></div><div class='clearfix'></div></td>");
+            var $basedd = $("<td class='per-price'><div class='check_price'>¥<span class='price-rmb'>" + retailPrice.toFixed(2) + "</span></div></td>");
             var $skudd = $("<td class='check'><div class='amount-wrapper'><div class='item-amount '><a class='J_Minus minus  updateVal'>-</a><input type='text' data-id='" + itemId + "' value='" + cartCount + "' class='cartCount text text-amount J_ItemAmount' data-max='" + quantity + "' data-now='2' autocomplete='off'><a class='updateVal J_Plus plus'>+</a></div><div class='amount-msg J_AmountMsg'></div></div></td>");
-            var $totaldd = $("<td class='cart-price'><div class='check_price allrmb'>¥<span class='price-rmbs'>" + cartPrice + "</span></div></td>");
+            var $totaldd = $("<td class='cart-price'><div class='check_price allrmb'>¥<span class='price-rmbs'>" + cartPrice.toFixed(2) + "</span></div></td>");
             var $fundd = $("<td data-id='" + id + "' class='check-goodsdelete delete'>删除</td>");
             var $itemdl = $("<tr class='lineCart' id='" + id + "'></tr>");
             $itemdl.append($titledt);

@@ -13,7 +13,10 @@ $(function() {
     // 		};
     // 		printCartHtml();
     // },{loadingMask:false});
-
+    var price = parseInt($('.Validform_checktip').text());
+    $('#express_fee').text(price);
+    $('#order_amount').text(price + parseInt($('#goods_amount').text()));
+    $('#txtFee').val(price + parseInt($('#goods_amount').text()));
     $('.otherAdd').on('click', function() {
 
         Tr.get('/retailer/address/addressList', {}, function(data) {

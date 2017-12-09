@@ -9,8 +9,7 @@ function validateOpts() {
 		onkeyup: false,
 		rules: {
 			phone: {
-				required: true,
-				mobile: true
+				required: true
 			},
 			password: {
 				required: true,
@@ -19,8 +18,7 @@ function validateOpts() {
 		},
 		messages: {
 			phone: {
-				required: Tr.error('手机号码需填写'),
-				mobile: Tr.error('手机号格式错误')
+				required: Tr.error('用户名需填写')
 			},
 			password: {
 				required: Tr.error('密码需填写'),
