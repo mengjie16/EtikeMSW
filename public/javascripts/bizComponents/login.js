@@ -8,7 +8,7 @@ function validateOpts() {
 	var options = {
 		onkeyup: false,
 		rules: {
-			phone: {
+			account: {
 				required: true
 			},
 			password: {
@@ -17,7 +17,7 @@ function validateOpts() {
 			}
 		},
 		messages: {
-			phone: {
+			account: {
 				required: Tr.error('用户名需填写')
 			},
 			password: {
