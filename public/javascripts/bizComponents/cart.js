@@ -20,7 +20,7 @@ $(function() {
                 var number = 0;
                 $('.price-rmbs').each(function() {
                     if ($(this).text() != '') {
-                        number += parseInt($(this).text());
+                        number += parseFloat($(this).text());
                     }
                 });
                 $('.check-trans-rmb').text(number);
@@ -38,20 +38,20 @@ $(function() {
             }
         });
         $('input[name="select-goods"]').on('click', function(e) {
-                var num = parseInt($('.check-trans-rmb').text());
-                var number = parseInt($('.check-count').text());
+                var num = parseFloat($('.check-trans-rmb').text());
+                var number = parseFloat($('.check-count').text());
                 var price = $(this).parents('tr').find('.price-rmbs').text();
                 var cartId = $(this).data('cart');
                 if (!this.checked) {
                     $("#J_SelectAllCbx1").prop("checked", false);
-                    num -= parseInt(price);
+                    num -= parseFloat(price);
                     number -= 1;
                     var index = hasCheckedBoxes.indexOf(cartId);
                     if (index > -1) {
                         hasCheckedBoxes.splice(index, 1);
                     }
                 } else {
-                    num += parseInt(price);
+                    num += parseFloat(price);
                     number += 1;
                     hasCheckedBoxes.push(cartId);
                 }
@@ -70,7 +70,7 @@ $(function() {
                     var num = $('.text-amount').val();
                     var price = $(this).parents('.check').prev('.per-price').find('.price-rmb').text();
                     $(this).parents('.check').next('.cart-price').find('.price-rmbs').text(num * price);
-                    if (parseInt($(this).next()[0].value) === 1) {
+                    if (parseFloat($(this).next()[0].value) === 1) {
                         $(this).addClass('no-minus');
                     }
                 } else {
@@ -89,7 +89,7 @@ $(function() {
                     var num = $('.text-amount').val();
                     var price = $(this).parents('.check').prev('.per-price').find('.price-rmb').text();
                     $(this).parents('.check').next('.cart-price').find('.price-rmbs').text(num * price);
-                    if (parseInt($(this).prev()[0].value) === storeNumber) {
+                    if (parseFloat($(this).prev()[0].value) === storeNumber) {
                         $(this).addClass('no-plus');
                     }
                 } else {
@@ -313,7 +313,9 @@ function checkedToPay(cartIds) {
         }
 
 
-    });
+    }, {
+                loadingMask: false
+            });
     return dtd.promise();
 }
 
