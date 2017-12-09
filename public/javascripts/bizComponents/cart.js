@@ -23,6 +23,7 @@ $(function() {
                         number += parseFloat($(this).text());
                     }
                 });
+                number = toDecimal2(number);
                 $('.check-trans-rmb').text(number);
                 $('.check-count').text($('.price-rmbs').length);
                 var arrCheckBox = $('input[name="select-goods"]:input');
@@ -55,6 +56,7 @@ $(function() {
                     number += 1;
                     hasCheckedBoxes.push(cartId);
                 }
+                num = toDecimal2(num);
                 $('.check-trans-rmb').text(num);
                 $('.check-count').text(number);
             })
@@ -69,7 +71,7 @@ $(function() {
                     $(this).next()[0].value--;
                     var num = $('.text-amount').val();
                     var price = $(this).parents('.check').prev('.per-price').find('.price-rmb').text();
-                    $(this).parents('.check').next('.cart-price').find('.price-rmbs').text(num * price);
+                    $(this).parents('.check').next('.cart-price').find('.price-rmbs').text(toDecimal2(num * price));
                     if (parseFloat($(this).next()[0].value) === 1) {
                         $(this).addClass('no-minus');
                     }
@@ -88,7 +90,7 @@ $(function() {
                     $(this).prev()[0].value++;
                     var num = $('.text-amount').val();
                     var price = $(this).parents('.check').prev('.per-price').find('.price-rmb').text();
-                    $(this).parents('.check').next('.cart-price').find('.price-rmbs').text(num * price);
+                    $(this).parents('.check').next('.cart-price').find('.price-rmbs').text(toDecimal2(num * price));
                     if (parseFloat($(this).prev()[0].value) === storeNumber) {
                         $(this).addClass('no-plus');
                     }
@@ -111,6 +113,7 @@ $(function() {
                 $('#cartContainer .cartCount').each(function(index, ele) {
                     ele.readOnly = true;
                 });
+
                 $('.J_Plus').unbind('click');
                 $('.J_Minus').unbind('click');
                 $.when(doneEdit()).done(function() {
@@ -226,6 +229,24 @@ $(function() {
         aler("购物车跑了……");
     });
 });
+
+function toDecimal2(x) { 
+      var f = parseFloat(x); 
+      if (isNaN(f)) { 
+        return false; 
+      } 
+      var f = Math.round(x*100)/100; 
+      var s = f.toString(); 
+      var rs = s.indexOf('.'); 
+      if (rs < 0) { 
+        rs = s.length; 
+        s += '.'; 
+      } 
+      while (s.length <= rs + 2) { 
+        s += '0'; 
+      } 
+      return s; 
+    } 
 // 加载购物车数据
 function loadCartData() {
         var dtd = $.Deferred();
