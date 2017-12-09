@@ -105,8 +105,8 @@ function initBase() {
         var itemId = $('#single .container').attr('mid');
         var $getColor = $('#single .container').find('li.skuColor a.active').eq(0).text();
         var cnt =$('#single .container input[name="cartAccount"]').val();
-        var totalPriceRMB = parseInt($('#single .container #detailRmb').text().substring(1))*cnt;
-        var totalPriceEUR = parseInt($('#single .container #detailEur').text().substring(1))*cnt;
+        var totalPriceRMB = parseFloat($('#single .container #detailRmb').text().substring(1))*cnt;
+        var totalPriceEUR = parseFloat($('#single .container #detailEur').text().substring(1))*cnt;
         var purl=$('#single .container').find('div.picUrl img').eq(0).attr('src');
         if(!purl){
             purl = 'http://img0.imgtn.bdimg.com/it/u=2517962916,2542239999&fm=214&gp=0.jpg';
@@ -122,8 +122,8 @@ function initBase() {
             "cart.skuQuantity":$('.kucun').text(),
             "cart.picUrl" : purl,
             "cart.cartCount" : $('#single .container input[name="cartAccount"]').val(),
-            "cart.retailPrice" : parseInt($('#single .container #detailRmb').text().substring(1)),
-            "cart.cny2eur":parseInt(cny2eur.substring(0,cny2eur.length-1)),
+            "cart.retailPrice" : parseFloat($('#single .container #detailRmb').text().substring(1)),
+            "cart.cny2eur":parseFloat(cny2eur.substring(2,cny2eur.length-1)),
             "cart.cartPrice" : totalPriceRMB,
             "cart.title" : $('#single .container #detailTitle').text(),
             "cart.brandId":$('#single .container #brandId').val()
