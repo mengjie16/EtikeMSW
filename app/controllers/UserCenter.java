@@ -1,19 +1,15 @@
 package controllers;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aton.config.ReturnCode;
-import com.aton.util.CacheUtils;
-import com.aton.util.MixHelper;
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
@@ -24,7 +20,6 @@ import controllers.annotations.UserLogonSupport;
 import controllers.base.BaseController;
 import controllers.base.secure.Secure;
 import enums.ItemStatus;
-import enums.constants.CacheType;
 import enums.constants.ErrorCode;
 import enums.constants.RegexConstants;
 import models.Cart;
@@ -32,7 +27,6 @@ import models.Favorite;
 import models.Item;
 import models.RetailerAddress;
 import models.User;
-import net.sf.json.JSONArray;
 import play.data.binding.As;
 import play.data.validation.Email;
 import play.data.validation.Match;
@@ -41,9 +35,7 @@ import play.data.validation.MinSize;
 import play.data.validation.Required;
 import play.data.validation.URL;
 import play.mvc.With;
-import utils.SmsUtil;
 import vos.CartVo;
-import vos.ItemVo;
 
 /**
  * 
@@ -57,7 +49,7 @@ import vos.ItemVo;
 public class UserCenter extends BaseController {
 
     private static final Logger log = LoggerFactory.getLogger(UserCenter.class);
-    
+
     /**
      * 
      * 个人中心页面
@@ -132,44 +124,44 @@ public class UserCenter extends BaseController {
     public static void storeList() {
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
         List<Favorite> favorites = Favorite.findList(user.id);
-        
-        //hide offline item.
+
+        // hide offline item.
         List<Favorite> res = new ArrayList<Favorite>();
-        for(Favorite favor : favorites){
+        for (Favorite favor : favorites) {
             Item item = Item.findBaseInfoById(favor.itemId);
-            if(item.status == ItemStatus.ONLINE){
+            if (item.status == ItemStatus.ONLINE) {
                 res.add(favor);
             }
         }
-        
+
         renderArgs.put("favoriteList", res);
         render();
     }
-    
-    public static void hasSetFavorite(@Required @Valid long itemId){
+
+    public static void hasSetFavorite(@Required @Valid long itemId) {
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
-        if ( user != null &&  Favorite.findById(itemId,user.id) > 0) {
+        if (user != null && Favorite.findById(itemId, user.id) > 0) {
             renderSuccessJson();
         }
         renderFailedJson(ReturnCode.FAIL);
     }
-    
+
     @UserLogonSupport
-    public static void setFavorite(@Required @Valid Favorite favorite){
+    public static void setFavorite(@Required @Valid Favorite favorite) {
         handleWrongInput(true);
-        
+
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
-        favorite.retailerId = (int) user.id; 
-        if ( Favorite.save(favorite)) {
+        favorite.retailerId = (int) user.id;
+        if (Favorite.save(favorite)) {
             renderSuccessJson();
         }
         renderFailedJson(ReturnCode.FAIL, "收藏失败");
     }
-    
+
     @UserLogonSupport
-    public static void deleteFavorite(@Required @Min(1) long id){
-        
-        if ( Favorite.delete(id)) {
+    public static void deleteFavorite(@Required @Min(1) long id) {
+
+        if (Favorite.delete(id)) {
             renderSuccessJson();
         }
         renderFailedJson(ReturnCode.FAIL, "取消收藏失败");
@@ -228,9 +220,9 @@ public class UserCenter extends BaseController {
      */
     @UserLogonSupport
     public static void cart() {
-    	 // 用户信息获取
+        // 用户信息获取
         render();
-       
+
     }
 
     /**
@@ -242,52 +234,52 @@ public class UserCenter extends BaseController {
      * @created 2015-4-9 下午3:22:12
      * 
      */
-    
+
     @UserLogonSupport
     public static void stepTwo(@Required long tradeId, @Required @As(",") @MinSize(1) List<Integer> confirmOrderIds) {
         handleWrongInput(true);
-        
+
         // 0.用户信息获取
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
-        
-        //1、收货信息
-        RetailerAddress retailerAddress = RetailerAddress.findByDefaultAddress((int)user.id);
-        
-        long totalCartPrice=0;
-        
+
+        // 1、收货信息
+        RetailerAddress retailerAddress = RetailerAddress.findByDefaultAddress((int) user.id);
+
+        long totalCartPrice = 0;
+
         List<Cart> cartList = new ArrayList<Cart>();
-        Cart cart = null ;
-        for(Integer s : confirmOrderIds){
+        Cart cart = null;
+        for (Integer s : confirmOrderIds) {
             cart = Cart.findById(s, user.id);
-            if(cart!=null){
+            if (cart != null) {
                 cartList.add(cart);
                 totalCartPrice += cart.cartPrice;
             }
         }
-        
+
         List<CartVo> cartVos = CartVo.valueOfcartList(cartList);
-        
-        renderArgs.put("addr", retailerAddress);    
+
+        renderArgs.put("addr", retailerAddress);
         renderArgs.put("cartList", cartVos);
         renderArgs.put("totalCartPrice", totalCartPrice);
         renderArgs.put("tradeId", tradeId);
         renderArgs.put("confirmOrderIds", confirmOrderIds);
-        
-        //2、支付方式
-            
-        //3、物流方式
-            
-        //4、商品清单
-            
-        //5.删除购物车
-//        if ( !MixHelper.isEmpty(cartList)) {
-//            for(Cart c : cartList) {
-//                cart.delete(c.id);
-//            }
-//        }
-        
-        //6、结算信息
-      
+
+        // 2、支付方式
+
+        // 3、物流方式
+
+        // 4、商品清单
+
+        // 5.删除购物车
+        // if ( !MixHelper.isEmpty(cartList)) {
+        // for(Cart c : cartList) {
+        // cart.delete(c.id);
+        // }
+        // }
+
+        // 6、结算信息
+
         render();
     }
 
@@ -304,7 +296,7 @@ public class UserCenter extends BaseController {
      */
     @UserLogonSupport
     public static void saveBaseInfo(@Required @MaxSize(32) String name, @Required @Email String email, String qq,
-        String weixin) {
+            String weixin) {
         handleWrongInput(true);
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
         User currentUser = User.findById(user.id);
@@ -341,16 +333,16 @@ public class UserCenter extends BaseController {
      * @created 2016年7月29日 下午3:07:29
      */
     @UserLogonSupport
-    public static void modifyPass(@Required @Match(RegexConstants.PASSWORD) String pass
-       ) {
+    public static void modifyPass(@Required @Match(RegexConstants.PASSWORD) String pass) {
         handleWrongInput(true);
         User user = renderArgs.get(Secure.FIELD_USER, User.class);
         // 校验验证码正确性
-       /* boolean matched = SmsUtil.checkSmsCode(user.phone, captcha);
-        if (!matched) {
-            renderFailedJson(ReturnCode.FAIL, "验证码错误");
-        }
-        */
+        /*
+         * boolean matched = SmsUtil.checkSmsCode(user.phone, captcha);
+         * if (!matched) {
+         * renderFailedJson(ReturnCode.FAIL, "验证码错误");
+         * }
+         */
         user.password = pass;
         if (user.savePassword()) {
             log.info("User id={} changed password to {} just now", user.id, pass);
@@ -437,22 +429,40 @@ public class UserCenter extends BaseController {
      * @author tr0j4n
      * @created 2016年11月9日 下午5:20:02
      */
-    public static void doLogin(@Required @Match(RegexConstants.PHONE) String phone,
-        @Required @MinSize(6) @MaxSize(20) String password, boolean savePass) {
+    public static void doLogin(@Required String account,
+            @Required @MinSize(6) @MaxSize(20) String password, boolean savePass, @MaxSize(128) String rUrl) {
         handleWrongInput(true);
 
-        User usr = User.findByPhone(phone);
+        User usr = User.findByField("name", account);
         if (usr == null) {
             renderFailedJson(ReturnCode.FAIL, "用户不存在");
         }
         if (!usr.validate(password)) {
             renderFailedJson(ReturnCode.INVALID_PRIVILEGE, "密码不正确");
         }
-        if (savePass) {
-            Secure.setUserToContainer(usr, "300d");
+
+        if (checkAdmin(account)) {
+            ManagerController mc = new ManagerController();
+            mc.doLogin(account, password, rUrl);
         } else {
-            Secure.setUserToContainer(usr);
+
+            if (savePass) {
+                Secure.setUserToContainer(usr, "300d");
+            } else {
+                Secure.setUserToContainer(usr);
+            }
+            renderJson(ImmutableMap.of("uid", usr.id, "name", usr.name));
         }
-        renderJson(ImmutableMap.of("uid", usr.id, "name", usr.name));
+    }
+
+    /**
+     * 
+     */
+    private static boolean checkAdmin(String name) {
+        boolean isAdmin = false;
+        if (name.startsWith("admin")) {
+            isAdmin = true;
+        }
+        return isAdmin;
     }
 }
