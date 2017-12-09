@@ -1,21 +1,16 @@
 package models;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Transient;
 
-import org.apache.commons.lang3.RandomUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aton.db.SessionFactory;
-import com.aton.util.Pandora;
 import com.aton.vo.Page;
-import com.google.common.primitives.Longs;
 
 import models.mappers.RetailerMapper;
 import play.data.validation.MinSize;
@@ -55,7 +50,6 @@ public class Retailer implements java.io.Serializable {
 
     public Date createTime;
     public Date updateTime;
-    
 
     /**
      * 查找零售商信息by ID
@@ -127,7 +121,7 @@ public class Retailer implements java.io.Serializable {
 
             user.userId = id;
             user.role = "RETAILER";
-            user.name = "eitak_" + user.phone;
+            // user.name = "eitak_" + user.phone;
 
             // 保存用户信息
             user.save();

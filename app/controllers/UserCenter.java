@@ -429,11 +429,11 @@ public class UserCenter extends BaseController {
      * @author tr0j4n
      * @created 2016年11月9日 下午5:20:02
      */
-    public static void doLogin(@Required String account,
+    public static void doLogin(@Required String name,
             @Required @MinSize(6) @MaxSize(20) String password, boolean savePass, @MaxSize(128) String rUrl) {
         handleWrongInput(true);
 
-        User usr = User.findByField("name", account);
+        User usr = User.findByField("name", name);
         if (usr == null) {
             renderFailedJson(ReturnCode.FAIL, "用户不存在");
         }
@@ -441,9 +441,9 @@ public class UserCenter extends BaseController {
             renderFailedJson(ReturnCode.INVALID_PRIVILEGE, "密码不正确");
         }
 
-        if (checkAdmin(account)) {
+        if (checkAdmin(name)) {
             ManagerController mc = new ManagerController();
-            mc.doLogin(account, password, rUrl);
+            mc.doLogin(name, password, rUrl);
         } else {
 
             if (savePass) {
