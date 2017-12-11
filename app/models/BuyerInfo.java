@@ -28,10 +28,20 @@ public class BuyerInfo {
      */
     public String address_detail_pcra;
 
+    /**
+     * 身份证号
+     */
+    public String IDcard;
+    /**
+     * 性别
+     */
+    public String gender;
+
     public BuyerInfo() {
     }
 
-    public BuyerInfo(String name, String contact, String province, String city, String region, String address, int provinceId) {
+    public BuyerInfo(String name, String contact, String province, String city, String region, String address,
+            int provinceId, String IDcard, String gender) {
         super();
         this.name = name;
         this.contact = contact;
@@ -40,7 +50,8 @@ public class BuyerInfo {
         this.region = region;
         this.address = address;
         this.provinceId = provinceId;
+        this.IDcard = IDcard;
+        this.gender = gender;
     }
-    
-    
+
 }

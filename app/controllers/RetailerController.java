@@ -464,6 +464,8 @@ public class RetailerController extends BaseController {
             vo.address = retailerAddress.address;
             vo.num = cart.cartCount;
             vo.provinceId = retailerAddress.provinceId;
+            vo.IDcard = retailerAddress.IDcard;
+            vo.gender = retailerAddress.gender;
 
             // 关键信息解析
             vo.md5ProductNameSkuStr();

@@ -2065,7 +2065,8 @@ public class ManagerController extends BaseController {
         Trade trade = Trade.findWithOrdersById(tradeId);
         if (trade != null) {
             renderArgs.put("tradeId", tradeId);
-            renderArgs.put("totalFee", trade.totalFee);
+            double totalFee = trade.totalFee;
+            renderArgs.put("totalFee", totalFee);
             renderArgs.put("payment", trade.payment);
             if (MixHelper.isNotEmpty(trade.orders)) {
                 List<OrderVo> vos = trade.orders.stream().map(o -> OrderVo.valueOfOrderParseFee(o))

@@ -39,11 +39,16 @@ public enum ErrorCode {
     ORDER_SHIPPINGFEE_ERROR(50009, "order.shippingFeeError", "订单商品未配置运费模版(或省份解析出错)"),
     ORDER_STATUS_CANNOT_CHANGE(50010, "order.statusCannotChange", "非等待发货状态订单,不可修改"),
     ORDER_NOT_FOUND(50011, "order.notFound", "订单ID:%s,不存在"),
+    
+    ORDER_BUYER_IDCARD_EMPTY(50015, "order.buyerIdcardEmpty", "客户身份证不能为空"),
+    ORDER_BUYER_GENDER_EMPTY(50015, "order.buyerGenderEmpty", "客户性别不能为空"),
 	
 	//=====地址
 	 RETAILERADDRESS_NAME_EMPTY(50012, "order.buyerNameEmpty", "客户姓名不能为空"),
 	 RETAILERADDRESS_PHONE_EMPTY(50013, "order.buyerContactEmpty", "客户联系方式不能为空"),
 	 RETAILERADDRESS_PHONE_INVALID(50014, "order.buyerContactInvalid", "客户联系方式不合法");
+	 
+   
     //@formatter:on
     /** 数值 */
     public int code;
