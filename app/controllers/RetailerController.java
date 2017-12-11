@@ -277,6 +277,13 @@ public class RetailerController extends BaseController {
             }
         }
 
+        if (Strings.isNullOrEmpty(address.IDcard)) {
+            sb.append(ErrorCode.RETAILERADDRESS_IDCARD_EMPTY.description + "，");
+        }
+        if (Strings.isNullOrEmpty(address.gender)) {
+            sb.append(ErrorCode.RETAILERADDRESS_GENDER_EMPTY.description + "，");
+        }
+
         return sb.toString();
     }
 

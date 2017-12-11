@@ -46,7 +46,10 @@ public enum ErrorCode {
 	//=====地址
 	 RETAILERADDRESS_NAME_EMPTY(50012, "order.buyerNameEmpty", "客户姓名不能为空"),
 	 RETAILERADDRESS_PHONE_EMPTY(50013, "order.buyerContactEmpty", "客户联系方式不能为空"),
-	 RETAILERADDRESS_PHONE_INVALID(50014, "order.buyerContactInvalid", "客户联系方式不合法");
+	 RETAILERADDRESS_PHONE_INVALID(50014, "order.buyerContactInvalid", "客户联系方式不合法"),
+    
+    RETAILERADDRESS_IDCARD_EMPTY(50015, "order.buyerIdcardEmpty", "客户身份证不能为空"),
+    RETAILERADDRESS_GENDER_EMPTY(50015, "order.buyerGenderEmpty", "客户性别不能为空");
 	 
    
     //@formatter:on
