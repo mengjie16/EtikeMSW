@@ -7,25 +7,17 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
-import org.apache.ibatis.type.MappedJdbcTypes;
 import org.apache.ibatis.type.TypeHandler;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import vos.PriceRangeVo;
-
 import com.alibaba.fastjson.JSON;
 import com.aton.util.JsonUtil;
-import com.aton.util.MixHelper;
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
-import com.google.common.collect.Lists;
 
 /**
  * sql json string parse to javaType
@@ -36,7 +28,7 @@ import com.google.common.collect.Lists;
  */
 public class JsonTypeHandler<T> implements TypeHandler<T> {
 
-    private Class<T> entityClass;
+    private final Class<T> entityClass;
 
     /**
      * sub class use this constructs
@@ -71,7 +63,8 @@ public class JsonTypeHandler<T> implements TypeHandler<T> {
             if (Strings.isNullOrEmpty(sqlRStr)) {
                 return null;
             }
-            sqlStr = new String(sqlRStr.getBytes("ISO-8859-1"), "utf-8");
+            // sqlStr = new String(sqlRStr.getBytes("ISO-8859-1"), "utf-8");
+            sqlStr = new String(sqlRStr.getBytes("utf-8"), "utf-8");
         } catch (UnsupportedEncodingException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
@@ -109,7 +102,8 @@ public class JsonTypeHandler<T> implements TypeHandler<T> {
             if (Strings.isNullOrEmpty(sqlRStr)) {
                 return null;
             }
-            sqlStr = new String(sqlRStr.getBytes("ISO-8859-1"), "utf-8");
+            // sqlStr = new String(sqlRStr.getBytes("ISO-8859-1"), "utf-8");
+            sqlStr = new String(sqlRStr.getBytes("utf-8"), "utf-8");
         } catch (UnsupportedEncodingException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
@@ -147,7 +141,8 @@ public class JsonTypeHandler<T> implements TypeHandler<T> {
             if (Strings.isNullOrEmpty(sqlRStr)) {
                 return null;
             }
-            sqlStr = new String(sqlRStr.getBytes("ISO-8859-1"), "utf-8");
+            // sqlStr = new String(sqlRStr.getBytes("ISO-8859-1"), "utf-8");
+            sqlStr = new String(sqlRStr.getBytes("utf-8"), "utf-8");
         } catch (UnsupportedEncodingException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();

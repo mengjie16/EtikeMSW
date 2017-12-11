@@ -344,8 +344,8 @@ public class Trade implements java.io.Serializable {
      * @created 2016年9月12日 下午12:56:01
      */
     public static List<Trade> findListWithOrdersByVo(TradeSearchVo vo) {
-        if (!Strings.isNullOrEmpty(vo.phone)) {
-            User usr = User.findByPhone(vo.phone);
+        if (!Strings.isNullOrEmpty(vo.name)) {
+            User usr = User.findByField("name", vo.name);
             if (usr != null) {
                 vo.retailerId = usr.userId;
             }
