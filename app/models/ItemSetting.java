@@ -1,8 +1,11 @@
 package models;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
+
+import utils.ExchangeRateUtil;
 
 /**
  * 活动列表配置
@@ -15,12 +18,24 @@ public class ItemSetting {
 
     public long id;
     // 活动商品(单位：分)
-    public int price;
+    public double price;
     // --- 只是展示使用
     public double currentPrice;
 
     public String img;
     public String title;
+
+    public double cny2eur;
+
+    public double getCny2eur() {
+        return cny2eur;
+    }
+
+    public void setCny2eur(double cny2eur) {
+        double d = (price * ExchangeRateUtil.getExchangeRate() / 100);
+        BigDecimal bd = new BigDecimal(d);
+        this.cny2eur = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+    }
 
     public Map toMap() {
         return ImmutableMap.of("id", id, "price", price * 100);
@@ -52,6 +67,7 @@ public class ItemSetting {
             this.img = item.picUrl;
             this.title = item.title;
             this.currentPrice = item.itemLastFee();
+            this.cny2eur = getCny2eur();
         }
         return this;
     }
