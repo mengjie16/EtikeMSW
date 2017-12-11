@@ -7,6 +7,7 @@ import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.ibatis.session.SqlSession;
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -278,9 +279,11 @@ public class Order implements java.io.Serializable {
      */
     private static long makeAvaliableId() {
         // 生成10位随机数
-        long rand10 = Pandora.newInstance(RandomUtils.nextInt(8, 31), RandomUtils.nextInt(8, 31)).makeId(10);
+        long rand10 = Pandora.newInstance(RandomUtils.nextInt(8, 31), RandomUtils.nextInt(8, 31)).makeId(5);
         DateTime dtNow = DateTime.now();
-        long id = Longs.tryParse(dtNow.toString("MMddHH") + rand10);
+        long id = Longs.tryParse(DateTimeFormat.forPattern("yyyyMMddHHmmss")
+                .print(dtNow) + rand10);
+
         while (true) {
             Order order = findById(id);
             if (order == null) {

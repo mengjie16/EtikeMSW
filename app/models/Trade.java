@@ -10,6 +10,7 @@ import javax.persistence.Transient;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -378,13 +379,16 @@ public class Trade implements java.io.Serializable {
      * @return
      * @since v1.0
      * @author Calm
+     * @throws java.text.ParseException
      * @created 2016年9月11日 上午10:37:08
      */
     private static long makeAvaliableId() {
         // 生成10位随机数
-        long rand10 = Pandora.newInstance(RandomUtils.nextInt(10, 31), RandomUtils.nextInt(10, 31)).makeId(10);
+        long rand10 = Pandora.newInstance(RandomUtils.nextInt(10, 31), RandomUtils.nextInt(10, 31)).makeId(5);
         DateTime dtNow = DateTime.now();
-        long id = Longs.tryParse(dtNow.toString("yyMMdd") + rand10);
+        long id = Longs.tryParse(DateTimeFormat.forPattern("yyyyMMddHHmmss")
+                .print(dtNow) + rand10);
+
         while (true) {
             Trade trade = findById(id);
             if (trade == null) {
