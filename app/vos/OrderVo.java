@@ -73,6 +73,15 @@ public class OrderVo implements java.io.Serializable {
     public String address_detail;
     // 详细地址，包含省市区
     public String address_detail_pcra;
+
+    /**
+     * 身份证号
+     */
+    public String IDcard;
+    /**
+     * 性别
+     */
+    public String gender;
     // 商品数量
     public int num;
     // 商品规格
@@ -240,6 +249,8 @@ public class OrderVo implements java.io.Serializable {
         order.buyerInfo.address = this.address;
         order.buyerInfo.contact = this.contact;
         order.buyerInfo.provinceId = this.provinceId;
+        order.buyerInfo.IDcard = this.IDcard;
+        order.buyerInfo.gender = this.gender;
 
         // ------ 其他信息构建
         order.outOrderNo = this.outOrderNo;
@@ -367,6 +378,20 @@ public class OrderVo implements java.io.Serializable {
         if (!Strings.isNullOrEmpty(this.address)) {
             order.buyerInfo.address = this.address;
         }
+
+        /**
+         * 身份证号
+         */
+        if (!Strings.isNullOrEmpty(this.IDcard)) {
+            order.buyerInfo.IDcard = this.IDcard;
+        }
+        /**
+         * 性别
+         */
+        if (!Strings.isNullOrEmpty(this.gender)) {
+            order.buyerInfo.gender = this.gender;
+        }
+
         // ------ 商品信息更新(商品id，规格)
         int num = order.num == 0 ? checkOrder.num : order.num;
         Item item = null;
@@ -527,6 +552,8 @@ public class OrderVo implements java.io.Serializable {
         mio.put("city", this.buyerInfo.city);
         mio.put("region", this.buyerInfo.region);
         mio.put("address", this.buyerInfo.address);
+        mio.put("IDcard", this.buyerInfo.IDcard);
+        mio.put("gender", this.buyerInfo.gender);
         mio.put("note", this.note);
         return mio;
     }
@@ -538,6 +565,9 @@ public class OrderVo implements java.io.Serializable {
      * @since v1.0
      * @author Calm
      * @created 2016年9月19日 上午11:30:21
+     */
+    /**
+     * @return
      */
     public static Map<String, String> headMap() {
         Map<String, String> mio = Maps.newHashMap();
@@ -559,6 +589,8 @@ public class OrderVo implements java.io.Serializable {
         mio.put("region", "客户地址-区");
         mio.put("address", "客户-详细地址");
         mio.put("note", "订单备注");
+        mio.put("Idcard", "客户身份证号码");
+        mio.put("gender", "客户性别");
         return mio;
     }
 
@@ -960,6 +992,19 @@ public class OrderVo implements java.io.Serializable {
         if (this.provinceId == 0) {
             sb.append(ErrorCode.ORDER_BUYER_PROVINCE_INVALID.description + "，");
         }
+
+        /**
+         * 身份证号
+         */
+        if (Strings.isNullOrEmpty(this.IDcard)) {
+            sb.append(ErrorCode.ORDER_BUYER_IDCARD_EMPTY.description + "，");
+        }
+        /**
+         * 性别
+         */
+        if (Strings.isNullOrEmpty(this.gender)) {
+            sb.append(ErrorCode.ORDER_BUYER_GENDER_EMPTY.description + "，");
+        }
         return sb.toString();
     }
 
@@ -1056,6 +1101,8 @@ public class OrderVo implements java.io.Serializable {
             vo.address = retailerAddress.address;
             vo.provinceId = retailerAddress.provinceId;
             vo.createTime = DateTime.now().toDate();
+            vo.IDcard = retailerAddress.IDcard;
+            vo.gender = retailerAddress.gender;
             // 关键信息解析
             vo.md5ProductNameSkuStr();
             // 解析地址
