@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 import com.aton.db.SessionFactory;
 import com.aton.util.MixHelper;
 import com.aton.util.Pandora;
-import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.primitives.Longs;
 
@@ -345,13 +344,6 @@ public class Trade implements java.io.Serializable {
      * @created 2016年9月12日 下午12:56:01
      */
     public static List<Trade> findListWithOrdersByVo(TradeSearchVo vo) {
-        if (!Strings.isNullOrEmpty(vo.name)) {
-            User usr = User.findByField("name", vo.name);
-            if (usr != null) {
-                vo.retailerId = usr.userId;
-            }
-        }
-
         SqlSession ss = SessionFactory.getSqlSession();
         try {
             TradeMapper mapper = ss.getMapper(TradeMapper.class);

@@ -103,7 +103,7 @@
 	<sql id="where">
 		<where>
 			<if test="id > 0">
-				and t.id = #{id}
+				and t.id like '%${id}%'
 			</if>
 			<if test="retailerId > 0">
 				and t.retailer_id = #{retailerId}
