@@ -2,14 +2,13 @@ package models.mappers;
 
 import java.util.List;
 
-import models.User;
-
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import models.User;
 import vos.UserSearchVo;
 
 public interface UserMapper {
@@ -19,15 +18,16 @@ public interface UserMapper {
 
     @Select("select * from " + User.TABLE_NAME + " where ${field}=#{value} limit 1")
     User selectByField(@Param("field") String field, @Param("value") Object value);
-    
+
     @Select("select count(1) from " + User.TABLE_NAME + " where ${field}=#{value} and id!=${id}")
-    int countFieldUsedByOthers(@Param("field") String field, @Param("value") Object value,@Param("id")  long id);
+    int countFieldUsedByOthers(@Param("field") String field, @Param("value") Object value, @Param("id") long id);
 
     @Select("select * from " + User.TABLE_NAME + " where phone=#{phone} and id!=${id} limit 1")
-    User checkUserExsit(@Param("phone") String phone,@Param("id")  long id);
+    User checkUserExsit(@Param("phone") String phone, @Param("id") long id);
 
-    @Insert("insert into " + User.TABLE_NAME + "(name,email,avatar,phone,password,salt,role,user_id,qq,weixin,is_auth,create_time,last_login_time) "
-        + "values(#{name},#{email},#{avatar},#{phone},#{password},#{salt},#{role},#{userId},#{qq},#{weixin},#{isAuth},#{createTime},#{lastLoginTime})")
+    @Insert("insert into " + User.TABLE_NAME
+            + "(name,email,avatar,phone,password,salt,role,user_id,qq,weixin,is_auth,create_time,last_login_time) "
+            + "values(#{name},#{email},#{avatar},#{phone},#{password},#{salt},#{role},#{userId},#{qq},#{weixin},#{isAuth},#{createTime},#{lastLoginTime})")
     void insert(User user);
 
     /**
@@ -36,6 +36,10 @@ public interface UserMapper {
     void updateById(User user);
 
     List<User> selectListByVo(UserSearchVo vo);
+
+    @Select("select * from user u where u.name like '%${name}%'  order by u.create_time desc")
+    List<User> selectListByNameFuzzy(@Param("name") String name);
+
     int countVo(UserSearchVo vo);
 
     @Update("update user u set u.password = #{password},u.salt = #{salt} where u.id=#{id}")

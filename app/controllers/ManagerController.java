@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.ByteArrayOutputStream;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -1936,7 +1937,33 @@ public class ManagerController extends BaseController {
         handleWrongInput(true);
         // 用户信息获取
         Page<TradeVo> page = Page.newInstance(vo.pageNo, vo.pageSize, 0);
-        List<Trade> trades = Trade.findListWithOrdersByVo(vo);
+        List<Trade> trades = new ArrayList<Trade>();
+        if (!Strings.isNullOrEmpty(vo.name)) {
+            List<User> users = User.findUserByNameFuzzy(vo.name);
+            if (users != null) {
+                List<Trade> allTrades = new ArrayList<Trade>();
+                for (User user : users) {
+                    vo.retailerId = (int) user.id;
+                    List<Trade> tradesPerUser = Trade.findListWithOrdersByVo(vo);
+                    allTrades.addAll(tradesPerUser);
+                }
+
+                if (vo.id > 0) {
+                    for (Trade trade : allTrades) {
+                        String idString = trade.id + "";
+                        String voIdString = vo.id + "";
+                        if (idString.contains(voIdString)) {
+                            trades.add(trade);
+                        }
+                    }
+                } else {
+                    trades.addAll(allTrades);
+                }
+            }
+        } else {
+            trades = Trade.findListWithOrdersByVo(vo);
+        }
+
         if (MixHelper.isEmpty(trades)) {
             renderPageJson(page.items, page.totalCount);
         }

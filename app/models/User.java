@@ -1,6 +1,5 @@
 package models;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -14,24 +13,16 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aton.config.ReturnCode;
 import com.aton.db.SessionFactory;
 import com.aton.util.CacheUtils;
-import com.aton.util.MailUtils;
-import com.aton.util.MixHelper;
-import com.aton.util.StringUtils;
 import com.aton.vo.Page;
-import com.google.common.base.Objects;
 import com.google.common.base.Strings;
-import com.google.common.collect.Lists;
-import com.mchange.lang.CharUtils;
 
 import enums.constants.CacheType;
 import enums.constants.RegexConstants;
 import models.mappers.UserMapper;
 import play.data.validation.Email;
 import play.data.validation.Match;
-import play.data.validation.MaxSize;
 import play.data.validation.Required;
 import play.libs.Codec;
 import vos.UserSearchVo;
@@ -375,5 +366,20 @@ public class User implements java.io.Serializable {
         CacheUtils.remove(CacheType.RETAILER_ORDER_PRODUCT_DATA.getKey(this.userId));
         // 订单视图完整信息缓存
         CacheUtils.remove(CacheType.RETAILER_ORDER_VO_ALL.getKey(this.userId));
+    }
+
+    /**
+     * @param name2
+     * @return
+     */
+    public static List<User> findUserByNameFuzzy(String name) {
+        SqlSession ss = SessionFactory.getSqlSession();
+        try {
+            UserMapper mapper = ss.getMapper(UserMapper.class);
+            List<User> users = mapper.selectListByNameFuzzy(name);
+            return users;
+        } finally {
+            ss.close();
+        }
     }
 }
