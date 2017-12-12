@@ -21,6 +21,7 @@ public class ProductInfo {
     public String color;
     public String brandName;
     public double retailPrice;
+    public int productNum;
 
     public ProductInfo() {
     }

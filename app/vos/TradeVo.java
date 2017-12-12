@@ -139,7 +139,10 @@ public class TradeVo implements java.io.Serializable {
                 if (!Strings.isNullOrEmpty(order.expNo)) {
                     vo.expbeen++;
                 }
-                products.add(order.productInfo);
+                ProductInfo pi = order.productInfo;
+                // 单件商品数量统计
+                pi.productNum = order.num;
+                products.add(pi);
                 // 商品数量统计
                 vo.itemNum += order.num;
             }
@@ -151,7 +154,7 @@ public class TradeVo implements java.io.Serializable {
                 }
 
                 vo.itemVos.add(new TradeItemVo(product.itemId, product.picUrl, product.title, product.color,
-                        product.brandName, product.retailPrice));
+                        product.brandName, product.retailPrice, product.productNum));
             }
         }
         return vo;
