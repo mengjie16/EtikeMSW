@@ -1652,7 +1652,12 @@ public class ManagerController extends BaseController {
      */
     public static void querySupplierItemByVo(@Required ItemSearchVo vo) {
         Page<Item> page = Item.findItemPage(vo);
-        renderPageJson(page);
+        Page<ItemVo> pageItems2 = new Page<ItemVo>();
+        List<Item> items = page.items;
+        for (Item item : items) {
+            pageItems2.items.add(ItemVo.valueOfItem(item, false));
+        }
+        renderPageJson(pageItems2);
     }
 
     /**
