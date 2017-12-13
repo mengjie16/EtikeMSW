@@ -156,7 +156,10 @@ public class ManagerController extends BaseController {
         if (!Strings.isNullOrEmpty(rUrl)) {
             redirect(rUrl);
         }
-        redirect("/sys/user/manage");
+
+        usr.updateLastLoginTime(usr);
+        renderJson(ImmutableMap.of("uid", usr.id, "name", usr.name));
+        // redirect("/sys/user/manage");
     }
 
     /**

@@ -382,4 +382,16 @@ public class User implements java.io.Serializable {
             ss.close();
         }
     }
+
+    public static void updateLastLoginTime(User user) {
+        SqlSession ss = SessionFactory.getSqlSession();
+        try {
+            UserMapper mapper = ss.getMapper(UserMapper.class);
+            DateTime dtNow = DateTime.now();
+            user.lastLoginTime = dtNow.toDate();
+            mapper.updateById(user);
+        } finally {
+            ss.close();
+        }
+    }
 }

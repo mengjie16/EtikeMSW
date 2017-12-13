@@ -19,7 +19,11 @@
 			</if>
 			<if test="userId != null and userId != ''">
 				user_id = #{userId},
-			</if>			
+			</if>	
+			<if test="lastLoginTime != null and lastLoginTime != ''">
+                last_login_time = #{lastLoginTime},
+            </if>   
+					
 			qq = #{qq},
 			weixin = #{weixin}
 		</set>
