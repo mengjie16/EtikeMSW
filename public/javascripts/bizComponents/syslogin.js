@@ -8,7 +8,7 @@ function validateOpts() {
 	var options = {
 		onkeyup: false,
 		rules: {
-			account: {
+			name: {
 				required: true
 			},
 			password: {
@@ -16,7 +16,7 @@ function validateOpts() {
 			}
 		},
 		messages: {
-			account: Tr.error('账号必填'),
+			name: Tr.error('账号必填'),
 			password: Tr.error('密码必填')
 		},
 		success: function(label, element) {}

@@ -66,7 +66,7 @@ $(function() {
 			//window.location.href = '/'+$('input[name="rUrl"]').val()?$('input[name="rUrl"]').val():'user/home';
 		}
 	});*/
-	$("#frmLogin").on('click', function(){		
+	$(".trSubmit").on('click', function(){		
 		var params ={
 			savePass: function(){
 				return $('#secure_connection1').is(':checked');
@@ -91,12 +91,18 @@ $(function() {
 		        success: function(data) {
 		        	if(tr_url === "/doLogin"){
 			        	if (data.code != 200) {
+			        		$('.error_panel').html(data.msg);
 			                return;
 			            } else if (data.code === 200){		            	
 			            		window.location.href = '/user/home';
 			            }
 		        	}else{
-		        		window.location.href = '/sys/user/manage';
+		        		if (data.code && data.code != 200) {
+			        		$('.error_panel').html(data.msg);
+			                return;
+			            } else {		            	
+			            		window.location.href = '/sys/user/manage';
+			            }
 		        	}
 
 

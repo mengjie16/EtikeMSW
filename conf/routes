@@ -37,7 +37,7 @@ POST    /alipay/notify/error                    PayCenter.errorNotify
 #---------------------------------------------------------------------------------------------------------------
 
 # 管理员相关页面
-GET     /sys/enter                              ManagerController.login
+#GET     /sys/enter                              ManagerController.login
 POST    /sys/doLogin                            ManagerController.doLogin
 GET     /sys/brand                              ManagerController.brandManage
 GET     /sys/cate                               ManagerController.cateManage

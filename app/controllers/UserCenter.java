@@ -436,8 +436,10 @@ public class UserCenter extends BaseController {
         User usr = User.findByField("name", name);
         if (usr == null) {
             renderFailedJson(ReturnCode.FAIL, "用户不存在");
+            flash.error("用户不存在");
         }
         if (!usr.validate(password)) {
+            flash.error("密码不正确");
             renderFailedJson(ReturnCode.INVALID_PRIVILEGE, "密码不正确");
         }
 
