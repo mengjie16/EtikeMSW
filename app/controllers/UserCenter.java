@@ -448,6 +448,9 @@ public class UserCenter extends BaseController {
         } else {
             Secure.setUserToContainer(usr);
         }
+
+        usr.updateLastLoginTime(usr);
+
         renderJson(ImmutableMap.of("uid", usr.id, "name", usr.name));
     }
 

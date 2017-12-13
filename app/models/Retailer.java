@@ -116,6 +116,7 @@ public class Retailer implements java.io.Serializable {
             DateTime dtNow = DateTime.now();
             this.createTime = dtNow.toDate();
             this.updateTime = dtNow.toDate();
+            this.name = user.name;
 
             mapper.insert(this);
 
