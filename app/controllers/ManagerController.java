@@ -16,7 +16,6 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aton.config.AppMode;
 import com.aton.config.ReturnCode;
 import com.aton.util.MailUtils;
 import com.aton.util.MixHelper;
@@ -128,20 +127,31 @@ public class ManagerController extends BaseController {
             flash.error("信息填写错误");
             redirect(enterUrl);
         }
+
         // 开发状态下无需进行权限验证
-        if (AppMode.get().isNotOnline()) {
-            User usr = new User();
-            Secure.setAdminToContainer(usr);
-            if (!Strings.isNullOrEmpty(rUrl)) {
-                redirect(rUrl);
-            }
-            redirect("/sys/user/manage");
+        // if (AppMode.get().isNotOnline()) {
+        // User usr = new User();
+        // Secure.setAdminToContainer(usr);
+        // if (!Strings.isNullOrEmpty(rUrl)) {
+        // redirect(rUrl);
+        // }
+        // redirect("/sys/user/manage");
+        // }
+        // if (!"test".equals(name) || !"notest".equals(password)) {
+        // flash.error("用户或密码不正确");
+        // redirect(enterUrl);
+        // }
+
+        User usr = User.findByField("name", name);
+        if (usr == null) {
+            renderFailedJson(ReturnCode.FAIL, "用户不存在");
+            flash.error("用户不存在");
         }
-        if (!"test".equals(name) || !"notest".equals(password)) {
-            flash.error("用户或密码不正确");
-            redirect(enterUrl);
+        if (!usr.validate(password)) {
+            flash.error("密码不正确");
+            renderFailedJson(ReturnCode.INVALID_PRIVILEGE, "密码不正确");
         }
-        User usr = new User();
+
         Secure.setAdminToContainer(usr);
         if (!Strings.isNullOrEmpty(rUrl)) {
             redirect(rUrl);
