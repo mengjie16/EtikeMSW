@@ -7,7 +7,7 @@ cd this repo
 edit files
 add files
 commit files 
-push to master.
+push to master
 
 You can also download a github desktop exe 
 then add the repo 
