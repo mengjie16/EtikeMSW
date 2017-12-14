@@ -68,6 +68,7 @@ import utils.TSFileUtil;
 import vos.CateChangeVo;
 import vos.FreightSearchVo;
 import vos.FreightTempVo;
+import vos.ItemManagementResult;
 import vos.ItemSearchVo;
 import vos.ItemVo;
 import vos.OrderVo;
@@ -1665,12 +1666,11 @@ public class ManagerController extends BaseController {
      */
     public static void querySupplierItemByVo(@Required ItemSearchVo vo) {
         Page<Item> page = Item.findItemPage(vo);
-        Page<ItemVo> pageItems2 = new Page<ItemVo>();
-        List<Item> items = page.items;
-        for (Item item : items) {
-            pageItems2.items.add(ItemVo.valueOfItem(item, false));
+        if (page != null && MixHelper.isNotEmpty(page.items)) {
+            List<ItemManagementResult> vos = page.items.stream().map(t -> ItemManagementResult.valueOfItem(t))
+                    .collect(Collectors.toList());
+            renderPageJson(vos, vos.size());
         }
-        renderPageJson(pageItems2);
     }
 
     /**
