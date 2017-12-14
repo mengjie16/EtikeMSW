@@ -44,11 +44,81 @@
 			<classifier>sources</classifier>
 		</dependency>
 
-		<!--<dependency>
+		<dependency>
 			<groupId>com.taobao</groupId>
 			<artifactId>dayu</artifactId>
 			<version>1.0.0</version>
-		</dependency>-->
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.mybatis</groupId>
+		    <artifactId>mybatis</artifactId>
+		    <version>3.4.5</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.ganshane.specs</groupId>
+		    <artifactId>taobao-sdk</artifactId>
+		    <version>20120515</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.github.xingePush</groupId>
+		    <artifactId>xinge</artifactId>
+		    <version>1.1.8</version>
+		    <exclusions>
+		    	<exclusion>
+		    		<artifactId>json</artifactId>
+		    		<groupId>org.json</groupId>
+		    	</exclusion>
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		    <version>3.3</version>
+		</dependency>
+		
+		
+		
+		<dependency>
+		    <groupId>net.sf.jxls</groupId>
+		    <artifactId>jxls-core</artifactId>
+		    <version>1.0.6</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>net.sf.jxls</groupId>
+		    <artifactId>jxls-reader</artifactId>
+		    <version>1.0.6</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>org.codehaus.jackson</groupId>
+		    <artifactId>jackson-core-lgpl</artifactId>
+		    <version>1.9.13</version>
+		</dependency>
+			
+		<dependency>
+		    <groupId>org.codehaus.jackson</groupId>
+		    <artifactId>jackson-mapper-lgpl</artifactId>
+		    <version>1.9.13</version>
+		</dependency>
+		
+			
+		<dependency>
+		    <groupId>com.google.guava</groupId>
+		    <artifactId>guava</artifactId>
+		    <version>18.0</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>fluent-hc</artifactId>
+		    <version>4.2</version>
+		</dependency>
+		
 
 		<dependency>
 			<groupId>org.apache.thrift</groupId>
