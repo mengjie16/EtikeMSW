@@ -389,7 +389,7 @@ public class User implements java.io.Serializable {
             UserMapper mapper = ss.getMapper(UserMapper.class);
             DateTime dtNow = DateTime.now();
             user.lastLoginTime = dtNow.toDate();
-            mapper.updateById(user);
+            mapper.updateLastLoginTimeById(user.lastLoginTime, user.id);
         } finally {
             ss.close();
         }

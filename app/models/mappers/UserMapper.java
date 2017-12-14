@@ -1,5 +1,6 @@
 package models.mappers;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
@@ -34,6 +35,9 @@ public interface UserMapper {
      * 这个接口不会涉及到密码的修改
      */
     void updateById(User user);
+
+    @Update("update user u set last_login_time = #{lastLoginTime} where u.id=#{id}")
+    void updateLastLoginTimeById(@Param("lastLoginTime") Date lastLoginTime, @Param("id") long id);
 
     List<User> selectListByVo(UserSearchVo vo);
 
