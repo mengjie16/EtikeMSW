@@ -1,246 +1,231 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.atoninc</groupId>
-	<artifactId>eitak</artifactId>
-	<version>1.0</version>
-
-	<dependencies>
-
-		<!-- cache redis -->
-		<dependency>
-			<groupId>redis.clients</groupId>
-			<artifactId>jedis</artifactId>
-			<version>2.7.0</version>
-		</dependency>
-
-		<!-- qrcode -->
-		<dependency>
-			<groupId>com.google.zxing</groupId>
-			<artifactId>core</artifactId>
-			<version>2.3.0</version>
-		</dependency>
-
-		<!-- utils -->
-		<dependency>
-			<groupId>com.qiniu</groupId>
-			<artifactId>sdk</artifactId>
-			<version>6.1.7</version>
-			<exclusions>
-				<exclusion>
-					<groupId>commons-codec</groupId>
-					<artifactId>commons-codec</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>com.qiniu</groupId>
-			<artifactId>sdk</artifactId>
-			<version>6.1.7</version>
-			<classifier>sources</classifier>
-		</dependency>
-
-		<dependency>
-			<groupId>com.taobao</groupId>
-			<artifactId>dayu</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		
-		<dependency>
-		    <groupId>org.mybatis</groupId>
-		    <artifactId>mybatis</artifactId>
-		    <version>3.4.5</version>
-		</dependency>
-		
-		<dependency>
-		    <groupId>com.ganshane.specs</groupId>
-		    <artifactId>taobao-sdk</artifactId>
-		    <version>20120515</version>
-		</dependency>
-		
-		<dependency>
-		    <groupId>com.github.xingePush</groupId>
-		    <artifactId>xinge</artifactId>
-		    <version>1.1.8</version>
-		    <exclusions>
-		    	<exclusion>
-		    		<artifactId>json</artifactId>
-		    		<groupId>org.json</groupId>
-		    	</exclusion>
-		    </exclusions>
-		</dependency>
-		
-		<dependency>
-		    <groupId>org.apache.commons</groupId>
-		    <artifactId>commons-lang3</artifactId>
-		    <version>3.3</version>
-		</dependency>
-		
-		
-		
-		<dependency>
-		    <groupId>net.sf.jxls</groupId>
-		    <artifactId>jxls-core</artifactId>
-		    <version>1.0.6</version>
-		</dependency>
-
-		<dependency>
-		    <groupId>net.sf.jxls</groupId>
-		    <artifactId>jxls-reader</artifactId>
-		    <version>1.0.6</version>
-		</dependency>
-
-		<dependency>
-		    <groupId>org.codehaus.jackson</groupId>
-		    <artifactId>jackson-core-lgpl</artifactId>
-		    <version>1.9.13</version>
-		</dependency>
-			
-		<dependency>
-		    <groupId>org.codehaus.jackson</groupId>
-		    <artifactId>jackson-mapper-lgpl</artifactId>
-		    <version>1.9.13</version>
-		</dependency>
-		
-			
-		<dependency>
-		    <groupId>com.google.guava</groupId>
-		    <artifactId>guava</artifactId>
-		    <version>18.0</version>
-		</dependency>
-
-		<dependency>
-		    <groupId>org.apache.httpcomponents</groupId>
-		    <artifactId>fluent-hc</artifactId>
-		    <version>4.2</version>
-		</dependency>
-		
-
-		<dependency>
-			<groupId>org.apache.thrift</groupId>
-			<artifactId>libthrift</artifactId>
-			<version>0.9.3</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-api</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<!-- RPC -->
-
-		<dependency>
-			<groupId>com.aliyun.openservices</groupId>
-			<artifactId>ons-client</artifactId>
-			<version>1.1.8</version>
-			<exclusions>
-				<exclusion>
-					<groupId>commons-codec</groupId>
-					<artifactId>commons-codec</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-api</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-		    <groupId>net.sf.json-lib</groupId>
-		    <artifactId>json-lib</artifactId>
-		    <version>2.2.3</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-core-asl -->
-		<dependency>
-		    <groupId>org.codehaus.jackson</groupId>
-		    <artifactId>jackson-core-asl</artifactId>
-		    <version>1.9.13</version>
-		</dependency>
-		
-		
-		<dependency>
-			<groupId>net.sf.xss-html-filter</groupId>
-			<artifactId>xss-html-filter</artifactId>
-			<version>1.5</version>
-		</dependency>
-
-		<dependency>
-			<groupId>net.sf.xss-html-filter</groupId>
-			<artifactId>xss-html-filter</artifactId>
-			<version>1.5</version>
-			<classifier>sources</classifier>
-		</dependency>
-
-		<dependency>
-			<groupId>com.aton</groupId>
-			<artifactId>common</artifactId>
-			<version>1.5.1-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<groupId>commons-lang</groupId>
-					<artifactId>commons-lang</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>commons-io</groupId>
-					<artifactId>commons-io</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>commons-beanutils</groupId>
-					<artifactId>commons-beanutils</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>commons-collections</groupId>
-					<artifactId>commons-collections</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>joda-time</groupId>
-					<artifactId>joda-time</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>dom4j</groupId>
-					<artifactId>dom4j</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-api</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-log4j12</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>log4j</groupId>
-					<artifactId>log4j</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.mongodb</groupId>
-			<artifactId>mongo-java-driver</artifactId>
-			<version>2.10.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mongodb</groupId>
-			<artifactId>mongo-java-driver</artifactId>
-			<version>2.10.1</version>
-			<classifier>sources</classifier>
-		</dependency>
-
-	</dependencies>
-	<build>
-		<plugins>
-             <plugin>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.play</groupId>
+        <artifactId>play-parent</artifactId>
+        <version>1.1</version>
+    </parent>
+    <groupId>com.tanxiazhe</groupId>
+    <artifactId>eitak</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    
+    <dependencies>
+        <!-- cache redis -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+        <!-- qrcode -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <!-- utils -->
+        <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>sdk</artifactId>
+            <version>6.1.7</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-codec</groupId>
+                    <artifactId>commons-codec</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>sdk</artifactId>
+            <version>6.1.7</version>
+            <classifier>sources</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.taobao</groupId>
+            <artifactId>dayu</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.4.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ganshane.specs</groupId>
+            <artifactId>taobao-sdk</artifactId>
+            <version>20120515</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.xingePush</groupId>
+            <artifactId>xinge</artifactId>
+            <version>1.1.8</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>json</artifactId>
+                    <groupId>org.json</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.3</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.jxls</groupId>
+            <artifactId>jxls-core</artifactId>
+            <version>1.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.jxls</groupId>
+            <artifactId>jxls-reader</artifactId>
+            <version>1.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-lgpl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-lgpl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>18.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>fluent-hc</artifactId>
+            <version>4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.thrift</groupId>
+            <artifactId>libthrift</artifactId>
+            <version>0.9.3</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- RPC -->
+        <dependency>
+            <groupId>com.aliyun.openservices</groupId>
+            <artifactId>ons-client</artifactId>
+            <version>1.1.8</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-codec</groupId>
+                    <artifactId>commons-codec</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>2.2.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-core-asl -->
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-asl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.xss-html-filter</groupId>
+            <artifactId>xss-html-filter</artifactId>
+            <version>1.5</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.xss-html-filter</groupId>
+            <artifactId>xss-html-filter</artifactId>
+            <version>1.5</version>
+            <classifier>sources</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.aton</groupId>
+            <artifactId>common</artifactId>
+            <version>1.5.1-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-lang</groupId>
+                    <artifactId>commons-lang</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-io</groupId>
+                    <artifactId>commons-io</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-beanutils</groupId>
+                    <artifactId>commons-beanutils</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-collections</groupId>
+                    <artifactId>commons-collections</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>joda-time</groupId>
+                    <artifactId>joda-time</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>dom4j</groupId>
+                    <artifactId>dom4j</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>2.10.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>2.10.1</version>
+            <classifier>sources</classifier>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+            </plugin>
+            <!-- Keeping this order is very important for packaging phase (copy-dependency must run before antrun) -->
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.6.0</version>
@@ -249,23 +234,19 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-			<plugin>
-				<artifactId>maven-dependency-plugin</artifactId>
-			</plugin>
-			<!-- 跳过测试 -->
-			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.20.1</version>
-				<configuration>
-					<skipTests>true</skipTests>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-project-info-reports-plugin</artifactId>
-			</plugin>
-		</plugins>
-
-	</build>
-
+            <!-- 跳过测试 -->
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.20.1</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+            </plugin>
+            <!-- End -->
+        </plugins>
+    </build>
 </project>
