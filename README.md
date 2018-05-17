@@ -13,6 +13,8 @@ You can also download a github desktop exe
 then add the repo 
 click the 'sync'  then you can see the changes update on the browser.
 
+There two ways to run application.
+First way:
 
 1. git clone git@github.com:mengjie16/EtikeMSW.git
 2. eclipse import->maven import->pom.xml. 
@@ -27,3 +29,11 @@ click the 'sync'  then you can see the changes update on the browser.
 5. run bash, execute command:play eclipsify, this will generate eclipse folder.
 6. open eclipse folder, run: eitak.launch, debug Connect JPDA to eitak.launch.
 7. in browser open :localhost:9000, that's everything.
+
+Secend way:
+1. git clone git@github.com:mengjie16/EtikeMSW.git
+2. cd EtikeMSW
+3. play install maven
+4. play dependencies
+5. play mvn:up
+6. play run
