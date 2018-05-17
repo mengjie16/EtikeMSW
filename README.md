@@ -37,4 +37,5 @@ Second way:
 3. play install maven
 4. play dependencies
 5. play mvn:up
-6. play run
+6. add personal.conf, log4j.dev.properties back
+7. play run
