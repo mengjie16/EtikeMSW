@@ -14,6 +14,7 @@ then add the repo
 click the 'sync'  then you can see the changes update on the browser.
 
 There are two ways to run application.
+
 First way:
 
 1. git clone git@github.com:mengjie16/EtikeMSW.git
