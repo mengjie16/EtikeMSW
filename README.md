@@ -39,3 +39,4 @@ Second way:
 5. play mvn:up
 6. add personal.conf, log4j.dev.properties back
 7. play run
+8. in browser open :localhost:9000, that's everything.
