@@ -87,6 +87,7 @@ function loadList(pageNo) {
         if (data.code != 200 || !data.results) return;
         // 保存到缓存
         CDT.loadedListCache = data.results;
+        console.log(CDT)
         var output = Mustache.render(CDT.orderTemp, $.extend(data, {
             'paymentStr': function() {
                 if (this.cargoFee) {

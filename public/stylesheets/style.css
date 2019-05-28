@@ -1723,7 +1723,7 @@ ul.nav.nav-pills {
 }
 .item_price{margin-top:15px;line-height:18px;overflow: hidden;}
 .item_price .new{margin-right:3px;font-size:14px;vertical-align: bottom;float: left;}
-.item_price .new span{font-size:18px;color:#52D0C4;font-weight: normal;}
+.item_price .new span{font-size:16px;color:#52D0C4;font-weight: normal;}
 .item_price .old{font-size:12px;float: right;}
 .callbacks_nav {
   position: absolute;
