@@ -1,0 +1,65 @@
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+--
+-- Host: localhost    Database: tusibaby_dev
+-- ------------------------------------------------------
+-- Server version	5.7.18-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user` (
+  `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `name` varchar(30) NOT NULL COMMENT '用户名称',
+  `email` varchar(30) DEFAULT NULL COMMENT '用户邮箱',
+  `avatar` varchar(256) DEFAULT NULL COMMENT '用户头像url',
+  `phone` varchar(20) DEFAULT NULL COMMENT '用户手机',
+  `password` varchar(64) DEFAULT NULL COMMENT '用户密码',
+  `salt` varchar(10) DEFAULT NULL COMMENT '随机字符',
+  `role` varchar(128) DEFAULT NULL COMMENT '权限',
+  `is_delete` tinyint(2) NOT NULL DEFAULT '0' COMMENT '是否删除',
+  `user_id` bigint(62) DEFAULT NULL COMMENT '角色ID',
+  `is_main_account` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否是主账号',
+  `qq` varchar(15) DEFAULT NULL COMMENT 'QQ',
+  `weixin` varchar(30) DEFAULT NULL COMMENT '微信',
+  `is_auth` tinyint(2) DEFAULT '0' COMMENT '是否认证',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `last_login_time` datetime DEFAULT NULL COMMENT '最后登录时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (5,'eitak_15006188150',NULL,NULL,'15006188150','d077e5a5e039e8d6aec73d97836a0f09','809960','RETAILER',0,4,0,NULL,NULL,0,'2017-10-21 21:30:19',NULL),(17,'admin_123456',NULL,NULL,NULL,'3045a75e8a169ff178e35907ec07375a','389704','RETAILER',0,16,0,NULL,NULL,0,'2017-12-30 18:34:06','2017-12-30 18:34:15'),(18,'123456',NULL,NULL,NULL,'b00181bdebce726ea81af46bdffd88a0','712659','RETAILER',0,17,0,NULL,NULL,0,'2017-12-30 18:52:11','2018-01-08 20:21:05'),(19,'admin123456',NULL,NULL,NULL,'55bb0706ca0408b86d2589d2f3979600','859925','RETAILER',0,18,0,NULL,NULL,0,'2018-01-07 14:56:44','2018-01-07 14:56:57');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2019-05-28 21:23:29
